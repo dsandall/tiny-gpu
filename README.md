@@ -1,4 +1,4 @@
-# tiny-gpu
+# Dylan's tiny-gpu
 
 A minimal GPU implementation in Verilog optimized for learning about how GPUs work from the ground up.
 
