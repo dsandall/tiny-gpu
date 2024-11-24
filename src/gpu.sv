@@ -88,11 +88,12 @@ module gpu #(
     );
 
     // Data Memory Controller
-    controller #(
+    dmem_controller #(
         .ADDR_BITS(DATA_MEM_ADDR_BITS),
         .DATA_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),
-        .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS)
+        .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS), 
+        // .WRITE_ENABLE(1)
     ) data_memory_controller (
         .clk(clk),
         .reset(reset),
@@ -117,12 +118,12 @@ module gpu #(
     );
 
     // Program Memory Controller
-    controller #(
+    pmem_controller #(
         .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
         .DATA_BITS(PROGRAM_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_FETCHERS),
         .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS),
-        .WRITE_ENABLE(0)
+        // .WRITE_ENABLE(0)
     ) program_memory_controller (
         .clk(clk),
         .reset(reset),

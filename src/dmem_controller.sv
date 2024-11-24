@@ -5,12 +5,12 @@
 // > Receives memory requests from all cores
 // > Throttles requests based on limited external memory bandwidth
 // > Waits for responses from external memory and distributes them back to cores
-module controller #(
-    parameter ADDR_BITS = 8,
-    parameter DATA_BITS = 16,
-    parameter NUM_CONSUMERS = 4, // The number of consumers accessing memory through this controller
-    parameter NUM_CHANNELS = 1,  // The number of concurrent channels available to send requests to global memory
-    parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
+module dmem_controller #(
+    parameter ADDR_BITS, // 16 bit addresses
+    parameter DATA_BITS, // 8 for data, 16 for program mem
+    parameter NUM_CONSUMERS, // The number of consumers accessing memory through this controller
+    parameter NUM_CHANNELS,  // The number of concurrent channels available to send requests to global memory
+    // parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
 ) (
     input wire clk,
     input wire reset,
@@ -25,7 +25,7 @@ module controller #(
     input reg [DATA_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
     output reg [NUM_CONSUMERS-1:0] consumer_write_ready,
 
-    // Memory Interface (Data / Program)
+    // Memory Interface (Data / Program)    
     output reg [NUM_CHANNELS-1:0] mem_read_valid,
     output reg [ADDR_BITS-1:0] mem_read_address [NUM_CHANNELS-1:0],
     input reg [NUM_CHANNELS-1:0] mem_read_ready,
