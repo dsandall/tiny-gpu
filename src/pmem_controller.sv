@@ -45,24 +45,25 @@ module pmem_controller #(
         READ_RELAYING = 3'b100,
         WRITE_RELAYING = 3'b101;
 
-    // Keep track of state for each channel and which jobs each channel is handling
+    //// Internal State Memory
+    // Keeps track of state for each channel and which jobs each channel is handling
     reg [2:0] controller_state [NUM_CHANNELS-1:0];
     reg [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
     reg [NUM_CONSUMERS-1:0] channel_serving_consumer; // Which channels are being served? Prevents many workers from picking up the same request.
 
     always @(posedge clk) begin
         if (reset) begin 
+            //reset all the output signals
             mem_read_valid <= 0;
             mem_read_address <= 0;
-
             mem_write_valid <= 0;
             mem_write_address <= 0;
             mem_write_data <= 0;
-
             consumer_read_ready <= 0;
             consumer_read_data <= 0;
             consumer_write_ready <= 0;
 
+            //reset all the internal signals
             current_consumer <= 0;
             controller_state <= 0;
 

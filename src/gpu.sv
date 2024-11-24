@@ -54,7 +54,8 @@ module gpu #(
     reg [7:0] core_block_id [NUM_CORES-1:0];
     reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_CORES-1:0];
 
-    // LSU <> Data Memory Controller Channels
+    // LSU <-> Data Memory Controller Channels
+    // there's a channel/bus for each LSU  
     localparam NUM_LSUS = NUM_CORES * THREADS_PER_BLOCK;
     reg [NUM_LSUS-1:0] lsu_read_valid;
     reg [DATA_MEM_ADDR_BITS-1:0] lsu_read_address [NUM_LSUS-1:0];
@@ -65,13 +66,14 @@ module gpu #(
     reg [DATA_MEM_DATA_BITS-1:0] lsu_write_data [NUM_LSUS-1:0];
     reg [NUM_LSUS-1:0] lsu_write_ready;
 
-    // Fetcher <> Program Memory Controller Channels
+    // Fetcher <-> Program Memory Controller Channels
     localparam NUM_FETCHERS = NUM_CORES;
     reg [NUM_FETCHERS-1:0] fetcher_read_valid;
     reg [PROGRAM_MEM_ADDR_BITS-1:0] fetcher_read_address [NUM_FETCHERS-1:0];
     reg [NUM_FETCHERS-1:0] fetcher_read_ready;
     reg [PROGRAM_MEM_DATA_BITS-1:0] fetcher_read_data [NUM_FETCHERS-1:0];
     
+    // Dump waveform to GTK Wave readable format
     initial begin
         $dumpfile("build/gpu.vcd"); 
         $dumpvars(0, gpu);
@@ -176,13 +178,16 @@ module gpu #(
             for (j = 0; j < THREADS_PER_BLOCK; j = j + 1) begin
                 localparam lsu_index = i * THREADS_PER_BLOCK + j;
                 always @(posedge clk) begin 
+                    //LSU Read Requests
                     lsu_read_valid[lsu_index] <= core_lsu_read_valid[j];
                     lsu_read_address[lsu_index] <= core_lsu_read_address[j];
 
+                    //LSU Write Requests
                     lsu_write_valid[lsu_index] <= core_lsu_write_valid[j];
                     lsu_write_address[lsu_index] <= core_lsu_write_address[j];
                     lsu_write_data[lsu_index] <= core_lsu_write_data[j];
                     
+                    //LSU Read/Write Responses
                     core_lsu_read_ready[j] <= lsu_read_ready[lsu_index];
                     core_lsu_read_data[j] <= lsu_read_data[lsu_index];
                     core_lsu_write_ready[j] <= lsu_write_ready[lsu_index];

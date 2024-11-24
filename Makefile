@@ -26,17 +26,17 @@ compile:
 	cat build/gpu.v >> build/temp.v
 	mv build/temp.v build/gpu.v
 
-compile_%:
 # compile_alu or other module
-	sv2v -w build/$*.v src/$*.sv 
+compile_%:
 # compile source/*.sv and write it to build/*.v 
+	sv2v -w build/$*.v src/$*.sv 
 
 # GTKWave Visualization Rule
 show_%: build/gpu.vcd
-	# Launch GTKWave with the specified VCD file
+# Launch GTKWave with the specified VCD file
 	gtkwave $<
 
 # Catch-all rule to view a specific waveform
 build/%.vcd: test_%
-	# Run the test to generate the corresponding VCD file
+# Run the test to generate the corresponding VCD file
 	make test_$*

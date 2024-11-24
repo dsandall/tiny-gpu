@@ -2,7 +2,7 @@
 `timescale 1ns/1ns
 
 // MEMORY CONTROLLER
-// > Receives memory requests from all cores
+// > Receives memory requests from all LSUs
 // > Throttles requests based on limited external memory bandwidth
 // > Waits for responses from external memory and distributes them back to cores
 module dmem_controller #(

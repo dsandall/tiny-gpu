@@ -30,15 +30,18 @@ module core #(
     input reg [PROGRAM_MEM_DATA_BITS-1:0] program_mem_read_data,
 
     // Data Memory
-    output reg [THREADS_PER_BLOCK-1:0] data_mem_read_valid,
-    output reg [DATA_MEM_ADDR_BITS-1:0] data_mem_read_address [THREADS_PER_BLOCK-1:0],
-    input reg [THREADS_PER_BLOCK-1:0] data_mem_read_ready,
-    input reg [DATA_MEM_DATA_BITS-1:0] data_mem_read_data [THREADS_PER_BLOCK-1:0],
-    output reg [THREADS_PER_BLOCK-1:0] data_mem_write_valid,
-    output reg [DATA_MEM_ADDR_BITS-1:0] data_mem_write_address [THREADS_PER_BLOCK-1:0],
-    output reg [DATA_MEM_DATA_BITS-1:0] data_mem_write_data [THREADS_PER_BLOCK-1:0],
-    input reg [THREADS_PER_BLOCK-1:0] data_mem_write_ready
+    output reg [THREADS_PER_BLOCK-1:0]  data_mem_read_valid, // 4 bits
+    output reg [DATA_MEM_ADDR_BITS-1:0] data_mem_read_address [THREADS_PER_BLOCK-1:0], // 8 bits x 4 
+    input  reg [THREADS_PER_BLOCK-1:0]  data_mem_read_ready, // 4 bits
+    input  reg [DATA_MEM_DATA_BITS-1:0] data_mem_read_data    [THREADS_PER_BLOCK-1:0], // 8 bits x 4
+
+    output reg [THREADS_PER_BLOCK-1:0]  data_mem_write_valid, // 4 bits
+    output reg [DATA_MEM_ADDR_BITS-1:0] data_mem_write_address [THREADS_PER_BLOCK-1:0], // 8 bits x 4
+    input  reg [THREADS_PER_BLOCK-1:0]  data_mem_write_ready, // 4 bits
+    output reg [DATA_MEM_DATA_BITS-1:0] data_mem_write_data    [THREADS_PER_BLOCK-1:0] // 8 bits x 4
+
 );
+
     // State
     reg [2:0] core_state;
     reg [2:0] fetcher_state;
