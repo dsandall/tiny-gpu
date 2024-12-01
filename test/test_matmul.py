@@ -5,10 +5,13 @@ from .helpers.memory import Memory
 from .helpers.format import format_cycle
 from .helpers.logger import logger
 
+
+delay = 0
+
 @cocotb.test()
 async def test_matadd(dut):
     # Program Memory
-    program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program")
+    program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program", delay=delay)
     program = [
         0b0101000011011110, # MUL R0, %blockIdx, %blockDim
         0b0011000000001111, # ADD R0, R0, %threadIdx         ; i = blockIdx * blockDim + threadIdx
@@ -42,7 +45,7 @@ async def test_matadd(dut):
     ]
 
     # Data Memory
-    data_memory = Memory(dut=dut, addr_bits=8, data_bits=8, channels=4, name="data")
+    data_memory = Memory(dut=dut, addr_bits=8, data_bits=8, channels=4, name="data", delay=delay)
     data = [
         1, 2, 3, 4, # Matrix A (2 x 2)
         1, 2, 3, 4, # Matrix B (2 x 2)
@@ -64,13 +67,17 @@ async def test_matadd(dut):
 
     cycles = 0
     while dut.done.value != 1:
-        data_memory.run()
-        program_memory.run()
 
+        a = cocotb.start(data_memory.run())
+        b = cocotb.start(program_memory.run())
+
+        
         await cocotb.triggers.ReadOnly()
         format_cycle(dut, cycles, thread_id=1)
         
         await RisingEdge(dut.clk)
+        await a 
+        await b
         cycles += 1
 
     logger.info(f"Completed in {cycles} cycles")

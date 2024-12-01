@@ -95,6 +95,7 @@ module pmem_cache #(
     // remaining bits serve as a UID for the data in the cache, and can tell if data is valid.
     struct packed {
         bit [CACHE_LINE_SIZE_BITS-1:0] data;
+        bit [3:0] tag; //UID for cache data
         bit valid; //starts at 0, set to 1 when written to memory
         bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
     } cache [CACHE_NUM_LINES-1:0];
@@ -130,12 +131,15 @@ module pmem_cache #(
         end else begin
             for (int i = 0; i < NUM_CHANNELS; i = i + 1) begin 
                 int j = 0;
-
+                //the 0 indeces below are j
+                logic [3:0] cache_line = controller_read_address[0][3:0];
+                logic tag_match = (cache[cache_line].tag == controller_read_address[0][7:4]);
+                
                 case (controller_state[i]) 
                     IDLE: begin
                         if (controller_read_valid[j]) begin //todo
 
-                            if (cache[controller_read_address[j][3:0]].valid) begin
+                            if (cache[cache_line].valid && tag_match) begin
                                 controller_state[i] <= CACHE_HIT;
                             end else begin
                                 mem_read_address[i] <= controller_read_address[j];
@@ -149,7 +153,7 @@ module pmem_cache #(
                         //just relay the stuff from the cache (can i add delay here in sv?)
                         controller_read_ready[j] <= 1;
                         
-                        controller_read_data[j] <= cache[0].data;
+                        controller_read_data[j] <= cache[cache_line].data;
                         // //For cache lines that are not == word length 
                         // if (controller_read_address[0] == 1'b0) begin
                         //     controller_read_data <= cache[0].data[15:0];
@@ -167,9 +171,9 @@ module pmem_cache #(
                             controller_read_ready[j] <= 1;
                             controller_read_data[j] <= mem_read_data[i];
 
-                            cache[0].valid <= 1;
-
-                            cache[0].data <= mem_read_data[i];
+                            cache[cache_line].data <= mem_read_data[i];
+                            cache[cache_line].valid <= 1;
+                            cache[cache_line].tag <= mem_read_address[i][7:4];
                             // if (controller_read_address[0] == 1'b0) begin
                             //     cache[0].data[15:0] <= mem_read_data; 
                             // end else begin
