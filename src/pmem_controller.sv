@@ -75,6 +75,8 @@ module pmem_controller #(
                     IDLE: begin
                         // While this channel is idle, cycle through consumers looking for one with a pending request
                         for (int j = 0; j < NUM_CONSUMERS; j = j + 1) begin 
+
+                            // check for any pending read requests
                             if (consumer_read_valid[j] && !channel_serving_consumer[j]) begin 
                                 channel_serving_consumer[j] = 1;
                                 current_consumer[i] <= j;
@@ -85,6 +87,8 @@ module pmem_controller #(
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
                                 break;
+
+                            // if no reads, check for any pending write requests
                             end else if (consumer_write_valid[j] && !channel_serving_consumer[j]) begin 
                                 channel_serving_consumer[j] = 1;
                                 current_consumer[i] <= j;
@@ -99,6 +103,8 @@ module pmem_controller #(
                             end
                         end
                     end
+                    
+                    
                     READ_WAITING: begin
                         // Wait for response from memory for pending read request
                         if (mem_read_ready[i]) begin 
@@ -116,6 +122,8 @@ module pmem_controller #(
                             controller_state[i] <= WRITE_RELAYING;
                         end
                     end
+                     
+
                     // Wait until consumer acknowledges it received response, then reset
                     READ_RELAYING: begin
                         if (!consumer_read_valid[current_consumer[i]]) begin 

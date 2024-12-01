@@ -6,7 +6,7 @@ from .helpers.format import format_cycle
 from .helpers.logger import logger
 
 # delay for read/write operations in clock cycles 
-delay = 30
+delay = 0
 
 @cocotb.test()
 async def test_matadd(dut):
