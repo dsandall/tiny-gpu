@@ -47,13 +47,6 @@ module gpu #(
     // Control
     wire [7:0] thread_count;
 
-    //Pcache /program memory cache wires
-
-    wire [PROGRAM_MEM_NUM_CHANNELS-1:0] pcache_read_valid;
-    wire [PROGRAM_MEM_ADDR_BITS-1:0] pcache_read_address [PROGRAM_MEM_NUM_CHANNELS-1:0];
-    wire [PROGRAM_MEM_NUM_CHANNELS-1:0] pcache_read_ready;
-    wire [PROGRAM_MEM_DATA_BITS-1:0] pcache_read_data [PROGRAM_MEM_NUM_CHANNELS-1:0];
-
     // Compute Core State
     reg [NUM_CORES-1:0] core_start;
     reg [NUM_CORES-1:0] core_reset;
@@ -61,8 +54,7 @@ module gpu #(
     reg [7:0] core_block_id [NUM_CORES-1:0];
     reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_CORES-1:0];
 
-    // LSU <-> Data Memory Controller Channels
-    // there's a channel/bus for each LSU  
+    // LSU <> Data Memory Controller Channels
     localparam NUM_LSUS = NUM_CORES * THREADS_PER_BLOCK;
     reg [NUM_LSUS-1:0] lsu_read_valid;
     reg [DATA_MEM_ADDR_BITS-1:0] lsu_read_address [NUM_LSUS-1:0];
@@ -73,18 +65,12 @@ module gpu #(
     reg [DATA_MEM_DATA_BITS-1:0] lsu_write_data [NUM_LSUS-1:0];
     reg [NUM_LSUS-1:0] lsu_write_ready;
 
-    // Fetcher <-> Program Memory Controller Channels
+    // Fetcher <> Program Memory Controller Channels
     localparam NUM_FETCHERS = NUM_CORES;
     reg [NUM_FETCHERS-1:0] fetcher_read_valid;
     reg [PROGRAM_MEM_ADDR_BITS-1:0] fetcher_read_address [NUM_FETCHERS-1:0];
     reg [NUM_FETCHERS-1:0] fetcher_read_ready;
     reg [PROGRAM_MEM_DATA_BITS-1:0] fetcher_read_data [NUM_FETCHERS-1:0];
-    
-    // Dump waveform to GTK Wave readable format
-    initial begin
-        $dumpfile("build/gpu.vcd"); 
-        $dumpvars(0, gpu);
-    end
     
     // Device Control Register
     dcr dcr_instance (
@@ -97,12 +83,11 @@ module gpu #(
     );
 
     // Data Memory Controller
-    dmem_controller #(
+    controller #(
         .ADDR_BITS(DATA_MEM_ADDR_BITS),
         .DATA_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),
-        .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS), 
-        // .WRITE_ENABLE(1)
+        .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS)
     ) data_memory_controller (
         .clk(clk),
         .reset(reset),
@@ -126,38 +111,13 @@ module gpu #(
         .mem_write_ready(data_mem_write_ready)
     );
 
-
-    
-    // Program Memory Cache
-    pmem_cache #(
-        .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
-        .DATA_BITS(PROGRAM_MEM_DATA_BITS),
-        .NUM_CONSUMERS(1),
-        .NUM_CHANNELS(1),
-    ) program_memory_cache (
-        .clk(clk),
-        .reset(reset),
-
-        // pmem_controller (towards CPU cores)
-        .controller_read_valid(pcache_read_valid),
-        .controller_read_address(pcache_read_address),
-        .controller_read_ready(pcache_read_ready),
-        .controller_read_data(pcache_read_data),
-
-        // Program memory (SRAM)
-        .mem_read_valid(program_mem_read_valid),
-        .mem_read_address(program_mem_read_address),
-        .mem_read_ready(program_mem_read_ready),
-        .mem_read_data(program_mem_read_data),    
-    );
-
     // Program Memory Controller
-    pmem_controller #(
+    controller #(
         .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
         .DATA_BITS(PROGRAM_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_FETCHERS),
         .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS),
-        // .WRITE_ENABLE(0)
+        .WRITE_ENABLE(0)
     ) program_memory_controller (
         .clk(clk),
         .reset(reset),
@@ -167,10 +127,10 @@ module gpu #(
         .consumer_read_ready(fetcher_read_ready),
         .consumer_read_data(fetcher_read_data),
 
-        .mem_read_valid(pcache_read_valid),
-        .mem_read_address(pcache_read_address),
-        .mem_read_ready(pcache_read_ready),
-        .mem_read_data(pcache_read_data),
+        .mem_read_valid(program_mem_read_valid),
+        .mem_read_address(program_mem_read_address),
+        .mem_read_ready(program_mem_read_ready),
+        .mem_read_data(program_mem_read_data),
     );
 
     // Dispatcher
@@ -210,16 +170,13 @@ module gpu #(
             for (j = 0; j < THREADS_PER_BLOCK; j = j + 1) begin
                 localparam lsu_index = i * THREADS_PER_BLOCK + j;
                 always @(posedge clk) begin 
-                    //LSU Read Requests
                     lsu_read_valid[lsu_index] <= core_lsu_read_valid[j];
                     lsu_read_address[lsu_index] <= core_lsu_read_address[j];
 
-                    //LSU Write Requests
                     lsu_write_valid[lsu_index] <= core_lsu_write_valid[j];
                     lsu_write_address[lsu_index] <= core_lsu_write_address[j];
                     lsu_write_data[lsu_index] <= core_lsu_write_data[j];
                     
-                    //LSU Read/Write Responses
                     core_lsu_read_ready[j] <= lsu_read_ready[lsu_index];
                     core_lsu_read_data[j] <= lsu_read_data[lsu_index];
                     core_lsu_write_ready[j] <= lsu_write_ready[lsu_index];

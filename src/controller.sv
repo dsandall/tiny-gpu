@@ -5,81 +5,60 @@
 // > Receives memory requests from all cores
 // > Throttles requests based on limited external memory bandwidth
 // > Waits for responses from external memory and distributes them back to cores
-module pmem_controller #(
-    parameter ADDR_BITS, // 16 bit addresses
-    parameter DATA_BITS, // 8 for data, 16 for program mem
-    parameter NUM_CONSUMERS, // The number of consumers accessing memory through this controller
-    parameter NUM_CHANNELS,  // The number of concurrent channels available to send requests to global memory
-    // parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
+module controller #(
+    parameter ADDR_BITS = 8,
+    parameter DATA_BITS = 16,
+    parameter NUM_CONSUMERS = 4, // The number of consumers accessing memory through this controller
+    parameter NUM_CHANNELS = 1,  // The number of concurrent channels available to send requests to global memory
+    parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
 ) (
-    input wire clk, 
+    input wire clk,
     input wire reset,
 
-    //// Consumer Interface (Fetchers / LSUs)
-    // Consumer Side Reads
+    // Consumer Interface (Fetchers / LSUs)
     input reg [NUM_CONSUMERS-1:0] consumer_read_valid,
     input reg [ADDR_BITS-1:0] consumer_read_address [NUM_CONSUMERS-1:0],
     output reg [NUM_CONSUMERS-1:0] consumer_read_ready,
     output reg [DATA_BITS-1:0] consumer_read_data [NUM_CONSUMERS-1:0],
-    // Consumer Side Writes
     input reg [NUM_CONSUMERS-1:0] consumer_write_valid,
     input reg [ADDR_BITS-1:0] consumer_write_address [NUM_CONSUMERS-1:0],
     input reg [DATA_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
     output reg [NUM_CONSUMERS-1:0] consumer_write_ready,
 
-    //// Memory Interface (Data / Program)    
-    // Mem Side Reads
+    // Memory Interface (Data / Program)
     output reg [NUM_CHANNELS-1:0] mem_read_valid,
     output reg [ADDR_BITS-1:0] mem_read_address [NUM_CHANNELS-1:0],
     input reg [NUM_CHANNELS-1:0] mem_read_ready,
     input reg [DATA_BITS-1:0] mem_read_data [NUM_CHANNELS-1:0],
-    // Mem Side Writes
     output reg [NUM_CHANNELS-1:0] mem_write_valid,
     output reg [ADDR_BITS-1:0] mem_write_address [NUM_CHANNELS-1:0],
     output reg [DATA_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
     input reg [NUM_CHANNELS-1:0] mem_write_ready
 );
-
     localparam IDLE = 3'b000, 
         READ_WAITING = 3'b010, 
         WRITE_WAITING = 3'b011,
         READ_RELAYING = 3'b100,
         WRITE_RELAYING = 3'b101;
 
-    //// Internal State Memory
-    // Keeps track of state for each channel and which jobs each channel is handling
+    // Keep track of state for each channel and which jobs each channel is handling
     reg [2:0] controller_state [NUM_CHANNELS-1:0];
     reg [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
     reg [NUM_CONSUMERS-1:0] channel_serving_consumer; // Which channels are being served? Prevents many workers from picking up the same request.
 
-    
-    localparam CACHE_LINE_SIZE_BITS = 32; //2 instructions per line
-    // localparam CACHE_NUM_LINES = ((2**ADDR_BITS))*DATA_BITS)/CACHE_LINE_SIZE_BITS = 128; //if you were to store all of memory the mem in cache...
-    localparam CACHE_NUM_LINES = 16;
-    // this means: mem_addr[0] Line/instr Offset "upper or lower instr in the line?"
-    // mem_addr[4:1] Index (which cache line) (this also means a given data must be placed in a given line based on it's addr)
-    // remaining bits serve as a UID for the data in the cache, and can tell if data is valid.
-    struct packed {
-        bit [CACHE_LINE_SIZE_BITS-1:0] data;
-        bit valid; //starts at 0, set to 1 when written to memory
-        bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
-    } cache [CACHE_NUM_LINES-1:0];
-
-
-
     always @(posedge clk) begin
         if (reset) begin 
-            //reset all the output signals
             mem_read_valid <= 0;
             mem_read_address <= 0;
+
             mem_write_valid <= 0;
             mem_write_address <= 0;
             mem_write_data <= 0;
+
             consumer_read_ready <= 0;
             consumer_read_data <= 0;
             consumer_write_ready <= 0;
 
-            //reset all the internal signals
             current_consumer <= 0;
             controller_state <= 0;
 
@@ -91,8 +70,6 @@ module pmem_controller #(
                     IDLE: begin
                         // While this channel is idle, cycle through consumers looking for one with a pending request
                         for (int j = 0; j < NUM_CONSUMERS; j = j + 1) begin 
-
-                            // check for any pending read requests
                             if (consumer_read_valid[j] && !channel_serving_consumer[j]) begin 
                                 channel_serving_consumer[j] = 1;
                                 current_consumer[i] <= j;
@@ -103,8 +80,6 @@ module pmem_controller #(
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
                                 break;
-
-                            // if no reads, check for any pending write requests
                             end else if (consumer_write_valid[j] && !channel_serving_consumer[j]) begin 
                                 channel_serving_consumer[j] = 1;
                                 current_consumer[i] <= j;
@@ -119,8 +94,6 @@ module pmem_controller #(
                             end
                         end
                     end
-                    
-
                     READ_WAITING: begin
                         // Wait for response from memory for pending read request
                         if (mem_read_ready[i]) begin 
@@ -138,8 +111,6 @@ module pmem_controller #(
                             controller_state[i] <= WRITE_RELAYING;
                         end
                     end
-                     
-
                     // Wait until consumer acknowledges it received response, then reset
                     READ_RELAYING: begin
                         if (!consumer_read_valid[current_consumer[i]]) begin 
