@@ -53,19 +53,6 @@ module pmem_controller #(
     reg [NUM_CONSUMERS-1:0] channel_serving_consumer; // Which channels are being served? Prevents many workers from picking up the same request.
 
     
-    localparam CACHE_LINE_SIZE_BITS = 32; //2 instructions per line
-    // localparam CACHE_NUM_LINES = ((2**ADDR_BITS))*DATA_BITS)/CACHE_LINE_SIZE_BITS = 128; //if you were to store all of memory the mem in cache...
-    localparam CACHE_NUM_LINES = 16;
-    // this means: mem_addr[0] Line/instr Offset "upper or lower instr in the line?"
-    // mem_addr[4:1] Index (which cache line) (this also means a given data must be placed in a given line based on it's addr)
-    // remaining bits serve as a UID for the data in the cache, and can tell if data is valid.
-    struct packed {
-        bit [CACHE_LINE_SIZE_BITS-1:0] data;
-        bit valid; //starts at 0, set to 1 when written to memory
-        bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
-    } cache [CACHE_NUM_LINES-1:0];
-
-
 
     always @(posedge clk) begin
         if (reset) begin 

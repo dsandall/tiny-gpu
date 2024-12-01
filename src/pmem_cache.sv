@@ -106,9 +106,8 @@ module pmem_cache #(
     localparam IDLE = 3'b000, 
     CACHE_HIT = 3'b001,
     CACHE_MISS = 3'b110,
-    READ_WAITING = 3'b010, 
-    WRITE_WAITING = 3'b011,
     READ_RELAYING = 3'b100,
+    WRITE_WAITING = 3'b011,
     WRITE_RELAYING = 3'b101;
 
     always @(posedge clk) begin
