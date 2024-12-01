@@ -12,7 +12,7 @@ module pmem_controller #(
     parameter NUM_CHANNELS,  // The number of concurrent channels available to send requests to global memory
     // parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
 ) (
-    input wire clk,
+    input wire clk, 
     input wire reset,
 
     //// Consumer Interface (Fetchers / LSUs)
@@ -39,6 +39,7 @@ module pmem_controller #(
     output reg [DATA_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
     input reg [NUM_CHANNELS-1:0] mem_write_ready
 );
+
     localparam IDLE = 3'b000, 
         READ_WAITING = 3'b010, 
         WRITE_WAITING = 3'b011,
@@ -50,6 +51,21 @@ module pmem_controller #(
     reg [2:0] controller_state [NUM_CHANNELS-1:0];
     reg [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
     reg [NUM_CONSUMERS-1:0] channel_serving_consumer; // Which channels are being served? Prevents many workers from picking up the same request.
+
+    
+    localparam CACHE_LINE_SIZE_BITS = 32; //2 instructions per line
+    // localparam CACHE_NUM_LINES = ((2**ADDR_BITS))*DATA_BITS)/CACHE_LINE_SIZE_BITS = 128; //if you were to store all of memory the mem in cache...
+    localparam CACHE_NUM_LINES = 16;
+    // this means: mem_addr[0] Line/instr Offset "upper or lower instr in the line?"
+    // mem_addr[4:1] Index (which cache line) (this also means a given data must be placed in a given line based on it's addr)
+    // remaining bits serve as a UID for the data in the cache, and can tell if data is valid.
+    struct packed {
+        bit [CACHE_LINE_SIZE_BITS-1:0] data;
+        bit valid; //starts at 0, set to 1 when written to memory
+        bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
+    } cache [CACHE_NUM_LINES-1:0];
+
+
 
     always @(posedge clk) begin
         if (reset) begin 
@@ -104,7 +120,7 @@ module pmem_controller #(
                         end
                     end
                     
-                    
+
                     READ_WAITING: begin
                         // Wait for response from memory for pending read request
                         if (mem_read_ready[i]) begin 
