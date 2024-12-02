@@ -6,10 +6,10 @@ from .helpers.format import format_cycle
 from .helpers.logger import logger
 
 # delay for read/write operations in clock cycles 
-delay = 5
+delay = 3
 
 @cocotb.test()
-async def test_matadd(dut):
+async def test_dcache_initial(dut):
     # Program Memory
     program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program", delay=delay)
     program = [
@@ -36,7 +36,7 @@ async def test_matadd(dut):
     ]
 
     # Device Control
-    threads = 8
+    threads = 1
 
     await setup(
         dut=dut,

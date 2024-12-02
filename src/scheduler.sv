@@ -81,7 +81,7 @@ module scheduler #(
                         // Make sure no lsu_state = REQUESTING or WAITING
                         if (lsu_state[i] == 2'b01 || lsu_state[i] == 2'b10) begin
                             any_lsu_waiting = 1'b1;
-                            // break; //i'm commenting this out and expect this to cause errors in future 
+                            break; //i'm commenting this out and expect this to cause errors in future 
                         end
                     end
 

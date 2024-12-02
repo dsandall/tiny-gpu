@@ -1,0 +1,144 @@
+[*]
+[*] GTKWave Analyzer v3.3.120 (w)1999-2024 BSI
+[*] Mon Dec  2 05:25:14 2024
+[*]
+[dumpfile] "/home/thebu/newhome/tiny-gpu/build/gpu.vcd"
+[dumpfile_mtime] "Mon Dec  2 05:03:30 2024"
+[dumpfile_size] 181842
+[savefile] "/home/thebu/newhome/tiny-gpu/viewing_conf.gtkw"
+[timestart] 2291000
+[size] 1536 960
+[pos] -31 -27
+*-18.895092 3275000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] gpu.
+[sst_width] 267
+[signals_width] 502
+[sst_expanded] 1
+[sst_vpaned_height] 288
+@420
+gpu.DATA_MEM_ADDR_BITS
+gpu.DATA_MEM_DATA_BITS
+gpu.DATA_MEM_NUM_CHANNELS
+gpu.NUM_CORES
+gpu.NUM_FETCHERS
+gpu.NUM_LSUS
+gpu.PROGRAM_MEM_ADDR_BITS
+gpu.PROGRAM_MEM_DATA_BITS
+gpu.PROGRAM_MEM_NUM_CHANNELS
+gpu.THREADS_PER_BLOCK
+@28
+gpu.clk
+@22
+gpu.core_block_id[15:0]
+@28
+gpu.core_done[1:0]
+gpu.core_reset[1:0]
+gpu.core_start[1:0]
+@22
+gpu.core_thread_count[5:0]
+gpu.data_mem_read_address[7:0]
+gpu.data_mem_read_data[7:0]
+@28
+gpu.data_mem_read_ready
+gpu.data_mem_read_valid
+@22
+gpu.data_mem_write_address[7:0]
+gpu.data_mem_write_data[7:0]
+@28
+gpu.data_mem_write_ready
+gpu.data_mem_write_valid
+@22
+gpu.device_control_data[7:0]
+@28
+gpu.device_control_write_enable
+gpu.done
+@22
+gpu.fetcher_read_address[15:0]
+gpu.fetcher_read_data[31:0]
+@28
+gpu.fetcher_read_ready[1:0]
+gpu.fetcher_read_valid[1:0]
+@22
+gpu.lsu_read_address[63:0]
+gpu.lsu_read_data[63:0]
+gpu.lsu_read_ready[7:0]
+gpu.lsu_read_valid[7:0]
+gpu.lsu_write_address[63:0]
+gpu.lsu_write_data[63:0]
+gpu.lsu_write_ready[7:0]
+gpu.lsu_write_valid[7:0]
+gpu.program_mem_read_address[7:0]
+gpu.program_mem_read_data[15:0]
+@28
+gpu.program_mem_read_ready
+gpu.program_mem_read_valid
+gpu.reset
+gpu.start
+@22
+gpu.sv2v_tmp_data_memory_controller_consumer_read_data[64:1]
+gpu.sv2v_tmp_data_memory_controller_consumer_read_ready[8:1]
+gpu.sv2v_tmp_data_memory_controller_consumer_write_ready[8:1]
+gpu.sv2v_tmp_dispatch_instance_core_block_id[16:1]
+@28
+gpu.sv2v_tmp_dispatch_instance_core_reset[2:1]
+gpu.sv2v_tmp_dispatch_instance_core_start[2:1]
+@22
+gpu.sv2v_tmp_dispatch_instance_core_thread_count[6:1]
+gpu.sv2v_tmp_program_memory_controller_consumer_read_data[32:1]
+@28
+gpu.sv2v_tmp_program_memory_controller_consumer_read_ready[2:1]
+@22
+gpu.thread_count[7:0]
+@420
+gpu.data_memory_controller.ADDR_BITS
+gpu.data_memory_controller.CACHE_INDEX_BITS
+gpu.data_memory_controller.CACHE_LINE_SIZE_BITS
+gpu.data_memory_controller.CACHE_NUM_LINES
+gpu.data_memory_controller.CACHE_OFFSET_BITS
+gpu.data_memory_controller.CACHE_TAG_BITS
+gpu.data_memory_controller.CHUNK_SIZE
+gpu.data_memory_controller.DATA_BITS
+gpu.data_memory_controller.NUM_CHANNELS
+gpu.data_memory_controller.NUM_CHUNKS
+gpu.data_memory_controller.NUM_CONSUMERS
+gpu.data_memory_controller.WRITE_ENABLE
+@22
+gpu.data_memory_controller.cache[335:0]
+gpu.data_memory_controller.cache_line[31:0]
+[color] 3
+gpu.data_memory_controller.channel_serving_consumer[7:0]
+@28
+gpu.data_memory_controller.clk
+@22
+[color] 6
+gpu.data_memory_controller.consumer_read_address[63:0]
+[color] 7
+gpu.data_memory_controller.consumer_read_data[63:0]
+[color] 3
+gpu.data_memory_controller.consumer_read_ready[7:0]
+gpu.data_memory_controller.consumer_read_valid[7:0]
+gpu.data_memory_controller.consumer_write_address[63:0]
+gpu.data_memory_controller.consumer_write_data[63:0]
+gpu.data_memory_controller.consumer_write_ready[7:0]
+gpu.data_memory_controller.consumer_write_valid[7:0]
+gpu.data_memory_controller.controller_state[3:0]
+@28
+gpu.data_memory_controller.current_consumer[2:0]
+@22
+gpu.data_memory_controller.mem_read_address[7:0]
+gpu.data_memory_controller.mem_read_data[7:0]
+@28
+gpu.data_memory_controller.mem_read_ready
+gpu.data_memory_controller.mem_read_valid
+@22
+gpu.data_memory_controller.mem_write_address[7:0]
+@420
+gpu.data_memory_controller.mem_write_data[7:0]
+@28
+gpu.data_memory_controller.mem_write_ready
+gpu.data_memory_controller.mem_write_valid
+gpu.data_memory_controller.reset
+@22
+gpu.data_memory_controller.tag_match[7:0]
+[pattern_trace] 1
+[pattern_trace] 0

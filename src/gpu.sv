@@ -15,8 +15,10 @@ module gpu #(
     parameter PROGRAM_MEM_DATA_BITS = 16,    // Number of bits in program memory value (16 bit instruction)
     parameter PROGRAM_MEM_NUM_CHANNELS = 1,  // Number of concurrent channels for sending requests to program memory
     parameter NUM_CORES = 2,                 // Number of cores to include in this GPU
+    // parameter THREADS_PER_BLOCK = 4          // Number of threads to handle per block (determines the compute resources of each core)
     parameter THREADS_PER_BLOCK = 4          // Number of threads to handle per block (determines the compute resources of each core)
-) (
+
+    ) (
     input wire clk,
     input wire reset,
 
@@ -98,7 +100,7 @@ module gpu #(
 
     // Data Memory Controller
     // dmem_controller #(
-    dmem_cache #(
+    dmem_controller #(
         .ADDR_BITS(DATA_MEM_ADDR_BITS),
         .DATA_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),

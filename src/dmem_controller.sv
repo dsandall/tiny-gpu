@@ -81,7 +81,7 @@ module dmem_controller #(
                                 controller_state[i] <= READ_WAITING;
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
-                                // break; //i'm commenting this out and expect this to cause errors in future 
+                                break; //i'm commenting this out and expect this to cause errors in future 
                             end else if (consumer_write_valid[j] && !channel_serving_consumer[j]) begin 
                                 channel_serving_consumer[j] = 1;
                                 current_consumer[i] <= j;
@@ -92,7 +92,7 @@ module dmem_controller #(
                                 controller_state[i] <= WRITE_WAITING;
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
-                                // break; //i'm commenting this out and expect this to cause errors in future 
+                                break; //i'm commenting this out and expect this to cause errors in future 
                             end
                         end
                     end
