@@ -230,7 +230,8 @@ localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_line
                         if (consumer_read_address[current_consumer[i]][0] == 1'b0) begin
                             consumer_read_data[current_consumer[i]] <= cache_data[cache_line[current_consumer[i]]][7:0];
                         end else begin
-                            consumer_read_data[current_consumer[i]] <= cache_data[cache_line[current_consumer[i]]][15:8];
+                            // consumer_read_data[current_consumer[i]] <= cache_data[cache_line[current_consumer[i]]][15:8];
+                            consumer_read_data[current_consumer[i]] <= mem_read_data[i];
                         end
                     
                         // next state

@@ -50,7 +50,7 @@ async def test_matmul(dut):
 
     ## System Config
     # Memory Channels
-    data_memory = Memory(dut=dut, addr_bits=8, data_bits=8, channels=1, name="data", delay=delay)
+    data_memory = Memory(dut=dut, addr_bits=8, data_bits=8, channels=4, name="data", delay=delay)
     program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program", delay=delay)
 
     # threads
