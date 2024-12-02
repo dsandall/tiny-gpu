@@ -9,7 +9,7 @@ module pmem_controller #(
     parameter ADDR_BITS, // 16 bit addresses
     parameter DATA_BITS, // 8 for data, 16 for program mem
     parameter NUM_CONSUMERS, // The number of consumers accessing memory through this controller
-    parameter NUM_CHANNELS,  // The number of concurrent channels available to send requests to global memory
+    parameter NUM_CHANNELS  // The number of concurrent channels available to send requests to global memory
     // parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
 ) (
     input wire clk, 
@@ -89,7 +89,8 @@ module pmem_controller #(
                                 controller_state[i] <= READ_WAITING;
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
-                                break;
+                                // break; //i'm commenting this out and expect this to cause errors in future 
+
 
                             // if no reads, check for any pending write requests
                             end else if (consumer_write_valid[j] && !channel_serving_consumer[j]) begin 
@@ -102,7 +103,7 @@ module pmem_controller #(
                                 controller_state[i] <= WRITE_WAITING;
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
-                                break;
+                                // break; //i'm commenting this out and expect this to cause errors in future 
                             end
                         end
                     end

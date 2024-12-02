@@ -115,7 +115,7 @@ module core #(
 
     // Scheduler
     scheduler #(
-        .THREADS_PER_BLOCK(THREADS_PER_BLOCK),
+        .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
     ) scheduler_instance (
         .clk(clk),
         .reset(reset),
@@ -174,7 +174,7 @@ module core #(
             registers #(
                 .THREADS_PER_BLOCK(THREADS_PER_BLOCK),
                 .THREAD_ID(i),
-                .DATA_BITS(DATA_MEM_DATA_BITS),
+                .DATA_BITS(DATA_MEM_DATA_BITS)
             ) register_instance (
                 .clk(clk),
                 .reset(reset),

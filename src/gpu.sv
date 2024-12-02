@@ -97,11 +97,12 @@ module gpu #(
     );
 
     // Data Memory Controller
-    dmem_controller #(
+    // dmem_controller #(
+    dmem_cache #(
         .ADDR_BITS(DATA_MEM_ADDR_BITS),
         .DATA_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),
-        .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS), 
+        .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS)
         // .WRITE_ENABLE(1)
     ) data_memory_controller (
         .clk(clk),
@@ -128,35 +129,35 @@ module gpu #(
 
 
     
-    // Program Memory Cache
-    pmem_cache #(
-        .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
-        .DATA_BITS(PROGRAM_MEM_DATA_BITS),
-        .NUM_CONSUMERS(1),
-        .NUM_CHANNELS(1),
-    ) program_memory_cache (
-        .clk(clk),
-        .reset(reset),
+    // // Program Memory Cache
+    // pmem_cache #(
+    //     .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
+    //     .DATA_BITS(PROGRAM_MEM_DATA_BITS),
+    //     .NUM_CONSUMERS(1),
+    //     .NUM_CHANNELS(1)
+    // ) program_memory_cache (
+    //     .clk(clk),
+    //     .reset(reset),
 
-        // pmem_controller (towards CPU cores)
-        .controller_read_valid(pcache_read_valid),
-        .controller_read_address(pcache_read_address),
-        .controller_read_ready(pcache_read_ready),
-        .controller_read_data(pcache_read_data),
+    //     // pmem_controller (towards CPU cores)
+    //     .controller_read_valid(pcache_read_valid),
+    //     .controller_read_address(pcache_read_address),
+    //     .controller_read_ready(pcache_read_ready),
+    //     .controller_read_data(pcache_read_data),
 
-        // Program memory (SRAM)
-        .mem_read_valid(program_mem_read_valid),
-        .mem_read_address(program_mem_read_address),
-        .mem_read_ready(program_mem_read_ready),
-        .mem_read_data(program_mem_read_data),    
-    );
+    //     // Program memory (SRAM)
+    //     .mem_read_valid(program_mem_read_valid),
+    //     .mem_read_address(program_mem_read_address),
+    //     .mem_read_ready(program_mem_read_ready),
+    //     .mem_read_data(program_mem_read_data)    
+    // );
 
     // Program Memory Controller
     pmem_controller #(
         .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
         .DATA_BITS(PROGRAM_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_FETCHERS),
-        .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS),
+        .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS)
         // .WRITE_ENABLE(0)
     ) program_memory_controller (
         .clk(clk),
@@ -167,10 +168,10 @@ module gpu #(
         .consumer_read_ready(fetcher_read_ready),
         .consumer_read_data(fetcher_read_data),
 
-        .mem_read_valid(pcache_read_valid),
-        .mem_read_address(pcache_read_address),
-        .mem_read_ready(pcache_read_ready),
-        .mem_read_data(pcache_read_data),
+        .mem_read_valid(program_mem_read_valid),
+        .mem_read_address(program_mem_read_address),
+        .mem_read_ready(program_mem_read_ready),
+        .mem_read_data(program_mem_read_data)
     );
 
     // Dispatcher
@@ -232,7 +233,7 @@ module gpu #(
                 .DATA_MEM_DATA_BITS(DATA_MEM_DATA_BITS),
                 .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
                 .PROGRAM_MEM_DATA_BITS(PROGRAM_MEM_DATA_BITS),
-                .THREADS_PER_BLOCK(THREADS_PER_BLOCK),
+                .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
             ) core_instance (
                 .clk(clk),
                 .reset(core_reset[i]),

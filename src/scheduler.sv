@@ -14,7 +14,7 @@
 // > Technically, different instructions can branch to different PCs, requiring "branch divergence." In
 //   this minimal implementation, we assume no branch divergence (naive approach for simplicity)
 module scheduler #(
-    parameter THREADS_PER_BLOCK = 4,
+    parameter THREADS_PER_BLOCK = 4
 ) (
     input wire clk,
     input wire reset,
@@ -81,7 +81,7 @@ module scheduler #(
                         // Make sure no lsu_state = REQUESTING or WAITING
                         if (lsu_state[i] == 2'b01 || lsu_state[i] == 2'b10) begin
                             any_lsu_waiting = 1'b1;
-                            break;
+                            // break; //i'm commenting this out and expect this to cause errors in future 
                         end
                     end
 

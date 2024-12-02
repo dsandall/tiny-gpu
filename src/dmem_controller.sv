@@ -35,12 +35,12 @@ module dmem_controller #(
     output reg [DATA_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
     input reg [NUM_CHANNELS-1:0] mem_write_ready
 );
-    typedef enum logic [2:0] {
-        IDLE = 3'b000,
-        READ_WAITING = 3'b010,
-        READ_RELAYING = 3'b100,
-        WRITE_WAITING = 3'b011,
-        WRITE_RELAYING = 3'b101
+    typedef enum logic [3:0] {
+        IDLE,
+        READ_WAITING,
+        READ_RELAYING,
+        WRITE_WAITING,
+        WRITE_RELAYING
     } controller_state_t;
 
     // Keep track of state for each channel and which jobs each channel is handling
@@ -81,7 +81,7 @@ module dmem_controller #(
                                 controller_state[i] <= READ_WAITING;
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
-                                break;
+                                // break; //i'm commenting this out and expect this to cause errors in future 
                             end else if (consumer_write_valid[j] && !channel_serving_consumer[j]) begin 
                                 channel_serving_consumer[j] = 1;
                                 current_consumer[i] <= j;
@@ -92,7 +92,7 @@ module dmem_controller #(
                                 controller_state[i] <= WRITE_WAITING;
 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
-                                break;
+                                // break; //i'm commenting this out and expect this to cause errors in future 
                             end
                         end
                     end
