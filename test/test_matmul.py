@@ -9,9 +9,8 @@ from .helpers.logger import logger
 delay = 5
 
 @cocotb.test()
-async def test_matadd(dut):
+async def test_matmul(dut):
     # Program Memory
-    program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program", delay=delay)
     program = [
         0b0101000011011110, # MUL R0, %blockIdx, %blockDim
         0b0011000000001111, # ADD R0, R0, %threadIdx         ; i = blockIdx * blockDim + threadIdx
@@ -43,17 +42,22 @@ async def test_matadd(dut):
         0b1000000010011000, # STR R9, R8                     ; store C[i] in global memory
         0b1111000000000000  # RET                            ; end of kernel
     ]
-
     # Data Memory
-    data_memory = Memory(dut=dut, addr_bits=8, data_bits=8, channels=4, name="data", delay=delay)
     data = [
         1, 2, 3, 4, # Matrix A (2 x 2)
         1, 2, 3, 4, # Matrix B (2 x 2)
     ]
 
-    # Device Control
+    ## System Config
+    # Memory Channels
+    data_memory = Memory(dut=dut, addr_bits=8, data_bits=8, channels=1, name="data", delay=delay)
+    program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program", delay=delay)
+
+    # threads
     threads = 4
 
+
+    ## Simulation Runner    
     await setup(
         dut=dut,
         program_memory=program_memory,

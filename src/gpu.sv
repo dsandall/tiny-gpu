@@ -100,7 +100,7 @@ module gpu #(
 
     // Data Memory Controller
     // dmem_controller #(
-    dmem_controller #(
+    dmem_cache #(
         .ADDR_BITS(DATA_MEM_ADDR_BITS),
         .DATA_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),
