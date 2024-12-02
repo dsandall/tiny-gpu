@@ -10,7 +10,7 @@ module dmem_controller #(
     parameter DATA_BITS, // 8 for data, 16 for program mem
     parameter NUM_CONSUMERS, // The number of consumers accessing memory through this controller
     parameter NUM_CHANNELS,  // The number of concurrent channels available to send requests to global memory
-    // parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
+    parameter WRITE_ENABLE = 1   // Whether this memory controller can write to memory (program memory is read-only)
 ) (
     input wire clk,
     input wire reset,
@@ -35,14 +35,16 @@ module dmem_controller #(
     output reg [DATA_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
     input reg [NUM_CHANNELS-1:0] mem_write_ready
 );
-    localparam IDLE = 3'b000, 
-        READ_WAITING = 3'b010, 
-        WRITE_WAITING = 3'b011,
+    typedef enum logic [2:0] {
+        IDLE = 3'b000,
+        READ_WAITING = 3'b010,
         READ_RELAYING = 3'b100,
-        WRITE_RELAYING = 3'b101;
+        WRITE_WAITING = 3'b011,
+        WRITE_RELAYING = 3'b101
+    } controller_state_t;
 
     // Keep track of state for each channel and which jobs each channel is handling
-    reg [2:0] controller_state [NUM_CHANNELS-1:0];
+    controller_state_t controller_state [NUM_CHANNELS-1:0];
     reg [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
     reg [NUM_CONSUMERS-1:0] channel_serving_consumer; // Which channels are being served? Prevents many workers from picking up the same request.
 
@@ -103,6 +105,8 @@ module dmem_controller #(
                             controller_state[i] <= READ_RELAYING;
                         end
                     end
+
+
                     WRITE_WAITING: begin 
                         // Wait for response from memory for pending write request
                         if (mem_write_ready[i]) begin 
