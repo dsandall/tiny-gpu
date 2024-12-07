@@ -1,0 +1,7 @@
+read_verilog ../build/gpu.v
+hierarchy -top gpu
+synth
+show -colors 42 -format dot -prefix gpu
+
+
+
