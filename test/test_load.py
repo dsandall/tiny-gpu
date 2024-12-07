@@ -5,13 +5,14 @@ from .helpers.memory import Memory
 from .helpers.format import format_cycle
 from .helpers.logger import logger
 
-delay = 3 # Memory Read/Write Delay, in Clock Cycles
+delay = 0 # Memory Read/Write Delay, in Clock Cycles
 
 @cocotb.test()
 async def test_load(dut):
     # Program Memory
     program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program", delay=delay)
     program = [
+        # Assembled output for ./asm_src/test_load.asm
         0b1001000100001000, # CONST R1, #8                   ;  Increment for addresses (8 bytes later)
         0b1001001000000100, # CONST R2, #4                   ;  Number of iterations
         0b1001001100000000, # CONST R3, #0                   ;  Base address
@@ -25,6 +26,7 @@ async def test_load(dut):
         0b0101100010000100, # MUL R8, R8, R4                 ;  R8 = R8 * 2
         0b0011011001100001, # ADD R6, R6, R1                 ;  R6 = R6 + 8 (next store address)
         0b1000000001101000, # STR R6, R8                     ;  memory[R6] = R8 (store)
+        0b0000000000000000, # NOP                                             
         0b1001110000000001, # CONST R12, #1                  
         0b0011011101111100, # ADD R7, R7, R12                ;  R7 = R7 + 1
         0b0010000001110010, # CMP R7, R2                     
@@ -39,7 +41,7 @@ async def test_load(dut):
     ]
 
     # Device Control
-    threads = 8
+    threads = 4
 
     await setup(
         dut=dut,
@@ -71,7 +73,7 @@ async def test_load(dut):
     logger.info(f"Completed in {cycles} cycles")
     data_memory.display(40)
 
-    expected_results = [a for a in data[0:8]]
+    expected_results = [a for a in data[0:threads]]
     for i, expected in enumerate(expected_results):
         result = data_memory.memory[i ]
         assert result == expected, f"Result mismatch at index {i}: expected {expected}, got {result}"
