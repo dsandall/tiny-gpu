@@ -12,6 +12,7 @@ test_%:
 # run cocotb testbench at test/test_$, using icarus (vvp)  
 	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
 
+## This does not currently work, as SV support is iffy at best for the open source toolchain
 # test_direct_%:
 # # create gpu.v from all sv files in src
 # #	make compile

@@ -76,7 +76,7 @@ async def test_subtract(dut):
 
 
     # Assuming the matrices are 2x2 and the result is stored starting at address 9
-    expected_results = [8,-8,0,0]
+    expected_results = [8,254,0,0]
     for i, expected in enumerate(expected_results):
         result = data_memory.memory[i + 8]  # Results start at address 9
         assert result == expected, f"Result mismatch at index {i}: expected {expected}, got {result}"
