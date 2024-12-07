@@ -1,0 +1,15 @@
+# Load the design
+read_verilog ../build/gpu.v
+
+# Isolate the target module
+# hierarchy -top (default is gpu)
+
+# Perform synthesis
+synth
+
+# Show detailed statistics
+stat
+
+# Optionally, write the synthesized netlist for further analysis
+# write_verilog my_module_synthesized.v
+

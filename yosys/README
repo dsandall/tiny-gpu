@@ -1,0 +1,2 @@
+Install yosys
+Run the yoscript with "yosys -s synth.ys"
