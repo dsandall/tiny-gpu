@@ -105,7 +105,6 @@ module gpu #(
         .DATA_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),
         .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS)
-        // .WRITE_ENABLE(1)
     ) data_memory_controller (
         .clk(clk),
         .reset(reset),
