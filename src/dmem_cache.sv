@@ -142,7 +142,7 @@ localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_line
                                 
                             end else begin
                                 // set up memory read
-                                mem_read_address[i] <= consumer_read_address[j] & 16'hFFFE; // mask out the offset bit
+                                mem_read_address[i] <= consumer_read_address[j] & 16'hFFFE; // mask out the offset bit todo: parameterize
                                 mem_read_valid[i] <= 1;
                                 controller_state[i] <= CACHE_MISS;
                             end
@@ -230,40 +230,91 @@ localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_line
                     endcase
                 end
                 
+                // CACHE_MISS_OLD: begin
+                //     // Wait for first response from memory for pending read request
+                //     if (mem_read_ready[i]) begin 
+                //         mem_read_valid[i] <= 0;
+                //         // consumer_read_ready[current_consumer[i]] <= 1;
+                //         // consumer_read_data[current_consumer[i]] <= mem_read_data[i];
+                //         case (chunks_read) 
+                //             0: begin
+                //                 cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                //             end
+                //             1: begin
+                //                 cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(1 +1))-1:CHUNK_SIZE*1] <= mem_read_data[i]; //todo: param for different chunk sizes
+                //             end
+                //             2: begin
+                //                 cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(2 +1))-1:CHUNK_SIZE*2] <= mem_read_data[i]; //todo: param for different chunk sizes   
+                //             end
+                //             3: begin
+                //                 cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(3 +1))-1:CHUNK_SIZE*3] <= mem_read_data[i]; //todo: param for different chunk sizes
+                //             end
+                //             // 4: begin
+                //             //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(4 +1))-1:CHUNK_SIZE*4] <= mem_read_data[i]; //todo: param for different chunk sizes
+                //             // end
+                //             // 5: begin
+                //             //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                //             // end
+                //             // 6: begin
+                //             //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                //             // end
+                //             // 7: begin
+                //             //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                //             // end
+                //         endcase
+                //         chunks_read <= chunks_read + 1;
+    
+                //         if (CACHE_INDEX_BITS < 1) begin
+                //             // go directly to end state
+                //             controller_state[i] <= READ_RELAYING;                    
+                //         end else begin
+                //             // otherwise continue
+                //             controller_state[i] <= CACHE_MISS_WAIT;
+                //         end
+                //     end
+                // end
+                
+                
+    
                 CACHE_MISS: begin
-                    // Wait for first response from memory for pending read request
-                    if (mem_read_ready[i]) begin 
-                        mem_read_valid[i] <= 0;
-                        // consumer_read_ready[current_consumer[i]] <= 1;
-                        // consumer_read_data[current_consumer[i]] <= mem_read_data[i];
-                        
-                        cache_data[cache_line[current_consumer[i]]][CHUNK_SIZE-1:0] <= mem_read_data[i]; //todo: param for different chunk sizes
-                        chunks_read <= chunks_read + 1;
-    
-                        if (CACHE_INDEX_BITS < 1) begin
-                            // go directly to end state
-                            controller_state[i] <= READ_RELAYING;                    
-                        end else begin
-                            // otherwise continue
-                            controller_state[i] <= CACHE_MISS_WAIT;
-                        end
-                    end
-                end
-                
-                
-    
-                CACHE_MISS_2: begin
+                    localparam ZEEB = 1;
                     // Wait for second response from memory for pending read request
                     if (mem_read_ready[i]) begin 
                         // end memory request sig
                         mem_read_valid[i] <= 0;
-                        
-                        // complete memreads, 
-                        cache_data[cache_line[current_consumer[i]]][15:8] <= mem_read_data[i]; //todo: second chunk 
                         chunks_read <= chunks_read + 1;
+
+                        // complete memreads
+                        case (chunks_read) 
+                            0: begin
+                                cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                            end
+                            1: begin
+                                cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(1 +1))-1:CHUNK_SIZE*1] <= mem_read_data[i]; //todo: param for different chunk sizes
+                            end
+                            2: begin
+                                cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(2 +1))-1:CHUNK_SIZE*2] <= mem_read_data[i]; //todo: param for different chunk sizes   
+                            end
+                            3: begin
+                                cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(3 +1))-1:CHUNK_SIZE*3] <= mem_read_data[i]; //todo: param for different chunk sizes
+                            end
+                            // 4: begin
+                            //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(4 +1))-1:CHUNK_SIZE*4] <= mem_read_data[i]; //todo: param for different chunk sizes
+                            // end
+                            // 5: begin
+                            //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                            // end
+                            // 6: begin
+                            //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                            // end
+                            // 7: begin
+                            //     cache_data[cache_line[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
+                            // end
+                        endcase                        
+                        
     
                         if (chunks_read < (NUM_CHUNKS - 1)) begin
-                            controller_state[i] <= CACHE_MISS_WAIT_2;
+                            controller_state[i] <= CACHE_MISS_WAIT;
                         end else begin
                             // (if final chunk read) the cache is now valid and properly tagged
                             cache_valid[cache_line[current_consumer[i]]] <= 1; // validate cache line
@@ -330,7 +381,7 @@ localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_line
                     mem_read_address[i] <= (consumer_read_address[current_consumer[i]] & 16'hFFFE) | 16'b0001; // mask out the offset bit
                     mem_read_valid[i] <= 1;
     
-                    controller_state[i] <= CACHE_MISS_2;                    
+                    controller_state[i] <= CACHE_MISS;                    
                 end
     
                 // CACHE_MISS_WAIT_2: begin
