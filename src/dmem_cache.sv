@@ -5,6 +5,12 @@
 // > Receives memory requests from all LSUs
 // > Throttles requests based on limited external memory bandwidth
 // > Waits for responses from external memory and distributes them back to cores
+
+// CACHE ADDITIONS
+// > Retreive groups of bytes from memory
+// > Stores bytes into cache lines
+// > Saves them for later reads
+
 module dmem_cache #(
     parameter ADDR_BITS = 8, // 16 bit addresses
     parameter DATA_BITS = 8, // 8 for data, 16 for program mem
@@ -34,27 +40,29 @@ module dmem_cache #(
     output logic [DATA_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
     input wire [NUM_CHANNELS-1:0] mem_write_ready
 );
-    // localparam CACHE_NUM_LINES = ((2**ADDR_BITS))*DATA_BITS)/CACHE_LINE_SIZE_BITS = 128; //if you were to store all of memory the mem in cache...
-// localparam CACHE_LINE_SIZE_BITS = 32; //2 instructions per line
+    ////
+    //// Cache Data / SRAM 
+    // mem_addr = [tag][line index][offset]
+    // mem_addr = [remaining][4][3] bits
 
-localparam CACHE_OFFSET_BITS = 1;
-localparam CACHE_INDEX_BITS = 4;
-localparam CACHE_TAG_BITS = ADDR_BITS - CACHE_INDEX_BITS - CACHE_OFFSET_BITS; //3 bit tags
-localparam NUM_CHUNKS = 2**(CACHE_OFFSET_BITS); 
-localparam CHUNK_SIZE = DATA_BITS;
-localparam CACHE_LINE_SIZE_BITS = NUM_CHUNKS * CHUNK_SIZE; //todo testing: this also should equal 
-localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_lines * cache_line_size * tag possibilities should be equal to size of memory address space?
-//mem_addr = [tag][line index][offset]
-//mem_addr = [remaining][4][3] bits
+    localparam CACHE_OFFSET_BITS = 1;
+    localparam CACHE_INDEX_BITS = 4;
 
-// kinda gross, just pretend it's a case statement
-localparam CACHE_OFFSET_MASK = (CACHE_OFFSET_BITS == 0) ? 16'hBEEF :
-                               (CACHE_OFFSET_BITS == 1) ? 16'hFFFE :
-                               (CACHE_OFFSET_BITS == 2) ? 16'hFFFC : 16'h0000;
-
-
-
-
+    logic cache_valid [CACHE_NUM_LINES-1:0];
+    logic cache_dirty [CACHE_NUM_LINES-1:0];
+    logic cache_tags [CACHE_NUM_LINES-1:0] [CACHE_TAG_BITS-1:0];
+    logic cache_data [CACHE_NUM_LINES-1:0] [CACHE_LINE_SIZE_BITS-1:0];
+    logic [CACHE_INDEX_BITS-1:0] cache_line [NUM_CONSUMERS-1:0]; //todo: this should probably be what the channels act on, rather than per consumer.
+    
+    // kinda gross, just pretend it's a case statement
+    localparam CACHE_OFFSET_MASK = (CACHE_OFFSET_BITS == 0) ? 16'hBEEF :
+                                (CACHE_OFFSET_BITS == 1) ? 16'hFFFE :
+                                (CACHE_OFFSET_BITS == 2) ? 16'hFFFC : 16'h0000;
+    localparam CACHE_TAG_BITS = ADDR_BITS - CACHE_INDEX_BITS - CACHE_OFFSET_BITS; //3 bit tags
+    localparam NUM_CHUNKS = 2**(CACHE_OFFSET_BITS); 
+    localparam CHUNK_SIZE = DATA_BITS;
+    localparam CACHE_LINE_SIZE_BITS = NUM_CHUNKS * CHUNK_SIZE; //todo testing: this also should equal 
+    localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_lines * cache_line_size * tag possibilities should be equal to size of memory address space?
 
     // struct packed {
     //     bit [CACHE_LINE_SIZE_BITS-1:0] data;
@@ -63,18 +71,14 @@ localparam CACHE_OFFSET_MASK = (CACHE_OFFSET_BITS == 0) ? 16'hBEEF :
     //     bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
     // } cache [CACHE_NUM_LINES-1:0];
 
-    logic cache_valid [CACHE_NUM_LINES-1:0];
-    logic cache_dirty [CACHE_NUM_LINES-1:0];
-    logic cache_tags [CACHE_NUM_LINES-1:0] [CACHE_TAG_BITS-1:0];
-    logic cache_data [CACHE_NUM_LINES-1:0] [CACHE_LINE_SIZE_BITS-1:0];
 
-    // struct packed {
-    //     bit [CACHE_LINE_SIZE_BITS-1:0] data;
-    //     bit [CACHE_TAG_BITS-1:0] tag; //UID for cache data
-    //     bit valid; //starts at 0, set to 1 when written to memory
-    //     bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
-    // } dummycache [CACHE_NUM_LINES-1:0];
 
+
+    //// Memory Channel Construction
+    ////
+
+    //// FSM States. Could be split into more states,
+    ////    depending on penalties for num clock cycles vs the clock freq of the cache FSM as a whole 
     typedef enum logic [7:0] {
         IDLE,
         CACHE_HIT,
@@ -85,16 +89,15 @@ localparam CACHE_OFFSET_MASK = (CACHE_OFFSET_BITS == 0) ? 16'hBEEF :
         WRITE_RELAYING
     } controller_state_t;
 
-    // Keep track of state for each channel and which jobs each channel is handling
     controller_state_t controller_state [NUM_CHANNELS-1:0];
+
+    // Keep track of state for each channel and which jobs each channel is handling
+    // The highest level ones, used for communication between channels
     logic [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
     logic [NUM_CONSUMERS-1:0] channel_serving_consumer; // Which channels are being served? Prevents many workers from picking up the same request.
-    
-    logic [CACHE_INDEX_BITS-1:0] cache_line [NUM_CONSUMERS-1:0];
-    logic [NUM_CONSUMERS-1:0] tag_match;
 
+    // Reset Block
     always @(posedge clk) begin
-
         if (reset) begin 
             mem_read_valid <= 0;
             mem_read_address <= 0;
@@ -118,10 +121,16 @@ localparam CACHE_OFFSET_MASK = (CACHE_OFFSET_BITS == 0) ? 16'hBEEF :
         end
     end
 
-    // For each channel, we handle processing concurrently
+    logic [NUM_CONSUMERS-1:0] tag_match;
+
+    //// Memory Channel Generate Block
+    //// This is the rest of the file. 4 channels of parallel memory reads
     generate
+        
+        // For each memory channel, we handle processing concurrently
         for (genvar i = 0; i < NUM_CHANNELS; i = i + 1) begin 
 
+            // setting up some per-channel state registers
             logic consumer_req_offset [7:0]; //arbitrary size todo:
             int chunks_read = 0;
 
@@ -172,18 +181,12 @@ localparam CACHE_OFFSET_MASK = (CACHE_OFFSET_BITS == 0) ? 16'hBEEF :
                 
     
                 CACHE_HIT: begin
-                    //just relay the stuff from the cache (can i add delay here in sv?)
+                    //just relay the stuff from the cache
                     consumer_read_ready[current_consumer[i]] <= 1;
                     controller_state[i] <= READ_RELAYING;
                     
     
-                    // //For cache lines that are not == word length 
-                    // if (consumer_read_address[current_consumer[i]][0] == 1'b0) begin
-                    //     consumer_read_data[current_consumer[i]] <= cache_data[cache_line[current_consumer[i]]][7:0];
-                    // end else begin
-                    //     consumer_read_data[current_consumer[i]] <= cache_data[cache_line[current_consumer[i]]][15:8];
-                    // end
-                    // // todo: experimental parameterized version 
+                    // For cache lines that are not == word length 
                     case (CACHE_OFFSET_BITS)
                         0: begin
                             // If CACHE_OFFSET_BITS is 0, assume no offset and just select the first byte
