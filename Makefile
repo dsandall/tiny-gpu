@@ -12,13 +12,13 @@ test_%:
 # run cocotb testbench at test/test_$, using icarus (vvp)  
 	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
 
-test_direct_%:
-# create gpu.v from all sv files in src
-#	make compile
-# compile GPU.v into simulatable sim.VVP format, set top level module to gpu
-	iverilog -sv -o build/sim.vvp -s gpu -g2012 src/*.sv
-# run cocotb testbench at test/test_$, using icarus (vvp)  
-	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
+# test_direct_%:
+# # create gpu.v from all sv files in src
+# #	make compile
+# # compile GPU.v into simulatable sim.VVP format, set top level module to gpu
+# 	iverilog -sv -o build/sim.vvp -s gpu -g2012 src/*.sv
+# # run cocotb testbench at test/test_$, using icarus (vvp)  
+# 	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
 
 compile:
 # Convert alu 

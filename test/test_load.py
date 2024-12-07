@@ -5,8 +5,7 @@ from .helpers.memory import Memory
 from .helpers.format import format_cycle
 from .helpers.logger import logger
 
-# delay for read/write operations in clock cycles 
-delay = 3
+delay = 3 # Memory Read/Write Delay, in Clock Cycles
 
 @cocotb.test()
 async def test_load(dut):
