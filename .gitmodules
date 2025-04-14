@@ -1,0 +1,3 @@
+[submodule "tiny-gpu-assembler"]
+	path = tiny-gpu-assembler
+	url = git@github.com:dsandall/tiny-gpu-assembler.git
