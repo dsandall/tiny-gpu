@@ -2,7 +2,10 @@
 
 export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 
-# Make is typically ran with "make test_matadd"
+# Make is typically ran with :
+# - make test_matadd
+# - make compile_matadd
+# - make show_matadd
 
 test_%:
 # create gpu.v from all sv files in src
@@ -22,6 +25,7 @@ test_%:
 # 	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
 
 compile:
+	mkdir build --parents
 # Convert alu 
 	make compile_alu
 # build convert all source files to v and dump them into gpu.v
