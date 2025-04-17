@@ -5,8 +5,8 @@
 # New Tests
 # from test.test_load import *
 #from test.test_load_8_threads import *
-from test.test_subtract import *
+#from test.test_subtract import *
 
 # Base Tests
-from test.test_matadd import *
 from test.test_matmul import *
+from test.test_matadd import *

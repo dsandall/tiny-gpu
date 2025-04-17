@@ -1,16 +1,12 @@
 import cocotb
-from cocotb.triggers import RisingEdge
-from .helpers.setup import setup
-from .helpers.memory import Memory
-from .helpers.format import format_cycle
-from .helpers.logger import logger
+from .helpers.testbench_bin import setup_wrap
 
 delay = 0 # Memory Read/Write Delay, in Clock Cycles
+threads = 4
 
 @cocotb.test()
 async def test_load(dut):
     # Program Memory
-    program_memory = Memory(dut=dut, addr_bits=8, data_bits=16, channels=1, name="program", delay=delay)
     program = [
         # Assembled output for ./asm_src/test_load.asm
         0b1001000100000100, # CONST R1, #4                   ;  Increment for addresses (8 bytes later)
@@ -36,43 +32,12 @@ async def test_load(dut):
     ]
 
     # Data Memory
-    data_memory = Memory(dut=dut, addr_bits=8, data_bits=8, channels=4, name="data", delay=delay)
     data = [
         1, 2, 3, 4,
     ]
 
-    # Device Control
-    threads = 4
-
-    await setup(
-        dut=dut,
-        program_memory=program_memory,
-        program=program,
-        data_memory=data_memory,
-        data=data,
-        threads=threads
-    )
-    
-    data_memory.display(40)
-
-
-    cycles = 0
-    while dut.done.value != 1:
-
-        a = cocotb.start(data_memory.run())
-        b = cocotb.start(program_memory.run())
-
-        
-        await cocotb.triggers.ReadOnly()
-        format_cycle(dut, cycles)
-        
-        await RisingEdge(dut.clk)
-        await a 
-        await b
-        cycles += 1
-
-    logger.info(f"Completed in {cycles} cycles")
-    data_memory.display(40)
+    # run device and dump memory
+    data_memory = await setup_wrap(dut=dut, program=program, data=data, threads=threads, mem_delay=delay)
 
     expected_results = [a for a in data[0:threads]]
     for i, expected in enumerate(expected_results):

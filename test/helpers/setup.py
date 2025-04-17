@@ -4,13 +4,16 @@ from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge
 from .memory import Memory
 
+
+
+
 async def setup(
-    dut, 
-    program_memory: Memory, 
+    dut,
+    program_memory: Memory,
     program: List[int],
     data_memory: Memory,
     data: List[int],
-    threads: int
+    threads: int,
 ):
     # Setup Clock
     clock = Clock(dut.clk, 25, units="us")
@@ -18,6 +21,8 @@ async def setup(
 
     # Reset
     dut.reset.value = 1
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
     await RisingEdge(dut.clk)
     dut.reset.value = 0
 

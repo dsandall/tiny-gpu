@@ -5,7 +5,7 @@ test/logs/*
 
 gds
 gds/**/*.gltf
-
+**.nvim
 .DS_Store
 results.xml
 
