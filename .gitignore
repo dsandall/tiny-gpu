@@ -2,9 +2,13 @@
 build/
 test/logs/*
 !.gitkeep
+
+gds
 gds/**/*.gltf
 
 .DS_Store
 results.xml
 
 research_papers/
+
+tiny-gpu-mlir/
