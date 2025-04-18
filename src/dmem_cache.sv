@@ -10,6 +10,9 @@
 // > Retreive groups of bytes from memory
 // > Stores bytes into cache lines
 // > Saves them for later reads
+parameter READ_ONLY = 0;
+parameter CACHE_OFFSET_BITS = 1;
+parameter CACHE_INDEX_BITS = 4;
 
 module dmem_cache #(
     parameter ADDR_BITS = 8, // 16 bit addresses
@@ -25,6 +28,7 @@ module dmem_cache #(
     input wire [ADDR_BITS-1:0] consumer_read_address [NUM_CONSUMERS-1:0],
     output logic [NUM_CONSUMERS-1:0] consumer_read_ready,
     output logic [DATA_BITS-1:0] consumer_read_data [NUM_CONSUMERS-1:0],
+
     input wire [NUM_CONSUMERS-1:0] consumer_write_valid,
     input wire [ADDR_BITS-1:0] consumer_write_address [NUM_CONSUMERS-1:0],
     input wire [DATA_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
@@ -35,6 +39,7 @@ module dmem_cache #(
     output logic [ADDR_BITS-1:0] mem_read_address [NUM_CHANNELS-1:0],
     input wire [NUM_CHANNELS-1:0] mem_read_ready,
     input wire [DATA_BITS-1:0] mem_read_data [NUM_CHANNELS-1:0],
+
     output logic [NUM_CHANNELS-1:0] mem_write_valid,
     output logic [ADDR_BITS-1:0] mem_write_address [NUM_CHANNELS-1:0],
     output logic [DATA_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
@@ -45,28 +50,19 @@ module dmem_cache #(
     // mem_addr = [tag][line index][offset]
     // mem_addr = [3]  [4]         [1] bits
 
-    localparam CACHE_OFFSET_BITS = 1;
-    localparam CACHE_INDEX_BITS = 4;
+    // we start with cache offset, index and total address len (8b address
+    // space is very tight...)
 
-    // kinda gross, just pretend it's a case statement
-    localparam CACHE_OFFSET_MASK = (CACHE_OFFSET_BITS == 0) ? 16'hBEEF :
-    (CACHE_OFFSET_BITS == 1) ? 16'hFFFE :
-    (CACHE_OFFSET_BITS == 2) ? 16'hFFFC : 16'h0000;
-    localparam CACHE_TAG_BITS = ADDR_BITS - CACHE_INDEX_BITS - CACHE_OFFSET_BITS; //3 bit tags
-    localparam NUM_CHUNKS = 2**(CACHE_OFFSET_BITS); 
-    localparam CHUNK_SIZE = DATA_BITS;
-    localparam CACHE_LINE_SIZE_BITS = NUM_CHUNKS * CHUNK_SIZE; //todo testing: this also should equal 
-    localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_lines * cache_line_size * tag possibilities should be equal to size of memory address space?
-
+    // do the calculations based on provided bits
     `include "cache_utils.svh"
-
-    cache_line_t cache [CACHE_NUM_LINES-1:0];
-    wire [CACHE_INDEX_BITS-1:0] cache_line_read [NUM_CONSUMERS-1:0]; //todo: this should probably be what the channels act on, rather than per consumer.
-    wire [CACHE_INDEX_BITS-1:0] cache_line_write [NUM_CONSUMERS-1:0]; //todo: this should probably be what the channels act on, rather than per consumer.
-
-    //// Memory Channel Construction
+    // now we have all these definitions
+    
+    
+    ////
+    // Cache State: 
     ////
 
+    //// For each hardware memory controller:
     //// FSM States. Could be split into more states,
     ////    depending on penalties for num clock cycles vs the clock freq of the cache FSM as a whole 
     typedef enum logic [7:0] {
@@ -78,13 +74,16 @@ module dmem_cache #(
         WRITE_WAITING,
         WRITE_RELAYING
     } controller_state_t;
-
     controller_state_t controller_state [NUM_CHANNELS-1:0];
+    
+    //// For each cache line:
+    cache_line_t cache [CACHE_NUM_LINES-1:0];
 
+    //// For each consumer interface:
     // Keep track of state for each channel and which jobs each channel is handling
     // The highest level ones, used for communication between channels
     logic [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
-    logic [NUM_CONSUMERS-1:0] channel_serving_consumer; // Which channels are being served? Prevents many workers from picking up the same request.
+    logic [NUM_CONSUMERS-1:0] consumer_mutex; // Which channels are being served? Prevents many workers from picking up the same request.
 
     // Reset Block
     always @(posedge clk) begin
@@ -102,7 +101,7 @@ module dmem_cache #(
             
             current_consumer <= 0;
             controller_state <= 0;
-            channel_serving_consumer = 0;
+            consumer_mutex = 0;
             
             // Initialize cache lines
             for (int k = 0; k < CACHE_NUM_LINES; k = k + 1) begin
@@ -114,17 +113,31 @@ module dmem_cache #(
         end
     end
 
-    logic [NUM_CONSUMERS-1:0] tag_match_read;
+    `define LINE_BITS CACHE_INDEX_BITS+CACHE_OFFSET_BITS-1:CACHE_OFFSET_BITS
+    `define TAG_BITS ADDR_BITS-1:CACHE_INDEX_BITS+CACHE_OFFSET_BITS
+    `define OFFSET_BITS CACHE_OFFSET_BITS-1:0
 
-    generate 
-        for (genvar j = 0; j < NUM_CONSUMERS; j = j + 1) begin 
-            assign cache_line_read[j] = consumer_read_address[j][CACHE_INDEX_BITS+CACHE_OFFSET_BITS-1:CACHE_OFFSET_BITS]; // extract the requested cache line as bits 
-            assign cache_line_write[j] = consumer_write_address[j][CACHE_INDEX_BITS+CACHE_OFFSET_BITS-1:CACHE_OFFSET_BITS]; // extract the requested cache line as bits 
-        end
-    endgenerate
 
     //// Memory Channel Generate Block
     //// This is the rest of the file. 4 channels of parallel memory reads
+    `define NEXTSTATE(state) controller_state[i] <= state
+    `define IS_READ consumer_read_valid[j]
+    `define IS_WRITE consumer_write_valid[j]
+    `define IS_UNSERVED !consumer_mutex[j]
+    `define REQUESTED_ADDR (`IS_READ ? consumer_read_address[j] : `IS_WRITE ? consumer_write_address[j] : 0)
+    `define REQUESTED_LINE (`IS_READ ? consumer_read_address[j][`LINE_BITS] : `IS_WRITE ? consumer_write_address[j][`LINE_BITS] : 0)
+    `define REQUESTED_TAG (`IS_READ ? consumer_read_address[j][`TAG_BITS] : `IS_WRITE ? consumer_write_address[j][`TAG_BITS]: 0)
+    `define REQUESTED_OFFSET (`IS_READ ? consumer_read_address[j][`OFFSET_BITS] : `IS_WRITE ? consumer_write_address[j][`OFFSET_BITS]: 0)
+
+    `define CC current_consumer[i]
+    `define CC_IS_READ consumer_read_valid[`CC]
+    `define CC_IS_WRITE consumer_write_valid[`CC]
+    //`define CC_IS_UNSERVED !consumer_mutex[j]
+    `define CC_REQUESTED_ADDR (`CC_IS_READ ? consumer_read_address[`CC] : `CC_IS_WRITE ? consumer_write_address[`CC] : 0)
+    `define CC_REQUESTED_LINE (`CC_IS_READ ? consumer_read_address[`CC][`LINE_BITS] : `CC_IS_WRITE ? consumer_write_address[`CC][`LINE_BITS] : 0)
+    `define CC_REQUESTED_TAG (`CC_IS_READ ? consumer_read_address[`CC][`TAG_BITS] : `CC_IS_WRITE ? consumer_write_address[`CC][`TAG_BITS]: 0)
+    `define CC_REQUESTED_OFFSET (`CC_IS_READ ? consumer_read_address[`CC][`OFFSET_BITS] : `CC_IS_WRITE ? consumer_write_address[`CC][`OFFSET_BITS]: 0)
+
     generate
         
         // For each memory channel, we handle processing concurrently
@@ -142,59 +155,64 @@ module dmem_cache #(
                 //// Idle state, waiting for transaction
                 IDLE: begin
 
-                    // While this channel is idle, cycle through consumers looking for one with a pending request
+                    // While this channel is idle, 
+                    // poll through consumers looking for one with a pending request
                     for (int j = 0; j < NUM_CONSUMERS; j = j + 1) begin 
-                        tag_match_read[j]  = (cache[cache_line_read[j]].tag == consumer_read_address[j][ADDR_BITS-1:CACHE_INDEX_BITS+CACHE_OFFSET_BITS]); // does the tag match the tag in cache?
                         
-                        //// Consumer Read Request Available
-                        if (consumer_read_valid[j] && !channel_serving_consumer[j]) begin
-                            //read request, check if data is in the cache
-                            if (cache[cache_line_read[j]].valid[consumer_read_address[j][CACHE_OFFSET_BITS-1:0]] && tag_match_read[j]) begin
-                                // cache hit case
-                                controller_state[i] <= CACHE_HIT;
-                                
-                            end else begin
-                                // set up memory read
-                                mem_read_address[i] <= consumer_read_address[j] & CACHE_OFFSET_MASK; // | chunks_read; // todo: parameterize masking out the offset bit 
-                                mem_read_valid[i] <= 1;
-                                controller_state[i] <= CACHE_MISS;
-                            end
-                            
+                        // for reads: does the tag match the tag in cache?
+                        logic tag_valid;
+                        tag_valid = (cache[`REQUESTED_LINE].tag == `REQUESTED_TAG); 
+                        
+                        if ((`IS_READ||`IS_WRITE )&&`IS_UNSERVED) begin
                             //mutex-like behavior
-                            channel_serving_consumer[j] = 1;
-                            current_consumer[i] <= j;
-                            
-                            // save some data for next step
-                            consumer_req_offset <= consumer_read_address[j][CACHE_OFFSET_BITS-1:0]; //how many bits to offset into the cache line 
-                            
-                            // Once we find a pending request, pick it up with this channel and stop looking for requests
-                            break;
+                            consumer_mutex[j] = 1;
+                            `CC <= j;
 
-                        //// Consumer Write Request Available
-                        end else if (consumer_write_valid[j] && !channel_serving_consumer[j]) begin 
-                            // mutex-like behavior
-                            channel_serving_consumer[j] = 1;
-                            current_consumer[i] <= j;
-                            
-                            // Memory Write Request
-                            mem_write_valid[i] <= 1;
-                            mem_write_address[i] <= consumer_write_address[j];
-                            mem_write_data[i] <= consumer_write_data[j];
-                            controller_state[i] <= WRITE_WAITING;
+                            //// Consumer Read Request Available and unserved?
+                            if (`IS_READ) begin
+                                //read request, check if data is in the cache
+                                logic req_line_valid = cache[`REQUESTED_LINE].valid[`REQUESTED_OFFSET];
+                                if ( req_line_valid && tag_valid) begin
+                                    // cache hit case
+                                    `NEXTSTATE(CACHE_HIT);
+                                    
+                                end else begin
+                                    // set up memory read
+                                    mem_read_address[i] <= consumer_read_address[j] & CACHE_OFFSET_MASK; // | chunks_read; // todo: parameterize masking out the offset bit 
+                                    mem_read_valid[i] <= 1;
+                                    `NEXTSTATE(CACHE_MISS);
+                                end
+                                
+                                // save some data for next cycle
+                                consumer_req_offset <= consumer_read_address[j][CACHE_OFFSET_BITS-1:0]; //how many bits to offset into the cache line 
+                                
+                                // Once we find a pending request, pick it up with this channel and stop looking for requests
+                                break;
+    
+                            //// Consumer Write Request Available
+                            end else if (`IS_WRITE) begin 
+                                
+                                // Memory Write Request
+                                mem_write_valid[i] <= 1;
+                                mem_write_address[i] <= consumer_write_address[j];
+                                mem_write_data[i] <= consumer_write_data[j];
+                                `NEXTSTATE(WRITE_WAITING);
+    
+                                //// Writing Data to cache line
+                                // Update cache line data and valid bit for this chunk
+                                cache[`REQUESTED_LINE].data <= cache_write_by_offset(
+                                    cache[`REQUESTED_LINE].data,
+                                    consumer_write_address[j][CACHE_OFFSET_BITS-1:0],
+                                    consumer_write_data[j]
+                                );
 
-                            //// Writing Data to cache line
-                            // Update cache line data and valid bit for this chunk
-                            cache[cache_line_write[j]].data <= cache_write_by_offset(
-                                cache[cache_line_write[j]].data,
-                                consumer_write_address[j][CACHE_OFFSET_BITS-1:0],
-                                consumer_write_data[j]
-                            );
-                            cache[cache_line_write[j]].valid <= cache[cache_line_write[j]].valid |
-                                cache_valid_mask_by_offset(consumer_write_address[j][CACHE_OFFSET_BITS-1:0]);
-                            cache[cache_line_write[j]].dirty <= 1'b1;
-                            
-                            // Once we find a pending request, pick it up with this channel and stop looking for requests
-                            break;
+                                cache[`REQUESTED_LINE].valid <= cache[`REQUESTED_LINE].valid |
+                                    cache_valid_mask_by_offset(consumer_write_address[j][CACHE_OFFSET_BITS-1:0]);
+                                cache[`REQUESTED_LINE].dirty <= 1'b1;
+                                
+                                // Once we find a pending request, pick it up with this channel and stop looking for requests
+                                break;
+                            end
                         end
                     end
                 end
@@ -203,53 +221,54 @@ module dmem_cache #(
                 //// Directly relay information from cache to consumer
                 CACHE_HIT: begin
                     //just relay the stuff from the cache
-                    consumer_read_ready[current_consumer[i]] <= 1;
-                    controller_state[i] <= READ_RELAYING;
+                    consumer_read_ready[`CC] <= 1;
+                    `NEXTSTATE(READ_RELAYING);
     
                     // Read requested data chunk from cache
-                    consumer_read_data[current_consumer[i]] <= cache_read_by_offset(
-                        cache[cache_line_read[current_consumer[i]]].data,
+                    consumer_read_data[`CC] <= cache_read_by_offset(
+                        cache[`CC_REQUESTED_LINE].data,
                         consumer_req_offset
                     );
                 end
                 
-
                             
                 ////
-                //// Waits for read transaction from memory, stores data into cache
+                //// Waits for read transaction from memory, stores data into current cache line (or portion of line)
+                //// Reads from memory at least one time (serializes filling
+                //1 cache line in chunks)
                 CACHE_MISS: begin
-
+                    // if this hardware channel has a finished mem request:
                     if (mem_read_ready[i]) begin 
                         // end memory request sig
                         mem_read_valid[i] <= 0;
                         chunks_read <= chunks_read + 1;
 
                         // complete memreads
-                        cache[cache_line_read[current_consumer[i]]].data
+                        cache[`CC_REQUESTED_LINE].data
                             [(CHUNK_SIZE*(chunks_read+1))-1 -: CHUNK_SIZE] <= mem_read_data[i];
 
                         // If you're not done with the chunks, keep waiting
                         if (chunks_read < (NUM_CHUNKS - 1)) begin
-                            controller_state[i] <= CACHE_MISS_WAIT;
+                            `NEXTSTATE(CACHE_MISS_WAIT);
 
                         // If it's the final chunk read, the cache is now valid and properly tagged
                         end else begin
 
                             // Tag it and bag it
                             // Validate all chunks in the cache line and set tag
-                            cache[cache_line_read[current_consumer[i]]].valid <= {NUM_CHUNKS{1'b1}};
-                            cache[cache_line_read[current_consumer[i]]].tag   <= mem_read_address[i][ADDR_BITS-1:ADDR_BITS-CACHE_TAG_BITS];
-                            cache[cache_line_read[current_consumer[i]]].dirty <= 1'b0;
+                            cache[`CC_REQUESTED_LINE].valid <= {NUM_CHUNKS{1'b1}};
+                            cache[`CC_REQUESTED_LINE].tag   <= mem_read_address[i][`TAG_BITS];
+                            cache[`CC_REQUESTED_LINE].dirty <= 1'b0;
     
                             // give the data back to the consumer
-                            consumer_read_ready[current_consumer[i]] <= 1;
-                            controller_state[i] <= READ_RELAYING; // next state
+                            consumer_read_ready[`CC] <= 1;
+                            `NEXTSTATE(READ_RELAYING); // next state
                             
                             // set the consumer read data to the desired cache line
-                            consumer_read_data[current_consumer[i]] <= select_consumer_read_data(
+                            consumer_read_data[`CC] <= select_consumer_read_data(
                                 CACHE_OFFSET_BITS,
                                 consumer_req_offset,
-                                cache[cache_line_read[current_consumer[i]]].data,
+                                cache[`CC_REQUESTED_LINE].data,
                                 mem_read_data[i]
                             );
                         end
@@ -260,10 +279,10 @@ module dmem_cache #(
                 ////
                 CACHE_MISS_WAIT: begin
                     //start another read request
-                    mem_read_address[i] <= (consumer_read_address[current_consumer[i]] & CACHE_OFFSET_MASK) | chunks_read; // mask out the offset bit
+                    mem_read_address[i] <= (`CC_REQUESTED_ADDR & CACHE_OFFSET_MASK) | chunks_read; // mask out the offset bit
                     mem_read_valid[i] <= 1;
     
-                    controller_state[i] <= CACHE_MISS;                    
+                    `NEXTSTATE(CACHE_MISS);
                 end
 
                 ////
@@ -271,8 +290,8 @@ module dmem_cache #(
                 WRITE_WAITING: begin 
                     if (mem_write_ready[i]) begin 
                         mem_write_valid[i] <= 0;
-                        consumer_write_ready[current_consumer[i]] <= 1;
-                        controller_state[i] <= WRITE_RELAYING;
+                        consumer_write_ready[`CC] <= 1;
+                        `NEXTSTATE(WRITE_RELAYING);
                     end
                 end
                 
@@ -280,21 +299,20 @@ module dmem_cache #(
                 //// Informs the consumer that a read has been completed
                 READ_RELAYING: begin
                     chunks_read <= 0;
-                    if (!consumer_read_valid[current_consumer[i]]) begin 
-    
-                        channel_serving_consumer[current_consumer[i]] = 0; // release mutex bit
-                        consumer_read_ready[current_consumer[i]] <= 0; // release the consumer communication line
-                        controller_state[i] <= IDLE; 
+                    if (!consumer_read_valid[`CC]) begin 
+                        consumer_mutex[`CC] = 0; // release mutex bit
+                        consumer_read_ready[`CC] <= 0; // release the consumer communication line
+                        `NEXTSTATE(IDLE); 
                     end
                 end
                 
                 ////
                 //// Informs the consumer that a write has been completed
                 WRITE_RELAYING: begin 
-                    if (!consumer_write_valid[current_consumer[i]]) begin 
-                        channel_serving_consumer[current_consumer[i]] = 0;
-                        consumer_write_ready[current_consumer[i]] <= 0;
-                        controller_state[i] <= IDLE;
+                    if (!consumer_write_valid[`CC]) begin 
+                        consumer_mutex[`CC] = 0;
+                        consumer_write_ready[`CC] <= 0;
+                        `NEXTSTATE(IDLE);
                     end
                 end
                 endcase

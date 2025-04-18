@@ -79,6 +79,7 @@ async def setup_wrap(dut, test_config):
         delay=mem_delay
     )
 
+    # memory modules
     data_memory = Memory(
         dut=dut,
         addr_bits=hw["data_addr_bits"],
