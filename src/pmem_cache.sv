@@ -6,11 +6,15 @@
 // pmem_cache just needs to cache 1 source to 1 sink, and it doesn't even have to write to cache  
 
 module pmem_cache #(
-    parameter ADDR_BITS, // 16 bit addresses
-    parameter DATA_BITS, // 8 for data, 16 for program mem
-    parameter NUM_CONSUMERS, // The number of consumers accessing memory through this controller
-    parameter NUM_CHANNELS  // The number of concurrent channels available to send requests to global memory
-) (
+    parameter ADDR_BITS = 8, // 8 bit addresses
+    parameter CONSUMER_BUS_BITS = 16, // 8 for data, 16 for program mem
+    parameter NUM_CONSUMERS = 1, // The number of consumers accessing memory through this controller
+    parameter NUM_CHANNELS = 1,  // The number of concurrent channels available to send requests to global memory
+    parameter CACHE_OFFSET_BITS = 1,
+    parameter CACHE_INDEX_BITS = 4,
+    parameter MEMORY_BUS_BITS = 16,
+    parameter BITS_ADDRESSABLE = 16
+    ) (
     input wire clk, 
     input wire reset,
     
@@ -18,40 +22,20 @@ module pmem_cache #(
     input  reg [NUM_CONSUMERS-1:0]   controller_read_valid,
     input  reg [ADDR_BITS-1:0]      controller_read_address    [NUM_CONSUMERS-1:0],
     output reg [NUM_CONSUMERS-1:0]   controller_read_ready,
-    output reg [DATA_BITS-1:0]      controller_read_data       [NUM_CONSUMERS-1:0],
+    output reg [CONSUMER_BUS_BITS-1:0]      controller_read_data       [NUM_CONSUMERS-1:0],
 
     // Program memory (SRAM)
     output reg [NUM_CHANNELS-1:0] mem_read_valid,
     output reg [ADDR_BITS-1:0]    mem_read_address  [NUM_CHANNELS-1:0],
     input  reg [NUM_CHANNELS-1:0] mem_read_ready,
-    input  reg [DATA_BITS-1:0]    mem_read_data     [NUM_CHANNELS-1:0]
+    input  reg [MEMORY_BUS_BITS-1:0]    mem_read_data     [NUM_CHANNELS-1:0]
     );
     
+    `include "cache_utils.svh"
     
-    // localparam CACHE_NUM_LINES = ((2**ADDR_BITS))*DATA_BITS)/CACHE_LINE_SIZE_BITS = 128; //if you were to store all of memory the mem in cache...
-    // localparam CACHE_LINE_SIZE_BITS = 32; //2 instructions per line
-    localparam CACHE_LINE_SIZE_BITS = 16; //1 instruct per cache line
+    cache_line_t cache [CACHE_NUM_LINES-1:0];
 
-    localparam CACHE_NUM_LINES = 16;
-    // this means: mem_addr[0] Line/instr Offset "upper or lower instr in the line?"
-    // mem_addr[4:1] Index (which cache line) (this also means a given data must be placed in a given line based on it's addr)
-    // remaining bits serve as a UID for the data in the cache, and can tell if data is valid.
-    struct packed {
-        bit [CACHE_LINE_SIZE_BITS-1:0] data;
-        bit [3:0] tag; //UID for cache data
-        bit valid; //starts at 0, set to 1 when written to memory
-        bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
-    } cache [CACHE_NUM_LINES-1:0];
-
-
-
-    reg [2:0] controller_state [NUM_CHANNELS-1:0];
-    localparam IDLE = 3'b000, 
-    CACHE_HIT = 3'b001,
-    CACHE_MISS = 3'b110,
-    READ_RELAYING = 3'b100,
-    WRITE_WAITING = 3'b011,
-    WRITE_RELAYING = 3'b101;
+    controller_state_t controller_state [NUM_CHANNELS-1:0];
 
     always @(posedge clk) begin
         if (reset) begin

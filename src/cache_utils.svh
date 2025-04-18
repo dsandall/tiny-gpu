@@ -16,8 +16,10 @@
   // offset and chunks - if gpu address space is per bytes, cache is by line.
   // 1 line is X (1 byte) chunks 
   // chunking is used for serial burst reads from main memory
-  localparam NUM_CHUNKS = 2**(CACHE_OFFSET_BITS); 
-  localparam CHUNK_SIZE = DATA_BITS; //WARN:
+  localparam NUM_WORDS_IN_LINE = 2**(CACHE_OFFSET_BITS); //WARN: assumes that threads are byte addressable
+  localparam CHUNK_SIZE = MEMORY_BUS_BITS;
+  localparam NUM_BYTES = (NUM_WORDS_IN_LINE*8)/CHUNK_SIZE;
+  localparam NUM_CHUNKS = (NUM_WORDS_IN_LINE*BITS_ADDRESSABLE)/CHUNK_SIZE;
   localparam CACHE_LINE_SIZE_BITS = NUM_CHUNKS * CHUNK_SIZE; //todo testing: this also should equal 
 
   // index 
@@ -40,27 +42,39 @@
 `define LINE_BITS CACHE_INDEX_BITS+CACHE_OFFSET_BITS-2:CACHE_OFFSET_BITS
 `define OFFSET_BITS CACHE_OFFSET_BITS-2:0
 
+//// FSM States. Could be split into more states,
+////    depending on penalties for num clock cycles vs the clock freq of the cache FSM as a whole 
+typedef enum logic [7:0] {
+    IDLE,
+    CACHE_HIT,
+    CACHE_MISS,
+    CACHE_MISS_WAIT,
+    READ_RELAYING,
+    WRITE_WAITING,
+    WRITE_RELAYING
+} controller_state_t;
+
 //////////////////////////////////
 // Cache Data Accessor Functions
 //////////////////////////////////
 
 // Read a data chunk from a cache line at a given offset
-function automatic logic [CHUNK_SIZE-1:0] cache_read_by_offset(
+function automatic logic [CONSUMER_BUS_BITS-1:0] cache_read_by_offset(
     input logic [CACHE_LINE_SIZE_BITS-1:0] line,
     input logic [CACHE_OFFSET_BITS-1:0] offset
 );
-    cache_read_by_offset = line[offset * CHUNK_SIZE +: CHUNK_SIZE];
+    cache_read_by_offset = line[offset * CONSUMER_BUS_BITS +: CONSUMER_BUS_BITS];
 endfunction
 
 // Write a data chunk into a cache line at a given offset
 function automatic logic [CACHE_LINE_SIZE_BITS-1:0] cache_write_by_offset(
     input logic [CACHE_LINE_SIZE_BITS-1:0] line,
     input logic [CACHE_OFFSET_BITS-1:0] offset,
-    input logic [CHUNK_SIZE-1:0] data_in
+    input logic [MEMORY_BUS_BITS-1:0] data_in
 );
     logic [CACHE_LINE_SIZE_BITS-1:0] temp;
     temp = line;
-    temp[offset * CHUNK_SIZE +: CHUNK_SIZE] = data_in;
+    temp[offset * MEMORY_BUS_BITS +: MEMORY_BUS_BITS] = data_in;
     cache_write_by_offset = temp;
 endfunction
 

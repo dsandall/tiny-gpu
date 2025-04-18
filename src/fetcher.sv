@@ -1,5 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ns
+`include "handshake_bus.svh"
 
 // INSTRUCTION FETCHER
 // > Retrieves the instruction at the current PC from global data memory
@@ -25,15 +26,27 @@ module fetcher #(
     output reg [2:0] fetcher_state,
     output reg [PROGRAM_MEM_DATA_BITS-1:0] instruction
 );
+
+
     localparam IDLE = 3'b000, 
         FETCHING = 3'b001, 
         FETCHED = 3'b010;
     
+    MemChannelIF #(
+        .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
+        .DATA_BITS(PROGRAM_MEM_DATA_BITS)
+    ) mem_if();
+
+    assign mem_read_valid = mem_if.read_valid;
+    assign mem_read_address = mem_if.read_address;
+    assign mem_if.read_ready = mem_read_ready;
+    assign mem_if.read_data = mem_read_data;
+
     always @(posedge clk) begin
         if (reset) begin
             fetcher_state <= IDLE;
-            mem_read_valid <= 0;
-            mem_read_address <= 0;
+            mem_if.read_valid <= 0;
+            mem_if.read_address <= 0;
             instruction <= {PROGRAM_MEM_DATA_BITS{1'b0}};
         end else begin
             case (fetcher_state)
@@ -41,16 +54,16 @@ module fetcher #(
                     // Start fetching when core_state = FETCH
                     if (core_state == 3'b001) begin
                         fetcher_state <= FETCHING;
-                        mem_read_valid <= 1;
-                        mem_read_address <= current_pc;
+                        mem_if.read_valid <= 1;
+                        mem_if.read_address <= current_pc;
                     end
                 end
                 FETCHING: begin
                     // Wait for response from program memory
-                    if (mem_read_ready) begin
+                    if (mem_if.read_ready) begin
                         fetcher_state <= FETCHED;
-                        instruction <= mem_read_data; // Store the instruction when received
-                        mem_read_valid <= 0;
+                        instruction <= mem_if.read_data; // Store the instruction when received
+                        mem_if.read_valid <= 0;
                     end
                 end
                 FETCHED: begin

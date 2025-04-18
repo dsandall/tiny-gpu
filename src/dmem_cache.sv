@@ -10,16 +10,18 @@
 // > Retreive groups of bytes from memory
 // > Stores bytes into cache lines
 // > Saves them for later reads
-parameter READ_ONLY = 0;
-parameter CACHE_OFFSET_BITS = 1;
-parameter CACHE_INDEX_BITS = 4;
+
 
 module dmem_cache #(
-    parameter ADDR_BITS = 8, // 16 bit addresses
-    parameter DATA_BITS = 8, // 8 for data, 16 for program mem
-    parameter NUM_CONSUMERS = 8, // The number of consumers accessing memory through this controller
-    parameter NUM_CHANNELS = 4  // The number of concurrent channels available to send requests to global memory
-) (
+    parameter NUM_CONSUMERS, // The number of consumers accessing memory through this controller
+    parameter NUM_CHANNELS,  // The number of concurrent channels available to send requests to global memory
+    parameter ADDR_BITS, // 16 bit addresses
+    parameter CACHE_OFFSET_BITS = 1,
+    parameter CACHE_INDEX_BITS = 4,
+    parameter CONSUMER_BUS_BITS = 8, // 8 for data, 16 for program mem
+    parameter MEMORY_BUS_BITS = 8, 
+    parameter BITS_ADDRESSABLE = MEMORY_BUS_BITS
+  ) (
     input wire clk,
     input wire reset,
 
@@ -27,22 +29,22 @@ module dmem_cache #(
     input wire [NUM_CONSUMERS-1:0] consumer_read_valid,
     input wire [ADDR_BITS-1:0] consumer_read_address [NUM_CONSUMERS-1:0],
     output logic [NUM_CONSUMERS-1:0] consumer_read_ready,
-    output logic [DATA_BITS-1:0] consumer_read_data [NUM_CONSUMERS-1:0],
+    output logic [CONSUMER_BUS_BITS-1:0] consumer_read_data [NUM_CONSUMERS-1:0],
 
     input wire [NUM_CONSUMERS-1:0] consumer_write_valid,
     input wire [ADDR_BITS-1:0] consumer_write_address [NUM_CONSUMERS-1:0],
-    input wire [DATA_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
+    input wire [CONSUMER_BUS_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
     output logic [NUM_CONSUMERS-1:0] consumer_write_ready,
 
     // Memory Interface (Data / Program)    
     output logic [NUM_CHANNELS-1:0] mem_read_valid,
     output logic [ADDR_BITS-1:0] mem_read_address [NUM_CHANNELS-1:0],
     input wire [NUM_CHANNELS-1:0] mem_read_ready,
-    input wire [DATA_BITS-1:0] mem_read_data [NUM_CHANNELS-1:0],
+    input wire [MEMORY_BUS_BITS-1:0] mem_read_data [NUM_CHANNELS-1:0],
 
     output logic [NUM_CHANNELS-1:0] mem_write_valid,
     output logic [ADDR_BITS-1:0] mem_write_address [NUM_CHANNELS-1:0],
-    output logic [DATA_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
+    output logic [MEMORY_BUS_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
     input wire [NUM_CHANNELS-1:0] mem_write_ready
 );
     ////
@@ -55,25 +57,12 @@ module dmem_cache #(
 
     // do the calculations based on provided bits
     `include "cache_utils.svh"
-    // now we have all these definitions
-    
     
     ////
     // Cache State: 
     ////
 
     //// For each hardware memory controller:
-    //// FSM States. Could be split into more states,
-    ////    depending on penalties for num clock cycles vs the clock freq of the cache FSM as a whole 
-    typedef enum logic [7:0] {
-        IDLE,
-        CACHE_HIT,
-        CACHE_MISS,
-        CACHE_MISS_WAIT,
-        READ_RELAYING,
-        WRITE_WAITING,
-        WRITE_RELAYING
-    } controller_state_t;
     controller_state_t controller_state [NUM_CHANNELS-1:0];
     
     //// For each cache line:
@@ -281,7 +270,6 @@ module dmem_cache #(
                     //start another read request
                     mem_read_address[i] <= (`CC_REQUESTED_ADDR & CACHE_OFFSET_MASK) | chunks_read; // mask out the offset bit
                     mem_read_valid[i] <= 1;
-    
                     `NEXTSTATE(CACHE_MISS);
                 end
 
