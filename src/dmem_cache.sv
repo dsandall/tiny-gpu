@@ -57,18 +57,10 @@ module dmem_cache #(
     localparam CHUNK_SIZE = DATA_BITS;
     localparam CACHE_LINE_SIZE_BITS = NUM_CHUNKS * CHUNK_SIZE; //todo testing: this also should equal 
     localparam CACHE_NUM_LINES = 2**CACHE_INDEX_BITS; //todo testing: cache_num_lines * cache_line_size * tag possibilities should be equal to size of memory address space?
-    
-    // struct packed {
-    //     bit [CACHE_LINE_SIZE_BITS-1:0] data;
-    //     bit [CACHE_TAG_BITS-1:0] tag; //UID for cache data
-    //     bit valid; //starts at 0, set to 1 when written to memory
-    //     bit dirty; //starts at 0, set to 1 when written to by consumer (gpu thread)
-    // } cache [CACHE_NUM_LINES-1:0];
-    
-    logic cache_valid [CACHE_NUM_LINES-1:0] [NUM_CHUNKS-1:0];
-    logic cache_dirty [CACHE_NUM_LINES-1:0];
-    logic cache_tags [CACHE_NUM_LINES-1:0] [CACHE_TAG_BITS-1:0];
-    logic cache_data [CACHE_NUM_LINES-1:0] [CACHE_LINE_SIZE_BITS-1:0];
+
+    `include "cache_utils.svh"
+
+    cache_line_t cache [CACHE_NUM_LINES-1:0];
     wire [CACHE_INDEX_BITS-1:0] cache_line_read [NUM_CONSUMERS-1:0]; //todo: this should probably be what the channels act on, rather than per consumer.
     wire [CACHE_INDEX_BITS-1:0] cache_line_write [NUM_CONSUMERS-1:0]; //todo: this should probably be what the channels act on, rather than per consumer.
 
@@ -112,10 +104,13 @@ module dmem_cache #(
             controller_state <= 0;
             channel_serving_consumer = 0;
             
-            cache_data <= 0;
-            cache_dirty <= 0;
-            cache_tags <= 0;
-            cache_valid <= 0;
+            // Initialize cache lines
+            for (int k = 0; k < CACHE_NUM_LINES; k = k + 1) begin
+                cache[k].data  <= '0;
+                cache[k].tag   <= '0;
+                cache[k].valid <= '0;
+                cache[k].dirty <= 1'b0;
+            end
         end
     end
 
@@ -149,12 +144,12 @@ module dmem_cache #(
 
                     // While this channel is idle, cycle through consumers looking for one with a pending request
                     for (int j = 0; j < NUM_CONSUMERS; j = j + 1) begin 
-                        tag_match_read[j]  = (cache_tags[cache_line_read[j]] == consumer_read_address[j][ADDR_BITS-1:CACHE_INDEX_BITS+CACHE_OFFSET_BITS]); // does the tag match the tag in cache?
+                        tag_match_read[j]  = (cache[cache_line_read[j]].tag == consumer_read_address[j][ADDR_BITS-1:CACHE_INDEX_BITS+CACHE_OFFSET_BITS]); // does the tag match the tag in cache?
                         
                         //// Consumer Read Request Available
                         if (consumer_read_valid[j] && !channel_serving_consumer[j]) begin
                             //read request, check if data is in the cache
-                            if(cache_valid[cache_line_read[j]][consumer_read_address[j][CACHE_OFFSET_BITS-1:0]] && tag_match_read[j]) begin
+                            if (cache[cache_line_read[j]].valid[consumer_read_address[j][CACHE_OFFSET_BITS-1:0]] && tag_match_read[j]) begin
                                 // cache hit case
                                 controller_state[i] <= CACHE_HIT;
                                 
@@ -188,20 +183,15 @@ module dmem_cache #(
                             controller_state[i] <= WRITE_WAITING;
 
                             //// Writing Data to cache line
-                            // Cache validation?
-                            // If it's already valid, the data will be updated and remain valid.
-                            // if it's not already valid, writing one chunk of data does not validate the cache. Push the data regardless, it's ok
-                            // todo: also check write tag match
-                            case (consumer_write_address[j][CACHE_OFFSET_BITS-1:0]) // find the byte which the user is trying to write
-                                0: begin
-                                    cache_data[cache_line_write[j]][(CHUNK_SIZE*(0+1))-1:CHUNK_SIZE*0] <= consumer_write_data[j]; //todo: param for different chunk sizes
-                                    cache_valid[cache_line_write[j]] <= cache_valid[cache_line_write[j]] | 2'b01;
-                                end
-                                1: begin
-                                    cache_data[cache_line_write[j]][(CHUNK_SIZE*(1+1))-1:CHUNK_SIZE*1] <= consumer_write_data[j]; //todo: param for different chunk sizes
-                                    cache_valid[cache_line_write[j]] <= cache_valid[cache_line_write[j]] | 2'b10;
-                                end
-                            endcase        
+                            // Update cache line data and valid bit for this chunk
+                            cache[cache_line_write[j]].data <= cache_write_by_offset(
+                                cache[cache_line_write[j]].data,
+                                consumer_write_address[j][CACHE_OFFSET_BITS-1:0],
+                                consumer_write_data[j]
+                            );
+                            cache[cache_line_write[j]].valid <= cache[cache_line_write[j]].valid |
+                                cache_valid_mask_by_offset(consumer_write_address[j][CACHE_OFFSET_BITS-1:0]);
+                            cache[cache_line_write[j]].dirty <= 1'b1;
                             
                             // Once we find a pending request, pick it up with this channel and stop looking for requests
                             break;
@@ -215,52 +205,12 @@ module dmem_cache #(
                     //just relay the stuff from the cache
                     consumer_read_ready[current_consumer[i]] <= 1;
                     controller_state[i] <= READ_RELAYING;
-                    
     
-                    // For cache lines that are not == word length 
-                    case (CACHE_OFFSET_BITS)
-                        0: begin
-                            // If CACHE_OFFSET_BITS is 0, assume no offset and just select the first byte
-                            consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0]; //mem_read_data?
-                        end
-                    
-                        1: begin
-                            // If CACHE_OFFSET_BITS is 1, use consumer_req_offset to select the correct byte
-                            if (consumer_req_offset == 0) begin
-                                consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0];
-                            end else begin
-                                consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][15:8];
-                            end
-                        end
-                    
-                        2: begin
-                            // If CACHE_OFFSET_BITS is 2, we may have to select data from 4-byte chunks
-                            // You can use similar logic to the previous case
-                            case (consumer_req_offset)
-                                0: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0];
-                                1: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][15:8];
-                                2: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][23:16];
-                                3: consumer_read_data[current_consumer[i]] <= mem_read_data[i];
-                            endcase
-                        end
-
-                        3: begin
-                            // Handle the case where CACHE_OFFSET_BITS is 3
-                            // Handling a 3-bit offset
-                            if (consumer_req_offset == 0) begin
-                                consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][31:0];
-                            end else if (consumer_req_offset == 3) begin
-                                consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][39:32];
-                            end else begin
-                                consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][47:40];
-                            end
-                        end
-                    
-                        default: begin
-                            // Handle any default or invalid cases if needed
-                            consumer_read_data[current_consumer[i]] <= 0;
-                        end
-                    endcase
+                    // Read requested data chunk from cache
+                    consumer_read_data[current_consumer[i]] <= cache_read_by_offset(
+                        cache[cache_line_read[current_consumer[i]]].data,
+                        consumer_req_offset
+                    );
                 end
                 
 
@@ -275,87 +225,33 @@ module dmem_cache #(
                         chunks_read <= chunks_read + 1;
 
                         // complete memreads
-                        case (chunks_read) 
-                            0: begin
-                                cache_data[cache_line_read[current_consumer[i]]][(CHUNK_SIZE*(0 +1))-1:CHUNK_SIZE*0] <= mem_read_data[i]; //todo: param for different chunk sizes
-                            end
-                            1: begin
-                                cache_data[cache_line_read[current_consumer[i]]][(CHUNK_SIZE*(1 +1))-1:CHUNK_SIZE*1] <= mem_read_data[i]; //todo: param for different chunk sizes
-                            end
-                            2: begin
-                                cache_data[cache_line_read[current_consumer[i]]][(CHUNK_SIZE*(2 +1))-1:CHUNK_SIZE*2] <= mem_read_data[i]; //todo: param for different chunk sizes   
-                            end
-                            3: begin
-                                cache_data[cache_line_read[current_consumer[i]]][(CHUNK_SIZE*(3 +1))-1:CHUNK_SIZE*3] <= mem_read_data[i]; //todo: param for different chunk sizes
-                            end
-                        endcase                        
-                        
-    
+                        cache[cache_line_read[current_consumer[i]]].data
+                            [(CHUNK_SIZE*(chunks_read+1))-1 -: CHUNK_SIZE] <= mem_read_data[i];
+
                         // If you're not done with the chunks, keep waiting
                         if (chunks_read < (NUM_CHUNKS - 1)) begin
-
                             controller_state[i] <= CACHE_MISS_WAIT;
-
 
                         // If it's the final chunk read, the cache is now valid and properly tagged
                         end else begin
 
                             // Tag it and bag it
-                            cache_valid[cache_line_read[current_consumer[i]]] <= 2'b11; // validate cache line TODO:
-                            cache_tags[cache_line_read[current_consumer[i]]] <= mem_read_address[i][ADDR_BITS-1:ADDR_BITS-CACHE_TAG_BITS];
+                            // Validate all chunks in the cache line and set tag
+                            cache[cache_line_read[current_consumer[i]]].valid <= {NUM_CHUNKS{1'b1}};
+                            cache[cache_line_read[current_consumer[i]]].tag   <= mem_read_address[i][ADDR_BITS-1:ADDR_BITS-CACHE_TAG_BITS];
+                            cache[cache_line_read[current_consumer[i]]].dirty <= 1'b0;
     
                             // give the data back to the consumer
                             consumer_read_ready[current_consumer[i]] <= 1;
                             controller_state[i] <= READ_RELAYING; // next state
                             
                             // set the consumer read data to the desired cache line
-                            // it's not pretty... but it works. Had trouble with parameterization
-                            case (CACHE_OFFSET_BITS)
-                                0: begin
-                                    // If CACHE_OFFSET_BITS is 0, assume no offset and just select the first byte
-                                    consumer_read_data[current_consumer[i]] <= mem_read_data[i]; //mem_read_data?
-                                end
-                            
-                                1: begin
-                                    // If CACHE_OFFSET_BITS is 1, use consumer_req_offset to select the correct byte out of 2 chunks
-                                    case (consumer_req_offset)
-                                        0: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0];
-                                        1: consumer_read_data[current_consumer[i]] <= mem_read_data[i];
-                                    endcase
-                                end
-                            
-                                2: begin
-                                    // If CACHE_OFFSET_BITS is 2, we may have to select data from 4 chunks
-                                    // You can use similar logic to the previous case
-                                    case (consumer_req_offset)
-                                        0: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0];
-                                        1: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][15:8];
-                                        2: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][23:16];
-                                        3: consumer_read_data[current_consumer[i]] <= mem_read_data[i];
-                                    endcase
-                                    
-                                end
-    
-                                // 3: begin
-                                //     // Handle the case where CACHE_OFFSET_BITS is 3
-                                //     // Handling a 3-bit offset
-                                //     case (consumer_req_offset)
-                                //         0: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0];
-                                //         1: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][15:8];
-                                //         2: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][23:16];
-                                //         3: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0];
-                                //         4: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][7:0];
-                                //         5: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][15:8];
-                                //         6: consumer_read_data[current_consumer[i]] <= cache_data[cache_line_read[current_consumer[i]]][23:16];
-                                //         7: consumer_read_data[current_consumer[i]] <= mem_read_data[i];
-                                //     endcase
-                                // end
-                            
-                                // default: begin
-                                //     // Handle any default or invalid cases if needed
-                                //     consumer_read_data[current_consumer[i]] <= 0;
-                                // end
-                            endcase
+                            consumer_read_data[current_consumer[i]] <= select_consumer_read_data(
+                                CACHE_OFFSET_BITS,
+                                consumer_req_offset,
+                                cache[cache_line_read[current_consumer[i]]].data,
+                                mem_read_data[i]
+                            );
                         end
                     end
                 end
@@ -406,3 +302,34 @@ module dmem_cache #(
         end
     endgenerate
 endmodule
+
+function automatic logic [7:0] select_consumer_read_data;
+    input int offset_bits;
+    input logic [7:0] offset;           // up to 255 chunks supported
+    input logic [255:0] line_data;      // up to 32 bytes; adjust width if needed
+    input logic [7:0] tail_data;
+
+    int max_index;
+    int total_chunks;
+    int i;
+
+    begin
+        total_chunks = 2 ** offset_bits;
+        max_index = total_chunks - 1;
+
+        // Default to zero
+        select_consumer_read_data = 8'h00;
+
+        // If offset == last chunk index, take tail_data
+        if (offset == max_index) begin
+            select_consumer_read_data = tail_data;
+        end else begin
+            // Manually select the byte at the specified offset
+            for (i = 0; i < total_chunks; i = i + 1) begin
+                if (offset == i) begin
+                    select_consumer_read_data = line_data[(8*i)+:8];
+                end
+            end
+        end
+    end
+endfunction
