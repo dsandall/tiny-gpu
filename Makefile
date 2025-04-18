@@ -60,7 +60,7 @@ build/%.vcd: test_%
 hwsw_%:
 	cd ./tiny-gpu-assembler && \
 	cargo build && \
-	./target/debug/tiny-gpu-assembler asm_src/test_$*.asm > asm_build/test_$*.json
+	./target/debug/tiny-gpu-assembler asm_src/test_$*.asm -o asm_build/test_$*.json
 
 #fulltest
 ft_%:
