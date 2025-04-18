@@ -1,4 +1,3 @@
-from cocotb import default_config
 import cocotb.triggers
 from cocotb.triggers import RisingEdge
 from .setup import setup
@@ -6,6 +5,7 @@ from .memory import Memory
 from .format import format_cycle
 from .logger import logger
 
+from ctypes import c_int8, c_uint16
 import json
 
 default_hw_config = {
@@ -18,19 +18,30 @@ default_hw_config = {
 }
 
 
-def load_test_config(path):
-    with open(path, "r") as f:
-        test_config = json.load(f)
-
-    testname = test_config["testname"]
-    mem_delay = test_config["memory_delay"]
-    threads = test_config["threads"]
+def load_json_binary(config_path):
+    # TODO: replace all accesses with graceful handling (.get() and None)
+    with open(config_path, "r") as f:
+        test_config = json.load(f).copy()
 
     # Program memory (16 bits)
     program = [int(x, 16) for x in test_config["program_memory"]]
+    test_config["program_memory"] = program
+
+    # data memory (8 bits)
+    if test_config.get("initial_data"):
+        print("using json initial data")
+        data = [c_int8(x).value for x in test_config["initial_data"]]
+    else:
+        print("using 0 initial data")
+        data = [0]
+    test_config["initial_data"] = data
 
     print("PROGRAM IS")
     for i in program:
+        print(i)
+
+    print("DATA IS")
+    for i in data:
         print(i)
 
     # Hardware config
@@ -41,24 +52,22 @@ def load_test_config(path):
             raise ValueError(
                 "If 'hardware' is specified, all hardware config keys must be present.")
     else:
-        hw = None
+        test_config["hardware"] = default_hw_config
+        hw = default_hw_config
 
-    return testname, mem_delay, threads, program,  hw
-
-
-async def more_wrap(dut, data_init, config_path):
-    testname, mem_delay, threads, program, hardware = load_test_config(
-        config_path)
-
-    print(f"Running test: {testname}")
-
-    return await setup_wrap(dut=dut, program=program, data=data_init,
-                            threads=threads, mem_delay=mem_delay, hw=hardware)
+    print(f"Running test: {test_config["testname"]}")
+    return test_config
 
 
-async def setup_wrap(dut, program, data, threads, mem_delay, hw=default_hw_config):
+async def setup_wrap(dut, test_config):
 
     num_memory_printout = 24
+
+    hw = test_config["hardware"]
+    mem_delay = test_config["memory_delay"]
+    threads = test_config["threads"]
+    program = test_config["program_memory"]
+    data = test_config["initial_data"]
 
     # memory modules
     program_memory = Memory(

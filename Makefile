@@ -53,3 +53,31 @@ show_%: build/gpu.vcd
 build/%.vcd: test_%
 # Run the test to generate the corresponding VCD file
 	make test_$*
+
+
+### recent end to end build tests:
+#runs tiny-gpu-assembler
+hwsw_%:
+	cd ./tiny-gpu-assembler && \
+	cargo build && \
+	./target/debug/tiny-gpu-assembler asm_src/test_$*.asm > asm_build/test_$*.json
+
+#fulltest
+ft_%:
+	make hwsw_$*
+	make test_$*
+
+# TODO:
+# these probably don't need to recompile the hardware and software,
+# and restart the cocotb stuff every time... 
+# but they do because I havent fixed the reset bug in the verilog yet.
+#
+# This makefile is getting pretty large, and should probably be split between hw compilation and sw testing soon
+ft_all:
+	make ft_matadd && \
+	make ft_matmul && \
+	make ft_load && \
+	make ft_load_8_threads && \
+	make ft_negatives
+	#make ft_load_20_cycles && \
+
