@@ -117,11 +117,6 @@ function automatic logic [CONSUMER_BUS_BITS-1:0] select_consumer_read_data;
         end
     end
 endfunction
-//consumer_read_data[`CC] <= select_consumer_read_data(
-//                                CACHE_OFFSET_BITS,
-//                                consumer_req_offset,
-//                                cache[`CC_REQUESTED_LINE].data,
-//                                mem_read_data[i]
-//                            );
+
 `endif // CACHE_UTILS_SVH
 // end of cache_utils.svh

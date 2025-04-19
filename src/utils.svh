@@ -1,6 +1,29 @@
 `ifndef UTILS_SVH
 `define UTILS_SVH
 
+
+//
+// These all translate to some form of:
+//
+//  Memory transmission bus, with a handshake (DATA_BITS wide, NUM times)
+// 
+////
+  //  reg "myname"_read_valid, // 4 bits
+  //  reg "myname"_read_address [THREADS_PER_BLOCK-1:0], // 8 bits x 4 
+  //  reg "myname"_read_ready, // 4 bits
+  //  reg "myname"_read_data    [THREADS_PER_BLOCK-1:0] // 8 bits x 4
+////
+//
+////
+  // .mem_read_valid(program_mem_read_valid),
+  // .mem_read_address(program_mem_read_address),
+  // .mem_read_ready(program_mem_read_ready),
+  // .mem_read_data(program_mem_read_data)
+////
+//
+//   Note the lack of a comma at the final entry, provided by the macro user (or semicolon, etc)
+//
+
 `define CHANNEL_READ_BUFF(prefix, NUM, ADDR_BITS, DATA_BITS) \
     reg  [NUM-1:0]            prefix``_read_valid; \
     reg  [ADDR_BITS-1:0]      prefix``_read_address [NUM-1:0]; \

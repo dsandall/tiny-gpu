@@ -1,5 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ns
+`include "utils.svh"
 
 // COMPUTE CORE
 // > Handles processing 1 block at a time
@@ -24,22 +25,11 @@ module core #(
     input wire [$clog2(THREADS_PER_BLOCK):0] thread_count,
 
     // Program Memory
-    output reg program_mem_read_valid,
-    output reg [PROGRAM_MEM_ADDR_BITS-1:0] program_mem_read_address,
-    input reg program_mem_read_ready,
-    input reg [PROGRAM_MEM_DATA_BITS-1:0] program_mem_read_data,
+    `CHANNEL_READ_MODULE(program_mem, 1, PROGRAM_MEM_ADDR_BITS, PROGRAM_MEM_DATA_BITS),
 
     // Data Memory
-    output reg [THREADS_PER_BLOCK-1:0]  data_mem_read_valid, // 4 bits
-    output reg [DATA_MEM_ADDR_BITS-1:0] data_mem_read_address [THREADS_PER_BLOCK-1:0], // 8 bits x 4 
-    input  reg [THREADS_PER_BLOCK-1:0]  data_mem_read_ready, // 4 bits
-    input  reg [DATA_MEM_DATA_BITS-1:0] data_mem_read_data    [THREADS_PER_BLOCK-1:0], // 8 bits x 4
-
-    output reg [THREADS_PER_BLOCK-1:0]  data_mem_write_valid, // 4 bits
-    output reg [DATA_MEM_ADDR_BITS-1:0] data_mem_write_address [THREADS_PER_BLOCK-1:0], // 8 bits x 4
-    input  reg [THREADS_PER_BLOCK-1:0]  data_mem_write_ready, // 4 bits
-    output reg [DATA_MEM_DATA_BITS-1:0] data_mem_write_data    [THREADS_PER_BLOCK-1:0] // 8 bits x 4
-
+    `CHANNEL_READ_MODULE(data_mem, THREADS_PER_BLOCK, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS),
+    `CHANNEL_WRITE_MODULE(data_mem, THREADS_PER_BLOCK, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
 );
 
     // State
@@ -83,12 +73,10 @@ module core #(
         .reset(reset),
         .core_state(core_state),
         .current_pc(current_pc),
-        .mem_read_valid(program_mem_read_valid),
-        .mem_read_address(program_mem_read_address),
-        .mem_read_ready(program_mem_read_ready),
-        .mem_read_data(program_mem_read_data),
+        `CHANNEL_READ(mem, program_mem),
+
         .fetcher_state(fetcher_state),
-        .instruction(instruction) 
+        .instruction(instruction)
     );
 
     // Decoder
@@ -193,7 +181,10 @@ module core #(
                 .rt(rt[i])
             );
 
-            // Program Counter
+            // WARN:
+            // Program Counter:
+            // Handles Jump/Branch requests
+            // Assumed that all synched threads remain executing the same instruction!
             pc #(
                 .DATA_MEM_DATA_BITS(DATA_MEM_DATA_BITS),
                 .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS)
