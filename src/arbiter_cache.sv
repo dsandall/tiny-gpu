@@ -1,6 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ns
-
+`include "utils.svh"
 // MEMORY CONTROLLER
 // > Receives memory requests from all LSUs
 // > Throttles requests based on limited external memory bandwidth
@@ -10,9 +10,61 @@
 // > Retreive groups of bytes from memory
 // > Stores bytes into cache lines
 // > Saves them for later reads
+//
 
+// Update: April 18
+// Dylan Sandall
+// 
+// the arbiter_cache serves both as a global cache shared between all threads,
+// as well as a parallel state machine that can handle and manage requests.
+//
+// (Threads(LSUs)) or (Cores(Fetchers)) -> request from arbiter_cache 
+//  arbiter_cache -> requests from parallel memory access channels
+//
+// The model is parameterized, and abstracted in the hopes that it will be
+// useful later. 
+//
+// it has been tested as:
+// Program Arbiter:
+//  - 1 Read Only Memory Channel
+//  - 2 Read Only Consumer Cores
+//  - 16 bit bus 
+//  - 8 bit address space 
+//  - (2**8bits) * 16 bits addressable memory space in global mem
+//  Cache:
+//  - 1 bit offset 
+//  - 4 bit index
+//  - (3) bit tag
+//  - results in (16*(2**1)=)32bit cache line size(must read from main mem in 2 sequential
+//  16b chunks) 
+//  - results in (2**4=)16 lines in cache, 
+//  - 512 cache bits total (allows up to 32 threads different instruction
+//  memory at once) (TODO: should be totally overkill for SIMD)
+//
+// Data Arbiter:
+//  - 4 R/W Main Data Memory Channels
+//  - 8 R/W Consumer Threads
+//  - 8 bit data bus
+//  - 8 bit address space
+//  - (2**8bits) * 8 bits addressable memory space in global mem
+//  Cache:
+//  - 1 bit offset
+//  - 4 bit index
+//  - (3) bit tag
+//  - results in (8*(2**1)=)16bit cache line size (must read from main mem in 2 sequential
+//  bytes) 
+//  - results in (2**4=)16 lines in cache, 
+//  - 256 cache bits total (allows up to 32 threads to have a spot in the data
+//  cache) (TODO:too small for current thread configuration)
+//
+//  with the current 8 threads, 256 cache bits is decent, but should be
+//  rearranged to allow for more threads and perhaps less program memory cache
+//
+//  if we did HW contex switching, we can get threads to 16-32.
+//  then, i expect we will have trouble with cache, largely depending on the use
+//  case
 
-module dmem_cache #(
+module arbiter_cache #(
     parameter NUM_CONSUMERS, // The number of consumers accessing memory through this controller
     parameter NUM_CHANNELS,  // The number of concurrent channels available to send requests to global memory
     parameter ADDR_BITS, // 16 bit addresses
@@ -24,28 +76,33 @@ module dmem_cache #(
   ) (
     input wire clk,
     input wire reset,
-
+    
     // Consumer Interface (Fetchers / LSUs)
-    input wire [NUM_CONSUMERS-1:0] consumer_read_valid,
-    input wire [ADDR_BITS-1:0] consumer_read_address [NUM_CONSUMERS-1:0],
-    output logic [NUM_CONSUMERS-1:0] consumer_read_ready,
-    output logic [CONSUMER_BUS_BITS-1:0] consumer_read_data [NUM_CONSUMERS-1:0],
+    `CONSUMER_READ_MODULE(consumer, NUM_CONSUMERS, ADDR_BITS, CONSUMER_BUS_BITS),
+    `CONSUMER_WRITE_MODULE(consumer, NUM_CONSUMERS, ADDR_BITS, CONSUMER_BUS_BITS),
+    `CHANNEL_READ_MODULE(mem, NUM_CHANNELS, ADDR_BITS, MEMORY_BUS_BITS),
+    `CHANNEL_WRITE_MODULE(mem, NUM_CHANNELS, ADDR_BITS, MEMORY_BUS_BITS)
 
-    input wire [NUM_CONSUMERS-1:0] consumer_write_valid,
-    input wire [ADDR_BITS-1:0] consumer_write_address [NUM_CONSUMERS-1:0],
-    input wire [CONSUMER_BUS_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
-    output logic [NUM_CONSUMERS-1:0] consumer_write_ready,
+    //input wire [NUM_CONSUMERS-1:0] consumer_read_valid,
+    //input wire [ADDR_BITS-1:0] consumer_read_address [NUM_CONSUMERS-1:0],
+    //output logic [NUM_CONSUMERS-1:0] consumer_read_ready,
+    //output logic [CONSUMER_BUS_BITS-1:0] consumer_read_data [NUM_CONSUMERS-1:0],
 
-    // Memory Interface (Data / Program)    
-    output logic [NUM_CHANNELS-1:0] mem_read_valid,
-    output logic [ADDR_BITS-1:0] mem_read_address [NUM_CHANNELS-1:0],
-    input wire [NUM_CHANNELS-1:0] mem_read_ready,
-    input wire [MEMORY_BUS_BITS-1:0] mem_read_data [NUM_CHANNELS-1:0],
+    //input wire [NUM_CONSUMERS-1:0] consumer_write_valid,
+    //input wire [ADDR_BITS-1:0] consumer_write_address [NUM_CONSUMERS-1:0],
+    //input wire [CONSUMER_BUS_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
+    //output logic [NUM_CONSUMERS-1:0] consumer_write_ready,
 
-    output logic [NUM_CHANNELS-1:0] mem_write_valid,
-    output logic [ADDR_BITS-1:0] mem_write_address [NUM_CHANNELS-1:0],
-    output logic [MEMORY_BUS_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
-    input wire [NUM_CHANNELS-1:0] mem_write_ready
+    //// Memory Interface (Data / Program)    
+    //output logic [NUM_CHANNELS-1:0] mem_read_valid,
+    //output logic [ADDR_BITS-1:0] mem_read_address [NUM_CHANNELS-1:0],
+    //input wire [NUM_CHANNELS-1:0] mem_read_ready,
+    //input wire [MEMORY_BUS_BITS-1:0] mem_read_data [NUM_CHANNELS-1:0],
+
+    //output logic [NUM_CHANNELS-1:0] mem_write_valid,
+    //output logic [ADDR_BITS-1:0] mem_write_address [NUM_CHANNELS-1:0],
+    //output logic [MEMORY_BUS_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
+    //input wire [NUM_CHANNELS-1:0] mem_write_ready
 );
     ////
     //// Cache Data / SRAM 

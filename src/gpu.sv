@@ -1,5 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ns
+//`include "utils.svh"
 
 // GPU
 // > Built to use an external async memory with multi-channel read/write
@@ -80,12 +81,7 @@ module gpu #(
     reg [NUM_FETCHERS-1:0] fetcher_read_ready;
     reg [PROGRAM_MEM_DATA_BITS-1:0] fetcher_read_data [NUM_FETCHERS-1:0];
     
-    // Dump waveform to GTK Wave readable format
-    initial begin
-        $dumpfile("build/gpu.vcd"); 
-        $dumpvars(0, gpu);
-    end
-    
+
     // Device Control Register
     dcr dcr_instance (
         .clk(clk),
@@ -98,123 +94,38 @@ module gpu #(
 
     // Data Memory Controller
     // dmem_controller #(
-    dmem_cache #(
+    arbiter_cache #(
         .ADDR_BITS(DATA_MEM_ADDR_BITS),
         .CONSUMER_BUS_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),
         .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS),
         .MEMORY_BUS_BITS(DATA_MEM_DATA_BITS)
     ) data_memory_controller (
+
         .clk(clk),
         .reset(reset),
-
-        .consumer_read_valid(lsu_read_valid),
-        .consumer_read_address(lsu_read_address),
-        .consumer_read_ready(lsu_read_ready),
-        .consumer_read_data(lsu_read_data),
-        .consumer_write_valid(lsu_write_valid),
-        .consumer_write_address(lsu_write_address),
-        .consumer_write_data(lsu_write_data),
-        .consumer_write_ready(lsu_write_ready),
-
-        .mem_read_valid(data_mem_read_valid),
-        .mem_read_address(data_mem_read_address),
-        .mem_read_ready(data_mem_read_ready),
-        .mem_read_data(data_mem_read_data),
-        .mem_write_valid(data_mem_write_valid),
-        .mem_write_address(data_mem_write_address),
-        .mem_write_data(data_mem_write_data),
-        .mem_write_ready(data_mem_write_ready)
+        `CHANNEL_WRITE(consumer, lsu),
+        `CHANNEL_READ(consumer, lsu),
+        `CHANNEL_WRITE(mem, data_mem),
+        `CHANNEL_READ(mem, data_mem)
     );
-
-    //// Matmul Benchmarked at:
-    // New pmem controller, using dmem model:
-    // (simulated ns)13775001.00
-    // (real s)11.32
-    // (ns/s)1217045.73
-    //
-    // Old, custom pmem controller + cache combo:
-    // (simulated ns) 15225001.00
-    // (real s) 13.75
-    // (ns/s) 1107321.05
-
-    dmem_cache #(
+    
+    arbiter_cache #(
         .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
         .CONSUMER_BUS_BITS(PROGRAM_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_FETCHERS),
         .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS),
         .MEMORY_BUS_BITS(PROGRAM_MEM_DATA_BITS)
     ) program_memory_controller (
+
         .clk(clk),
         .reset(reset),
-
-        .consumer_read_valid(fetcher_read_valid),
-        .consumer_read_address(fetcher_read_address),
-        .consumer_read_ready(fetcher_read_ready),
-        .consumer_read_data(fetcher_read_data),
-        .consumer_write_valid(2'b0),
-        .consumer_write_address(16'b0),
-        .consumer_write_data(32'b0),
-        .consumer_write_ready(),
-
-        .mem_read_valid(program_mem_read_valid),
-        .mem_read_address(program_mem_read_address),
-        .mem_read_ready(program_mem_read_ready),
-        .mem_read_data(program_mem_read_data),
-        .mem_write_valid(),
-        .mem_write_address(),
-        .mem_write_data(),
-        .mem_write_ready(1'b0)
+        // Assumed to be disconnected by module, but hardware is present
+        //`CHANNEL_WRITE(),
+        //`CHANNEL_WRITE(),
+        `CHANNEL_READ(consumer, fetcher),
+        `CHANNEL_READ(mem, program_mem)
     );
-
-    /*
-    // Program Memory Cache
-    pmem_cache #(
-        .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
-        .CONSUMER_BUS_BITS(PROGRAM_MEM_DATA_BITS),
-        .NUM_CONSUMERS(1),
-        .NUM_CHANNELS(1),
-        .MEMORY_BUS_BITS(PROGRAM_MEM_DATA_BITS)
-    ) program_memory_cache (
-        .clk(clk),
-        .reset(reset),
-
-        // pmem_controller (towards CPU cores)
-        .controller_read_valid(pcache_read_valid),
-        .controller_read_address(pcache_read_address),
-        .controller_read_ready(pcache_read_ready),
-        .controller_read_data(pcache_read_data),
-
-        // Program memory (SRAM)
-        .mem_read_valid(program_mem_read_valid),
-        .mem_read_address(program_mem_read_address),
-        .mem_read_ready(program_mem_read_ready),
-        .mem_read_data(program_mem_read_data)    
-    );
-
-    // Program Memory Controller
-    pmem_controller #(
-        .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
-        .CONSUMER_BUS_BITS(PROGRAM_MEM_DATA_BITS),
-        .NUM_CONSUMERS(NUM_FETCHERS),
-        .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS),
-        .MEMORY_BUS_BITS(PROGRAM_MEM_DATA_BITS)
-        // .WRITE_ENABLE(0)
-    ) program_memory_controller (
-        .clk(clk),
-        .reset(reset),
-
-        .consumer_read_valid(fetcher_read_valid),
-        .consumer_read_address(fetcher_read_address),
-        .consumer_read_ready(fetcher_read_ready),
-        .consumer_read_data(fetcher_read_data),
-
-        .mem_read_valid(pcache_read_valid),
-        .mem_read_address(pcache_read_address),
-        .mem_read_ready(pcache_read_ready),
-        .mem_read_data(pcache_read_data)
-    );
-    */
 
     // Dispatcher
     dispatch #(
@@ -300,4 +211,11 @@ module gpu #(
             );
         end
     endgenerate
+
+    // Dump waveform to GTK Wave readable format
+    initial begin
+        $dumpfile("build/gpu.vcd"); 
+        $dumpvars(0, gpu);
+    end
+    
 endmodule
