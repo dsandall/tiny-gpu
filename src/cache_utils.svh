@@ -86,5 +86,42 @@ function automatic logic [NUM_CHUNKS-1:0] cache_valid_mask_by_offset(
     cache_valid_mask_by_offset[offset] = 1'b1;
 endfunction
 
+function automatic logic [CONSUMER_BUS_BITS-1:0] select_consumer_read_data;
+    input int offset_bits;
+    input logic [CACHE_OFFSET_BITS-1:0] offset;
+    input logic [CACHE_LINE_SIZE_BITS-1:0] line_data;
+    input logic [CONSUMER_BUS_BITS-1:0] tail_data;
+
+    int i;
+
+    begin
+
+      // WARN: assumes that address space and consumer addressing are similar (ie,
+      // +1 address is next consumer chunk size) (ie, not byte addr memory for
+      // a 64 bit read bus)
+
+      localparam NUM_CONSUMER_CHUNKS = CACHE_LINE_SIZE_BITS / CONSUMER_BUS_BITS;
+        // Default to zero
+        select_consumer_read_data = {CONSUMER_BUS_BITS{1'b0}};
+
+        // If offset == last chunk index, take tail_data
+        if (offset == (NUM_CONSUMER_CHUNKS - 1)) begin
+            select_consumer_read_data = tail_data;
+        end else begin
+            // Manually select the byte at the specified offset
+            for (i = 0; i < NUM_CONSUMER_CHUNKS; i = i + 1) begin
+                if (offset == i) begin
+                    select_consumer_read_data = line_data[(CONSUMER_BUS_BITS*i)+:CONSUMER_BUS_BITS];
+                end
+            end
+        end
+    end
+endfunction
+//consumer_read_data[`CC] <= select_consumer_read_data(
+//                                CACHE_OFFSET_BITS,
+//                                consumer_req_offset,
+//                                cache[`CC_REQUESTED_LINE].data,
+//                                mem_read_data[i]
+//                            );
 `endif // CACHE_UTILS_SVH
 // end of cache_utils.svh

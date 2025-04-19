@@ -173,7 +173,7 @@ module dmem_cache #(
                                 end
                                 
                                 // save some data for next cycle
-                                consumer_req_offset <= consumer_read_address[j][CACHE_OFFSET_BITS-1:0]; //how many bits to offset into the cache line 
+                                consumer_req_offset <= `REQUESTED_OFFSET; //how many bits to offset into the cache line 
                                 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
                                 break;
@@ -191,12 +191,12 @@ module dmem_cache #(
                                 // Update cache line data and valid bit for this chunk
                                 cache[`REQUESTED_LINE].data <= cache_write_by_offset(
                                     cache[`REQUESTED_LINE].data,
-                                    consumer_write_address[j][CACHE_OFFSET_BITS-1:0],
+                                    `REQUESTED_OFFSET,
                                     consumer_write_data[j]
                                 );
 
                                 cache[`REQUESTED_LINE].valid <= cache[`REQUESTED_LINE].valid |
-                                    cache_valid_mask_by_offset(consumer_write_address[j][CACHE_OFFSET_BITS-1:0]);
+                                    cache_valid_mask_by_offset(`REQUESTED_OFFSET);
                                 cache[`REQUESTED_LINE].dirty <= 1'b1;
                                 
                                 // Once we find a pending request, pick it up with this channel and stop looking for requests
@@ -309,33 +309,3 @@ module dmem_cache #(
     endgenerate
 endmodule
 
-function automatic logic [7:0] select_consumer_read_data;
-    input int offset_bits;
-    input logic [7:0] offset;           // up to 255 chunks supported
-    input logic [255:0] line_data;      // up to 32 bytes; adjust width if needed
-    input logic [7:0] tail_data;
-
-    int max_index;
-    int total_chunks;
-    int i;
-
-    begin
-        total_chunks = 2 ** offset_bits;
-        max_index = total_chunks - 1;
-
-        // Default to zero
-        select_consumer_read_data = 8'h00;
-
-        // If offset == last chunk index, take tail_data
-        if (offset == max_index) begin
-            select_consumer_read_data = tail_data;
-        end else begin
-            // Manually select the byte at the specified offset
-            for (i = 0; i < total_chunks; i = i + 1) begin
-                if (offset == i) begin
-                    select_consumer_read_data = line_data[(8*i)+:8];
-                end
-            end
-        end
-    end
-endfunction

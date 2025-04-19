@@ -103,7 +103,7 @@ module gpu #(
         .CONSUMER_BUS_BITS(DATA_MEM_DATA_BITS),
         .NUM_CONSUMERS(NUM_LSUS),
         .NUM_CHANNELS(DATA_MEM_NUM_CHANNELS),
-        .MEMORY_BUS_BITS(8)
+        .MEMORY_BUS_BITS(DATA_MEM_DATA_BITS)
     ) data_memory_controller (
         .clk(clk),
         .reset(reset),
@@ -127,37 +127,47 @@ module gpu #(
         .mem_write_ready(data_mem_write_ready)
     );
 
-    //dmem_cache #(
-    //    .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
-    //    .DATA_BITS(PROGRAM_MEM_DATA_BITS),
-    //    .NUM_CONSUMERS(NUM_FETCHERS),
-    //    .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS),
-    //    .MEM_BUS_BITS(PROGRAM_MEM_DATA_BITS)
-    //) program_memory_controller (
-    //    .clk(clk),
-    //    .reset(reset),
+    //// Matmul Benchmarked at:
+    // New pmem controller, using dmem model:
+    // (simulated ns)13775001.00
+    // (real s)11.32
+    // (ns/s)1217045.73
+    //
+    // Old, custom pmem controller + cache combo:
+    // (simulated ns) 15225001.00
+    // (real s) 13.75
+    // (ns/s) 1107321.05
 
-    //    .consumer_read_valid(fetcher_read_valid),
-    //    .consumer_read_address(fetcher_read_address),
-    //    .consumer_read_ready(fetcher_read_ready),
-    //    .consumer_read_data(fetcher_read_data),
-    //    .consumer_write_valid(2'b0),
-    //    .consumer_write_address(16'b0),
-    //    .consumer_write_data(32'b0),
-    //    .consumer_write_ready(),
+    dmem_cache #(
+        .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
+        .CONSUMER_BUS_BITS(PROGRAM_MEM_DATA_BITS),
+        .NUM_CONSUMERS(NUM_FETCHERS),
+        .NUM_CHANNELS(PROGRAM_MEM_NUM_CHANNELS),
+        .MEMORY_BUS_BITS(PROGRAM_MEM_DATA_BITS)
+    ) program_memory_controller (
+        .clk(clk),
+        .reset(reset),
 
-    //    .mem_read_valid(program_mem_read_valid),
-    //    .mem_read_address(program_mem_read_address),
-    //    .mem_read_ready(program_mem_read_ready),
-    //    .mem_read_data(program_mem_read_data),
-    //    .mem_write_valid(),
-    //    .mem_write_address(),
-    //    .mem_write_data(),
-    //    .mem_write_ready(1'b0)
-    //);
+        .consumer_read_valid(fetcher_read_valid),
+        .consumer_read_address(fetcher_read_address),
+        .consumer_read_ready(fetcher_read_ready),
+        .consumer_read_data(fetcher_read_data),
+        .consumer_write_valid(2'b0),
+        .consumer_write_address(16'b0),
+        .consumer_write_data(32'b0),
+        .consumer_write_ready(),
 
+        .mem_read_valid(program_mem_read_valid),
+        .mem_read_address(program_mem_read_address),
+        .mem_read_ready(program_mem_read_ready),
+        .mem_read_data(program_mem_read_data),
+        .mem_write_valid(),
+        .mem_write_address(),
+        .mem_write_data(),
+        .mem_write_ready(1'b0)
+    );
 
-    
+    /*
     // Program Memory Cache
     pmem_cache #(
         .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
@@ -204,6 +214,7 @@ module gpu #(
         .mem_read_ready(pcache_read_ready),
         .mem_read_data(pcache_read_data)
     );
+    */
 
     // Dispatcher
     dispatch #(
