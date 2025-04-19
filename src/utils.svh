@@ -1,6 +1,18 @@
 `ifndef UTILS_SVH
 `define UTILS_SVH
 
+`define CHANNEL_READ_BUFF(prefix, NUM, ADDR_BITS, DATA_BITS) \
+    reg  [NUM-1:0]            prefix``_read_valid; \
+    reg  [ADDR_BITS-1:0]      prefix``_read_address [NUM-1:0]; \
+    reg  [NUM-1:0]            prefix``_read_ready; \
+    reg  [DATA_BITS-1:0]      prefix``_read_data   [NUM-1:0]
+
+`define CHANNEL_WRITE_BUFF(prefix, NUM, ADDR_BITS, DATA_BITS) \
+    reg  [NUM-1:0]            prefix``_write_valid; \
+    reg  [ADDR_BITS-1:0]      prefix``_write_address [NUM-1:0]; \
+    reg  [NUM-1:0]            prefix``_write_ready; \
+    reg  [DATA_BITS-1:0]      prefix``_write_data   [NUM-1:0]
+
 `define CONSUMER_READ_MODULE(prefix, NUM, ADDR_BITS, DATA_BITS) \
     input logic   [NUM-1:0]            prefix``_read_valid, \
     input logic   [ADDR_BITS-1:0]      prefix``_read_address [NUM-1:0], \

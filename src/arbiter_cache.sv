@@ -83,26 +83,6 @@ module arbiter_cache #(
     `CHANNEL_READ_MODULE(mem, NUM_CHANNELS, ADDR_BITS, MEMORY_BUS_BITS),
     `CHANNEL_WRITE_MODULE(mem, NUM_CHANNELS, ADDR_BITS, MEMORY_BUS_BITS)
 
-    //input wire [NUM_CONSUMERS-1:0] consumer_read_valid,
-    //input wire [ADDR_BITS-1:0] consumer_read_address [NUM_CONSUMERS-1:0],
-    //output logic [NUM_CONSUMERS-1:0] consumer_read_ready,
-    //output logic [CONSUMER_BUS_BITS-1:0] consumer_read_data [NUM_CONSUMERS-1:0],
-
-    //input wire [NUM_CONSUMERS-1:0] consumer_write_valid,
-    //input wire [ADDR_BITS-1:0] consumer_write_address [NUM_CONSUMERS-1:0],
-    //input wire [CONSUMER_BUS_BITS-1:0] consumer_write_data [NUM_CONSUMERS-1:0],
-    //output logic [NUM_CONSUMERS-1:0] consumer_write_ready,
-
-    //// Memory Interface (Data / Program)    
-    //output logic [NUM_CHANNELS-1:0] mem_read_valid,
-    //output logic [ADDR_BITS-1:0] mem_read_address [NUM_CHANNELS-1:0],
-    //input wire [NUM_CHANNELS-1:0] mem_read_ready,
-    //input wire [MEMORY_BUS_BITS-1:0] mem_read_data [NUM_CHANNELS-1:0],
-
-    //output logic [NUM_CHANNELS-1:0] mem_write_valid,
-    //output logic [ADDR_BITS-1:0] mem_write_address [NUM_CHANNELS-1:0],
-    //output logic [MEMORY_BUS_BITS-1:0] mem_write_data [NUM_CHANNELS-1:0],
-    //input wire [NUM_CHANNELS-1:0] mem_write_ready
 );
     ////
     //// Cache Data / SRAM 
