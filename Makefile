@@ -7,7 +7,7 @@ export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 # - make compile_matadd
 # - make show_matadd
 
-SIM ?= icarus 
+SIM ?= verilator
 TOPLEVEL = gpu
 BUILD_DIR = build
 
@@ -19,10 +19,10 @@ ifeq ($(SIM),icarus)
 else ifeq ($(SIM),verilator)
 	MODULE=$(MODULE) \
 	TOPLEVEL=$(TOPLEVEL) \
-	VERILOG_SOURCES=src/*.s* \
+	VERILOG_SOURCES=$(shell find src -name '*.sv' -o -name '*.svh') \
 	SIM=verilator \
 	WAVES=1 \
-	EXTRA_ARGS="--cc --timing --trace-fst --top-module $(TOPLEVEL) -Wall" \
+	EXTRA_ARGS="--cc --timing --trace-fst --top-module $(TOPLEVEL) -Wall -I src" \
 	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim
 else
 	$(error Unknown SIM '$(SIM)')

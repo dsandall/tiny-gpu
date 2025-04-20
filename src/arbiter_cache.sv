@@ -1,6 +1,7 @@
 `default_nettype none
 `timescale 1ns/1ns
 `include "utils.svh"
+
 // MEMORY CONTROLLER
 // > Receives memory requests from all LSUs
 // > Throttles requests based on limited external memory bandwidth

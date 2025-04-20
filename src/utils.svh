@@ -1,7 +1,6 @@
 `ifndef UTILS_SVH
 `define UTILS_SVH
 
-
 //
 // These all translate to some form of:
 //
@@ -80,13 +79,13 @@
 // assumes that both devices use same address bits to communicate
 // assumes that both devices use same bus width to communicate 
 // (serial/deserial must be done in a module, such as arbitrator_cache)
-`define CHANNEL_READ(prefix1, prefix2) \
+`define MEM_BUS_READ(prefix1, prefix2) \
     .prefix1``_read_valid       (prefix2``_read_valid), \
     .prefix1``_read_address     (prefix2``_read_address), \
     .prefix1``_read_ready       (prefix2``_read_ready), \
     .prefix1``_read_data        (prefix2``_read_data)
 
-`define CHANNEL_WRITE(prefix1, prefix2) \
+`define MEM_BUS_WRITE(prefix1, prefix2) \
     .prefix1``_write_valid      (prefix2``_write_valid), \
     .prefix1``_write_address    (prefix2``_write_address), \
     .prefix1``_write_ready      (prefix2``_write_ready), \
@@ -97,5 +96,12 @@
   for (int b = 0; b < size; b++) begin \
     arr[b] = '0; \
   end
-`endif // UTILS_SVH
+`endif 
+
+
+
+
+
+
+// UTILS_SVH
 // end of utils.svh

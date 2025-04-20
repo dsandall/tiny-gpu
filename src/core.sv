@@ -73,7 +73,7 @@ module core #(
         .reset(reset),
         .core_state(core_state),
         .current_pc(current_pc),
-        `CHANNEL_READ(mem, program_mem),
+        `MEM_BUS_READ(mem, program_mem),
 
         .fetcher_state(fetcher_state),
         .instruction(instruction)

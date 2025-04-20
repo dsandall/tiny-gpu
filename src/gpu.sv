@@ -30,11 +30,11 @@ module gpu #(
     input wire [7:0] device_control_data,
 
     // Program Memory
-    `CHANNEL_READ_MODULE(program_mem,PROGRAM_MEM_NUM_CHANNELS, PROGRAM_MEM_ADDR_BITS, PROGRAM_MEM_DATA_BITS),
+    `CHANNEL_READ_MODULE(program_mem, PROGRAM_MEM_NUM_CHANNELS, PROGRAM_MEM_ADDR_BITS, PROGRAM_MEM_DATA_BITS),
 
     // Data Memory
-    `CHANNEL_READ_MODULE(data_mem,DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS),
-    `CHANNEL_WRITE_MODULE(data_mem,DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
+    `CHANNEL_READ_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS),
+    `CHANNEL_WRITE_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
 );
 
     localparam NUM_LSUS = NUM_CORES * THREADS_PER_BLOCK;
@@ -154,8 +154,8 @@ module gpu #(
                 .program_mem_read_ready(fetcher_read_ready[i]),
                 .program_mem_read_data(fetcher_read_data[i]),
 
-                `CHANNEL_READ(data_mem,core_lsu),
-                `CHANNEL_WRITE(data_mem,core_lsu)
+                `MEM_BUS_READ(data_mem,core_lsu),
+                `MEM_BUS_WRITE(data_mem,core_lsu)
             );
         end
     endgenerate
@@ -176,10 +176,10 @@ module gpu #(
 
         .clk(clk),
         .reset(reset),
-        `CHANNEL_WRITE(consumer, lsu),
-        `CHANNEL_READ(consumer, lsu),
-        `CHANNEL_WRITE(mem, data_mem),
-        `CHANNEL_READ(mem, data_mem)
+        `MEM_BUS_WRITE(consumer, lsu),
+        `MEM_BUS_READ(consumer, lsu),
+        `MEM_BUS_WRITE(mem, data_mem),
+        `MEM_BUS_READ(mem, data_mem)
     );
     
     arbiter_cache #(
@@ -193,10 +193,10 @@ module gpu #(
         .clk(clk),
         .reset(reset),
         // Assumed to be disconnected by module, but hardware is present
-        //`CHANNEL_WRITE(),
-        //`CHANNEL_WRITE(),
-        `CHANNEL_READ(consumer, fetcher),
-        `CHANNEL_READ(mem, program_mem)
+        //`MEM_BUS_WRITE(),
+        //`MEM_BUS_WRITE(),
+        `MEM_BUS_READ(consumer, fetcher),
+        `MEM_BUS_READ(mem, program_mem)
     );
 
     /////////////////////////////////////////
