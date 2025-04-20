@@ -1,0 +1,164 @@
+// Verilated -*- C++ -*-
+// DESCRIPTION: Verilator output: Symbol table internal header
+//
+// Internal details; most calling programs do not need this header,
+// unless using verilator public meta comments.
+
+#ifndef VERILATED_VTOP__SYMS_H_
+#define VERILATED_VTOP__SYMS_H_  // guard
+
+#include "verilated.h"
+
+// INCLUDE MODEL CLASS
+
+#include "Vtop.h"
+
+// INCLUDE MODULE CLASSES
+#include "Vtop___024root.h"
+#include "Vtop_core.h"
+
+// DPI TYPES for DPI Export callbacks (Internal use)
+
+// SYMS CLASS (contains all model state)
+class alignas(VL_CACHE_LINE_BYTES)Vtop__Syms final : public VerilatedSyms {
+  public:
+    // INTERNAL STATE
+    Vtop* const __Vm_modelp;
+    VlDeleter __Vm_deleter;
+    bool __Vm_didInit = false;
+
+    // MODULE INSTANCE STATE
+    Vtop___024root                 TOP;
+    Vtop_core                      TOP__gpu__DOT__cores__BRA__0__KET____DOT__core_instance;
+    Vtop_core                      TOP__gpu__DOT__cores__BRA__1__KET____DOT__core_instance;
+
+    // SCOPE NAMES
+    VerilatedScope __Vscope_TOP;
+    VerilatedScope __Vscope_gpu;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__decoder_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__fetcher_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__fetcher_instance__mem_if;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__scheduler_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__scheduler_instance__sv2v_autoblock_1;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__scheduler_instance__sv2v_autoblock_1__sv2v_autoblock_2;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__scheduler_instance__sv2v_autoblock_1__sv2v_autoblock_2__sv2v_autoblock_3;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__scheduler_instance__sv2v_autoblock_1__sv2v_autoblock_2__sv2v_autoblock_3__sv2v_autoblock_4;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__0__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__0__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__0__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__0__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__0__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__1__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__1__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__1__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__1__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__1__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__2__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__2__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__2__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__2__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__2__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__3__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__3__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__3__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__3__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____core_instance__threads__BRA__3__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____genblk1__BRA__0__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____genblk1__BRA__1__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____genblk1__BRA__2__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__0__KET____genblk1__BRA__3__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__decoder_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__fetcher_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__fetcher_instance__mem_if;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__scheduler_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__scheduler_instance__sv2v_autoblock_1;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__scheduler_instance__sv2v_autoblock_1__sv2v_autoblock_2;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__scheduler_instance__sv2v_autoblock_1__sv2v_autoblock_2__sv2v_autoblock_3;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__scheduler_instance__sv2v_autoblock_1__sv2v_autoblock_2__sv2v_autoblock_3__sv2v_autoblock_4;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__0__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__0__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__0__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__0__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__0__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__1__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__1__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__1__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__1__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__1__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__2__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__2__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__2__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__2__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__2__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__3__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__3__KET____alu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__3__KET____lsu_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__3__KET____pc_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____core_instance__threads__BRA__3__KET____register_instance;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____genblk1__BRA__0__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____genblk1__BRA__1__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____genblk1__BRA__2__KET__;
+    VerilatedScope __Vscope_gpu__cores__BRA__1__KET____genblk1__BRA__3__KET__;
+    VerilatedScope __Vscope_gpu__data_memory_controller;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__0__KET__;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8__sv2v_autoblock_9;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__1__KET__;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__1__KET____sv2v_autoblock_5;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__1__KET____sv2v_autoblock_5__sv2v_autoblock_6;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__1__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__1__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__1__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8__sv2v_autoblock_9;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__2__KET__;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__2__KET____sv2v_autoblock_5;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__2__KET____sv2v_autoblock_5__sv2v_autoblock_6;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__2__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__2__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__2__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8__sv2v_autoblock_9;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__3__KET__;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__3__KET____sv2v_autoblock_5;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__3__KET____sv2v_autoblock_5__sv2v_autoblock_6;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__3__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__3__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8;
+    VerilatedScope __Vscope_gpu__data_memory_controller__genblk1__BRA__3__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8__sv2v_autoblock_9;
+    VerilatedScope __Vscope_gpu__data_memory_controller__sv2v_autoblock_1;
+    VerilatedScope __Vscope_gpu__data_memory_controller__sv2v_autoblock_2;
+    VerilatedScope __Vscope_gpu__data_memory_controller__sv2v_autoblock_3;
+    VerilatedScope __Vscope_gpu__data_memory_controller__sv2v_autoblock_4;
+    VerilatedScope __Vscope_gpu__dcr_instance;
+    VerilatedScope __Vscope_gpu__dispatch_instance;
+    VerilatedScope __Vscope_gpu__dispatch_instance__sv2v_autoblock_1;
+    VerilatedScope __Vscope_gpu__dispatch_instance__sv2v_autoblock_2;
+    VerilatedScope __Vscope_gpu__dispatch_instance__sv2v_autoblock_3;
+    VerilatedScope __Vscope_gpu__dispatch_instance__sv2v_autoblock_4;
+    VerilatedScope __Vscope_gpu__program_memory_controller;
+    VerilatedScope __Vscope_gpu__program_memory_controller__genblk1__BRA__0__KET__;
+    VerilatedScope __Vscope_gpu__program_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5;
+    VerilatedScope __Vscope_gpu__program_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6;
+    VerilatedScope __Vscope_gpu__program_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7;
+    VerilatedScope __Vscope_gpu__program_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8;
+    VerilatedScope __Vscope_gpu__program_memory_controller__genblk1__BRA__0__KET____sv2v_autoblock_5__sv2v_autoblock_6__sv2v_autoblock_7__sv2v_autoblock_8__sv2v_autoblock_9;
+    VerilatedScope __Vscope_gpu__program_memory_controller__sv2v_autoblock_1;
+    VerilatedScope __Vscope_gpu__program_memory_controller__sv2v_autoblock_2;
+    VerilatedScope __Vscope_gpu__program_memory_controller__sv2v_autoblock_3;
+    VerilatedScope __Vscope_gpu__program_memory_controller__sv2v_autoblock_4;
+
+    // SCOPE HIERARCHY
+    VerilatedHierarchy __Vhier;
+
+    // CONSTRUCTORS
+    Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* modelp);
+    ~Vtop__Syms();
+
+    // METHODS
+    const char* name() { return TOP.name(); }
+};
+
+#endif  // guard

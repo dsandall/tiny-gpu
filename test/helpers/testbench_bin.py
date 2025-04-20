@@ -5,7 +5,7 @@ from .memory import Memory
 from .format import format_cycle
 from .logger import logger
 
-from ctypes import c_int8, c_uint16
+from ctypes import c_int8
 import json
 
 default_hw_config = {
@@ -115,6 +115,8 @@ async def setup_wrap(dut, test_config):
         await a
         await b
         cycles += 1
+
+    dut.reset = 1
 
     # printout after sim
     logger.info(f"Completed in {cycles} cycles")

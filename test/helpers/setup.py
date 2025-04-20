@@ -5,8 +5,6 @@ from cocotb.triggers import RisingEdge
 from .memory import Memory
 
 
-
-
 async def setup(
     dut,
     program_memory: Memory,
@@ -21,6 +19,11 @@ async def setup(
 
     # Reset
     dut.reset.value = 1
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
     await RisingEdge(dut.clk)
     await RisingEdge(dut.clk)
     await RisingEdge(dut.clk)

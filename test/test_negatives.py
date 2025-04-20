@@ -1,5 +1,4 @@
 import cocotb
-
 from .helpers.testbench_bin import load_json_binary, setup_wrap
 
 

@@ -38,9 +38,9 @@
         logic                            dirty;
     } cache_line_t;
 
-`define TAG_BITS ADDR_BITS-2:CACHE_INDEX_BITS+CACHE_OFFSET_BITS
-`define LINE_BITS CACHE_INDEX_BITS+CACHE_OFFSET_BITS-2:CACHE_OFFSET_BITS
-`define OFFSET_BITS CACHE_OFFSET_BITS-2:0
+    `define TAG_BITS ADDR_BITS-1:CACHE_INDEX_BITS+CACHE_OFFSET_BITS
+    `define LINE_BITS CACHE_INDEX_BITS+CACHE_OFFSET_BITS-1:CACHE_OFFSET_BITS
+    `define OFFSET_BITS CACHE_OFFSET_BITS-1:0
 
 //// FSM States. Could be split into more states,
 ////    depending on penalties for num clock cycles vs the clock freq of the cache FSM as a whole 

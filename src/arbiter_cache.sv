@@ -114,34 +114,21 @@ module arbiter_cache #(
     // Reset Block
     always @(posedge clk) begin
         if (reset) begin 
-            mem_read_valid <= 0;
-            mem_read_address <= 0;
             
-            mem_write_valid <= 0;
-            mem_write_address <= 0;
-            mem_write_data <= 0;
-            
-            consumer_read_ready <= 0;
-            consumer_read_data <= 0;
-            consumer_write_ready <= 0;
-            
-            current_consumer <= 0;
-            controller_state <= 0;
-            consumer_mutex = 0;
-            
+            `CONSUMER_READ_MODULE_RESET(consumer);
+            `CONSUMER_WRITE_MODULE_RESET(consumer);
+            `CHANNEL_READ_MODULE_RESET(mem);
+            `CHANNEL_WRITE_MODULE_RESET(mem);
+
+            `ZERO_ARRAY(current_consumer, NUM_CHANNELS)
+            `ZERO_ARRAY(controller_state, NUM_CHANNELS)
+            `ZERO_ARRAY(consumer_mutex, NUM_CONSUMERS)
+
             // Initialize cache lines
-            for (int k = 0; k < CACHE_NUM_LINES; k = k + 1) begin
-                cache[k].data  <= '0;
-                cache[k].tag   <= '0;
-                cache[k].valid <= '0;
-                cache[k].dirty <= 1'b0;
-            end
+           `ZERO_ARRAY(cache, CACHE_NUM_LINES)
         end
     end
 
-    `define LINE_BITS CACHE_INDEX_BITS+CACHE_OFFSET_BITS-1:CACHE_OFFSET_BITS
-    `define TAG_BITS ADDR_BITS-1:CACHE_INDEX_BITS+CACHE_OFFSET_BITS
-    `define OFFSET_BITS CACHE_OFFSET_BITS-1:0
 
 
     //// Memory Channel Generate Block

@@ -60,6 +60,22 @@
     input logic    [NUM-1:0]            prefix``_write_ready, \
     output logic  [DATA_BITS-1:0]      prefix``_write_data   [NUM-1:0]
 
+`define CONSUMER_READ_MODULE_RESET(prefix) \
+    prefix``_read_ready <= 0; \
+    prefix``_read_data <= 0
+
+`define CONSUMER_WRITE_MODULE_RESET(prefix) \
+    prefix``_write_ready <= 0
+
+`define CHANNEL_READ_MODULE_RESET(prefix) \
+    prefix``_read_valid <= 0; \
+    prefix``_read_address <= 0
+
+`define CHANNEL_WRITE_MODULE_RESET(prefix) \
+    prefix``_write_valid <= 0; \
+    prefix``_write_address <= 0; \
+    prefix``_write_data <= 0
+
 // Assumes that a single memory bus is read and write
 // assumes that both devices use same address bits to communicate
 // assumes that both devices use same bus width to communicate 
@@ -76,5 +92,10 @@
     .prefix1``_write_ready      (prefix2``_write_ready), \
     .prefix1``_write_data       (prefix2``_write_data)
 
+
+`define ZERO_ARRAY(arr, size) \
+  for (int b = 0; b < size; b++) begin \
+    arr[b] = '0; \
+  end
 `endif // UTILS_SVH
 // end of utils.svh

@@ -7,13 +7,34 @@ export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 # - make compile_matadd
 # - make show_matadd
 
-test_%:
-# create gpu.v from all sv files in src
+SIM ?= icarus 
+TOPLEVEL = gpu
+BUILD_DIR = build
+
+test_%: MODULE = test.test_$*
+test_%: $(BUILD_DIR)/gpu.v
+ifeq ($(SIM),icarus)
+	iverilog -o $(BUILD_DIR)/sim.vvp -s $(TOPLEVEL) -g2012 $<
+	MODULE=$(MODULE) vvp -M $(shell cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus $(BUILD_DIR)/sim.vvp
+else ifeq ($(SIM),verilator)
+	MODULE=$(MODULE) \
+	TOPLEVEL=$(TOPLEVEL) \
+	VERILOG_SOURCES=src/*.s* \
+	SIM=verilator \
+	WAVES=1 \
+	EXTRA_ARGS="--cc --timing --trace-fst --top-module $(TOPLEVEL) -Wall" \
+	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim
+else
+	$(error Unknown SIM '$(SIM)')
+endif
+
+$(BUILD_DIR)/gpu.v:
 	make compile
-# compile GPU.v into simulatable sim.VVP format, set top level module to gpu
-	iverilog -o build/sim.vvp -s gpu -g2012 build/gpu.v
-# run cocotb testbench at test/test_$, using icarus (vvp)  
-	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
+##  make compile
+### compile GPU.v into simulatable sim.VVP format, set top level module to gpu
+##	iverilog -o build/sim.vvp -s gpu -g2012 build/gpu.v
+### run cocotb testbench at test/test_$, using icarus (vvp)  
+##	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
 
 ## This does not currently work, as SV support is iffy at best for the open source toolchain
 # test_direct_%:
