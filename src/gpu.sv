@@ -15,7 +15,7 @@ module gpu #(
     parameter PROGRAM_MEM_ADDR_BITS = 8,     // Number of bits in program memory address (256 rows)
     parameter PROGRAM_MEM_DATA_BITS = 16,    // Number of bits in program memory value (16 bit instruction)
     parameter PROGRAM_MEM_NUM_CHANNELS = 1,  // Number of concurrent channels for sending requests to program memory
-    parameter NUM_CORES = 2,                 // Number of cores to include in this GPU
+    parameter NUM_HARDWARE_CORES = 1,        // Number of cores to include in this GPU
     parameter THREADS_PER_BLOCK = 4          // Number of threads to handle per block (determines the compute resources of each core)
   ) (
     input wire clk,
@@ -34,11 +34,13 @@ module gpu #(
 
     // Data Memory
     `CHANNEL_READ_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS),
- `CHANNEL_WRITE_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
+    `CHANNEL_WRITE_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
 );
 
-    localparam NUM_LSUS = NUM_CORES * THREADS_PER_BLOCK;
-    localparam NUM_FETCHERS = NUM_CORES;
+    localparam NUM_LOGICAL_CORES = NUM_HARDWARE_CORES * 2; //WARN:
+
+    localparam NUM_FETCHERS = NUM_LOGICAL_CORES;
+    localparam NUM_LSUS = NUM_LOGICAL_CORES * THREADS_PER_BLOCK;
 
     /////////////////////////////////////////
     //////////     Control Logic  ///////////
@@ -48,11 +50,11 @@ module gpu #(
     wire [7:0] thread_count;
     
     // Compute Core State
-    reg [NUM_CORES-1:0] core_start;
-    reg [NUM_CORES-1:0] core_reset;
-    reg [NUM_CORES-1:0] core_done;
-    reg [7:0] core_block_id [NUM_CORES-1:0];
-    reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_CORES-1:0];
+    reg [NUM_LOGICAL_CORES-1:0] core_start;
+    reg [NUM_LOGICAL_CORES-1:0] core_reset;
+    reg [NUM_LOGICAL_CORES-1:0] core_done;
+    reg [7:0] core_block_id [NUM_LOGICAL_CORES-1:0];
+    reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_LOGICAL_CORES-1:0];
 
     // Device Control Register
     dcr dcr_instance (
@@ -66,7 +68,7 @@ module gpu #(
 
     // Dispatcher
     dispatch #(
-        .NUM_CORES(NUM_CORES),
+        .NUM_LOGICAL_CORES(NUM_LOGICAL_CORES),
         .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
     ) dispatch_instance (
         .clk(clk),
@@ -90,35 +92,34 @@ module gpu #(
     // Fetcher <-> Program Memory Controller Channels (x1)
     `CHANNEL_READ_BUFF(fetcher, NUM_FETCHERS, PROGRAM_MEM_ADDR_BITS, PROGRAM_MEM_DATA_BITS);
 
-    /////////////////////////////////////////
-    //////////   Compute Cores        ///////////
-    /////////////////////////////////////////
-
+    /////////////////////////////////////////////
+    //////////   Some Core/Thread mapping logic
+    /////////////////////////////////////////////
     genvar i;
     generate
-        for (i = 0; i < NUM_CORES; i = i + 1) begin : cores
+        for (i = 0; i < NUM_LOGICAL_CORES; i = i + 1) begin : per_core_accoutrements
         // For every core,
 
             // EDA: We create separate signals here to pass to cores because of a requirement
             // by the OpenLane EDA flow (uses Verilog 2005) that prevents slicing the top-level signals
             //
-            // IE, theres a buffer here
+            // IE, theres a buffer here that was necessary for... some opensource ASIC reason
+
             `CHANNEL_READ_BUFF(core_lsu, THREADS_PER_BLOCK, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS);
             `CHANNEL_WRITE_BUFF(core_lsu, THREADS_PER_BLOCK, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS);
 
             // Pass through signals between LSUs and data memory controller:
             genvar j;
             for (j = 0; j < THREADS_PER_BLOCK; j = j + 1) begin
-                localparam lsu_index = i * THREADS_PER_BLOCK + j;
+                localparam lsu_index = i * THREADS_PER_BLOCK + j; //NOTE: this ensures that each core has threads that are numbered sequentially, and uniquely
                 always @(posedge clk) begin
                 // For every core,
-                //  For every Thread in that core,
 
                     //////////////////
                     // Thread -> Cache
                     //////////////////
                     //LSU Read Requests
-                    lsu_read_valid[lsu_index] <= core_lsu_read_valid[j];
+                    lsu_read_valid[lsu_index] <= core_lsu_read_valid[j]; // NOTE: for example, on core 2: j(core internal thread numbers) = {0:3}, lsu_index(global thread numbers) = {8:11} 
                     lsu_read_address[lsu_index] <= core_lsu_read_address[j];
 
                     //LSU Write Requests
@@ -135,7 +136,17 @@ module gpu #(
                     core_lsu_write_ready[j] <= lsu_write_ready[lsu_index];
                 end
             end
+        end
+    endgenerate
 
+    ////////////////////////////////////////
+    //////////   Compute Cores   ///////////
+    ////////////////////////////////////////
+
+    genvar i;
+    generate
+        for (i = 0; i < NUM_HARDWARE_CORES; i = i + 2) begin : cores
+            
             // Compute Core
             ducttape2cores #(
                 .DATA_MEM_ADDR_BITS(DATA_MEM_ADDR_BITS),
@@ -145,22 +156,21 @@ module gpu #(
                 .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
             ) core_instance (
                 .clk(clk),
-                .reset(core_reset[i]),
 
+                .reset(core_reset[i]),
                 .start(core_start[i]),
                 .done(core_done[i]),
                 .block_id(core_block_id[i]),
                 .thread_count(core_thread_count[i]),
-
                 .program_mem_read_valid(fetcher_read_valid[i]),
                 .program_mem_read_address(fetcher_read_address[i]),
                 .program_mem_read_ready(fetcher_read_ready[i]),
                 .program_mem_read_data(fetcher_read_data[i]),
-
-                `MEM_BUS_READ(data_mem, core_lsu),
-                `MEM_BUS_WRITE(data_mem, core_lsu),
+                `MEM_BUS_READ(data_mem, per_core_accoutrements[i].core_lsu), //NOTE: this macro expands to connect: data_mem{_read_ready,_read_valid,...} and per_core_accoutrements[i].core_lsu{_read_ready, _read_valid...}
+                `MEM_BUS_WRITE(data_mem, per_core_accoutrements[i].core_lsu),
 
                 // the conjoined twin core
+                .reset_2(core_reset[i+1]),
                 .start_2(core_start[i+1]),
                 .done_2(core_done[i+1]),
                 .block_id_2(core_block_id[i+1]),
@@ -169,8 +179,8 @@ module gpu #(
                 .program_mem_2_read_address(fetcher_read_address[i+1]),
                 .program_mem_2_read_ready(fetcher_read_ready[i+1]),
                 .program_mem_2_read_data(fetcher_read_data[i+1]),
-                `MEM_BUS_READ(data_mem_2, core_lsu_2),
-                `MEM_BUS_WRITE(data_mem_2, core_lsu_2)
+                `MEM_BUS_READ(data_mem_2, per_core_accoutrements[i+1].core_lsu),
+                `MEM_BUS_WRITE(data_mem_2, per_core_accoutrements[i+1].core_lsu)
             );
         end
     endgenerate
@@ -222,4 +232,6 @@ module gpu #(
         $dumpvars(0, gpu);
     end
     
+
+
 endmodule

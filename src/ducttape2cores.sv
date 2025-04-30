@@ -14,9 +14,9 @@ module ducttape2cores #(
     parameter THREADS_PER_BLOCK = 4
 ) (
     input wire clk,
-    input wire reset,
 
     // Kernel Execution and Block Metadata
+    input wire reset,
     input wire start,
     output wire done,
     input wire [7:0] block_id,
@@ -27,10 +27,12 @@ module ducttape2cores #(
     `CHANNEL_WRITE_MODULE(data_mem, THREADS_PER_BLOCK, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS),
 
     // Second logical core / warp / thread group / set of registers / etc
+    input wire reset_2,
     input wire start_2,
     output wire done_2,
     input wire [7:0] block_id_2,
     input wire [$clog2(THREADS_PER_BLOCK):0] thread_count_2,
+    // unique PCACHE and DCACHE access for cores
     `CHANNEL_READ_MODULE(program_mem_2, 1, PROGRAM_MEM_ADDR_BITS, PROGRAM_MEM_DATA_BITS),
     `CHANNEL_READ_MODULE(data_mem_2, THREADS_PER_BLOCK, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS),
     `CHANNEL_WRITE_MODULE(data_mem_2, THREADS_PER_BLOCK, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
@@ -68,7 +70,7 @@ module ducttape2cores #(
       .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
   ) inner_core_instance_2 (
       .clk(clk),
-      .reset(reset),
+      .reset(reset_2),
       .start(start_2),
       .done(done_2),
       .block_id(block_id_2),

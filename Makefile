@@ -98,12 +98,6 @@ ft_%:
 	make test_$*
 
 # This makefile is getting pretty large, and should probably be split between hw compilation and sw testing soon
-ft_all:
-	make clean && \
-	make ft_matadd && \
-	make ft_matmul && \
-	make ft_load && \
-	make ft_load_8_threads && \
-	make ft_negatives
-	#make ft_load_20_cycles && \
+ft_all: clean ft_matadd ft_matmul ft_load ft_load_8_threads ft_negatives
+
 

@@ -16,6 +16,7 @@ async def test_matadd(dut):
     # test results
     expected_results = [a + b for a,
                         b in zip(data[0:threads], data[8: (8 + threads)])]
+
     for i, expected in enumerate(expected_results):
         result = data_memory.memory[i + 16]
         assert result == expected, (

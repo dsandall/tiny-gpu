@@ -108,7 +108,10 @@ module scheduler #(
                     end
                 end
                 DONE: begin 
-                    // no-op
+                    // return to idle when the dispatcher recognizes DONE
+                    if (!start) begin
+                      core_state <= IDLE;
+                    end
                 end
             endcase
         end

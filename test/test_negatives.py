@@ -5,11 +5,6 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 @cocotb.test()
 async def test_negatives(dut):
 
-    # Data Memory
-    data = [
-        0, 0, 0, 0,
-    ]
-
     test_conf = load_json_binary(
         "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_negatives.json")
 

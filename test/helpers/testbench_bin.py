@@ -4,6 +4,7 @@ from .setup import setup
 from .memory import Memory
 from .format import format_cycle
 from .logger import logger
+import copy
 
 from ctypes import c_int8
 import json
@@ -61,6 +62,10 @@ def load_json_binary(config_path):
 
 async def setup_wrap(dut, test_config):
 
+    logger.info("------------------------------------------\n")
+    logger.info(f" launching test: {test_config["testname"]}\n")
+    logger.info("------------------------------------------\n")
+
     num_memory_printout = 24
 
     hw = test_config["hardware"]
@@ -89,6 +94,8 @@ async def setup_wrap(dut, test_config):
         delay=mem_delay
     )
 
+    print(f"threads is {threads}")
+
     # gpu module
     await setup(
         dut=dut,
@@ -101,26 +108,57 @@ async def setup_wrap(dut, test_config):
 
     # printout prior to sim
     data_memory.display(num_memory_printout)
+    old_mem = copy.deepcopy(data_memory.memory)
 
     # execute sim
     cycles = 0
-    while dut.done.value != 1:
-        a = cocotb.start(data_memory.run())
-        b = cocotb.start(program_memory.run())
 
+    extra_cycles = 10
+    while dut.done.value != 1 or extra_cycles > 0:
+        if dut.done.value == 1:
+            extra_cycles -= 1
+
+        # while running the DUT, piggyback the clock and use for dmem and pmem
+        dmem = cocotb.start(data_memory.run())
+        pmem = cocotb.start(program_memory.run())
+
+        if (data_memory.memory != old_mem):
+            data_memory.display(num_memory_printout)
+            old_mem = copy.deepcopy(data_memory.memory)
+
+        # same for the printer logging function
         await cocotb.triggers.ReadOnly()
-        format_cycle(dut, cycles)
+        format_cycle(dut, cycles)  # print the stuff
 
+        if (dut.done.value == 1):
+            logger.info(f"Done signal asserted\n")
+        # await the GPUs clock
         await RisingEdge(dut.clk)
-        await a
-        await b
+        await dmem
+        await pmem
+
         cycles += 1
 
-    dut.reset = 1
+    print(f"finished at cycle {cycles-extra_cycles}")
+
+#    dut.reset.value = 1
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    await RisingEdge(dut.clk)
+#    dut.reset.value = 0
+#    await RisingEdge(dut.clk)
 
     # printout after sim
     logger.info(f"Completed in {cycles} cycles")
-    data_memory.display(num_memory_printout)
+    if (data_memory.memory != old_mem):
+        data_memory.display(num_memory_printout)
+        old_mem = copy.deepcopy(data_memory.memory)
 
     # return results for testbench comparison
     return data_memory

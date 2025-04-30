@@ -68,7 +68,8 @@ def format_fetcher_state(fetcher_state: str) -> str:
 
 
 def format_lsu_state(lsu_state: str) -> str:
-    lsu_state_map = {"00": "IDLE", "01": "REQUESTING", "10": "WAITING", "11": "DONE"}
+    lsu_state_map = {"00": "IDLE", "01": "REQUESTING",
+                     "10": "WAITING", "11": "DONE"}
     return lsu_state_map[lsu_state]
 
 
@@ -88,82 +89,79 @@ def format_registers(registers: List[str]) -> str:
     for i, reg_value in enumerate(registers):
         decimal_value = int(reg_value, 2)  # Convert binary string to decimal
         reg_idx = 15 - i  # Register data is provided in reverse order
-        formatted_registers.append(f"{format_register(reg_idx)} = {decimal_value}")
+        formatted_registers.append(
+            f"{format_register(reg_idx)} = {decimal_value}")
     formatted_registers.reverse()
     return ", ".join(formatted_registers)
 
 
-def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
-    logger.debug(
-        f"\n================================== Cycle {cycle_id} =================================="
-    )
+previous_values = {}
 
-    for core in dut.cores:
-        # Not exactly accurate, but good enough for now
-        if (
-            int(str(dut.thread_count.value), 2)
-            <= core.i.value * dut.THREADS_PER_BLOCK.value
-        ):
+
+def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
+    logger.debug(f"\n========== Cycle {cycle_id} ==========")
+
+    for hw_core in dut.cores:
+        if int(str(dut.thread_count.value), 2) <= hw_core.i.value * dut.THREADS_PER_BLOCK.value:
             continue
 
-        logger.debug(
-            f"\n+--------------------- Core {core.i.value} ---------------------+"
-        )
+        for lc_idx, logical_core in enumerate([hw_core.core_instance.inner_core_instance_1, hw_core.core_instance.inner_core_instance_2]):
+            # Check and log logical core-wide values before thread-specific ones
+            logical_core_values = {
+                "start": str(logical_core.start.value),
+                "done": str(logical_core.done.value),
+                "reset": str(logical_core.reset.value),
+                "Instruction": str(logical_core.instruction.value),
+                "Core State": format_core_state(str(logical_core.core_state.value)),
+                "Fetcher State": format_fetcher_state(str(logical_core.fetcher_state.value)),
+                "Decoded Immediate": int(str(logical_core.decoded_immediate.value), 2),
+            }
 
-        zeeba = core.core_instance.inner_core_instance_1  # WARN: this is my first time playing with the logging part of the testbench codabase
+            printed_header = False
+            for key, val in logical_core_values.items():
+                tag = (logical_core, key)
+                if previous_values.get(tag) != val:
+                    if not printed_header:
+                        logger.debug(
+                            f"\n+-------- Logical Core {lc_idx}--------+")
+                        printed_header = True
+                    logger.debug(f"{key}: {val}")
+                    previous_values[tag] = val
 
-        instruction = str(zeeba.instruction.value)
-        for thread in zeeba.threads:
-            if int(thread.i.value) < int(
-                str(zeeba.thread_count.value), 2
-            ):  # if enabled
-                block_idx = zeeba.block_id.value
-                block_dim = int(zeeba.THREADS_PER_BLOCK)
+            for thread in logical_core.threads:
+                if int(thread.i.value) >= int(str(logical_core.thread_count.value), 2):
+                    continue
+
+                block_idx = logical_core.block_id.value
+                block_dim = int(logical_core.THREADS_PER_BLOCK)
                 thread_idx = thread.register_instance.THREAD_ID.value
                 idx = block_idx * block_dim + thread_idx
 
-                rs = int(str(thread.register_instance.rs.value), 2)
-                rt = int(str(thread.register_instance.rt.value), 2)
+                values_to_check = {
+                    "PC": int(str(logical_core.current_pc.value), 2),
+                    "RS": int(str(thread.register_instance.rs.value), 2),
+                    "RT": int(str(thread.register_instance.rt.value), 2),
+                    "ALU Out": int(str(thread.alu_instance.alu_out.value), 2),
+                    "LSU Out": int(str(thread.lsu_instance.lsu_out.value), 2),
+                    "LSU State": format_lsu_state(str(thread.lsu_instance.lsu_state.value)),
+                }
 
-                reg_input_mux = int(str(zeeba.decoded_reg_input_mux.value), 2)
-                alu_out = int(str(thread.alu_instance.alu_out.value), 2)
-                lsu_out = int(str(thread.lsu_instance.lsu_out.value), 2)
-                constant = int(str(zeeba.decoded_immediate.value), 2)
+                for key, val in values_to_check.items():
+                    tag = (idx, key)
+                    if previous_values.get(tag) != val:
+                        if not printed_header:
+                            logger.debug(f"\n+-------- Thread {idx} --------+")
+                            printed_header = True
+                        logger.debug(f"{key}: {val}")
+                        previous_values[tag] = val
 
-                if thread_id is None or thread_id == idx:
-                    logger.debug(f"\n+-------- Thread {idx} --------+")
-
-                    logger.debug("PC:", int(str(zeeba.current_pc.value), 2))
-                    logger.debug("Instruction:", format_instruction(instruction))
-                    logger.debug(
-                        "Core State:",
-                        format_core_state(str(zeeba.core_state.value)),
-                    )
-                    logger.debug(
-                        "Fetcher State:",
-                        format_fetcher_state(str(zeeba.fetcher_state.value)),
-                    )
-                    logger.debug(
-                        "LSU State:",
-                        format_lsu_state(str(thread.lsu_instance.lsu_state.value)),
-                    )
-                    logger.debug(
-                        "Registers:",
-                        format_registers(
-                            [
-                                str(item.value)
-                                for item in thread.register_instance.registers
-                            ]
-                        ),
-                    )
-                    logger.debug(f"RS = {rs}, RT = {rt}")
-
-                    if reg_input_mux == 0:
-                        logger.debug("ALU Out:", alu_out)
-                    if reg_input_mux == 1:
-                        logger.debug("LSU Out:", lsu_out)
-                    if reg_input_mux == 2:
-                        logger.debug("Constant:", constant)
-
-        logger.debug("Zeeba Core Done:", str(zeeba.done.value))
-
+                # Now check individual registers
+                for i, reg in enumerate(thread.register_instance.registers):
+                    tag = (idx, f"reg_{i}")
+                    val = str(reg.value)
+                    if previous_values.get(tag) != val:
+                        if not printed_header:
+                            logger.debug(f"\n+-------- Thread {idx} --------+")
+                            printed_header = True
+                        logger.debug(f"R{i}: {val}")
+                        previous_values[tag] = val

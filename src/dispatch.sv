@@ -6,7 +6,7 @@
 // > Manages processing of threads and marks kernel execution as done
 // > Sends off batches of threads in blocks to be executed by available compute cores
 module dispatch #(
-    parameter NUM_CORES = 2,
+    parameter NUM_LOGICAL_CORES = 2,
     parameter THREADS_PER_BLOCK = 4
 ) (
     input wire clk,
@@ -17,11 +17,11 @@ module dispatch #(
     input wire [7:0] thread_count,
 
     // Core States
-    input reg [NUM_CORES-1:0] core_done,
-    output reg [NUM_CORES-1:0] core_start,
-    output reg [NUM_CORES-1:0] core_reset,
-    output reg [7:0] core_block_id [NUM_CORES-1:0],
-    output reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_CORES-1:0],
+    input reg [NUM_LOGICAL_CORES-1:0] core_done,
+    output reg [NUM_LOGICAL_CORES-1:0] core_start,
+    output reg [NUM_LOGICAL_CORES-1:0] core_reset,
+    output reg [7:0] core_block_id [NUM_LOGICAL_CORES-1:0],
+    output reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_LOGICAL_CORES-1:0],
 
     // Kernel Execution
     output reg done
@@ -42,7 +42,7 @@ module dispatch #(
             blocks_done = 0;
             start_execution <= 0;
 
-            for (int i = 0; i < NUM_CORES; i++) begin
+            for (int i = 0; i < NUM_LOGICAL_CORES; i++) begin
                 core_start[i] <= 0;
                 core_reset[i] <= 1;
                 core_block_id[i] <= 0;
@@ -52,7 +52,7 @@ module dispatch #(
             // EDA: Indirect way to get @(posedge start) without driving from 2 different clocks
             if (!start_execution) begin 
                 start_execution <= 1;
-                for (int i = 0; i < NUM_CORES; i++) begin
+                for (int i = 0; i < NUM_LOGICAL_CORES; i++) begin
                     core_reset[i] <= 1;
                 end
             end
@@ -62,7 +62,7 @@ module dispatch #(
                 done <= 1;
             end
 
-            for (int i = 0; i < NUM_CORES; i++) begin
+            for (int i = 0; i < NUM_LOGICAL_CORES; i++) begin
                 if (core_reset[i]) begin 
                     core_reset[i] <= 0;
 
@@ -79,7 +79,7 @@ module dispatch #(
                 end
             end
 
-            for (int i = 0; i < NUM_CORES; i++) begin
+            for (int i = 0; i < NUM_LOGICAL_CORES; i++) begin
                 if (core_start[i] && core_done[i]) begin
                     // If a core just finished executing it's current block, reset it
                     core_reset[i] <= 1;

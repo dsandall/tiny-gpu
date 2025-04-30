@@ -96,7 +96,13 @@
   for (int b = 0; b < size; b++) begin \
     arr[b] = '0; \
   end
-`endif 
+
+
+
+
+
+
+`endif
 
 
 
