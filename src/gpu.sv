@@ -34,7 +34,7 @@ module gpu #(
 
     // Data Memory
     `CHANNEL_READ_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS),
-    `CHANNEL_WRITE_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
+ `CHANNEL_WRITE_MODULE(data_mem, DATA_MEM_NUM_CHANNELS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS)
 );
 
     localparam NUM_LSUS = NUM_CORES * THREADS_PER_BLOCK;
@@ -97,6 +97,7 @@ module gpu #(
     genvar i;
     generate
         for (i = 0; i < NUM_CORES; i = i + 1) begin : cores
+        // For every core,
 
             // EDA: We create separate signals here to pass to cores because of a requirement
             // by the OpenLane EDA flow (uses Verilog 2005) that prevents slicing the top-level signals
@@ -109,8 +110,9 @@ module gpu #(
             genvar j;
             for (j = 0; j < THREADS_PER_BLOCK; j = j + 1) begin
                 localparam lsu_index = i * THREADS_PER_BLOCK + j;
-                always @(posedge clk) begin 
-                // For every core, For every Thread in that core, 
+                always @(posedge clk) begin
+                // For every core,
+                //  For every Thread in that core,
 
                     //////////////////
                     // Thread -> Cache
@@ -144,18 +146,31 @@ module gpu #(
             ) core_instance (
                 .clk(clk),
                 .reset(core_reset[i]),
+
                 .start(core_start[i]),
                 .done(core_done[i]),
                 .block_id(core_block_id[i]),
                 .thread_count(core_thread_count[i]),
-                
+
                 .program_mem_read_valid(fetcher_read_valid[i]),
                 .program_mem_read_address(fetcher_read_address[i]),
                 .program_mem_read_ready(fetcher_read_ready[i]),
                 .program_mem_read_data(fetcher_read_data[i]),
 
-                `MEM_BUS_READ(data_mem,core_lsu),
-                `MEM_BUS_WRITE(data_mem,core_lsu)
+                `MEM_BUS_READ(data_mem, core_lsu),
+                `MEM_BUS_WRITE(data_mem, core_lsu),
+
+                // the conjoined twin core
+                .start_2(core_start[i+1]),
+                .done_2(core_done[i+1]),
+                .block_id_2(core_block_id[i+1]),
+                .thread_count_2(core_thread_count[i+1]),
+                .program_mem_2_read_valid(fetcher_read_valid[i+1]),
+                .program_mem_2_read_address(fetcher_read_address[i+1]),
+                .program_mem_2_read_ready(fetcher_read_ready[i+1]),
+                .program_mem_2_read_data(fetcher_read_data[i+1]),
+                `MEM_BUS_READ(data_mem_2, core_lsu_2),
+                `MEM_BUS_WRITE(data_mem_2, core_lsu_2)
             );
         end
     endgenerate
