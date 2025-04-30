@@ -43,7 +43,7 @@ module ducttape2cores #(
       .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
       .PROGRAM_MEM_DATA_BITS(PROGRAM_MEM_DATA_BITS),
       .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
-  ) core_instance_1 (
+  ) inner_core_instance_1 (
       .clk(clk),
       .reset(reset),
       .start(start),
@@ -66,7 +66,7 @@ module ducttape2cores #(
       .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
       .PROGRAM_MEM_DATA_BITS(PROGRAM_MEM_DATA_BITS),
       .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
-  ) core_instance_1 (
+  ) inner_core_instance_2 (
       .clk(clk),
       .reset(reset),
       .start(start_2),

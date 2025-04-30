@@ -1,4 +1,4 @@
-.PHONY: test compile
+.PHONY: test compile clean
 
 export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 
@@ -7,14 +7,19 @@ export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 # - make compile_matadd
 # - make show_matadd
 
-SIM ?= verilator
+clean: 
+	rm -rf build/*
+
+SIM ?= icarus
+#SIM ?= verilator
 TOPLEVEL = gpu
 BUILD_DIR = build
+TOP_V = $(BUILD_DIR)/gpu.v
 
 test_%: MODULE = test.test_$*
-test_%: $(BUILD_DIR)/gpu.v
+test_%: clean $(TOP_V)
 ifeq ($(SIM),icarus)
-	iverilog -o $(BUILD_DIR)/sim.vvp -s $(TOPLEVEL) -g2012 $<
+	iverilog -o $(BUILD_DIR)/sim.vvp -s $(TOPLEVEL) -g2012 $(TOP_V)
 	MODULE=$(MODULE) vvp -M $(shell cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus $(BUILD_DIR)/sim.vvp
 else ifeq ($(SIM),verilator)
 	MODULE=$(MODULE) \
@@ -75,8 +80,12 @@ build/%.vcd: test_%
 # Run the test to generate the corresponding VCD file
 	make test_$*
 
-
 ### recent end to end build tests:
+# TODO:
+# these probably don't need to recompile the hardware and software,
+# and restart the cocotb stuff every time... 
+# but they do because I havent fixed the reset bug in the verilog yet.
+
 #runs tiny-gpu-assembler
 hwsw_%:
 	cd ./tiny-gpu-assembler && \
@@ -88,13 +97,9 @@ ft_%:
 	make hwsw_$*
 	make test_$*
 
-# TODO:
-# these probably don't need to recompile the hardware and software,
-# and restart the cocotb stuff every time... 
-# but they do because I havent fixed the reset bug in the verilog yet.
-#
 # This makefile is getting pretty large, and should probably be split between hw compilation and sw testing soon
 ft_all:
+	make clean && \
 	make ft_matadd && \
 	make ft_matmul && \
 	make ft_load && \

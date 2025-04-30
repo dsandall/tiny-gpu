@@ -81,9 +81,9 @@ module gpu #(
         .core_thread_count(core_thread_count),
         .done(done)
     );
-    
+
     // LSU <-> Data Memory Controller Channels (x8)
-    // there's a channel/bus for each LSU  
+    // there's a channel/bus for each LSU
     `CHANNEL_READ_BUFF(lsu, NUM_LSUS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS);
     `CHANNEL_WRITE_BUFF(lsu, NUM_LSUS, DATA_MEM_ADDR_BITS, DATA_MEM_DATA_BITS);
 
@@ -135,7 +135,7 @@ module gpu #(
             end
 
             // Compute Core
-            core #(
+            ducttape2cores #(
                 .DATA_MEM_ADDR_BITS(DATA_MEM_ADDR_BITS),
                 .DATA_MEM_DATA_BITS(DATA_MEM_DATA_BITS),
                 .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
