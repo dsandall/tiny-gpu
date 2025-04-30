@@ -62,10 +62,6 @@ def load_json_binary(config_path):
 
 async def setup_wrap(dut, test_config):
 
-    logger.info("------------------------------------------\n")
-    logger.info(f" launching test: {test_config["testname"]}\n")
-    logger.info("------------------------------------------\n")
-
     num_memory_printout = 24
 
     hw = test_config["hardware"]
@@ -96,7 +92,7 @@ async def setup_wrap(dut, test_config):
 
     print(f"threads is {threads}")
 
-    # gpu module
+    # init the gpu module
     await setup(
         dut=dut,
         program_memory=program_memory,
@@ -107,13 +103,17 @@ async def setup_wrap(dut, test_config):
     )
 
     # printout prior to sim
+    logger.info("------------------------------------------\n")
+    logger.info(f" launching test: {test_config["testname"]}\n")
+    logger.info(f" All values printed come from the python testlib. Check the sensitivity list (watched signals list) in format.py for all internal GPU signals that are logged\n")
+    logger.info("------------------------------------------\n")
     data_memory.display(num_memory_printout)
-    old_mem = copy.deepcopy(data_memory.memory)
 
     # execute sim
+    old_mem = copy.deepcopy(data_memory.memory)
     cycles = 0
-
     extra_cycles = 10
+
     while dut.done.value != 1 or extra_cycles > 0:
         if dut.done.value == 1:
             extra_cycles -= 1
@@ -131,13 +131,18 @@ async def setup_wrap(dut, test_config):
         format_cycle(dut, cycles)  # print the stuff
 
         if (dut.done.value == 1):
-            logger.info(f"Done signal asserted\n")
+            logger.info(f"GPU PROGRAM COMPLETE - Done signal asserted\n")
         # await the GPUs clock
         await RisingEdge(dut.clk)
         await dmem
         await pmem
 
         cycles += 1
+
+    dut.reset.value = 1
+    while dut.done.value == 1:
+        await RisingEdge(dut.clk)
+    dut.reset.value = 0
 
     print(f"finished at cycle {cycles-extra_cycles}")
 

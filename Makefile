@@ -97,7 +97,4 @@ ft_%:
 	make hwsw_$*
 	make test_$*
 
-# This makefile is getting pretty large, and should probably be split between hw compilation and sw testing soon
-ft_all: clean ft_matadd ft_matmul ft_load ft_load_8_threads ft_negatives
-
 

@@ -17,7 +17,7 @@ module dispatch #(
     input wire [7:0] thread_count,
 
     // Core States
-    input reg [NUM_LOGICAL_CORES-1:0] core_done,
+    input wire [NUM_LOGICAL_CORES-1:0] core_done,
     output reg [NUM_LOGICAL_CORES-1:0] core_start,
     output reg [NUM_LOGICAL_CORES-1:0] core_reset,
     output reg [7:0] core_block_id [NUM_LOGICAL_CORES-1:0],
@@ -28,7 +28,7 @@ module dispatch #(
 );
     // Calculate the total number of blocks based on total threads & threads per block
     wire [7:0] total_blocks;
-    assign total_blocks = (thread_count + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+    assign total_blocks = (thread_count + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK; //NOTE: floor op
 
     // Keep track of how many blocks have been processed
     reg [7:0] blocks_dispatched; // How many blocks have been sent to cores?

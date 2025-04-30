@@ -2,6 +2,22 @@ from typing import List, Optional
 from .logger import logger
 
 
+def safe_int(signal, base=8):
+    s = str(signal)
+    if 'x' in s or 'z' in s:
+        # print(f"[WARN] Signal not ready: {signal}")
+        return None
+    return int(s, base)
+
+
+def safe_hex(signal):
+    s = str(signal)
+    if 'x' in s or 'z' in s:
+        # print(f"[WARN] Signal not ready: {signal}")
+        return "X"
+    return hex(int(s, 2))
+
+
 def format_register(register: int) -> str:
     if register < 13:
         return f"R{register}"
@@ -59,18 +75,26 @@ def format_core_state(core_state: str) -> str:
         "110": "UPDATE",
         "111": "DONE",
     }
-    return core_state_map[core_state]
+
+    # if any(c not in "01" for c in core_state):
+    #    return f"UNKNOWN({core_state})"
+
+    return core_state_map.get(core_state, f"INVALID({core_state})")
 
 
 def format_fetcher_state(fetcher_state: str) -> str:
-    fetcher_state_map = {"000": "IDLE", "001": "FETCHING", "010": "FETCHED"}
-    return fetcher_state_map[fetcher_state]
+    fetcher_state_map = {
+        "000": "IDLE",
+        "001": "FETCHING",
+        "010": "FETCHED"
+    }
+    return fetcher_state_map.get(fetcher_state, f"INVALID({fetcher_state})")
 
 
 def format_lsu_state(lsu_state: str) -> str:
     lsu_state_map = {"00": "IDLE", "01": "REQUESTING",
                      "10": "WAITING", "11": "DONE"}
-    return lsu_state_map[lsu_state]
+    return lsu_state_map.get(lsu_state, f"INVALID({lsu_state})")
 
 
 def format_memory_controller_state(controller_state: str) -> str:
@@ -81,7 +105,7 @@ def format_memory_controller_state(controller_state: str) -> str:
         "100": "READ_RELAYING",
         "101": "WRITE_RELAYING",
     }
-    return controller_state_map[controller_state]
+    return controller_state_map.get(controller_state, f"INVALID({controller_state})")
 
 
 def format_registers(registers: List[str]) -> str:
@@ -95,26 +119,55 @@ def format_registers(registers: List[str]) -> str:
     return ", ".join(formatted_registers)
 
 
+# no previous state at initialization, log all state
 previous_values = {}
 
 
 def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
     logger.debug(f"\n========== Cycle {cycle_id} ==========")
 
+    gpu_vals = {
+        "dut done": str(dut.done.value),
+        "dut start": str(dut.start.value),
+        "dispatcher done": str(dut.dispatch_instance.done.value),
+        "total_blocks": safe_int(dut.dispatch_instance.total_blocks.value),
+        "blocks_dispatched": safe_int(dut.dispatch_instance.blocks_dispatched.value),
+        "blocks_done": safe_int(dut.dispatch_instance.blocks_done.value),
+        "start_execution": str(dut.dispatch_instance.start_execution.value),
+    }
+
+    printed_gpu_header = False
+    for key, val in gpu_vals.items():
+        tag = (dut, key)
+        if previous_values.get(tag) != val:
+            if not printed_gpu_header:
+                logger.debug(
+                    f"\n**** GPU TOP****")
+                printed_gpu_header = True
+            logger.debug(f"{key}: {val}")
+            previous_values[tag] = val
+
+    #
+    # for each HW core, log:
+    #
     for hw_core in dut.cores:
-        if int(str(dut.thread_count.value), 2) <= hw_core.i.value * dut.THREADS_PER_BLOCK.value:
+        zeebbbp = safe_int(dut.thread_count.value, 2)
+        if zeebbbp is not None and zeebbbp <= hw_core.i.value * dut.THREADS_PER_BLOCK.value:
             continue
 
+        #
+        # for each logical core, log:
+        #
         for lc_idx, logical_core in enumerate([hw_core.core_instance.inner_core_instance_1, hw_core.core_instance.inner_core_instance_2]):
             # Check and log logical core-wide values before thread-specific ones
             logical_core_values = {
                 "start": str(logical_core.start.value),
-                "done": str(logical_core.done.value),
+                "logical core done? ": str(logical_core.done.value),
                 "reset": str(logical_core.reset.value),
-                "Instruction": str(logical_core.instruction.value),
+                "Instruction": safe_hex(logical_core.instruction.value),
                 "Core State": format_core_state(str(logical_core.core_state.value)),
                 "Fetcher State": format_fetcher_state(str(logical_core.fetcher_state.value)),
-                "Decoded Immediate": int(str(logical_core.decoded_immediate.value), 2),
+                "Decoded Immediate": safe_int(logical_core.decoded_immediate.value, 2),
             }
 
             printed_header = False
@@ -128,8 +181,18 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
                     logger.debug(f"{key}: {val}")
                     previous_values[tag] = val
 
+            #
+            # for each thread in a LC, log:
+            #
             for thread in logical_core.threads:
-                if int(thread.i.value) >= int(str(logical_core.thread_count.value), 2):
+                tv = safe_int(thread.i.value, 10)
+                tc = safe_int(logical_core.thread_count.value, 2)
+
+                if tv is None:
+                    continue
+                elif tc is None:
+                    continue
+                elif tv >= tc:
                     continue
 
                 block_idx = logical_core.block_id.value
@@ -150,18 +213,22 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
                     tag = (idx, key)
                     if previous_values.get(tag) != val:
                         if not printed_header:
-                            logger.debug(f"\n+-------- Thread {idx} --------+")
+                            logger.debug(
+                                f"\n+-------- LC {lc_idx}, Thread {idx} --------+")
                             printed_header = True
                         logger.debug(f"{key}: {val}")
                         previous_values[tag] = val
 
-                # Now check individual registers
+                #
+                # for all registers in a thread, log:
+                #
                 for i, reg in enumerate(thread.register_instance.registers):
                     tag = (idx, f"reg_{i}")
                     val = str(reg.value)
                     if previous_values.get(tag) != val:
                         if not printed_header:
-                            logger.debug(f"\n+-------- Thread {idx} --------+")
+                            logger.debug(
+                                f"\n+-------- LC {lc_idx}, Thread {idx} --------+")
                             printed_header = True
                         logger.debug(f"R{i}: {val}")
                         previous_values[tag] = val

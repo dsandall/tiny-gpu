@@ -52,7 +52,7 @@ module gpu #(
     // Compute Core State
     reg [NUM_LOGICAL_CORES-1:0] core_start;
     reg [NUM_LOGICAL_CORES-1:0] core_reset;
-    reg [NUM_LOGICAL_CORES-1:0] core_done;
+    wire [NUM_LOGICAL_CORES-1:0] core_done;
     reg [7:0] core_block_id [NUM_LOGICAL_CORES-1:0];
     reg [$clog2(THREADS_PER_BLOCK):0] core_thread_count [NUM_LOGICAL_CORES-1:0];
 
