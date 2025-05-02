@@ -1,5 +1,7 @@
 import cocotb.triggers
 from cocotb.triggers import RisingEdge
+
+from test.screen.screen import init_window, update_display
 from .setup import setup
 from .memory import Memory
 from .format import format_cycle
@@ -60,7 +62,7 @@ def load_json_binary(config_path):
     return test_config
 
 
-async def setup_wrap(dut, test_config):
+async def setup_wrap(dut, test_config, screen=None):
 
     num_memory_printout = 24
 
@@ -89,6 +91,10 @@ async def setup_wrap(dut, test_config):
         name="data",
         delay=mem_delay
     )
+
+    if screen is not None:
+        # initialize screen is user passes anything in for screen
+        screen = init_window()
 
     print(f"threads is {threads}")
 
@@ -122,9 +128,14 @@ async def setup_wrap(dut, test_config):
         dmem = cocotb.start(data_memory.run())
         pmem = cocotb.start(program_memory.run())
 
+        # track changes to data memory
         if (data_memory.memory != old_mem):
             data_memory.display(num_memory_printout)
             old_mem = copy.deepcopy(data_memory.memory)
+
+            # lets also update the screen... at the same freq as the gpu clock, lol
+            if screen is not None:
+                await update_display(screen, data_memory.memory)
 
         # same for the printer logging function
         await cocotb.triggers.ReadOnly()
