@@ -11,6 +11,10 @@ async def test_load(dut):
     # run device and dump memory
     data_memory = await setup_wrap(dut, test_conf)
 
+    ###
+    # Verify results
+    ###
+
     data = test_conf["initial_data"]
     threads = test_conf["threads"]
 

@@ -5,24 +5,15 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 @cocotb.test()
 async def test_matmul(dut):
 
-    # Data Memory
-    data = [
-        1,
-        2,
-        3,
-        4,  # Matrix A (2 x 2)
-        1,
-        2,
-        3,
-        4,  # Matrix B (2 x 2)
-    ]
-
     test_conf = load_json_binary(
         "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_matmul.json")
 
     data_memory = await setup_wrap(dut, test_conf)
 
-    threads = test_conf["threads"]
+    ###
+    # Verify results
+    ###
+
     data = test_conf["initial_data"]
 
     # Assuming the matrices are 2x2 and the result is stored starting at address 9

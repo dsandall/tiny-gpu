@@ -30,7 +30,12 @@ def format_register(register: int) -> str:
 
 
 def format_instruction(instruction: str) -> str:
+    if 'x' in instruction or 'z' in instruction:
+        # print(f"[WARN] Signal not ready: {signal}")
+        return "X"
+
     opcode = instruction[0:4]
+
     rd = format_register(int(instruction[4:8], 2))
     rs = format_register(int(instruction[8:12], 2))
     rt = format_register(int(instruction[12:16], 2))
@@ -164,7 +169,9 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
                 "start": str(logical_core.start.value),
                 "logical core done? ": str(logical_core.done.value),
                 "reset": str(logical_core.reset.value),
-                "Instruction": safe_hex(logical_core.instruction.value),
+                "Instruction (hex)": safe_hex(logical_core.instruction.value),
+                "Instruction": format_instruction(str(logical_core.instruction.value)),
+                "PC": safe_hex(logical_core.current_pc.value),
                 "Core State": format_core_state(str(logical_core.core_state.value)),
                 "Fetcher State": format_fetcher_state(str(logical_core.fetcher_state.value)),
                 "Decoded Immediate": safe_int(logical_core.decoded_immediate.value, 2),
@@ -201,7 +208,7 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
                 idx = block_idx * block_dim + thread_idx
 
                 values_to_check = {
-                    "PC": int(str(logical_core.current_pc.value), 2),
+                    # "PC": int(str(logical_core.current_pc.value), 2),
                     "RS": int(str(thread.register_instance.rs.value), 2),
                     "RT": int(str(thread.register_instance.rt.value), 2),
                     "ALU Out": int(str(thread.alu_instance.alu_out.value), 2),

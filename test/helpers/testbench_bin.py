@@ -8,7 +8,7 @@ from .format import format_cycle
 from .logger import logger
 import copy
 
-from ctypes import c_int8
+from ctypes import c_uint8
 import json
 
 default_hw_config = {
@@ -33,7 +33,7 @@ def load_json_binary(config_path):
     # data memory (8 bits)
     if test_config.get("initial_data"):
         print("using json initial data")
-        data = [c_int8(x).value for x in test_config["initial_data"]]
+        data = [c_uint8(x).value for x in test_config["initial_data"]]
     else:
         print("using 0 initial data")
         data = [0]
@@ -92,10 +92,6 @@ async def setup_wrap(dut, test_config, screen=None):
         delay=mem_delay
     )
 
-    if screen is not None:
-        # initialize screen is user passes anything in for screen
-        screen = init_window()
-
     print(f"threads is {threads}")
 
     # init the gpu module
@@ -107,6 +103,11 @@ async def setup_wrap(dut, test_config, screen=None):
         data=data,
         threads=threads,
     )
+
+    if screen is not None:
+        # initialize screen is user passes anything in for screen
+        screen = init_window()
+        await update_display(screen, data_memory.memory)
 
     # printout prior to sim
     logger.info("------------------------------------------\n")

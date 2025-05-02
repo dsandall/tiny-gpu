@@ -10,6 +10,10 @@ async def test_matadd(dut):
 
     data_memory = await setup_wrap(dut, test_conf)
 
+    ###
+    # Verify results
+    ###
+
     threads = test_conf["threads"]
     data = test_conf["initial_data"]
 

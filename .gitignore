@@ -10,5 +10,5 @@ gds/**/*.gltf
 results.xml
 
 research_papers/
-
+./sim_build
 tiny-gpu-mlir/

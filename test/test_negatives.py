@@ -11,7 +11,10 @@ async def test_negatives(dut):
     # run device and dump memory
     data_memory = await setup_wrap(dut, test_conf)
 
-    # expected_results = [253, 8, 248, 0]
+    ###
+    # Verify results
+    ###
+
     expected_results = [253, 0, 0, 0]
     for i, expected in enumerate(expected_results):
         result = data_memory.memory[i]

@@ -7,23 +7,19 @@ async def test_load_20_cycles(dut):
 
     test_conf = load_json_binary(
         "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_load.json")
-    # WARN: Reuses test_load
-
-    # Data Memory
-    data = [
-        1, 2, 3, 4,
-    ]
-    test_conf["initial_data"] = data
-
-    threads = 4
-    test_conf["threads"] = threads
 
     test_conf["memory_delay"] = 20
 
     # run device and dump memory
     data_memory = await setup_wrap(dut, test_conf)
 
-    expected_results = [a for a in data[0:threads]]
+    ###
+    # Verify results
+    ###
+
+    expected_results = [
+        a for a in test_conf["initial_data"][0:test_conf["threads"]]]
+
     for i, expected in enumerate(expected_results):
         result = data_memory.memory[i]
         assert result == expected, f"Result mismatch at index {
