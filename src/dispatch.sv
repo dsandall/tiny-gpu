@@ -28,8 +28,7 @@ module dispatch #(
 );
     // Calculate the total number of blocks based on total threads & threads per block
     wire [7:0] total_blocks;
-    //assign total_blocks = (thread_count + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK; //NOTE: floor op
-    assign total_blocks = 2;
+    assign total_blocks = (thread_count + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK; //NOTE: floor op
 
     // Keep track of how many blocks have been processed
     reg [7:0] blocks_dispatched; // How many blocks have been sent to cores?

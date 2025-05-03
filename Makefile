@@ -55,11 +55,11 @@ compile:
 # Convert alu 
 	make compile_alu
 # build convert all source files to v and dump them into gpu.v
-	sv2v -I src/* -w build/gpu.v
+	sv2v -I --siloed src/* -w build/gpu.v
 # add newline to end of gpu.v (?)
 	echo "" >> build/gpu.v
 # add alu.v contents to gpu.v (not sure why alu not included by first sv2v call)
-	cat build/alu.v >> build/gpu.v
+	#cat build/alu.v >> build/gpu.v
 # add "timescale 1ns/1ns" line to gpu.v 
 	echo '`timescale 1ns/1ns' > build/temp.v
 	cat build/gpu.v >> build/temp.v

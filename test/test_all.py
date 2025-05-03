@@ -3,7 +3,7 @@
 # viewing the custom logfiles, or when debugging in general
 
 # sanity check (this test is fast, keeps you from debugging stuff in the current test when its actually something else)
-# from test.test_negatives import *
+from test.test_negatives import *
 
 # Current Tests (the one you care about and want to see)
 
@@ -14,3 +14,4 @@ from test.test_matadd import *
 from test.test_matmul import *
 from test.test_load import *
 from test.test_load_8_threads import *
+from test.test_alldmem import *

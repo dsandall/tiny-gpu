@@ -15,7 +15,7 @@ async def test_alldmem(dut):
     # Verify results
     ###
 
-    data = test_conf["initial_data"]
+    # data = test_conf["initial_data"]
 
-    for byte in data:
-        assert 255 == byte, f"Result mismatch: expected {255}, got {byte}"
+    for i, byte in enumerate(data_memory.memory):
+        assert i == byte, f"Result mismatch: expected {i}, got {byte}"
