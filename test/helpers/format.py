@@ -87,12 +87,15 @@ def format_core_state(core_state: str) -> str:
     return core_state_map.get(core_state, f"INVALID({core_state})")
 
 
-def format_fetcher_state(fetcher_state: str) -> str:
+def format_fetcher_state(logical_core) -> str:
+    fetcher_state = str(logical_core.fetcher_state.value)
+
     fetcher_state_map = {
         "000": "IDLE",
-        "001": "FETCHING",
-        "010": "FETCHED"
+        "001": f"FETCHING",
+        "010": f"FETCHED"
     }
+
     return fetcher_state_map.get(fetcher_state, f"INVALID({fetcher_state})")
 
 
@@ -102,15 +105,23 @@ def format_lsu_state(lsu_state: str) -> str:
     return lsu_state_map.get(lsu_state, f"INVALID({lsu_state})")
 
 
-def format_memory_controller_state(controller_state: str) -> str:
+def format_memory_controller_state(state) -> str:
+
+    a = safe_int(state, 2)
+    if a is None:
+        return "X"
+
     controller_state_map = {
-        "000": "IDLE",
-        "010": "READ_WAITING",
-        "011": "WRITE_WAITING",
-        "100": "READ_RELAYING",
-        "101": "WRITE_RELAYING",
+        0: "IDLE",
+        1: "CACHE_HIT",
+        2: "CACHE_MISS",
+        3: "CACHE_MISS_WAIT",
+        4: "READ_RELAYING",
+        5: "WRITE_WAITING",
+        6: "WRITE_RELAYING",
+        7: "MAIN_MEM_RELAYING",
     }
-    return controller_state_map.get(controller_state, f"INVALID({controller_state})")
+    return controller_state_map.get(a, f"INVALID({a})")
 
 
 def format_registers(registers: List[str]) -> str:
@@ -122,6 +133,53 @@ def format_registers(registers: List[str]) -> str:
             f"{format_register(reg_idx)} = {decimal_value}")
     formatted_registers.reverse()
     return ", ".join(formatted_registers)
+
+
+def format_cache(memory_controller):
+    # Helper to detect invalid value
+    def is_invalid(val):
+        return (
+            val is None or
+            isinstance(val, str) and ('x' in val.lower() or 'z' in val.lower())
+        )
+
+    # Extract config values
+    CACHE_LINE_SIZE_BITS = safe_int(
+        memory_controller.CACHE_LINE_SIZE_BITS.value, 10)
+    CACHE_TAG_BITS = safe_int(memory_controller.CACHE_TAG_BITS.value, 10)
+    NUM_CHUNKS = safe_int(memory_controller.NUM_CHUNKS.value, 10)
+
+    # Check for any bad configuration values
+    if any(is_invalid(v) for v in (CACHE_LINE_SIZE_BITS, CACHE_TAG_BITS, NUM_CHUNKS)):
+        return "X"
+
+    def parse_cache_line(entry):
+        dirty_bit = entry & 0b1
+        valid_bits = (entry >> 1) & ((1 << NUM_CHUNKS) - 1)
+        tag_bits = (entry >> (1 + NUM_CHUNKS)) & ((1 << CACHE_TAG_BITS) - 1)
+        data_bits = (entry >> (1 + NUM_CHUNKS + CACHE_TAG_BITS)
+                     ) & ((1 << CACHE_LINE_SIZE_BITS) - 1)
+        return data_bits, tag_bits, valid_bits, dirty_bit
+
+    lines = []
+    for i, raw_entry in enumerate(memory_controller.cache):
+        try:
+            entry_str = str(raw_entry)
+            if is_invalid(entry_str):
+                line = f"[{i:02}] X"
+            else:
+                entry = int(raw_entry)
+                data, tag, valid, dirty = parse_cache_line(entry)
+                line = (
+                    f"[{i:02}] data=0x{data:0{CACHE_LINE_SIZE_BITS // 4}x} "
+                    f"tag=0x{tag:0{CACHE_TAG_BITS // 4}x} "
+                    f"valid=0b{valid:0{NUM_CHUNKS}b} dirty={dirty}"
+                )
+        except Exception:
+            line = f"[{i:02}] ERROR"
+        lines.append(line)
+
+    return "\n".join(lines)
 
 
 # no previous state at initialization, log all state
@@ -139,6 +197,31 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
         "blocks_dispatched": safe_int(dut.dispatch_instance.blocks_dispatched.value),
         "blocks_done": safe_int(dut.dispatch_instance.blocks_done.value),
         "start_execution": str(dut.dispatch_instance.start_execution.value),
+        "Dmem controllerer_state(0)": format_memory_controller_state(dut.data_memory_controller.controller_state[0].value),
+        "Dmem controllerer_state(1)": format_memory_controller_state(dut.data_memory_controller.controller_state[1].value),
+        # "Dmem consumer_state(0)": format_memory_controller_state(dut.data_memory_controller.consumer_state[0].value),
+        # "Dmem consumer_state(1)": format_memory_controller_state(dut.data_memory_controller.consumer_state[1].value),
+        # "Dmem consumer_state(2)": format_memory_controller_state(dut.data_memory_controller.consumer_state[2].value),
+        # "Dmem consumer_state(3)": format_memory_controller_state(dut.data_memory_controller.consumer_state[3].value),
+        # "Dmem consumer_state(4)": format_memory_controller_state(dut.data_memory_controller.consumer_state[4].value),
+        # "Dmem consumer_state(5)": format_memory_controller_state(dut.data_memory_controller.consumer_state[5].value),
+        # "Dmem consumer_state(6)": format_memory_controller_state(dut.data_memory_controller.consumer_state[6].value),
+        # "Dmem consumer_state(7)": format_memory_controller_state(dut.data_memory_controller.consumer_state[7].value),
+        "Dmem mutex": str(dut.data_memory_controller.consumer_mutex.value),
+        # "Dmem active main_mem requests": str(dut.data_memory_controller.main_mem_request.value),
+        "Dmem cache": format_cache(dut.data_memory_controller),
+        "Dmem list": str(dut.data_memory_controller),
+        # "pmem consumer_state array": str(dut.program_memory_controller.consumer_state.value),
+        "pmem controllerer_state": format_memory_controller_state(dut.program_memory_controller.controller_state[0].value),
+        # "pmem consumer_state(0)": format_memory_controller_state(dut.program_memory_controller.consumer_state[0].value),
+        # "pmem consumer_state(1)": format_memory_controller_state(dut.program_memory_controller.consumer_state[1].value),
+        "pmem cache": format_cache(dut.program_memory_controller),
+        "pmem mutex": str(dut.program_memory_controller.consumer_mutex.value),
+        # "pmem cons0 line valid": str(dut.program_memory_controller.consumer_if[0].req_line_valid.value),
+        # "pmem cons0 tag valid": str(dut.program_memory_controller.consumer_if[0].tag_valid.value),
+        # "pmem cons1 line valid": str(dut.program_memory_controller.consumer_if[1].req_line_valid.value),
+        # "pmem cons1 tag valid": str(dut.program_memory_controller.consumer_if[1].tag_valid.value),
+        "pmem list": str(dut.program_memory_controller)
     }
 
     printed_gpu_header = False
@@ -173,7 +256,7 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
                 "Instruction": format_instruction(str(logical_core.instruction.value)),
                 "PC": safe_hex(logical_core.current_pc.value),
                 "Core State": format_core_state(str(logical_core.core_state.value)),
-                "Fetcher State": format_fetcher_state(str(logical_core.fetcher_state.value)),
+                "Fetcher State": format_fetcher_state(logical_core),
                 "Decoded Immediate": safe_int(logical_core.decoded_immediate.value, 2),
             }
 

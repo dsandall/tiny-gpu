@@ -231,7 +231,5 @@ module gpu #(
         $dumpfile("build/gpu.vcd"); 
         $dumpvars(0, gpu);
     end
-    
-
 
 endmodule

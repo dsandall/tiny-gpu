@@ -51,7 +51,8 @@ typedef enum logic [7:0] {
     CACHE_MISS_WAIT,
     READ_RELAYING,
     WRITE_WAITING,
-    WRITE_RELAYING
+    WRITE_RELAYING,
+    MAIN_MEM_RELAYING
 } controller_state_t;
 
 //////////////////////////////////
