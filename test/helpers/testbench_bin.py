@@ -104,6 +104,8 @@ async def setup_wrap(dut, test_config, screen=None):
         threads=threads,
     )
 
+    old_mem = copy.deepcopy(data_memory.memory)
+
     if screen is not None:
         # initialize screen is user passes anything in for screen
         screen = init_window()
@@ -117,7 +119,6 @@ async def setup_wrap(dut, test_config, screen=None):
     data_memory.display(num_memory_printout)
 
     # execute sim
-    old_mem = copy.deepcopy(data_memory.memory)
     cycles = 0
     extra_cycles = 10
 

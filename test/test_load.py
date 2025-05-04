@@ -3,10 +3,32 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 
 
 @cocotb.test()
-async def test_load(dut):
+async def test_load_8_threads(dut):
+    test_conf = load_json_binary(
+        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_load_8_threads.json")
 
+    await lode(dut, test_conf)
+
+
+@cocotb.test()
+async def test_load(dut):
     test_conf = load_json_binary(
         "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_load.json")
+
+    await lode(dut, test_conf)
+
+
+@cocotb.test()
+async def test_load_20_cycles(dut):
+    test_conf = load_json_binary(
+        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_load.json")
+
+    test_conf["memory_delay"] = 20
+
+    await lode(dut, test_conf)
+
+
+async def lode(dut, test_conf):
 
     # run device and dump memory
     data_memory = await setup_wrap(dut, test_conf)

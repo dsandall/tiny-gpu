@@ -2,6 +2,19 @@ from typing import List, Optional
 from .logger import logger
 
 
+import hashlib
+
+
+def snapshot_cache(memory_controller):
+    try:
+        raw_lines = format_cache(memory_controller)
+        if raw_lines == "X":
+            return None
+        return hashlib.md5(raw_lines.encode()).hexdigest()
+    except Exception:
+        return None
+
+
 def safe_int(signal: str, base=8):
     if 'x' in signal or 'z' in signal:
         # print(f"[WARN] Signal not ready: {signal}")
@@ -137,9 +150,9 @@ def format_cache(memory_controller):
 
     # Extract config values
     CACHE_LINE_SIZE_BITS = safe_int(
-        memory_controller.CACHE_LINE_SIZE_BITS.value, 10)
-    CACHE_TAG_BITS = safe_int(memory_controller.CACHE_TAG_BITS.value, 10)
-    NUM_CHUNKS = safe_int(memory_controller.NUM_CHUNKS.value, 10)
+        str(memory_controller.CACHE_LINE_SIZE_BITS.value), 10)
+    CACHE_TAG_BITS = safe_int(str(memory_controller.CACHE_TAG_BITS.value), 10)
+    NUM_CHUNKS = safe_int(str(memory_controller.NUM_CHUNKS.value), 10)
 
     # Check for any bad configuration values
     if any(is_invalid(v) for v in (CACHE_LINE_SIZE_BITS, CACHE_TAG_BITS, NUM_CHUNKS)):
@@ -235,17 +248,15 @@ def format_cycle(dut, cycle_id: int):
     logger.debug(f"\n========== Cycle {cycle_id} ==========")
     walk_dut_limited(dut)
 
-    return
-
     gpu_vals = {
         "dut done": str(safe_getattr(dut, "done")),
         "dut start": str(safe_getattr(dut, "start")),
         "logical core start sigs": str(safe_getattr(dut, "core_start")),
 
         "dispatcher done": str(safe_getattr(dut, "dispatch_instance.done")),
-        "total_blocks": safe_int(safe_getattr(dut, "dispatch_instance.total_blocks")),
-        "blocks_dispatched": safe_int(safe_getattr(dut, "dispatch_instance.blocks_dispatched")),
-        "blocks_done": safe_int(safe_getattr(dut, "dispatch_instance.blocks_done")),
+        "total_blocks": safe_int(str(safe_getattr(dut, "dispatch_instance.total_blocks"))),
+        "blocks_dispatched": safe_int(str(safe_getattr(dut, "dispatch_instance.blocks_dispatched"))),
+        "blocks_done": safe_int(str(safe_getattr(dut, "dispatch_instance.blocks_done"))),
         "start_execution": str(safe_getattr(dut, "dispatch_instance.start_execution")),
 
         # Dmem controller and consumers
@@ -295,6 +306,8 @@ def format_cycle(dut, cycle_id: int):
 
     for key, val in gpu_vals.items():
         log_if_changed((dut, key), val, print_gpu_header)
+
+    return
 
     # Handle each hardware core
     if not hasattr(dut, "cores"):

@@ -76,6 +76,7 @@ typedef enum logic [7:0] {
     MAIN_MEM_RELAYING,
     DIRECT_WRITE_WAITING,
     INDIRECT_WRITE_WAITING,
+    SETUP_WRITEBACK,
     ERROR
 } controller_state_t;
 

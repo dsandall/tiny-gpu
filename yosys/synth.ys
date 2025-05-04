@@ -12,4 +12,4 @@ write_json synth_out.json
 write_verilog synth_out.v
 
 # Show detailed statistics
-stat
+stat 

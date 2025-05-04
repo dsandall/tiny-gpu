@@ -2,7 +2,7 @@
 
 (* dynports =  1  *)
 (* hdlname = "pc" *)
-(* src = "../build/gpu.v:1421.1-1472.10" *)
+(* src = "../build/gpu.v:1481.1-1532.10" *)
 module \$paramod$443b7d7e6fa51b4925ad1f73d225e8bfd7dc6c37\pc (clk, reset, enable, core_state, decoded_nzp, decoded_immediate, decoded_nzp_write_enable, decoded_pc_mux, alu_out, current_pc, next_pc);
   wire _000_;
   wire _001_;
@@ -49,39 +49,39 @@ module \$paramod$443b7d7e6fa51b4925ad1f73d225e8bfd7dc6c37\pc (clk, reset, enable
   wire _042_;
   wire _043_;
   wire _044_;
-  (* src = "../build/gpu.v:1444.40-1444.47" *)
+  (* src = "../build/gpu.v:1504.40-1504.47" *)
   input [7:0] alu_out;
   wire [7:0] alu_out;
-  (* src = "../build/gpu.v:1436.13-1436.16" *)
+  (* src = "../build/gpu.v:1496.13-1496.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1439.19-1439.29" *)
+  (* src = "../build/gpu.v:1499.19-1499.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:1445.43-1445.53" *)
+  (* src = "../build/gpu.v:1505.43-1505.53" *)
   input [7:0] current_pc;
   wire [7:0] current_pc;
-  (* src = "../build/gpu.v:1441.40-1441.57" *)
+  (* src = "../build/gpu.v:1501.40-1501.57" *)
   input [7:0] decoded_immediate;
   wire [7:0] decoded_immediate;
-  (* src = "../build/gpu.v:1440.19-1440.30" *)
+  (* src = "../build/gpu.v:1500.19-1500.30" *)
   input [2:0] decoded_nzp;
   wire [2:0] decoded_nzp;
-  (* src = "../build/gpu.v:1442.13-1442.37" *)
+  (* src = "../build/gpu.v:1502.13-1502.37" *)
   input decoded_nzp_write_enable;
   wire decoded_nzp_write_enable;
-  (* src = "../build/gpu.v:1443.13-1443.27" *)
+  (* src = "../build/gpu.v:1503.13-1503.27" *)
   input decoded_pc_mux;
   wire decoded_pc_mux;
-  (* src = "../build/gpu.v:1438.13-1438.19" *)
+  (* src = "../build/gpu.v:1498.13-1498.19" *)
   input enable;
   wire enable;
-  (* src = "../build/gpu.v:1446.43-1446.50" *)
+  (* src = "../build/gpu.v:1506.43-1506.50" *)
   output [7:0] next_pc;
   reg [7:0] next_pc;
-  (* src = "../build/gpu.v:1447.12-1447.15" *)
+  (* src = "../build/gpu.v:1507.12-1507.15" *)
   reg [2:0] nzp;
-  (* src = "../build/gpu.v:1437.13-1437.18" *)
+  (* src = "../build/gpu.v:1497.13-1497.18" *)
   input reset;
   wire reset;
   assign _002_ = decoded_nzp_write_enable & enable;
@@ -129,47 +129,47 @@ module \$paramod$443b7d7e6fa51b4925ad1f73d225e8bfd7dc6c37\pc (clk, reset, enable
   assign _035_ = _034_ ^ current_pc[7];
   assign _036_ = _013_ ? decoded_immediate[7] : _035_;
   assign _044_ = decoded_pc_mux ? _036_ : _035_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[0] <= 1'h0;
     else if (_001_) next_pc[0] <= _037_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[1] <= 1'h0;
     else if (_001_) next_pc[1] <= _038_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[2] <= 1'h0;
     else if (_001_) next_pc[2] <= _039_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[3] <= 1'h0;
     else if (_001_) next_pc[3] <= _040_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[4] <= 1'h0;
     else if (_001_) next_pc[4] <= _041_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[5] <= 1'h0;
     else if (_001_) next_pc[5] <= _042_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[6] <= 1'h0;
     else if (_001_) next_pc[6] <= _043_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) next_pc[7] <= 1'h0;
     else if (_001_) next_pc[7] <= _044_;
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) nzp[0] <= 1'h0;
     else if (_000_) nzp[0] <= alu_out[0];
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) nzp[1] <= 1'h0;
     else if (_000_) nzp[1] <= alu_out[1];
-  (* src = "../build/gpu.v:1448.2-1471.6" *)
+  (* src = "../build/gpu.v:1508.2-1531.6" *)
   always @(posedge clk)
     if (reset) nzp[2] <= 1'h0;
     else if (_000_) nzp[2] <= alu_out[2];
@@ -177,7 +177,7 @@ endmodule
 
 (* dynports =  1  *)
 (* hdlname = "registers" *)
-(* src = "../build/gpu.v:1474.1-1549.10" *)
+(* src = "../build/gpu.v:1534.1-1609.10" *)
 module \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers (clk, reset, enable, block_id, core_state, decoded_rd_address, decoded_rs_address, decoded_rt_address, decoded_reg_write_enable, decoded_reg_input_mux, decoded_immediate, alu_out, lsu_out, rs, rt);
   wire [7:0] _000_;
   wire [7:0] _001_;
@@ -520,41 +520,40 @@ module \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers (clk, reset,
   wire _338_;
   wire _339_;
   wire _340_;
-  wire _341_;
-  (* src = "../build/gpu.v:1505.31-1505.38" *)
+  (* src = "../build/gpu.v:1565.31-1565.38" *)
   input [7:0] alu_out;
   wire [7:0] alu_out;
-  (* src = "../build/gpu.v:1497.19-1497.27" *)
+  (* src = "../build/gpu.v:1557.19-1557.27" *)
   input [7:0] block_id;
   wire [7:0] block_id;
-  (* src = "../build/gpu.v:1494.13-1494.16" *)
+  (* src = "../build/gpu.v:1554.13-1554.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1498.19-1498.29" *)
+  (* src = "../build/gpu.v:1558.19-1558.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:1504.31-1504.48" *)
+  (* src = "../build/gpu.v:1564.31-1564.48" *)
   input [7:0] decoded_immediate;
   wire [7:0] decoded_immediate;
-  (* src = "../build/gpu.v:1499.19-1499.37" *)
+  (* src = "../build/gpu.v:1559.19-1559.37" *)
   input [3:0] decoded_rd_address;
   wire [3:0] decoded_rd_address;
-  (* src = "../build/gpu.v:1503.19-1503.40" *)
+  (* src = "../build/gpu.v:1563.19-1563.40" *)
   input [1:0] decoded_reg_input_mux;
   wire [1:0] decoded_reg_input_mux;
-  (* src = "../build/gpu.v:1502.13-1502.37" *)
+  (* src = "../build/gpu.v:1562.13-1562.37" *)
   input decoded_reg_write_enable;
   wire decoded_reg_write_enable;
-  (* src = "../build/gpu.v:1500.19-1500.37" *)
+  (* src = "../build/gpu.v:1560.19-1560.37" *)
   input [3:0] decoded_rs_address;
   wire [3:0] decoded_rs_address;
-  (* src = "../build/gpu.v:1501.19-1501.37" *)
+  (* src = "../build/gpu.v:1561.19-1561.37" *)
   input [3:0] decoded_rt_address;
   wire [3:0] decoded_rt_address;
-  (* src = "../build/gpu.v:1496.13-1496.19" *)
+  (* src = "../build/gpu.v:1556.13-1556.19" *)
   input enable;
   wire enable;
-  (* src = "../build/gpu.v:1506.31-1506.38" *)
+  (* src = "../build/gpu.v:1566.31-1566.38" *)
   input [7:0] lsu_out;
   wire [7:0] lsu_out;
   reg [7:0] \registers[0] ;
@@ -573,371 +572,370 @@ module \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers (clk, reset,
   reg [7:0] \registers[7] ;
   reg [7:0] \registers[8] ;
   reg [7:0] \registers[9] ;
-  (* src = "../build/gpu.v:1495.13-1495.18" *)
+  (* src = "../build/gpu.v:1555.13-1555.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1507.19-1507.21" *)
+  (* src = "../build/gpu.v:1567.19-1567.21" *)
   output [7:0] rs;
   reg [7:0] rs;
-  (* src = "../build/gpu.v:1508.19-1508.21" *)
+  (* src = "../build/gpu.v:1568.19-1568.21" *)
   output [7:0] rt;
   reg [7:0] rt;
-  assign _050_ = decoded_rd_address[0] & decoded_rd_address[1];
+  assign _050_ = ~(decoded_rd_address[0] | decoded_rd_address[1]);
   assign _051_ = decoded_rd_address[3] | ~(decoded_rd_address[2]);
   assign _052_ = _050_ & ~(_051_);
   assign _053_ = ~enable;
   assign _054_ = core_state[1] & ~(core_state[0]);
   assign _055_ = ~(_054_ & core_state[2]);
   assign _056_ = decoded_rd_address[2] & decoded_rd_address[3];
-  assign _057_ = ~(decoded_rd_address[0] | decoded_rd_address[1]);
-  assign _058_ = _057_ | ~(_056_);
-  assign _059_ = ~(_058_ & decoded_reg_write_enable);
-  assign _060_ = decoded_reg_input_mux[1] | decoded_reg_input_mux[0];
-  assign _061_ = _060_ | _059_;
-  assign _062_ = _061_ | _055_;
-  assign _063_ = _062_ | _053_;
-  assign _064_ = _063_ | reset;
-  assign _065_ = decoded_reg_input_mux[1] | ~(decoded_reg_input_mux[0]);
-  assign _066_ = _065_ | _059_;
-  assign _067_ = _066_ | _055_;
-  assign _068_ = _067_ | _053_;
-  assign _069_ = _068_ | reset;
-  assign _070_ = ~(_069_ & _064_);
-  assign _071_ = decoded_reg_input_mux[0] | ~(decoded_reg_input_mux[1]);
-  assign _072_ = _071_ | _059_;
-  assign _073_ = _072_ | _055_;
-  assign _074_ = enable & ~(_073_);
-  assign _075_ = _074_ & ~(reset);
-  assign _076_ = _075_ | _070_;
-  assign _039_ = _076_ & _052_;
-  assign _004_ = _039_ | reset;
-  assign _077_ = decoded_rd_address[0] | decoded_rd_address[1];
-  assign _078_ = _077_ | _051_;
-  assign _036_ = _076_ & ~(_078_);
+  assign _057_ = _050_ | ~(_056_);
+  assign _058_ = ~(_057_ & decoded_reg_write_enable);
+  assign _059_ = decoded_reg_input_mux[1] | decoded_reg_input_mux[0];
+  assign _060_ = _059_ | _058_;
+  assign _061_ = _060_ | _055_;
+  assign _062_ = _061_ | _053_;
+  assign _063_ = _062_ | reset;
+  assign _064_ = decoded_reg_input_mux[1] | ~(decoded_reg_input_mux[0]);
+  assign _065_ = _064_ | _058_;
+  assign _066_ = _065_ | _055_;
+  assign _067_ = _066_ | _053_;
+  assign _068_ = _067_ | reset;
+  assign _069_ = ~(_068_ & _063_);
+  assign _070_ = decoded_reg_input_mux[0] | ~(decoded_reg_input_mux[1]);
+  assign _071_ = _070_ | _058_;
+  assign _072_ = _071_ | _055_;
+  assign _073_ = enable & ~(_072_);
+  assign _074_ = _073_ & ~(reset);
+  assign _075_ = _074_ | _069_;
+  assign _036_ = _075_ & _052_;
   assign _007_ = _036_ | reset;
-  assign _079_ = decoded_rd_address[2] | ~(decoded_rd_address[3]);
-  assign _080_ = _079_ | _077_;
-  assign _040_ = _076_ & ~(_080_);
+  assign _076_ = ~(decoded_rd_address[0] & decoded_rd_address[1]);
+  assign _077_ = _076_ | _051_;
+  assign _039_ = _075_ & ~(_077_);
+  assign _004_ = _039_ | reset;
+  assign _078_ = decoded_rd_address[2] | ~(decoded_rd_address[3]);
+  assign _079_ = _078_ | ~(_050_);
+  assign _040_ = _075_ & ~(_079_);
   assign _003_ = _040_ | reset;
-  assign _081_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
-  assign _082_ = _081_ | _051_;
-  assign _038_ = _076_ & ~(_082_);
-  assign _005_ = _038_ | reset;
-  assign _083_ = decoded_rd_address[1] | ~(decoded_rd_address[0]);
-  assign _084_ = _079_ | _083_;
-  assign _041_ = _076_ & ~(_084_);
+  assign _080_ = decoded_rd_address[1] | ~(decoded_rd_address[0]);
+  assign _081_ = _078_ | _080_;
+  assign _041_ = _075_ & ~(_081_);
   assign _002_ = _041_ | reset;
-  assign _085_ = decoded_rd_address[2] | decoded_rd_address[3];
-  assign _086_ = _085_ | _077_;
-  assign _027_ = _076_ & ~(_086_);
-  assign _017_ = _027_ | reset;
-  assign _087_ = _081_ | ~(_056_);
-  assign _031_ = _076_ & ~(_087_);
-  assign _012_ = _031_ | reset;
-  assign _088_ = ~(_056_ & _050_);
-  assign _032_ = _076_ & ~(_088_);
+  assign _082_ = _076_ | ~(_056_);
+  assign _032_ = _075_ & ~(_082_);
   assign _011_ = _032_ | reset;
-  assign _089_ = ~(core_state[0] & core_state[1]);
-  assign _090_ = _089_ | core_state[2];
-  assign _018_ = enable & ~(_090_);
-  assign _091_ = _083_ | ~(_056_);
-  assign _092_ = _076_ & ~(_091_);
-  assign _093_ = enable | reset;
-  assign _013_ = _093_ | _092_;
-  assign _094_ = _079_ | ~(_050_);
-  assign _029_ = _076_ & ~(_094_);
-  assign _015_ = _029_ | reset;
-  assign _095_ = _085_ | _081_;
-  assign _034_ = _076_ & ~(_095_);
-  assign _009_ = _034_ | reset;
-  assign _096_ = _085_ | _083_;
-  assign _033_ = _076_ & ~(_096_);
-  assign _010_ = _033_ | reset;
-  assign _097_ = _083_ | _051_;
-  assign _037_ = _076_ & ~(_097_);
-  assign _006_ = _037_ | reset;
-  assign _098_ = _081_ | _079_;
-  assign _028_ = _076_ & ~(_098_);
+  assign _083_ = decoded_rd_address[2] | decoded_rd_address[3];
+  assign _084_ = _083_ | ~(_050_);
+  assign _027_ = _075_ & ~(_084_);
+  assign _017_ = _027_ | reset;
+  assign _085_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
+  assign _086_ = _085_ | _078_;
+  assign _028_ = _075_ & ~(_086_);
   assign _016_ = _028_ | reset;
-  assign _099_ = _077_ | ~(_056_);
-  assign _030_ = _076_ & ~(_099_);
+  assign _087_ = _078_ | _076_;
+  assign _029_ = _075_ & ~(_087_);
+  assign _015_ = _029_ | reset;
+  assign _088_ = _080_ | ~(_056_);
+  assign _089_ = _075_ & ~(_088_);
+  assign _090_ = enable | reset;
+  assign _013_ = _090_ | _089_;
+  assign _091_ = ~(_056_ & _050_);
+  assign _030_ = _075_ & ~(_091_);
   assign _014_ = _030_ | reset;
-  assign _100_ = _085_ | ~(_050_);
-  assign _035_ = _076_ & ~(_100_);
+  assign _092_ = _085_ | ~(_056_);
+  assign _031_ = _075_ & ~(_092_);
+  assign _012_ = _031_ | reset;
+  assign _093_ = ~(core_state[0] & core_state[1]);
+  assign _094_ = _093_ | core_state[2];
+  assign _018_ = enable & ~(_094_);
+  assign _095_ = _085_ | _083_;
+  assign _034_ = _075_ & ~(_095_);
+  assign _009_ = _034_ | reset;
+  assign _096_ = _083_ | _080_;
+  assign _033_ = _075_ & ~(_096_);
+  assign _010_ = _033_ | reset;
+  assign _097_ = _083_ | _076_;
+  assign _035_ = _075_ & ~(_097_);
   assign _008_ = _035_ | reset;
-  assign _101_ = decoded_rs_address[0] ? \registers[1] [0] : \registers[0] [0];
-  assign _102_ = decoded_rs_address[0] ? \registers[3] [0] : \registers[2] [0];
-  assign _103_ = decoded_rs_address[1] ? _102_ : _101_;
-  assign _104_ = decoded_rs_address[0] ? \registers[5] [0] : \registers[4] [0];
-  assign _105_ = decoded_rs_address[0] ? \registers[7] [0] : \registers[6] [0];
-  assign _106_ = decoded_rs_address[1] ? _105_ : _104_;
-  assign _107_ = decoded_rs_address[2] ? _106_ : _103_;
-  assign _108_ = decoded_rs_address[0] ? \registers[9] [0] : \registers[8] [0];
-  assign _109_ = decoded_rs_address[0] ? \registers[11] [0] : \registers[10] [0];
-  assign _110_ = decoded_rs_address[1] ? _109_ : _108_;
-  assign _111_ = decoded_rs_address[0] ? \registers[13] [0] : \registers[12] [0];
-  assign _112_ = decoded_rs_address[0] ? \registers[15] [0] : \registers[14] [0];
-  assign _113_ = decoded_rs_address[1] ? _112_ : _111_;
-  assign _114_ = decoded_rs_address[2] ? _113_ : _110_;
-  assign _001_[0] = decoded_rs_address[3] ? _114_ : _107_;
-  assign _115_ = decoded_rs_address[0] ? \registers[1] [1] : \registers[0] [1];
-  assign _116_ = decoded_rs_address[0] ? \registers[3] [1] : \registers[2] [1];
-  assign _117_ = decoded_rs_address[1] ? _116_ : _115_;
-  assign _118_ = decoded_rs_address[0] ? \registers[5] [1] : \registers[4] [1];
-  assign _119_ = decoded_rs_address[0] ? \registers[7] [1] : \registers[6] [1];
-  assign _120_ = decoded_rs_address[1] ? _119_ : _118_;
-  assign _121_ = decoded_rs_address[2] ? _120_ : _117_;
-  assign _122_ = decoded_rs_address[0] ? \registers[9] [1] : \registers[8] [1];
-  assign _123_ = decoded_rs_address[0] ? \registers[11] [1] : \registers[10] [1];
-  assign _124_ = decoded_rs_address[1] ? _123_ : _122_;
-  assign _125_ = decoded_rs_address[0] ? \registers[13] [1] : \registers[12] [1];
-  assign _126_ = decoded_rs_address[0] ? \registers[15] [1] : \registers[14] [1];
-  assign _127_ = decoded_rs_address[1] ? _126_ : _125_;
-  assign _128_ = decoded_rs_address[2] ? _127_ : _124_;
-  assign _001_[1] = decoded_rs_address[3] ? _128_ : _121_;
-  assign _129_ = decoded_rs_address[0] ? \registers[1] [2] : \registers[0] [2];
-  assign _130_ = decoded_rs_address[0] ? \registers[3] [2] : \registers[2] [2];
-  assign _131_ = decoded_rs_address[1] ? _130_ : _129_;
-  assign _132_ = decoded_rs_address[0] ? \registers[5] [2] : \registers[4] [2];
-  assign _133_ = decoded_rs_address[0] ? \registers[7] [2] : \registers[6] [2];
-  assign _134_ = decoded_rs_address[1] ? _133_ : _132_;
-  assign _135_ = decoded_rs_address[2] ? _134_ : _131_;
-  assign _136_ = decoded_rs_address[0] ? \registers[9] [2] : \registers[8] [2];
-  assign _137_ = decoded_rs_address[0] ? \registers[11] [2] : \registers[10] [2];
-  assign _138_ = decoded_rs_address[1] ? _137_ : _136_;
-  assign _139_ = decoded_rs_address[0] ? \registers[13] [2] : \registers[12] [2];
-  assign _140_ = decoded_rs_address[0] ? \registers[15] [2] : \registers[14] [2];
-  assign _141_ = decoded_rs_address[1] ? _140_ : _139_;
-  assign _142_ = decoded_rs_address[2] ? _141_ : _138_;
-  assign _001_[2] = decoded_rs_address[3] ? _142_ : _135_;
-  assign _143_ = decoded_rs_address[0] ? \registers[1] [3] : \registers[0] [3];
-  assign _144_ = decoded_rs_address[0] ? \registers[3] [3] : \registers[2] [3];
-  assign _145_ = decoded_rs_address[1] ? _144_ : _143_;
-  assign _146_ = decoded_rs_address[0] ? \registers[5] [3] : \registers[4] [3];
-  assign _147_ = decoded_rs_address[0] ? \registers[7] [3] : \registers[6] [3];
-  assign _148_ = decoded_rs_address[1] ? _147_ : _146_;
-  assign _149_ = decoded_rs_address[2] ? _148_ : _145_;
-  assign _150_ = decoded_rs_address[0] ? \registers[9] [3] : \registers[8] [3];
-  assign _151_ = decoded_rs_address[0] ? \registers[11] [3] : \registers[10] [3];
-  assign _152_ = decoded_rs_address[1] ? _151_ : _150_;
-  assign _153_ = decoded_rs_address[0] ? \registers[13] [3] : \registers[12] [3];
-  assign _154_ = decoded_rs_address[0] ? \registers[15] [3] : \registers[14] [3];
-  assign _155_ = decoded_rs_address[1] ? _154_ : _153_;
-  assign _156_ = decoded_rs_address[2] ? _155_ : _152_;
-  assign _001_[3] = decoded_rs_address[3] ? _156_ : _149_;
-  assign _157_ = decoded_rs_address[0] ? \registers[1] [4] : \registers[0] [4];
-  assign _158_ = decoded_rs_address[0] ? \registers[3] [4] : \registers[2] [4];
-  assign _159_ = decoded_rs_address[1] ? _158_ : _157_;
-  assign _160_ = decoded_rs_address[0] ? \registers[5] [4] : \registers[4] [4];
-  assign _161_ = decoded_rs_address[0] ? \registers[7] [4] : \registers[6] [4];
-  assign _162_ = decoded_rs_address[1] ? _161_ : _160_;
-  assign _163_ = decoded_rs_address[2] ? _162_ : _159_;
-  assign _164_ = decoded_rs_address[0] ? \registers[9] [4] : \registers[8] [4];
-  assign _165_ = decoded_rs_address[0] ? \registers[11] [4] : \registers[10] [4];
-  assign _166_ = decoded_rs_address[1] ? _165_ : _164_;
-  assign _167_ = decoded_rs_address[0] ? \registers[13] [4] : \registers[12] [4];
-  assign _168_ = decoded_rs_address[0] ? \registers[15] [4] : \registers[14] [4];
-  assign _169_ = decoded_rs_address[1] ? _168_ : _167_;
-  assign _170_ = decoded_rs_address[2] ? _169_ : _166_;
-  assign _001_[4] = decoded_rs_address[3] ? _170_ : _163_;
-  assign _171_ = decoded_rs_address[0] ? \registers[1] [5] : \registers[0] [5];
-  assign _172_ = decoded_rs_address[0] ? \registers[3] [5] : \registers[2] [5];
-  assign _173_ = decoded_rs_address[1] ? _172_ : _171_;
-  assign _174_ = decoded_rs_address[0] ? \registers[5] [5] : \registers[4] [5];
-  assign _175_ = decoded_rs_address[0] ? \registers[7] [5] : \registers[6] [5];
-  assign _176_ = decoded_rs_address[1] ? _175_ : _174_;
-  assign _177_ = decoded_rs_address[2] ? _176_ : _173_;
-  assign _178_ = decoded_rs_address[0] ? \registers[9] [5] : \registers[8] [5];
-  assign _179_ = decoded_rs_address[0] ? \registers[11] [5] : \registers[10] [5];
-  assign _180_ = decoded_rs_address[1] ? _179_ : _178_;
-  assign _181_ = decoded_rs_address[0] ? \registers[13] [5] : \registers[12] [5];
-  assign _182_ = decoded_rs_address[0] ? \registers[15] [5] : \registers[14] [5];
-  assign _183_ = decoded_rs_address[1] ? _182_ : _181_;
-  assign _184_ = decoded_rs_address[2] ? _183_ : _180_;
-  assign _001_[5] = decoded_rs_address[3] ? _184_ : _177_;
-  assign _185_ = decoded_rs_address[0] ? \registers[1] [6] : \registers[0] [6];
-  assign _186_ = decoded_rs_address[0] ? \registers[3] [6] : \registers[2] [6];
-  assign _187_ = decoded_rs_address[1] ? _186_ : _185_;
-  assign _188_ = decoded_rs_address[0] ? \registers[5] [6] : \registers[4] [6];
-  assign _189_ = decoded_rs_address[0] ? \registers[7] [6] : \registers[6] [6];
-  assign _190_ = decoded_rs_address[1] ? _189_ : _188_;
-  assign _191_ = decoded_rs_address[2] ? _190_ : _187_;
-  assign _192_ = decoded_rs_address[0] ? \registers[9] [6] : \registers[8] [6];
-  assign _193_ = decoded_rs_address[0] ? \registers[11] [6] : \registers[10] [6];
-  assign _194_ = decoded_rs_address[1] ? _193_ : _192_;
-  assign _195_ = decoded_rs_address[0] ? \registers[13] [6] : \registers[12] [6];
-  assign _196_ = decoded_rs_address[0] ? \registers[15] [6] : \registers[14] [6];
-  assign _197_ = decoded_rs_address[1] ? _196_ : _195_;
-  assign _198_ = decoded_rs_address[2] ? _197_ : _194_;
-  assign _001_[6] = decoded_rs_address[3] ? _198_ : _191_;
-  assign _199_ = decoded_rs_address[0] ? \registers[1] [7] : \registers[0] [7];
-  assign _200_ = decoded_rs_address[0] ? \registers[3] [7] : \registers[2] [7];
-  assign _201_ = decoded_rs_address[1] ? _200_ : _199_;
-  assign _202_ = decoded_rs_address[0] ? \registers[5] [7] : \registers[4] [7];
-  assign _203_ = decoded_rs_address[0] ? \registers[7] [7] : \registers[6] [7];
-  assign _204_ = decoded_rs_address[1] ? _203_ : _202_;
-  assign _205_ = decoded_rs_address[2] ? _204_ : _201_;
-  assign _206_ = decoded_rs_address[0] ? \registers[9] [7] : \registers[8] [7];
-  assign _207_ = decoded_rs_address[0] ? \registers[11] [7] : \registers[10] [7];
-  assign _208_ = decoded_rs_address[1] ? _207_ : _206_;
-  assign _209_ = decoded_rs_address[0] ? \registers[13] [7] : \registers[12] [7];
-  assign _210_ = decoded_rs_address[0] ? \registers[15] [7] : \registers[14] [7];
-  assign _211_ = decoded_rs_address[1] ? _210_ : _209_;
-  assign _212_ = decoded_rs_address[2] ? _211_ : _208_;
-  assign _001_[7] = decoded_rs_address[3] ? _212_ : _205_;
-  assign _213_ = _069_ ? alu_out[0] : lsu_out[0];
-  assign _019_ = _075_ ? decoded_immediate[0] : _213_;
-  assign _214_ = _069_ ? alu_out[1] : lsu_out[1];
-  assign _020_ = _075_ ? decoded_immediate[1] : _214_;
-  assign _215_ = _069_ ? alu_out[2] : lsu_out[2];
-  assign _021_ = _075_ ? decoded_immediate[2] : _215_;
-  assign _216_ = _069_ ? alu_out[3] : lsu_out[3];
-  assign _022_ = _075_ ? decoded_immediate[3] : _216_;
-  assign _217_ = _069_ ? alu_out[4] : lsu_out[4];
-  assign _023_ = _075_ ? decoded_immediate[4] : _217_;
-  assign _218_ = _069_ ? alu_out[5] : lsu_out[5];
-  assign _024_ = _075_ ? decoded_immediate[5] : _218_;
-  assign _219_ = _069_ ? alu_out[6] : lsu_out[6];
-  assign _025_ = _075_ ? decoded_immediate[6] : _219_;
-  assign _220_ = _069_ ? alu_out[7] : lsu_out[7];
-  assign _026_ = _075_ ? decoded_immediate[7] : _220_;
-  assign _221_ = reset | ~(enable);
-  assign _222_ = block_id[0] & ~(_221_);
-  assign _042_ = _092_ ? _019_ : _222_;
-  assign _223_ = block_id[1] & ~(_221_);
-  assign _043_ = _092_ ? _020_ : _223_;
-  assign _224_ = block_id[2] & ~(_221_);
-  assign _044_ = _092_ ? _021_ : _224_;
-  assign _225_ = block_id[3] & ~(_221_);
-  assign _045_ = _092_ ? _022_ : _225_;
-  assign _226_ = block_id[4] & ~(_221_);
-  assign _046_ = _092_ ? _023_ : _226_;
-  assign _227_ = block_id[5] & ~(_221_);
-  assign _047_ = _092_ ? _024_ : _227_;
-  assign _228_ = block_id[6] & ~(_221_);
-  assign _048_ = _092_ ? _025_ : _228_;
-  assign _229_ = block_id[7] & ~(_221_);
-  assign _049_ = _092_ ? _026_ : _229_;
-  assign _230_ = decoded_rt_address[0] ? \registers[1] [0] : \registers[0] [0];
-  assign _231_ = decoded_rt_address[0] ? \registers[3] [0] : \registers[2] [0];
-  assign _232_ = decoded_rt_address[1] ? _231_ : _230_;
-  assign _233_ = decoded_rt_address[0] ? \registers[5] [0] : \registers[4] [0];
-  assign _234_ = decoded_rt_address[0] ? \registers[7] [0] : \registers[6] [0];
-  assign _235_ = decoded_rt_address[1] ? _234_ : _233_;
-  assign _236_ = decoded_rt_address[2] ? _235_ : _232_;
-  assign _237_ = decoded_rt_address[0] ? \registers[9] [0] : \registers[8] [0];
-  assign _238_ = decoded_rt_address[0] ? \registers[11] [0] : \registers[10] [0];
-  assign _239_ = decoded_rt_address[1] ? _238_ : _237_;
-  assign _240_ = decoded_rt_address[0] ? \registers[13] [0] : \registers[12] [0];
-  assign _241_ = decoded_rt_address[0] ? \registers[15] [0] : \registers[14] [0];
-  assign _242_ = decoded_rt_address[1] ? _241_ : _240_;
-  assign _243_ = decoded_rt_address[2] ? _242_ : _239_;
-  assign _000_[0] = decoded_rt_address[3] ? _243_ : _236_;
-  assign _244_ = decoded_rt_address[0] ? \registers[1] [1] : \registers[0] [1];
-  assign _245_ = decoded_rt_address[0] ? \registers[3] [1] : \registers[2] [1];
-  assign _246_ = decoded_rt_address[1] ? _245_ : _244_;
-  assign _247_ = decoded_rt_address[0] ? \registers[5] [1] : \registers[4] [1];
-  assign _248_ = decoded_rt_address[0] ? \registers[7] [1] : \registers[6] [1];
-  assign _249_ = decoded_rt_address[1] ? _248_ : _247_;
-  assign _250_ = decoded_rt_address[2] ? _249_ : _246_;
-  assign _251_ = decoded_rt_address[0] ? \registers[9] [1] : \registers[8] [1];
-  assign _252_ = decoded_rt_address[0] ? \registers[11] [1] : \registers[10] [1];
-  assign _253_ = decoded_rt_address[1] ? _252_ : _251_;
-  assign _254_ = decoded_rt_address[0] ? \registers[13] [1] : \registers[12] [1];
-  assign _255_ = decoded_rt_address[0] ? \registers[15] [1] : \registers[14] [1];
-  assign _256_ = decoded_rt_address[1] ? _255_ : _254_;
-  assign _257_ = decoded_rt_address[2] ? _256_ : _253_;
-  assign _000_[1] = decoded_rt_address[3] ? _257_ : _250_;
-  assign _258_ = decoded_rt_address[0] ? \registers[1] [2] : \registers[0] [2];
-  assign _259_ = decoded_rt_address[0] ? \registers[3] [2] : \registers[2] [2];
-  assign _260_ = decoded_rt_address[1] ? _259_ : _258_;
-  assign _261_ = decoded_rt_address[0] ? \registers[5] [2] : \registers[4] [2];
-  assign _262_ = decoded_rt_address[0] ? \registers[7] [2] : \registers[6] [2];
-  assign _263_ = decoded_rt_address[1] ? _262_ : _261_;
-  assign _264_ = decoded_rt_address[2] ? _263_ : _260_;
-  assign _265_ = decoded_rt_address[0] ? \registers[9] [2] : \registers[8] [2];
-  assign _266_ = decoded_rt_address[0] ? \registers[11] [2] : \registers[10] [2];
-  assign _267_ = decoded_rt_address[1] ? _266_ : _265_;
-  assign _268_ = decoded_rt_address[0] ? \registers[13] [2] : \registers[12] [2];
-  assign _269_ = decoded_rt_address[0] ? \registers[15] [2] : \registers[14] [2];
-  assign _270_ = decoded_rt_address[1] ? _269_ : _268_;
-  assign _271_ = decoded_rt_address[2] ? _270_ : _267_;
-  assign _000_[2] = decoded_rt_address[3] ? _271_ : _264_;
-  assign _272_ = decoded_rt_address[0] ? \registers[1] [3] : \registers[0] [3];
-  assign _273_ = decoded_rt_address[0] ? \registers[3] [3] : \registers[2] [3];
-  assign _274_ = decoded_rt_address[1] ? _273_ : _272_;
-  assign _275_ = decoded_rt_address[0] ? \registers[5] [3] : \registers[4] [3];
-  assign _276_ = decoded_rt_address[0] ? \registers[7] [3] : \registers[6] [3];
-  assign _277_ = decoded_rt_address[1] ? _276_ : _275_;
-  assign _278_ = decoded_rt_address[2] ? _277_ : _274_;
-  assign _279_ = decoded_rt_address[0] ? \registers[9] [3] : \registers[8] [3];
-  assign _280_ = decoded_rt_address[0] ? \registers[11] [3] : \registers[10] [3];
-  assign _281_ = decoded_rt_address[1] ? _280_ : _279_;
-  assign _282_ = decoded_rt_address[0] ? \registers[13] [3] : \registers[12] [3];
-  assign _283_ = decoded_rt_address[0] ? \registers[15] [3] : \registers[14] [3];
-  assign _284_ = decoded_rt_address[1] ? _283_ : _282_;
-  assign _285_ = decoded_rt_address[2] ? _284_ : _281_;
-  assign _000_[3] = decoded_rt_address[3] ? _285_ : _278_;
-  assign _286_ = decoded_rt_address[0] ? \registers[1] [4] : \registers[0] [4];
-  assign _287_ = decoded_rt_address[0] ? \registers[3] [4] : \registers[2] [4];
-  assign _288_ = decoded_rt_address[1] ? _287_ : _286_;
-  assign _289_ = decoded_rt_address[0] ? \registers[5] [4] : \registers[4] [4];
-  assign _290_ = decoded_rt_address[0] ? \registers[7] [4] : \registers[6] [4];
-  assign _291_ = decoded_rt_address[1] ? _290_ : _289_;
-  assign _292_ = decoded_rt_address[2] ? _291_ : _288_;
-  assign _293_ = decoded_rt_address[0] ? \registers[9] [4] : \registers[8] [4];
-  assign _294_ = decoded_rt_address[0] ? \registers[11] [4] : \registers[10] [4];
-  assign _295_ = decoded_rt_address[1] ? _294_ : _293_;
-  assign _296_ = decoded_rt_address[0] ? \registers[13] [4] : \registers[12] [4];
-  assign _297_ = decoded_rt_address[0] ? \registers[15] [4] : \registers[14] [4];
-  assign _298_ = decoded_rt_address[1] ? _297_ : _296_;
-  assign _299_ = decoded_rt_address[2] ? _298_ : _295_;
-  assign _000_[4] = decoded_rt_address[3] ? _299_ : _292_;
-  assign _300_ = decoded_rt_address[0] ? \registers[1] [5] : \registers[0] [5];
-  assign _301_ = decoded_rt_address[0] ? \registers[3] [5] : \registers[2] [5];
-  assign _302_ = decoded_rt_address[1] ? _301_ : _300_;
-  assign _303_ = decoded_rt_address[0] ? \registers[5] [5] : \registers[4] [5];
-  assign _304_ = decoded_rt_address[0] ? \registers[7] [5] : \registers[6] [5];
-  assign _305_ = decoded_rt_address[1] ? _304_ : _303_;
-  assign _306_ = decoded_rt_address[2] ? _305_ : _302_;
-  assign _307_ = decoded_rt_address[0] ? \registers[9] [5] : \registers[8] [5];
-  assign _308_ = decoded_rt_address[0] ? \registers[11] [5] : \registers[10] [5];
-  assign _309_ = decoded_rt_address[1] ? _308_ : _307_;
-  assign _310_ = decoded_rt_address[0] ? \registers[13] [5] : \registers[12] [5];
-  assign _311_ = decoded_rt_address[0] ? \registers[15] [5] : \registers[14] [5];
-  assign _312_ = decoded_rt_address[1] ? _311_ : _310_;
-  assign _313_ = decoded_rt_address[2] ? _312_ : _309_;
-  assign _000_[5] = decoded_rt_address[3] ? _313_ : _306_;
-  assign _314_ = decoded_rt_address[0] ? \registers[1] [6] : \registers[0] [6];
-  assign _315_ = decoded_rt_address[0] ? \registers[3] [6] : \registers[2] [6];
-  assign _316_ = decoded_rt_address[1] ? _315_ : _314_;
-  assign _317_ = decoded_rt_address[0] ? \registers[5] [6] : \registers[4] [6];
-  assign _318_ = decoded_rt_address[0] ? \registers[7] [6] : \registers[6] [6];
-  assign _319_ = decoded_rt_address[1] ? _318_ : _317_;
-  assign _320_ = decoded_rt_address[2] ? _319_ : _316_;
-  assign _321_ = decoded_rt_address[0] ? \registers[9] [6] : \registers[8] [6];
-  assign _322_ = decoded_rt_address[0] ? \registers[11] [6] : \registers[10] [6];
-  assign _323_ = decoded_rt_address[1] ? _322_ : _321_;
-  assign _324_ = decoded_rt_address[0] ? \registers[13] [6] : \registers[12] [6];
-  assign _325_ = decoded_rt_address[0] ? \registers[15] [6] : \registers[14] [6];
-  assign _326_ = decoded_rt_address[1] ? _325_ : _324_;
-  assign _327_ = decoded_rt_address[2] ? _326_ : _323_;
-  assign _000_[6] = decoded_rt_address[3] ? _327_ : _320_;
-  assign _328_ = decoded_rt_address[0] ? \registers[1] [7] : \registers[0] [7];
-  assign _329_ = decoded_rt_address[0] ? \registers[3] [7] : \registers[2] [7];
-  assign _330_ = decoded_rt_address[1] ? _329_ : _328_;
-  assign _331_ = decoded_rt_address[0] ? \registers[5] [7] : \registers[4] [7];
-  assign _332_ = decoded_rt_address[0] ? \registers[7] [7] : \registers[6] [7];
-  assign _333_ = decoded_rt_address[1] ? _332_ : _331_;
-  assign _334_ = decoded_rt_address[2] ? _333_ : _330_;
-  assign _335_ = decoded_rt_address[0] ? \registers[9] [7] : \registers[8] [7];
-  assign _336_ = decoded_rt_address[0] ? \registers[11] [7] : \registers[10] [7];
-  assign _337_ = decoded_rt_address[1] ? _336_ : _335_;
-  assign _338_ = decoded_rt_address[0] ? \registers[13] [7] : \registers[12] [7];
-  assign _339_ = decoded_rt_address[0] ? \registers[15] [7] : \registers[14] [7];
-  assign _340_ = decoded_rt_address[1] ? _339_ : _338_;
-  assign _341_ = decoded_rt_address[2] ? _340_ : _337_;
-  assign _000_[7] = decoded_rt_address[3] ? _341_ : _334_;
+  assign _098_ = _080_ | _051_;
+  assign _037_ = _075_ & ~(_098_);
+  assign _006_ = _037_ | reset;
+  assign _099_ = _085_ | _051_;
+  assign _038_ = _075_ & ~(_099_);
+  assign _005_ = _038_ | reset;
+  assign _100_ = decoded_rs_address[0] ? \registers[1] [0] : \registers[0] [0];
+  assign _101_ = decoded_rs_address[0] ? \registers[3] [0] : \registers[2] [0];
+  assign _102_ = decoded_rs_address[1] ? _101_ : _100_;
+  assign _103_ = decoded_rs_address[0] ? \registers[5] [0] : \registers[4] [0];
+  assign _104_ = decoded_rs_address[0] ? \registers[7] [0] : \registers[6] [0];
+  assign _105_ = decoded_rs_address[1] ? _104_ : _103_;
+  assign _106_ = decoded_rs_address[2] ? _105_ : _102_;
+  assign _107_ = decoded_rs_address[0] ? \registers[9] [0] : \registers[8] [0];
+  assign _108_ = decoded_rs_address[0] ? \registers[11] [0] : \registers[10] [0];
+  assign _109_ = decoded_rs_address[1] ? _108_ : _107_;
+  assign _110_ = decoded_rs_address[0] ? \registers[13] [0] : \registers[12] [0];
+  assign _111_ = decoded_rs_address[0] ? \registers[15] [0] : \registers[14] [0];
+  assign _112_ = decoded_rs_address[1] ? _111_ : _110_;
+  assign _113_ = decoded_rs_address[2] ? _112_ : _109_;
+  assign _001_[0] = decoded_rs_address[3] ? _113_ : _106_;
+  assign _114_ = decoded_rs_address[0] ? \registers[1] [1] : \registers[0] [1];
+  assign _115_ = decoded_rs_address[0] ? \registers[3] [1] : \registers[2] [1];
+  assign _116_ = decoded_rs_address[1] ? _115_ : _114_;
+  assign _117_ = decoded_rs_address[0] ? \registers[5] [1] : \registers[4] [1];
+  assign _118_ = decoded_rs_address[0] ? \registers[7] [1] : \registers[6] [1];
+  assign _119_ = decoded_rs_address[1] ? _118_ : _117_;
+  assign _120_ = decoded_rs_address[2] ? _119_ : _116_;
+  assign _121_ = decoded_rs_address[0] ? \registers[9] [1] : \registers[8] [1];
+  assign _122_ = decoded_rs_address[0] ? \registers[11] [1] : \registers[10] [1];
+  assign _123_ = decoded_rs_address[1] ? _122_ : _121_;
+  assign _124_ = decoded_rs_address[0] ? \registers[13] [1] : \registers[12] [1];
+  assign _125_ = decoded_rs_address[0] ? \registers[15] [1] : \registers[14] [1];
+  assign _126_ = decoded_rs_address[1] ? _125_ : _124_;
+  assign _127_ = decoded_rs_address[2] ? _126_ : _123_;
+  assign _001_[1] = decoded_rs_address[3] ? _127_ : _120_;
+  assign _128_ = decoded_rs_address[0] ? \registers[1] [2] : \registers[0] [2];
+  assign _129_ = decoded_rs_address[0] ? \registers[3] [2] : \registers[2] [2];
+  assign _130_ = decoded_rs_address[1] ? _129_ : _128_;
+  assign _131_ = decoded_rs_address[0] ? \registers[5] [2] : \registers[4] [2];
+  assign _132_ = decoded_rs_address[0] ? \registers[7] [2] : \registers[6] [2];
+  assign _133_ = decoded_rs_address[1] ? _132_ : _131_;
+  assign _134_ = decoded_rs_address[2] ? _133_ : _130_;
+  assign _135_ = decoded_rs_address[0] ? \registers[9] [2] : \registers[8] [2];
+  assign _136_ = decoded_rs_address[0] ? \registers[11] [2] : \registers[10] [2];
+  assign _137_ = decoded_rs_address[1] ? _136_ : _135_;
+  assign _138_ = decoded_rs_address[0] ? \registers[13] [2] : \registers[12] [2];
+  assign _139_ = decoded_rs_address[0] ? \registers[15] [2] : \registers[14] [2];
+  assign _140_ = decoded_rs_address[1] ? _139_ : _138_;
+  assign _141_ = decoded_rs_address[2] ? _140_ : _137_;
+  assign _001_[2] = decoded_rs_address[3] ? _141_ : _134_;
+  assign _142_ = decoded_rs_address[0] ? \registers[1] [3] : \registers[0] [3];
+  assign _143_ = decoded_rs_address[0] ? \registers[3] [3] : \registers[2] [3];
+  assign _144_ = decoded_rs_address[1] ? _143_ : _142_;
+  assign _145_ = decoded_rs_address[0] ? \registers[5] [3] : \registers[4] [3];
+  assign _146_ = decoded_rs_address[0] ? \registers[7] [3] : \registers[6] [3];
+  assign _147_ = decoded_rs_address[1] ? _146_ : _145_;
+  assign _148_ = decoded_rs_address[2] ? _147_ : _144_;
+  assign _149_ = decoded_rs_address[0] ? \registers[9] [3] : \registers[8] [3];
+  assign _150_ = decoded_rs_address[0] ? \registers[11] [3] : \registers[10] [3];
+  assign _151_ = decoded_rs_address[1] ? _150_ : _149_;
+  assign _152_ = decoded_rs_address[0] ? \registers[13] [3] : \registers[12] [3];
+  assign _153_ = decoded_rs_address[0] ? \registers[15] [3] : \registers[14] [3];
+  assign _154_ = decoded_rs_address[1] ? _153_ : _152_;
+  assign _155_ = decoded_rs_address[2] ? _154_ : _151_;
+  assign _001_[3] = decoded_rs_address[3] ? _155_ : _148_;
+  assign _156_ = decoded_rs_address[0] ? \registers[1] [4] : \registers[0] [4];
+  assign _157_ = decoded_rs_address[0] ? \registers[3] [4] : \registers[2] [4];
+  assign _158_ = decoded_rs_address[1] ? _157_ : _156_;
+  assign _159_ = decoded_rs_address[0] ? \registers[5] [4] : \registers[4] [4];
+  assign _160_ = decoded_rs_address[0] ? \registers[7] [4] : \registers[6] [4];
+  assign _161_ = decoded_rs_address[1] ? _160_ : _159_;
+  assign _162_ = decoded_rs_address[2] ? _161_ : _158_;
+  assign _163_ = decoded_rs_address[0] ? \registers[9] [4] : \registers[8] [4];
+  assign _164_ = decoded_rs_address[0] ? \registers[11] [4] : \registers[10] [4];
+  assign _165_ = decoded_rs_address[1] ? _164_ : _163_;
+  assign _166_ = decoded_rs_address[0] ? \registers[13] [4] : \registers[12] [4];
+  assign _167_ = decoded_rs_address[0] ? \registers[15] [4] : \registers[14] [4];
+  assign _168_ = decoded_rs_address[1] ? _167_ : _166_;
+  assign _169_ = decoded_rs_address[2] ? _168_ : _165_;
+  assign _001_[4] = decoded_rs_address[3] ? _169_ : _162_;
+  assign _170_ = decoded_rs_address[0] ? \registers[1] [5] : \registers[0] [5];
+  assign _171_ = decoded_rs_address[0] ? \registers[3] [5] : \registers[2] [5];
+  assign _172_ = decoded_rs_address[1] ? _171_ : _170_;
+  assign _173_ = decoded_rs_address[0] ? \registers[5] [5] : \registers[4] [5];
+  assign _174_ = decoded_rs_address[0] ? \registers[7] [5] : \registers[6] [5];
+  assign _175_ = decoded_rs_address[1] ? _174_ : _173_;
+  assign _176_ = decoded_rs_address[2] ? _175_ : _172_;
+  assign _177_ = decoded_rs_address[0] ? \registers[9] [5] : \registers[8] [5];
+  assign _178_ = decoded_rs_address[0] ? \registers[11] [5] : \registers[10] [5];
+  assign _179_ = decoded_rs_address[1] ? _178_ : _177_;
+  assign _180_ = decoded_rs_address[0] ? \registers[13] [5] : \registers[12] [5];
+  assign _181_ = decoded_rs_address[0] ? \registers[15] [5] : \registers[14] [5];
+  assign _182_ = decoded_rs_address[1] ? _181_ : _180_;
+  assign _183_ = decoded_rs_address[2] ? _182_ : _179_;
+  assign _001_[5] = decoded_rs_address[3] ? _183_ : _176_;
+  assign _184_ = decoded_rs_address[0] ? \registers[1] [6] : \registers[0] [6];
+  assign _185_ = decoded_rs_address[0] ? \registers[3] [6] : \registers[2] [6];
+  assign _186_ = decoded_rs_address[1] ? _185_ : _184_;
+  assign _187_ = decoded_rs_address[0] ? \registers[5] [6] : \registers[4] [6];
+  assign _188_ = decoded_rs_address[0] ? \registers[7] [6] : \registers[6] [6];
+  assign _189_ = decoded_rs_address[1] ? _188_ : _187_;
+  assign _190_ = decoded_rs_address[2] ? _189_ : _186_;
+  assign _191_ = decoded_rs_address[0] ? \registers[9] [6] : \registers[8] [6];
+  assign _192_ = decoded_rs_address[0] ? \registers[11] [6] : \registers[10] [6];
+  assign _193_ = decoded_rs_address[1] ? _192_ : _191_;
+  assign _194_ = decoded_rs_address[0] ? \registers[13] [6] : \registers[12] [6];
+  assign _195_ = decoded_rs_address[0] ? \registers[15] [6] : \registers[14] [6];
+  assign _196_ = decoded_rs_address[1] ? _195_ : _194_;
+  assign _197_ = decoded_rs_address[2] ? _196_ : _193_;
+  assign _001_[6] = decoded_rs_address[3] ? _197_ : _190_;
+  assign _198_ = decoded_rs_address[0] ? \registers[1] [7] : \registers[0] [7];
+  assign _199_ = decoded_rs_address[0] ? \registers[3] [7] : \registers[2] [7];
+  assign _200_ = decoded_rs_address[1] ? _199_ : _198_;
+  assign _201_ = decoded_rs_address[0] ? \registers[5] [7] : \registers[4] [7];
+  assign _202_ = decoded_rs_address[0] ? \registers[7] [7] : \registers[6] [7];
+  assign _203_ = decoded_rs_address[1] ? _202_ : _201_;
+  assign _204_ = decoded_rs_address[2] ? _203_ : _200_;
+  assign _205_ = decoded_rs_address[0] ? \registers[9] [7] : \registers[8] [7];
+  assign _206_ = decoded_rs_address[0] ? \registers[11] [7] : \registers[10] [7];
+  assign _207_ = decoded_rs_address[1] ? _206_ : _205_;
+  assign _208_ = decoded_rs_address[0] ? \registers[13] [7] : \registers[12] [7];
+  assign _209_ = decoded_rs_address[0] ? \registers[15] [7] : \registers[14] [7];
+  assign _210_ = decoded_rs_address[1] ? _209_ : _208_;
+  assign _211_ = decoded_rs_address[2] ? _210_ : _207_;
+  assign _001_[7] = decoded_rs_address[3] ? _211_ : _204_;
+  assign _212_ = _068_ ? alu_out[0] : lsu_out[0];
+  assign _019_ = _074_ ? decoded_immediate[0] : _212_;
+  assign _213_ = reset | ~(enable);
+  assign _214_ = block_id[0] & ~(_213_);
+  assign _042_ = _089_ ? _019_ : _214_;
+  assign _215_ = _068_ ? alu_out[1] : lsu_out[1];
+  assign _020_ = _074_ ? decoded_immediate[1] : _215_;
+  assign _216_ = block_id[1] & ~(_213_);
+  assign _043_ = _089_ ? _020_ : _216_;
+  assign _217_ = _068_ ? alu_out[2] : lsu_out[2];
+  assign _021_ = _074_ ? decoded_immediate[2] : _217_;
+  assign _218_ = block_id[2] & ~(_213_);
+  assign _044_ = _089_ ? _021_ : _218_;
+  assign _219_ = _068_ ? alu_out[3] : lsu_out[3];
+  assign _022_ = _074_ ? decoded_immediate[3] : _219_;
+  assign _220_ = block_id[3] & ~(_213_);
+  assign _045_ = _089_ ? _022_ : _220_;
+  assign _221_ = _068_ ? alu_out[4] : lsu_out[4];
+  assign _023_ = _074_ ? decoded_immediate[4] : _221_;
+  assign _222_ = block_id[4] & ~(_213_);
+  assign _046_ = _089_ ? _023_ : _222_;
+  assign _223_ = _068_ ? alu_out[5] : lsu_out[5];
+  assign _024_ = _074_ ? decoded_immediate[5] : _223_;
+  assign _224_ = block_id[5] & ~(_213_);
+  assign _047_ = _089_ ? _024_ : _224_;
+  assign _225_ = _068_ ? alu_out[6] : lsu_out[6];
+  assign _025_ = _074_ ? decoded_immediate[6] : _225_;
+  assign _226_ = block_id[6] & ~(_213_);
+  assign _048_ = _089_ ? _025_ : _226_;
+  assign _227_ = _068_ ? alu_out[7] : lsu_out[7];
+  assign _026_ = _074_ ? decoded_immediate[7] : _227_;
+  assign _228_ = block_id[7] & ~(_213_);
+  assign _049_ = _089_ ? _026_ : _228_;
+  assign _229_ = decoded_rt_address[0] ? \registers[1] [0] : \registers[0] [0];
+  assign _230_ = decoded_rt_address[0] ? \registers[3] [0] : \registers[2] [0];
+  assign _231_ = decoded_rt_address[1] ? _230_ : _229_;
+  assign _232_ = decoded_rt_address[0] ? \registers[5] [0] : \registers[4] [0];
+  assign _233_ = decoded_rt_address[0] ? \registers[7] [0] : \registers[6] [0];
+  assign _234_ = decoded_rt_address[1] ? _233_ : _232_;
+  assign _235_ = decoded_rt_address[2] ? _234_ : _231_;
+  assign _236_ = decoded_rt_address[0] ? \registers[9] [0] : \registers[8] [0];
+  assign _237_ = decoded_rt_address[0] ? \registers[11] [0] : \registers[10] [0];
+  assign _238_ = decoded_rt_address[1] ? _237_ : _236_;
+  assign _239_ = decoded_rt_address[0] ? \registers[13] [0] : \registers[12] [0];
+  assign _240_ = decoded_rt_address[0] ? \registers[15] [0] : \registers[14] [0];
+  assign _241_ = decoded_rt_address[1] ? _240_ : _239_;
+  assign _242_ = decoded_rt_address[2] ? _241_ : _238_;
+  assign _000_[0] = decoded_rt_address[3] ? _242_ : _235_;
+  assign _243_ = decoded_rt_address[0] ? \registers[1] [1] : \registers[0] [1];
+  assign _244_ = decoded_rt_address[0] ? \registers[3] [1] : \registers[2] [1];
+  assign _245_ = decoded_rt_address[1] ? _244_ : _243_;
+  assign _246_ = decoded_rt_address[0] ? \registers[5] [1] : \registers[4] [1];
+  assign _247_ = decoded_rt_address[0] ? \registers[7] [1] : \registers[6] [1];
+  assign _248_ = decoded_rt_address[1] ? _247_ : _246_;
+  assign _249_ = decoded_rt_address[2] ? _248_ : _245_;
+  assign _250_ = decoded_rt_address[0] ? \registers[9] [1] : \registers[8] [1];
+  assign _251_ = decoded_rt_address[0] ? \registers[11] [1] : \registers[10] [1];
+  assign _252_ = decoded_rt_address[1] ? _251_ : _250_;
+  assign _253_ = decoded_rt_address[0] ? \registers[13] [1] : \registers[12] [1];
+  assign _254_ = decoded_rt_address[0] ? \registers[15] [1] : \registers[14] [1];
+  assign _255_ = decoded_rt_address[1] ? _254_ : _253_;
+  assign _256_ = decoded_rt_address[2] ? _255_ : _252_;
+  assign _000_[1] = decoded_rt_address[3] ? _256_ : _249_;
+  assign _257_ = decoded_rt_address[0] ? \registers[1] [2] : \registers[0] [2];
+  assign _258_ = decoded_rt_address[0] ? \registers[3] [2] : \registers[2] [2];
+  assign _259_ = decoded_rt_address[1] ? _258_ : _257_;
+  assign _260_ = decoded_rt_address[0] ? \registers[5] [2] : \registers[4] [2];
+  assign _261_ = decoded_rt_address[0] ? \registers[7] [2] : \registers[6] [2];
+  assign _262_ = decoded_rt_address[1] ? _261_ : _260_;
+  assign _263_ = decoded_rt_address[2] ? _262_ : _259_;
+  assign _264_ = decoded_rt_address[0] ? \registers[9] [2] : \registers[8] [2];
+  assign _265_ = decoded_rt_address[0] ? \registers[11] [2] : \registers[10] [2];
+  assign _266_ = decoded_rt_address[1] ? _265_ : _264_;
+  assign _267_ = decoded_rt_address[0] ? \registers[13] [2] : \registers[12] [2];
+  assign _268_ = decoded_rt_address[0] ? \registers[15] [2] : \registers[14] [2];
+  assign _269_ = decoded_rt_address[1] ? _268_ : _267_;
+  assign _270_ = decoded_rt_address[2] ? _269_ : _266_;
+  assign _000_[2] = decoded_rt_address[3] ? _270_ : _263_;
+  assign _271_ = decoded_rt_address[0] ? \registers[1] [3] : \registers[0] [3];
+  assign _272_ = decoded_rt_address[0] ? \registers[3] [3] : \registers[2] [3];
+  assign _273_ = decoded_rt_address[1] ? _272_ : _271_;
+  assign _274_ = decoded_rt_address[0] ? \registers[5] [3] : \registers[4] [3];
+  assign _275_ = decoded_rt_address[0] ? \registers[7] [3] : \registers[6] [3];
+  assign _276_ = decoded_rt_address[1] ? _275_ : _274_;
+  assign _277_ = decoded_rt_address[2] ? _276_ : _273_;
+  assign _278_ = decoded_rt_address[0] ? \registers[9] [3] : \registers[8] [3];
+  assign _279_ = decoded_rt_address[0] ? \registers[11] [3] : \registers[10] [3];
+  assign _280_ = decoded_rt_address[1] ? _279_ : _278_;
+  assign _281_ = decoded_rt_address[0] ? \registers[13] [3] : \registers[12] [3];
+  assign _282_ = decoded_rt_address[0] ? \registers[15] [3] : \registers[14] [3];
+  assign _283_ = decoded_rt_address[1] ? _282_ : _281_;
+  assign _284_ = decoded_rt_address[2] ? _283_ : _280_;
+  assign _000_[3] = decoded_rt_address[3] ? _284_ : _277_;
+  assign _285_ = decoded_rt_address[0] ? \registers[1] [4] : \registers[0] [4];
+  assign _286_ = decoded_rt_address[0] ? \registers[3] [4] : \registers[2] [4];
+  assign _287_ = decoded_rt_address[1] ? _286_ : _285_;
+  assign _288_ = decoded_rt_address[0] ? \registers[5] [4] : \registers[4] [4];
+  assign _289_ = decoded_rt_address[0] ? \registers[7] [4] : \registers[6] [4];
+  assign _290_ = decoded_rt_address[1] ? _289_ : _288_;
+  assign _291_ = decoded_rt_address[2] ? _290_ : _287_;
+  assign _292_ = decoded_rt_address[0] ? \registers[9] [4] : \registers[8] [4];
+  assign _293_ = decoded_rt_address[0] ? \registers[11] [4] : \registers[10] [4];
+  assign _294_ = decoded_rt_address[1] ? _293_ : _292_;
+  assign _295_ = decoded_rt_address[0] ? \registers[13] [4] : \registers[12] [4];
+  assign _296_ = decoded_rt_address[0] ? \registers[15] [4] : \registers[14] [4];
+  assign _297_ = decoded_rt_address[1] ? _296_ : _295_;
+  assign _298_ = decoded_rt_address[2] ? _297_ : _294_;
+  assign _000_[4] = decoded_rt_address[3] ? _298_ : _291_;
+  assign _299_ = decoded_rt_address[0] ? \registers[1] [5] : \registers[0] [5];
+  assign _300_ = decoded_rt_address[0] ? \registers[3] [5] : \registers[2] [5];
+  assign _301_ = decoded_rt_address[1] ? _300_ : _299_;
+  assign _302_ = decoded_rt_address[0] ? \registers[5] [5] : \registers[4] [5];
+  assign _303_ = decoded_rt_address[0] ? \registers[7] [5] : \registers[6] [5];
+  assign _304_ = decoded_rt_address[1] ? _303_ : _302_;
+  assign _305_ = decoded_rt_address[2] ? _304_ : _301_;
+  assign _306_ = decoded_rt_address[0] ? \registers[9] [5] : \registers[8] [5];
+  assign _307_ = decoded_rt_address[0] ? \registers[11] [5] : \registers[10] [5];
+  assign _308_ = decoded_rt_address[1] ? _307_ : _306_;
+  assign _309_ = decoded_rt_address[0] ? \registers[13] [5] : \registers[12] [5];
+  assign _310_ = decoded_rt_address[0] ? \registers[15] [5] : \registers[14] [5];
+  assign _311_ = decoded_rt_address[1] ? _310_ : _309_;
+  assign _312_ = decoded_rt_address[2] ? _311_ : _308_;
+  assign _000_[5] = decoded_rt_address[3] ? _312_ : _305_;
+  assign _313_ = decoded_rt_address[0] ? \registers[1] [6] : \registers[0] [6];
+  assign _314_ = decoded_rt_address[0] ? \registers[3] [6] : \registers[2] [6];
+  assign _315_ = decoded_rt_address[1] ? _314_ : _313_;
+  assign _316_ = decoded_rt_address[0] ? \registers[5] [6] : \registers[4] [6];
+  assign _317_ = decoded_rt_address[0] ? \registers[7] [6] : \registers[6] [6];
+  assign _318_ = decoded_rt_address[1] ? _317_ : _316_;
+  assign _319_ = decoded_rt_address[2] ? _318_ : _315_;
+  assign _320_ = decoded_rt_address[0] ? \registers[9] [6] : \registers[8] [6];
+  assign _321_ = decoded_rt_address[0] ? \registers[11] [6] : \registers[10] [6];
+  assign _322_ = decoded_rt_address[1] ? _321_ : _320_;
+  assign _323_ = decoded_rt_address[0] ? \registers[13] [6] : \registers[12] [6];
+  assign _324_ = decoded_rt_address[0] ? \registers[15] [6] : \registers[14] [6];
+  assign _325_ = decoded_rt_address[1] ? _324_ : _323_;
+  assign _326_ = decoded_rt_address[2] ? _325_ : _322_;
+  assign _000_[6] = decoded_rt_address[3] ? _326_ : _319_;
+  assign _327_ = decoded_rt_address[0] ? \registers[1] [7] : \registers[0] [7];
+  assign _328_ = decoded_rt_address[0] ? \registers[3] [7] : \registers[2] [7];
+  assign _329_ = decoded_rt_address[1] ? _328_ : _327_;
+  assign _330_ = decoded_rt_address[0] ? \registers[5] [7] : \registers[4] [7];
+  assign _331_ = decoded_rt_address[0] ? \registers[7] [7] : \registers[6] [7];
+  assign _332_ = decoded_rt_address[1] ? _331_ : _330_;
+  assign _333_ = decoded_rt_address[2] ? _332_ : _329_;
+  assign _334_ = decoded_rt_address[0] ? \registers[9] [7] : \registers[8] [7];
+  assign _335_ = decoded_rt_address[0] ? \registers[11] [7] : \registers[10] [7];
+  assign _336_ = decoded_rt_address[1] ? _335_ : _334_;
+  assign _337_ = decoded_rt_address[0] ? \registers[13] [7] : \registers[12] [7];
+  assign _338_ = decoded_rt_address[0] ? \registers[15] [7] : \registers[14] [7];
+  assign _339_ = decoded_rt_address[1] ? _338_ : _337_;
+  assign _340_ = decoded_rt_address[2] ? _339_ : _336_;
+  assign _000_[7] = decoded_rt_address[3] ? _340_ : _333_;
   always @(posedge clk)
     if (reset) rs[0] <= 1'h0;
     else if (_018_) rs[0] <= _001_[0];
@@ -1075,157 +1073,37 @@ module \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers (clk, reset,
   always @(posedge clk)
     if (_013_) \registers[13] [7] <= _049_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [0] <= 1'h0;
-      else \registers[3] [0] <= _019_;
+    if (_006_)
+      if (!_037_) \registers[5] [0] <= 1'h0;
+      else \registers[5] [0] <= _019_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [1] <= 1'h0;
-      else \registers[3] [1] <= _020_;
+    if (_006_)
+      if (!_037_) \registers[5] [1] <= 1'h0;
+      else \registers[5] [1] <= _020_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [2] <= 1'h0;
-      else \registers[3] [2] <= _021_;
+    if (_006_)
+      if (!_037_) \registers[5] [2] <= 1'h0;
+      else \registers[5] [2] <= _021_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [3] <= 1'h0;
-      else \registers[3] [3] <= _022_;
+    if (_006_)
+      if (!_037_) \registers[5] [3] <= 1'h0;
+      else \registers[5] [3] <= _022_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [4] <= 1'h0;
-      else \registers[3] [4] <= _023_;
+    if (_006_)
+      if (!_037_) \registers[5] [4] <= 1'h0;
+      else \registers[5] [4] <= _023_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [5] <= 1'h0;
-      else \registers[3] [5] <= _024_;
+    if (_006_)
+      if (!_037_) \registers[5] [5] <= 1'h0;
+      else \registers[5] [5] <= _024_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [6] <= 1'h0;
-      else \registers[3] [6] <= _025_;
+    if (_006_)
+      if (!_037_) \registers[5] [6] <= 1'h0;
+      else \registers[5] [6] <= _025_;
   always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [7] <= 1'h0;
-      else \registers[3] [7] <= _026_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [0] <= 1'h0;
-      else \registers[4] [0] <= _019_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [1] <= 1'h0;
-      else \registers[4] [1] <= _020_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [2] <= 1'h0;
-      else \registers[4] [2] <= _021_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [3] <= 1'h0;
-      else \registers[4] [3] <= _022_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [4] <= 1'h0;
-      else \registers[4] [4] <= _023_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [5] <= 1'h0;
-      else \registers[4] [5] <= _024_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [6] <= 1'h0;
-      else \registers[4] [6] <= _025_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [7] <= 1'h0;
-      else \registers[4] [7] <= _026_;
-  always @(posedge clk)
-    if (reset) rt[0] <= 1'h0;
-    else if (_018_) rt[0] <= _000_[0];
-  always @(posedge clk)
-    if (reset) rt[1] <= 1'h0;
-    else if (_018_) rt[1] <= _000_[1];
-  always @(posedge clk)
-    if (reset) rt[2] <= 1'h0;
-    else if (_018_) rt[2] <= _000_[2];
-  always @(posedge clk)
-    if (reset) rt[3] <= 1'h0;
-    else if (_018_) rt[3] <= _000_[3];
-  always @(posedge clk)
-    if (reset) rt[4] <= 1'h0;
-    else if (_018_) rt[4] <= _000_[4];
-  always @(posedge clk)
-    if (reset) rt[5] <= 1'h0;
-    else if (_018_) rt[5] <= _000_[5];
-  always @(posedge clk)
-    if (reset) rt[6] <= 1'h0;
-    else if (_018_) rt[6] <= _000_[6];
-  always @(posedge clk)
-    if (reset) rt[7] <= 1'h0;
-    else if (_018_) rt[7] <= _000_[7];
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [0] <= 1'h0;
-      else \registers[9] [0] <= _019_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [1] <= 1'h0;
-      else \registers[9] [1] <= _020_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [2] <= 1'h0;
-      else \registers[9] [2] <= _021_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [3] <= 1'h0;
-      else \registers[9] [3] <= _022_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [4] <= 1'h0;
-      else \registers[9] [4] <= _023_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [5] <= 1'h0;
-      else \registers[9] [5] <= _024_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [6] <= 1'h0;
-      else \registers[9] [6] <= _025_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [7] <= 1'h0;
-      else \registers[9] [7] <= _026_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [0] <= 1'h1;
-      else \registers[15] [0] <= _019_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [1] <= 1'h1;
-      else \registers[15] [1] <= _020_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [2] <= 1'h0;
-      else \registers[15] [2] <= _021_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [3] <= 1'h0;
-      else \registers[15] [3] <= _022_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [4] <= 1'h0;
-      else \registers[15] [4] <= _023_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [5] <= 1'h0;
-      else \registers[15] [5] <= _024_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [6] <= 1'h0;
-      else \registers[15] [6] <= _025_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [7] <= 1'h0;
-      else \registers[15] [7] <= _026_;
+    if (_006_)
+      if (!_037_) \registers[5] [7] <= 1'h0;
+      else \registers[5] [7] <= _026_;
   always @(posedge clk)
     if (_009_)
       if (!_034_) \registers[2] [0] <= 1'h0;
@@ -1259,101 +1137,37 @@ module \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers (clk, reset,
       if (!_034_) \registers[2] [7] <= 1'h0;
       else \registers[2] [7] <= _026_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [0] <= 1'h0;
-      else \registers[8] [0] <= _019_;
+    if (_008_)
+      if (!_035_) \registers[3] [0] <= 1'h0;
+      else \registers[3] [0] <= _019_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [1] <= 1'h0;
-      else \registers[8] [1] <= _020_;
+    if (_008_)
+      if (!_035_) \registers[3] [1] <= 1'h0;
+      else \registers[3] [1] <= _020_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [2] <= 1'h0;
-      else \registers[8] [2] <= _021_;
+    if (_008_)
+      if (!_035_) \registers[3] [2] <= 1'h0;
+      else \registers[3] [2] <= _021_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [3] <= 1'h0;
-      else \registers[8] [3] <= _022_;
+    if (_008_)
+      if (!_035_) \registers[3] [3] <= 1'h0;
+      else \registers[3] [3] <= _022_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [4] <= 1'h0;
-      else \registers[8] [4] <= _023_;
+    if (_008_)
+      if (!_035_) \registers[3] [4] <= 1'h0;
+      else \registers[3] [4] <= _023_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [5] <= 1'h0;
-      else \registers[8] [5] <= _024_;
+    if (_008_)
+      if (!_035_) \registers[3] [5] <= 1'h0;
+      else \registers[3] [5] <= _024_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [6] <= 1'h0;
-      else \registers[8] [6] <= _025_;
+    if (_008_)
+      if (!_035_) \registers[3] [6] <= 1'h0;
+      else \registers[3] [6] <= _025_;
   always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [7] <= 1'h0;
-      else \registers[8] [7] <= _026_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [0] <= 1'h0;
-      else \registers[7] [0] <= _019_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [1] <= 1'h0;
-      else \registers[7] [1] <= _020_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [2] <= 1'h0;
-      else \registers[7] [2] <= _021_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [3] <= 1'h0;
-      else \registers[7] [3] <= _022_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [4] <= 1'h0;
-      else \registers[7] [4] <= _023_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [5] <= 1'h0;
-      else \registers[7] [5] <= _024_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [6] <= 1'h0;
-      else \registers[7] [6] <= _025_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [7] <= 1'h0;
-      else \registers[7] [7] <= _026_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [0] <= 1'h0;
-      else \registers[5] [0] <= _019_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [1] <= 1'h0;
-      else \registers[5] [1] <= _020_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [2] <= 1'h0;
-      else \registers[5] [2] <= _021_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [3] <= 1'h0;
-      else \registers[5] [3] <= _022_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [4] <= 1'h0;
-      else \registers[5] [4] <= _023_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [5] <= 1'h0;
-      else \registers[5] [5] <= _024_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [6] <= 1'h0;
-      else \registers[5] [6] <= _025_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [7] <= 1'h0;
-      else \registers[5] [7] <= _026_;
+    if (_008_)
+      if (!_035_) \registers[3] [7] <= 1'h0;
+      else \registers[3] [7] <= _026_;
   always @(posedge clk)
     if (_017_)
       if (!_027_) \registers[0] [0] <= 1'h0;
@@ -1387,37 +1201,101 @@ module \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers (clk, reset,
       if (!_027_) \registers[0] [7] <= 1'h0;
       else \registers[0] [7] <= _026_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [0] <= 1'h0;
-      else \registers[14] [0] <= _019_;
+    if (_004_)
+      if (!_039_) \registers[7] [0] <= 1'h0;
+      else \registers[7] [0] <= _019_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [1] <= 1'h0;
-      else \registers[14] [1] <= _020_;
+    if (_004_)
+      if (!_039_) \registers[7] [1] <= 1'h0;
+      else \registers[7] [1] <= _020_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [2] <= 1'h1;
-      else \registers[14] [2] <= _021_;
+    if (_004_)
+      if (!_039_) \registers[7] [2] <= 1'h0;
+      else \registers[7] [2] <= _021_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [3] <= 1'h0;
-      else \registers[14] [3] <= _022_;
+    if (_004_)
+      if (!_039_) \registers[7] [3] <= 1'h0;
+      else \registers[7] [3] <= _022_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [4] <= 1'h0;
-      else \registers[14] [4] <= _023_;
+    if (_004_)
+      if (!_039_) \registers[7] [4] <= 1'h0;
+      else \registers[7] [4] <= _023_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [5] <= 1'h0;
-      else \registers[14] [5] <= _024_;
+    if (_004_)
+      if (!_039_) \registers[7] [5] <= 1'h0;
+      else \registers[7] [5] <= _024_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [6] <= 1'h0;
-      else \registers[14] [6] <= _025_;
+    if (_004_)
+      if (!_039_) \registers[7] [6] <= 1'h0;
+      else \registers[7] [6] <= _025_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [7] <= 1'h0;
-      else \registers[14] [7] <= _026_;
+    if (_004_)
+      if (!_039_) \registers[7] [7] <= 1'h0;
+      else \registers[7] [7] <= _026_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [0] <= 1'h0;
+      else \registers[4] [0] <= _019_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [1] <= 1'h0;
+      else \registers[4] [1] <= _020_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [2] <= 1'h0;
+      else \registers[4] [2] <= _021_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [3] <= 1'h0;
+      else \registers[4] [3] <= _022_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [4] <= 1'h0;
+      else \registers[4] [4] <= _023_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [5] <= 1'h0;
+      else \registers[4] [5] <= _024_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [6] <= 1'h0;
+      else \registers[4] [6] <= _025_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [7] <= 1'h0;
+      else \registers[4] [7] <= _026_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [0] <= 1'h0;
+      else \registers[1] [0] <= _019_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [1] <= 1'h0;
+      else \registers[1] [1] <= _020_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [2] <= 1'h0;
+      else \registers[1] [2] <= _021_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [3] <= 1'h0;
+      else \registers[1] [3] <= _022_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [4] <= 1'h0;
+      else \registers[1] [4] <= _023_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [5] <= 1'h0;
+      else \registers[1] [5] <= _024_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [6] <= 1'h0;
+      else \registers[1] [6] <= _025_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [7] <= 1'h0;
+      else \registers[1] [7] <= _026_;
   always @(posedge clk)
     if (_005_)
       if (!_038_) \registers[6] [0] <= 1'h0;
@@ -1451,249 +1329,369 @@ module \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers (clk, reset,
       if (!_038_) \registers[6] [7] <= 1'h0;
       else \registers[6] [7] <= _026_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [0] <= 1'h0;
-      else \registers[1] [0] <= _019_;
+    if (_012_)
+      if (!_031_) \registers[14] [0] <= 1'h0;
+      else \registers[14] [0] <= _019_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [1] <= 1'h0;
-      else \registers[1] [1] <= _020_;
+    if (_012_)
+      if (!_031_) \registers[14] [1] <= 1'h0;
+      else \registers[14] [1] <= _020_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [2] <= 1'h0;
-      else \registers[1] [2] <= _021_;
+    if (_012_)
+      if (!_031_) \registers[14] [2] <= 1'h1;
+      else \registers[14] [2] <= _021_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [3] <= 1'h0;
-      else \registers[1] [3] <= _022_;
+    if (_012_)
+      if (!_031_) \registers[14] [3] <= 1'h0;
+      else \registers[14] [3] <= _022_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [4] <= 1'h0;
-      else \registers[1] [4] <= _023_;
+    if (_012_)
+      if (!_031_) \registers[14] [4] <= 1'h0;
+      else \registers[14] [4] <= _023_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [5] <= 1'h0;
-      else \registers[1] [5] <= _024_;
+    if (_012_)
+      if (!_031_) \registers[14] [5] <= 1'h0;
+      else \registers[14] [5] <= _024_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [6] <= 1'h0;
-      else \registers[1] [6] <= _025_;
+    if (_012_)
+      if (!_031_) \registers[14] [6] <= 1'h0;
+      else \registers[14] [6] <= _025_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [7] <= 1'h0;
-      else \registers[1] [7] <= _026_;
+    if (_012_)
+      if (!_031_) \registers[14] [7] <= 1'h0;
+      else \registers[14] [7] <= _026_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [0] <= 1'h0;
+      else \registers[8] [0] <= _019_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [1] <= 1'h0;
+      else \registers[8] [1] <= _020_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [2] <= 1'h0;
+      else \registers[8] [2] <= _021_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [3] <= 1'h0;
+      else \registers[8] [3] <= _022_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [4] <= 1'h0;
+      else \registers[8] [4] <= _023_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [5] <= 1'h0;
+      else \registers[8] [5] <= _024_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [6] <= 1'h0;
+      else \registers[8] [6] <= _025_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [7] <= 1'h0;
+      else \registers[8] [7] <= _026_;
+  always @(posedge clk)
+    if (reset) rt[0] <= 1'h0;
+    else if (_018_) rt[0] <= _000_[0];
+  always @(posedge clk)
+    if (reset) rt[1] <= 1'h0;
+    else if (_018_) rt[1] <= _000_[1];
+  always @(posedge clk)
+    if (reset) rt[2] <= 1'h0;
+    else if (_018_) rt[2] <= _000_[2];
+  always @(posedge clk)
+    if (reset) rt[3] <= 1'h0;
+    else if (_018_) rt[3] <= _000_[3];
+  always @(posedge clk)
+    if (reset) rt[4] <= 1'h0;
+    else if (_018_) rt[4] <= _000_[4];
+  always @(posedge clk)
+    if (reset) rt[5] <= 1'h0;
+    else if (_018_) rt[5] <= _000_[5];
+  always @(posedge clk)
+    if (reset) rt[6] <= 1'h0;
+    else if (_018_) rt[6] <= _000_[6];
+  always @(posedge clk)
+    if (reset) rt[7] <= 1'h0;
+    else if (_018_) rt[7] <= _000_[7];
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [0] <= 1'h1;
+      else \registers[15] [0] <= _019_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [1] <= 1'h1;
+      else \registers[15] [1] <= _020_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [2] <= 1'h0;
+      else \registers[15] [2] <= _021_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [3] <= 1'h0;
+      else \registers[15] [3] <= _022_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [4] <= 1'h0;
+      else \registers[15] [4] <= _023_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [5] <= 1'h0;
+      else \registers[15] [5] <= _024_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [6] <= 1'h0;
+      else \registers[15] [6] <= _025_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [7] <= 1'h0;
+      else \registers[15] [7] <= _026_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [0] <= 1'h0;
+      else \registers[9] [0] <= _019_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [1] <= 1'h0;
+      else \registers[9] [1] <= _020_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [2] <= 1'h0;
+      else \registers[9] [2] <= _021_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [3] <= 1'h0;
+      else \registers[9] [3] <= _022_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [4] <= 1'h0;
+      else \registers[9] [4] <= _023_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [5] <= 1'h0;
+      else \registers[9] [5] <= _024_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [6] <= 1'h0;
+      else \registers[9] [6] <= _025_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [7] <= 1'h0;
+      else \registers[9] [7] <= _026_;
 endmodule
 
 (* dynports =  1  *)
 (* hdlname = "core" *)
-(* src = "../build/gpu.v:390.1-624.10" *)
+(* src = "../build/gpu.v:450.1-684.10" *)
 module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, start, done, block_id, thread_count, program_mem_read_valid, program_mem_read_address, program_mem_read_ready, program_mem_read_data, data_mem_read_valid, data_mem_read_address, data_mem_read_ready, data_mem_read_data, data_mem_write_valid, data_mem_write_address, data_mem_write_ready, data_mem_write_data);
   wire _0_;
   wire _1_;
   wire _2_;
   wire _3_;
   wire _4_;
-  (* src = "../build/gpu.v:442.13-442.20" *)
+  (* src = "../build/gpu.v:502.13-502.20" *)
   wire [7:0] \alu_out[0] ;
-  (* src = "../build/gpu.v:442.13-442.20" *)
+  (* src = "../build/gpu.v:502.13-502.20" *)
   wire [7:0] \alu_out[1] ;
-  (* src = "../build/gpu.v:442.13-442.20" *)
+  (* src = "../build/gpu.v:502.13-502.20" *)
   wire [7:0] \alu_out[2] ;
-  (* src = "../build/gpu.v:442.13-442.20" *)
+  (* src = "../build/gpu.v:502.13-502.20" *)
   wire [7:0] \alu_out[3] ;
-  (* src = "../build/gpu.v:419.19-419.27" *)
+  (* src = "../build/gpu.v:479.19-479.27" *)
   input [7:0] block_id;
   wire [7:0] block_id;
-  (* src = "../build/gpu.v:415.13-415.16" *)
+  (* src = "../build/gpu.v:475.13-475.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:433.12-433.22" *)
+  (* src = "../build/gpu.v:493.12-493.22" *)
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:436.12-436.22" *)
+  (* src = "../build/gpu.v:496.12-496.22" *)
   wire [7:0] current_pc;
-  (* src = "../build/gpu.v:426.63-426.84" *)
+  (* src = "../build/gpu.v:486.63-486.84" *)
   output [31:0] data_mem_read_address;
   wire [31:0] data_mem_read_address;
-  (* src = "../build/gpu.v:428.62-428.80" *)
+  (* src = "../build/gpu.v:488.62-488.80" *)
   input [31:0] data_mem_read_data;
   wire [31:0] data_mem_read_data;
-  (* src = "../build/gpu.v:427.39-427.58" *)
+  (* src = "../build/gpu.v:487.39-487.58" *)
   input [3:0] data_mem_read_ready;
   wire [3:0] data_mem_read_ready;
-  (* src = "../build/gpu.v:425.40-425.59" *)
+  (* src = "../build/gpu.v:485.40-485.59" *)
   output [3:0] data_mem_read_valid;
   wire [3:0] data_mem_read_valid;
-  (* src = "../build/gpu.v:430.63-430.85" *)
+  (* src = "../build/gpu.v:490.63-490.85" *)
   output [31:0] data_mem_write_address;
   wire [31:0] data_mem_write_address;
-  (* src = "../build/gpu.v:432.63-432.82" *)
+  (* src = "../build/gpu.v:492.63-492.82" *)
   output [31:0] data_mem_write_data;
   wire [31:0] data_mem_write_data;
-  (* src = "../build/gpu.v:431.39-431.59" *)
+  (* src = "../build/gpu.v:491.39-491.59" *)
   input [3:0] data_mem_write_ready;
   wire [3:0] data_mem_write_ready;
-  (* src = "../build/gpu.v:429.40-429.60" *)
+  (* src = "../build/gpu.v:489.40-489.60" *)
   output [3:0] data_mem_write_valid;
   wire [3:0] data_mem_write_valid;
-  (* src = "../build/gpu.v:453.12-453.38" *)
+  (* src = "../build/gpu.v:513.12-513.38" *)
   wire [1:0] decoded_alu_arithmetic_mux;
-  (* src = "../build/gpu.v:454.6-454.28" *)
+  (* src = "../build/gpu.v:514.6-514.28" *)
   wire decoded_alu_output_mux;
-  (* src = "../build/gpu.v:447.12-447.29" *)
+  (* src = "../build/gpu.v:507.12-507.29" *)
   wire [7:0] decoded_immediate;
-  (* src = "../build/gpu.v:449.6-449.29" *)
+  (* src = "../build/gpu.v:509.6-509.29" *)
   wire decoded_mem_read_enable;
-  (* src = "../build/gpu.v:450.6-450.30" *)
+  (* src = "../build/gpu.v:510.6-510.30" *)
   wire decoded_mem_write_enable;
-  (* src = "../build/gpu.v:446.12-446.23" *)
+  (* src = "../build/gpu.v:506.12-506.23" *)
   wire [2:0] decoded_nzp;
-  (* src = "../build/gpu.v:451.6-451.30" *)
+  (* src = "../build/gpu.v:511.6-511.30" *)
   wire decoded_nzp_write_enable;
-  (* src = "../build/gpu.v:455.6-455.20" *)
+  (* src = "../build/gpu.v:515.6-515.20" *)
   wire decoded_pc_mux;
-  (* src = "../build/gpu.v:443.12-443.30" *)
+  (* src = "../build/gpu.v:503.12-503.30" *)
   wire [3:0] decoded_rd_address;
-  (* src = "../build/gpu.v:452.12-452.33" *)
+  (* src = "../build/gpu.v:512.12-512.33" *)
   wire [1:0] decoded_reg_input_mux;
-  (* src = "../build/gpu.v:448.6-448.30" *)
+  (* src = "../build/gpu.v:508.6-508.30" *)
   wire decoded_reg_write_enable;
-  (* src = "../build/gpu.v:456.6-456.17" *)
+  (* src = "../build/gpu.v:516.6-516.17" *)
   wire decoded_ret;
-  (* src = "../build/gpu.v:444.12-444.30" *)
+  (* src = "../build/gpu.v:504.12-504.30" *)
   wire [3:0] decoded_rs_address;
-  (* src = "../build/gpu.v:445.12-445.30" *)
+  (* src = "../build/gpu.v:505.12-505.30" *)
   wire [3:0] decoded_rt_address;
-  (* src = "../build/gpu.v:418.14-418.18" *)
+  (* src = "../build/gpu.v:478.14-478.18" *)
   output done;
   wire done;
-  (* src = "../build/gpu.v:434.12-434.25" *)
+  (* src = "../build/gpu.v:494.12-494.25" *)
   wire [2:0] fetcher_state;
-  (* src = "../build/gpu.v:435.13-435.24" *)
+  (* src = "../build/gpu.v:495.13-495.24" *)
   wire [15:0] instruction;
-  (* src = "../build/gpu.v:441.12-441.19" *)
+  (* src = "../build/gpu.v:501.12-501.19" *)
   wire [7:0] \lsu_out[0] ;
-  (* src = "../build/gpu.v:441.12-441.19" *)
+  (* src = "../build/gpu.v:501.12-501.19" *)
   wire [7:0] \lsu_out[1] ;
-  (* src = "../build/gpu.v:441.12-441.19" *)
+  (* src = "../build/gpu.v:501.12-501.19" *)
   wire [7:0] \lsu_out[2] ;
-  (* src = "../build/gpu.v:441.12-441.19" *)
+  (* src = "../build/gpu.v:501.12-501.19" *)
   wire [7:0] \lsu_out[3] ;
-  (* src = "../build/gpu.v:440.38-440.47" *)
+  (* src = "../build/gpu.v:500.38-500.47" *)
   wire [7:0] lsu_state;
-  (* src = "../build/gpu.v:437.39-437.46" *)
+  (* src = "../build/gpu.v:497.39-497.46" *)
   wire [31:0] next_pc;
-  (* src = "../build/gpu.v:422.44-422.68" *)
+  (* src = "../build/gpu.v:482.44-482.68" *)
   output [7:0] program_mem_read_address;
   wire [7:0] program_mem_read_address;
-  (* src = "../build/gpu.v:424.43-424.64" *)
+  (* src = "../build/gpu.v:484.43-484.64" *)
   input [15:0] program_mem_read_data;
   wire [15:0] program_mem_read_data;
-  (* src = "../build/gpu.v:423.19-423.41" *)
+  (* src = "../build/gpu.v:483.19-483.41" *)
   input program_mem_read_ready;
   wire program_mem_read_ready;
-  (* src = "../build/gpu.v:421.20-421.42" *)
+  (* src = "../build/gpu.v:481.20-481.42" *)
   output program_mem_read_valid;
   wire program_mem_read_valid;
-  (* src = "../build/gpu.v:416.13-416.18" *)
+  (* src = "../build/gpu.v:476.13-476.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:438.12-438.14" *)
+  (* src = "../build/gpu.v:498.12-498.14" *)
   wire [7:0] \rs[0] ;
-  (* src = "../build/gpu.v:438.12-438.14" *)
+  (* src = "../build/gpu.v:498.12-498.14" *)
   wire [7:0] \rs[1] ;
-  (* src = "../build/gpu.v:438.12-438.14" *)
+  (* src = "../build/gpu.v:498.12-498.14" *)
   wire [7:0] \rs[2] ;
-  (* src = "../build/gpu.v:438.12-438.14" *)
+  (* src = "../build/gpu.v:498.12-498.14" *)
   wire [7:0] \rs[3] ;
-  (* src = "../build/gpu.v:439.12-439.14" *)
+  (* src = "../build/gpu.v:499.12-499.14" *)
   wire [7:0] \rt[0] ;
-  (* src = "../build/gpu.v:439.12-439.14" *)
+  (* src = "../build/gpu.v:499.12-499.14" *)
   wire [7:0] \rt[1] ;
-  (* src = "../build/gpu.v:439.12-439.14" *)
+  (* src = "../build/gpu.v:499.12-499.14" *)
   wire [7:0] \rt[2] ;
-  (* src = "../build/gpu.v:439.12-439.14" *)
+  (* src = "../build/gpu.v:499.12-499.14" *)
   wire [7:0] \rt[3] ;
-  (* src = "../build/gpu.v:417.13-417.18" *)
+  (* src = "../build/gpu.v:477.13-477.18" *)
   input start;
   wire start;
-  (* src = "../build/gpu.v:496.13-496.65" *)
+  (* src = "../build/gpu.v:556.13-556.65" *)
   wire [2:1] sv2v_tmp_decoder_instance_decoded_alu_arithmetic_mux;
-  (* src = "../build/gpu.v:498.13-498.61" *)
+  (* src = "../build/gpu.v:558.13-558.61" *)
   wire sv2v_tmp_decoder_instance_decoded_alu_output_mux;
-  (* src = "../build/gpu.v:484.13-484.56" *)
+  (* src = "../build/gpu.v:544.13-544.56" *)
   wire [8:1] sv2v_tmp_decoder_instance_decoded_immediate;
-  (* src = "../build/gpu.v:488.13-488.62" *)
+  (* src = "../build/gpu.v:548.13-548.62" *)
   wire sv2v_tmp_decoder_instance_decoded_mem_read_enable;
-  (* src = "../build/gpu.v:490.13-490.63" *)
+  (* src = "../build/gpu.v:550.13-550.63" *)
   wire sv2v_tmp_decoder_instance_decoded_mem_write_enable;
-  (* src = "../build/gpu.v:482.13-482.50" *)
+  (* src = "../build/gpu.v:542.13-542.50" *)
   wire [3:1] sv2v_tmp_decoder_instance_decoded_nzp;
-  (* src = "../build/gpu.v:492.13-492.63" *)
+  (* src = "../build/gpu.v:552.13-552.63" *)
   wire sv2v_tmp_decoder_instance_decoded_nzp_write_enable;
-  (* src = "../build/gpu.v:500.13-500.53" *)
+  (* src = "../build/gpu.v:560.13-560.53" *)
   wire sv2v_tmp_decoder_instance_decoded_pc_mux;
-  (* src = "../build/gpu.v:476.13-476.57" *)
+  (* src = "../build/gpu.v:536.13-536.57" *)
   wire [4:1] sv2v_tmp_decoder_instance_decoded_rd_address;
-  (* src = "../build/gpu.v:494.13-494.60" *)
+  (* src = "../build/gpu.v:554.13-554.60" *)
   wire [2:1] sv2v_tmp_decoder_instance_decoded_reg_input_mux;
-  (* src = "../build/gpu.v:486.13-486.63" *)
+  (* src = "../build/gpu.v:546.13-546.63" *)
   wire sv2v_tmp_decoder_instance_decoded_reg_write_enable;
-  (* src = "../build/gpu.v:502.13-502.50" *)
+  (* src = "../build/gpu.v:562.13-562.50" *)
   wire sv2v_tmp_decoder_instance_decoded_ret;
-  (* src = "../build/gpu.v:478.13-478.57" *)
+  (* src = "../build/gpu.v:538.13-538.57" *)
   wire [4:1] sv2v_tmp_decoder_instance_decoded_rs_address;
-  (* src = "../build/gpu.v:480.13-480.57" *)
+  (* src = "../build/gpu.v:540.13-540.57" *)
   wire [4:1] sv2v_tmp_decoder_instance_decoded_rt_address;
-  (* src = "../build/gpu.v:457.13-457.52" *)
+  (* src = "../build/gpu.v:517.13-517.52" *)
   wire [3:1] sv2v_tmp_fetcher_instance_fetcher_state;
-  (* src = "../build/gpu.v:459.14-459.51" *)
+  (* src = "../build/gpu.v:519.14-519.51" *)
   wire [16:1] sv2v_tmp_fetcher_instance_instruction;
-  (* src = "../build/gpu.v:524.13-524.51" *)
+  (* src = "../build/gpu.v:584.13-584.51" *)
   wire [3:1] sv2v_tmp_scheduler_instance_core_state;
-  (* src = "../build/gpu.v:526.13-526.51" *)
+  (* src = "../build/gpu.v:586.13-586.51" *)
   wire [8:1] sv2v_tmp_scheduler_instance_current_pc;
-  (* src = "../build/gpu.v:420.43-420.55" *)
+  (* src = "../build/gpu.v:480.43-480.55" *)
   input [2:0] thread_count;
   wire [2:0] thread_count;
-  (* src = "../build/gpu.v:559.15-559.44" *)
+  (* src = "../build/gpu.v:619.15-619.44" *)
   wire [8:1] \threads[0].sv2v_tmp_lsu_instance_lsu_out ;
-  (* src = "../build/gpu.v:557.15-557.46" *)
+  (* src = "../build/gpu.v:617.15-617.46" *)
   wire [2:1] \threads[0].sv2v_tmp_lsu_instance_lsu_state ;
-  (* src = "../build/gpu.v:581.15-581.44" *)
+  (* src = "../build/gpu.v:641.15-641.44" *)
   wire [8:1] \threads[0].sv2v_tmp_register_instance_rs ;
-  (* src = "../build/gpu.v:583.15-583.44" *)
+  (* src = "../build/gpu.v:643.15-643.44" *)
   wire [8:1] \threads[0].sv2v_tmp_register_instance_rt ;
-  (* src = "../build/gpu.v:559.15-559.44" *)
+  (* src = "../build/gpu.v:619.15-619.44" *)
   wire [8:1] \threads[1].sv2v_tmp_lsu_instance_lsu_out ;
-  (* src = "../build/gpu.v:557.15-557.46" *)
+  (* src = "../build/gpu.v:617.15-617.46" *)
   wire [2:1] \threads[1].sv2v_tmp_lsu_instance_lsu_state ;
-  (* src = "../build/gpu.v:581.15-581.44" *)
+  (* src = "../build/gpu.v:641.15-641.44" *)
   wire [8:1] \threads[1].sv2v_tmp_register_instance_rs ;
-  (* src = "../build/gpu.v:583.15-583.44" *)
+  (* src = "../build/gpu.v:643.15-643.44" *)
   wire [8:1] \threads[1].sv2v_tmp_register_instance_rt ;
-  (* src = "../build/gpu.v:559.15-559.44" *)
+  (* src = "../build/gpu.v:619.15-619.44" *)
   wire [8:1] \threads[2].sv2v_tmp_lsu_instance_lsu_out ;
-  (* src = "../build/gpu.v:557.15-557.46" *)
+  (* src = "../build/gpu.v:617.15-617.46" *)
   wire [2:1] \threads[2].sv2v_tmp_lsu_instance_lsu_state ;
-  (* src = "../build/gpu.v:581.15-581.44" *)
+  (* src = "../build/gpu.v:641.15-641.44" *)
   wire [8:1] \threads[2].sv2v_tmp_register_instance_rs ;
-  (* src = "../build/gpu.v:583.15-583.44" *)
+  (* src = "../build/gpu.v:643.15-643.44" *)
   wire [8:1] \threads[2].sv2v_tmp_register_instance_rt ;
-  (* src = "../build/gpu.v:559.15-559.44" *)
+  (* src = "../build/gpu.v:619.15-619.44" *)
   wire [8:1] \threads[3].sv2v_tmp_lsu_instance_lsu_out ;
-  (* src = "../build/gpu.v:557.15-557.46" *)
+  (* src = "../build/gpu.v:617.15-617.46" *)
   wire [2:1] \threads[3].sv2v_tmp_lsu_instance_lsu_state ;
-  (* src = "../build/gpu.v:581.15-581.44" *)
+  (* src = "../build/gpu.v:641.15-641.44" *)
   wire [8:1] \threads[3].sv2v_tmp_register_instance_rs ;
-  (* src = "../build/gpu.v:583.15-583.44" *)
+  (* src = "../build/gpu.v:643.15-643.44" *)
   wire [8:1] \threads[3].sv2v_tmp_register_instance_rt ;
-  assign _1_ = thread_count[1] | thread_count[2];
   assign _4_ = thread_count[1] | thread_count[0];
   assign _2_ = _4_ | thread_count[2];
+  assign _1_ = thread_count[2] | thread_count[1];
   assign _3_ = thread_count[1] & thread_count[0];
   assign _0_ = _3_ | thread_count[2];
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:504.10-523.3" *)
+  (* src = "../build/gpu.v:564.10-583.3" *)
   decoder decoder_instance (
     .clk(clk),
     .core_state(core_state),
@@ -1714,7 +1712,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .instruction(instruction),
     .reset(reset)
   );
-  (* src = "../build/gpu.v:464.4-475.3" *)
+  (* src = "../build/gpu.v:524.4-535.3" *)
   \$paramod$beb00772bac1a1e06ce8ff4195cf7b0af620cd82\fetcher  fetcher_instance (
     .clk(clk),
     .core_state(core_state),
@@ -1727,7 +1725,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .mem_read_valid(program_mem_read_valid),
     .reset(reset)
   );
-  (* src = "../build/gpu.v:528.53-541.3" *)
+  (* src = "../build/gpu.v:588.53-601.3" *)
   \$paramod\scheduler\THREADS_PER_BLOCK=s32'00000000000000000000000000000100  scheduler_instance (
     .clk(clk),
     .core_state(core_state),
@@ -1743,7 +1741,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .start(start)
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:546.8-556.5" *)
+  (* src = "../build/gpu.v:606.8-616.5" *)
   alu \threads[0].alu_instance  (
     .alu_out(\alu_out[0] ),
     .clk(clk),
@@ -1756,7 +1754,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rt(\threads[0].sv2v_tmp_register_instance_rt )
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:561.8-580.5" *)
+  (* src = "../build/gpu.v:621.8-640.5" *)
   lsu \threads[0].lsu_instance  (
     .clk(clk),
     .core_state(core_state),
@@ -1777,7 +1775,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rs(\threads[0].sv2v_tmp_register_instance_rs ),
     .rt(\threads[0].sv2v_tmp_register_instance_rt )
   );
-  (* src = "../build/gpu.v:609.6-621.5" *)
+  (* src = "../build/gpu.v:669.6-681.5" *)
   \$paramod$443b7d7e6fa51b4925ad1f73d225e8bfd7dc6c37\pc  \threads[0].pc_instance  (
     .alu_out(\alu_out[0] ),
     .clk(clk),
@@ -1791,7 +1789,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .next_pc(next_pc[7:0]),
     .reset(reset)
   );
-  (* src = "../build/gpu.v:589.6-605.5" *)
+  (* src = "../build/gpu.v:649.6-665.5" *)
   \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers  \threads[0].register_instance  (
     .alu_out(\alu_out[0] ),
     .block_id(block_id),
@@ -1810,7 +1808,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rt(\threads[0].sv2v_tmp_register_instance_rt )
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:546.8-556.5" *)
+  (* src = "../build/gpu.v:606.8-616.5" *)
   alu \threads[1].alu_instance  (
     .alu_out(\alu_out[1] ),
     .clk(clk),
@@ -1823,7 +1821,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rt(\threads[1].sv2v_tmp_register_instance_rt )
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:561.8-580.5" *)
+  (* src = "../build/gpu.v:621.8-640.5" *)
   lsu \threads[1].lsu_instance  (
     .clk(clk),
     .core_state(core_state),
@@ -1844,7 +1842,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rs(\threads[1].sv2v_tmp_register_instance_rs ),
     .rt(\threads[1].sv2v_tmp_register_instance_rt )
   );
-  (* src = "../build/gpu.v:609.6-621.5" *)
+  (* src = "../build/gpu.v:669.6-681.5" *)
   \$paramod$443b7d7e6fa51b4925ad1f73d225e8bfd7dc6c37\pc  \threads[1].pc_instance  (
     .alu_out(\alu_out[1] ),
     .clk(clk),
@@ -1858,7 +1856,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .next_pc(next_pc[15:8]),
     .reset(reset)
   );
-  (* src = "../build/gpu.v:589.6-605.5" *)
+  (* src = "../build/gpu.v:649.6-665.5" *)
   \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers  \threads[1].register_instance  (
     .alu_out(\alu_out[1] ),
     .block_id(block_id),
@@ -1877,7 +1875,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rt(\threads[1].sv2v_tmp_register_instance_rt )
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:546.8-556.5" *)
+  (* src = "../build/gpu.v:606.8-616.5" *)
   alu \threads[2].alu_instance  (
     .alu_out(\alu_out[2] ),
     .clk(clk),
@@ -1890,7 +1888,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rt(\threads[2].sv2v_tmp_register_instance_rt )
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:561.8-580.5" *)
+  (* src = "../build/gpu.v:621.8-640.5" *)
   lsu \threads[2].lsu_instance  (
     .clk(clk),
     .core_state(core_state),
@@ -1911,7 +1909,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rs(\threads[2].sv2v_tmp_register_instance_rs ),
     .rt(\threads[2].sv2v_tmp_register_instance_rt )
   );
-  (* src = "../build/gpu.v:609.6-621.5" *)
+  (* src = "../build/gpu.v:669.6-681.5" *)
   \$paramod$443b7d7e6fa51b4925ad1f73d225e8bfd7dc6c37\pc  \threads[2].pc_instance  (
     .alu_out(\alu_out[2] ),
     .clk(clk),
@@ -1925,7 +1923,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .next_pc(next_pc[23:16]),
     .reset(reset)
   );
-  (* src = "../build/gpu.v:589.6-605.5" *)
+  (* src = "../build/gpu.v:649.6-665.5" *)
   \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers  \threads[2].register_instance  (
     .alu_out(\alu_out[2] ),
     .block_id(block_id),
@@ -1944,7 +1942,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rt(\threads[2].sv2v_tmp_register_instance_rt )
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:546.8-556.5" *)
+  (* src = "../build/gpu.v:606.8-616.5" *)
   alu \threads[3].alu_instance  (
     .alu_out(\alu_out[3] ),
     .clk(clk),
@@ -1957,7 +1955,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rt(\threads[3].sv2v_tmp_register_instance_rt )
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:561.8-580.5" *)
+  (* src = "../build/gpu.v:621.8-640.5" *)
   lsu \threads[3].lsu_instance  (
     .clk(clk),
     .core_state(core_state),
@@ -1978,7 +1976,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .rs(\threads[3].sv2v_tmp_register_instance_rs ),
     .rt(\threads[3].sv2v_tmp_register_instance_rt )
   );
-  (* src = "../build/gpu.v:609.6-621.5" *)
+  (* src = "../build/gpu.v:669.6-681.5" *)
   \$paramod$443b7d7e6fa51b4925ad1f73d225e8bfd7dc6c37\pc  \threads[3].pc_instance  (
     .alu_out(\alu_out[3] ),
     .clk(clk),
@@ -1992,7 +1990,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core (clk, reset, star
     .next_pc(next_pc[31:24]),
     .reset(reset)
   );
-  (* src = "../build/gpu.v:589.6-605.5" *)
+  (* src = "../build/gpu.v:649.6-665.5" *)
   \$paramod$570077e6b96415b4d92362103cebadbad9f2b201\registers  \threads[3].register_instance  (
     .alu_out(\alu_out[3] ),
     .block_id(block_id),
@@ -2045,115 +2043,115 @@ endmodule
 
 (* dynports =  1  *)
 (* hdlname = "ducttape2cores" *)
-(* src = "../build/gpu.v:853.1-982.10" *)
+(* src = "../build/gpu.v:913.1-1042.10" *)
 module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\ducttape2cores (clk, reset, start, done, block_id, thread_count, program_mem_read_valid, program_mem_read_address, program_mem_read_ready, program_mem_read_data, data_mem_read_valid, data_mem_read_address, data_mem_read_ready, data_mem_read_data, data_mem_write_valid, data_mem_write_address, data_mem_write_ready, data_mem_write_data, reset_2, start_2, done_2
 , block_id_2, thread_count_2, program_mem_2_read_valid, program_mem_2_read_address, program_mem_2_read_ready, program_mem_2_read_data, data_mem_2_read_valid, data_mem_2_read_address, data_mem_2_read_ready, data_mem_2_read_data, data_mem_2_write_valid, data_mem_2_write_address, data_mem_2_write_ready, data_mem_2_write_data);
-  (* src = "../build/gpu.v:899.19-899.27" *)
+  (* src = "../build/gpu.v:959.19-959.27" *)
   input [7:0] block_id;
   wire [7:0] block_id;
-  (* src = "../build/gpu.v:916.19-916.29" *)
+  (* src = "../build/gpu.v:976.19-976.29" *)
   input [7:0] block_id_2;
   wire [7:0] block_id_2;
-  (* src = "../build/gpu.v:895.13-895.16" *)
+  (* src = "../build/gpu.v:955.13-955.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:923.63-923.86" *)
+  (* src = "../build/gpu.v:983.63-983.86" *)
   output [31:0] data_mem_2_read_address;
   wire [31:0] data_mem_2_read_address;
-  (* src = "../build/gpu.v:925.62-925.82" *)
+  (* src = "../build/gpu.v:985.62-985.82" *)
   input [31:0] data_mem_2_read_data;
   wire [31:0] data_mem_2_read_data;
-  (* src = "../build/gpu.v:924.39-924.60" *)
+  (* src = "../build/gpu.v:984.39-984.60" *)
   input [3:0] data_mem_2_read_ready;
   wire [3:0] data_mem_2_read_ready;
-  (* src = "../build/gpu.v:922.40-922.61" *)
+  (* src = "../build/gpu.v:982.40-982.61" *)
   output [3:0] data_mem_2_read_valid;
   wire [3:0] data_mem_2_read_valid;
-  (* src = "../build/gpu.v:927.63-927.87" *)
+  (* src = "../build/gpu.v:987.63-987.87" *)
   output [31:0] data_mem_2_write_address;
   wire [31:0] data_mem_2_write_address;
-  (* src = "../build/gpu.v:929.63-929.84" *)
+  (* src = "../build/gpu.v:989.63-989.84" *)
   output [31:0] data_mem_2_write_data;
   wire [31:0] data_mem_2_write_data;
-  (* src = "../build/gpu.v:928.39-928.61" *)
+  (* src = "../build/gpu.v:988.39-988.61" *)
   input [3:0] data_mem_2_write_ready;
   wire [3:0] data_mem_2_write_ready;
-  (* src = "../build/gpu.v:926.40-926.62" *)
+  (* src = "../build/gpu.v:986.40-986.62" *)
   output [3:0] data_mem_2_write_valid;
   wire [3:0] data_mem_2_write_valid;
-  (* src = "../build/gpu.v:906.63-906.84" *)
+  (* src = "../build/gpu.v:966.63-966.84" *)
   output [31:0] data_mem_read_address;
   wire [31:0] data_mem_read_address;
-  (* src = "../build/gpu.v:908.62-908.80" *)
+  (* src = "../build/gpu.v:968.62-968.80" *)
   input [31:0] data_mem_read_data;
   wire [31:0] data_mem_read_data;
-  (* src = "../build/gpu.v:907.39-907.58" *)
+  (* src = "../build/gpu.v:967.39-967.58" *)
   input [3:0] data_mem_read_ready;
   wire [3:0] data_mem_read_ready;
-  (* src = "../build/gpu.v:905.40-905.59" *)
+  (* src = "../build/gpu.v:965.40-965.59" *)
   output [3:0] data_mem_read_valid;
   wire [3:0] data_mem_read_valid;
-  (* src = "../build/gpu.v:910.63-910.85" *)
+  (* src = "../build/gpu.v:970.63-970.85" *)
   output [31:0] data_mem_write_address;
   wire [31:0] data_mem_write_address;
-  (* src = "../build/gpu.v:912.63-912.82" *)
+  (* src = "../build/gpu.v:972.63-972.82" *)
   output [31:0] data_mem_write_data;
   wire [31:0] data_mem_write_data;
-  (* src = "../build/gpu.v:911.39-911.59" *)
+  (* src = "../build/gpu.v:971.39-971.59" *)
   input [3:0] data_mem_write_ready;
   wire [3:0] data_mem_write_ready;
-  (* src = "../build/gpu.v:909.40-909.60" *)
+  (* src = "../build/gpu.v:969.40-969.60" *)
   output [3:0] data_mem_write_valid;
   wire [3:0] data_mem_write_valid;
-  (* src = "../build/gpu.v:898.14-898.18" *)
+  (* src = "../build/gpu.v:958.14-958.18" *)
   output done;
   wire done;
-  (* src = "../build/gpu.v:915.14-915.20" *)
+  (* src = "../build/gpu.v:975.14-975.20" *)
   output done_2;
   wire done_2;
-  (* src = "../build/gpu.v:919.44-919.70" *)
+  (* src = "../build/gpu.v:979.44-979.70" *)
   output [7:0] program_mem_2_read_address;
   wire [7:0] program_mem_2_read_address;
-  (* src = "../build/gpu.v:921.43-921.66" *)
+  (* src = "../build/gpu.v:981.43-981.66" *)
   input [15:0] program_mem_2_read_data;
   wire [15:0] program_mem_2_read_data;
-  (* src = "../build/gpu.v:920.19-920.43" *)
+  (* src = "../build/gpu.v:980.19-980.43" *)
   input program_mem_2_read_ready;
   wire program_mem_2_read_ready;
-  (* src = "../build/gpu.v:918.20-918.44" *)
+  (* src = "../build/gpu.v:978.20-978.44" *)
   output program_mem_2_read_valid;
   wire program_mem_2_read_valid;
-  (* src = "../build/gpu.v:902.44-902.68" *)
+  (* src = "../build/gpu.v:962.44-962.68" *)
   output [7:0] program_mem_read_address;
   wire [7:0] program_mem_read_address;
-  (* src = "../build/gpu.v:904.43-904.64" *)
+  (* src = "../build/gpu.v:964.43-964.64" *)
   input [15:0] program_mem_read_data;
   wire [15:0] program_mem_read_data;
-  (* src = "../build/gpu.v:903.19-903.41" *)
+  (* src = "../build/gpu.v:963.19-963.41" *)
   input program_mem_read_ready;
   wire program_mem_read_ready;
-  (* src = "../build/gpu.v:901.20-901.42" *)
+  (* src = "../build/gpu.v:961.20-961.42" *)
   output program_mem_read_valid;
   wire program_mem_read_valid;
-  (* src = "../build/gpu.v:896.13-896.18" *)
+  (* src = "../build/gpu.v:956.13-956.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:913.13-913.20" *)
+  (* src = "../build/gpu.v:973.13-973.20" *)
   input reset_2;
   wire reset_2;
-  (* src = "../build/gpu.v:897.13-897.18" *)
+  (* src = "../build/gpu.v:957.13-957.18" *)
   input start;
   wire start;
-  (* src = "../build/gpu.v:914.13-914.20" *)
+  (* src = "../build/gpu.v:974.13-974.20" *)
   input start_2;
   wire start_2;
-  (* src = "../build/gpu.v:900.43-900.55" *)
+  (* src = "../build/gpu.v:960.43-960.55" *)
   input [2:0] thread_count;
   wire [2:0] thread_count;
-  (* src = "../build/gpu.v:917.43-917.57" *)
+  (* src = "../build/gpu.v:977.43-977.57" *)
   input [2:0] thread_count_2;
   wire [2:0] thread_count_2;
-  (* src = "../build/gpu.v:936.4-955.3" *)
+  (* src = "../build/gpu.v:996.4-1015.3" *)
   \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core  inner_core_instance_1 (
     .block_id(block_id),
     .clk(clk),
@@ -2174,7 +2172,7 @@ module \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\ducttape2cores (clk, r
     .start(start),
     .thread_count(thread_count)
   );
-  (* src = "../build/gpu.v:962.4-981.3" *)
+  (* src = "../build/gpu.v:1022.4-1041.3" *)
   \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\core  inner_core_instance_2 (
     .block_id(block_id_2),
     .clk(clk),
@@ -2199,11 +2197,11 @@ endmodule
 
 (* dynports =  1  *)
 (* hdlname = "dispatch" *)
-(* src = "../build/gpu.v:771.1-851.10" *)
+(* src = "../build/gpu.v:831.1-911.10" *)
 module \$paramod$7b6d06001638ea57df1f39f9a8db092ea6b39b0a\dispatch (clk, reset, start, thread_count, core_done, core_start, core_reset, core_block_id, core_thread_count, done);
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   wire [7:0] _000_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   wire [7:0] _001_;
   wire _002_;
   wire _003_;
@@ -2494,552 +2492,564 @@ module \$paramod$7b6d06001638ea57df1f39f9a8db092ea6b39b0a\dispatch (clk, reset, 
   wire _288_;
   wire _289_;
   wire _290_;
-  (* src = "../build/gpu.v:836.299-836.415" *)
   wire _291_;
-  (* src = "../build/gpu.v:836.299-836.415" *)
   wire _292_;
-  (* src = "../build/gpu.v:836.299-836.415" *)
   wire _293_;
-  (* src = "../build/gpu.v:836.299-836.415" *)
   wire _294_;
-  (* src = "../build/gpu.v:836.299-836.415" *)
   wire _295_;
-  (* src = "../build/gpu.v:836.299-836.415" *)
   wire _296_;
+  (* src = "../build/gpu.v:896.299-896.415" *)
+  wire _297_;
+  (* src = "../build/gpu.v:896.299-896.415" *)
+  wire _298_;
+  (* src = "../build/gpu.v:896.299-896.415" *)
+  wire _299_;
+  (* src = "../build/gpu.v:896.299-896.415" *)
+  wire _300_;
+  (* src = "../build/gpu.v:896.299-896.415" *)
+  wire _301_;
+  (* src = "../build/gpu.v:896.299-896.415" *)
+  wire _302_;
   (* force_downto = 32'd1 *)
-  (* src = "../build/gpu.v:833.11-833.43|/usr/bin/../share/yosys/techmap.v:266.22-266.23" *)
-  wire [7:0] _297_;
-  (* src = "../build/gpu.v:797.12-797.29" *)
+  (* src = "../build/gpu.v:893.11-893.43|/usr/bin/../share/yosys/techmap.v:268.22-268.23" *)
+  wire [7:0] _303_;
+  (* src = "../build/gpu.v:857.12-857.29" *)
   reg [7:0] blocks_dispatched;
-  (* src = "../build/gpu.v:798.12-798.23" *)
+  (* src = "../build/gpu.v:858.12-858.23" *)
   reg [7:0] blocks_done;
-  (* src = "../build/gpu.v:785.13-785.16" *)
+  (* src = "../build/gpu.v:845.13-845.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:792.45-792.58" *)
+  (* src = "../build/gpu.v:852.45-852.58" *)
   output [15:0] core_block_id;
   reg [15:0] core_block_id;
-  (* src = "../build/gpu.v:789.39-789.48" *)
+  (* src = "../build/gpu.v:849.39-849.48" *)
   input [1:0] core_done;
   wire [1:0] core_done;
-  (* src = "../build/gpu.v:791.39-791.49" *)
+  (* src = "../build/gpu.v:851.39-851.49" *)
   output [1:0] core_reset;
   reg [1:0] core_reset;
-  (* src = "../build/gpu.v:790.39-790.49" *)
+  (* src = "../build/gpu.v:850.39-850.49" *)
   output [1:0] core_start;
   reg [1:0] core_start;
-  (* src = "../build/gpu.v:793.267-793.284" *)
+  (* src = "../build/gpu.v:853.267-853.284" *)
   output [5:0] core_thread_count;
   reg [5:0] core_thread_count;
-  (* src = "../build/gpu.v:794.13-794.17" *)
+  (* src = "../build/gpu.v:854.13-854.17" *)
   output done;
   reg done;
-  (* src = "../build/gpu.v:786.13-786.18" *)
+  (* src = "../build/gpu.v:846.13-846.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:787.13-787.18" *)
+  (* src = "../build/gpu.v:847.13-847.18" *)
   input start;
   wire start;
-  (* src = "../build/gpu.v:799.6-799.21" *)
+  (* src = "../build/gpu.v:859.6-859.21" *)
   reg start_execution;
-  (* src = "../build/gpu.v:788.19-788.31" *)
+  (* src = "../build/gpu.v:848.19-848.31" *)
   input [7:0] thread_count;
   wire [7:0] thread_count;
-  (* src = "../build/gpu.v:795.13-795.25" *)
+  (* src = "../build/gpu.v:855.13-855.25" *)
   (* unused_bits = "0 1 2 3 4 5 6" *)
   wire [7:0] total_blocks;
-  assign _259_ = ~core_reset[0];
-  assign _260_ = ~blocks_dispatched[7];
-  assign _261_ = ~blocks_dispatched[6];
-  assign _262_ = blocks_dispatched[5] & blocks_dispatched[4];
-  assign _263_ = blocks_dispatched[3] & blocks_dispatched[2];
-  assign _264_ = blocks_dispatched[1] & blocks_dispatched[0];
-  assign _265_ = _264_ & _263_;
-  assign _266_ = _265_ & _262_;
-  assign _267_ = _266_ & ~(_261_);
-  assign _268_ = _267_ ^ _260_;
-  assign _269_ = ~_268_;
-  assign _270_ = thread_count[7] & thread_count[6];
-  assign _271_ = ~(thread_count[5] & thread_count[4]);
-  assign _272_ = _270_ & ~(_271_);
-  assign _273_ = ~(thread_count[3] & thread_count[2]);
-  assign _274_ = ~(thread_count[0] | thread_count[1]);
-  assign _275_ = _274_ | _273_;
-  assign _276_ = _272_ & ~(_275_);
-  assign _277_ = ~(_276_ & _261_);
-  assign _278_ = _277_ | blocks_dispatched[7];
-  assign _279_ = _276_ ^ blocks_dispatched[6];
-  assign _280_ = _260_ & ~(_279_);
-  assign _281_ = ~thread_count[6];
-  assign _282_ = ~(_275_ | _271_);
-  assign _283_ = _282_ & ~(_281_);
-  assign _284_ = ~(_283_ ^ thread_count[7]);
-  assign _285_ = _284_ | blocks_dispatched[5];
-  assign _286_ = ~blocks_dispatched[5];
-  assign _007_ = _284_ ^ _286_;
-  assign _008_ = ~blocks_dispatched[4];
-  assign _009_ = _282_ ^ _281_;
-  assign _010_ = _008_ & ~(_009_);
-  assign _011_ = _010_ & ~(_007_);
-  assign _012_ = _285_ & ~(_011_);
-  assign _013_ = _280_ & ~(_012_);
-  assign _014_ = _278_ & ~(_013_);
-  assign _015_ = _009_ ^ _008_;
-  assign _016_ = _015_ | _007_;
-  assign _017_ = _280_ & ~(_016_);
-  assign _018_ = thread_count[4] & ~(_275_);
-  assign _019_ = ~(_018_ ^ thread_count[5]);
-  assign _020_ = _019_ | blocks_dispatched[3];
-  assign _021_ = _019_ ^ blocks_dispatched[3];
-  assign _022_ = _275_ ^ thread_count[4];
-  assign _023_ = _022_ | blocks_dispatched[2];
-  assign _024_ = _021_ & ~(_023_);
-  assign _025_ = _020_ & ~(_024_);
-  assign _026_ = ~blocks_dispatched[2];
-  assign _027_ = _022_ ^ _026_;
-  assign _028_ = _027_ | ~(_021_);
-  assign _029_ = thread_count[2] & ~(_274_);
-  assign _030_ = ~(_029_ ^ thread_count[3]);
-  assign _031_ = _030_ | blocks_dispatched[1];
-  assign _032_ = ~blocks_dispatched[1];
-  assign _033_ = _030_ ^ _032_;
-  assign _034_ = ~blocks_dispatched[0];
-  assign _035_ = ~thread_count[2];
-  assign _036_ = _274_ ^ _035_;
-  assign _037_ = _036_ | _034_;
-  assign _038_ = _037_ & ~(_033_);
-  assign _039_ = _038_ | ~(_031_);
-  assign _040_ = _039_ & ~(_028_);
-  assign _041_ = _025_ & ~(_040_);
-  assign _042_ = _017_ & ~(_041_);
-  assign _043_ = _014_ & ~(_042_);
-  assign _044_ = _036_ ^ blocks_dispatched[0];
-  assign _045_ = _044_ | _033_;
-  assign _046_ = _045_ | _028_;
-  assign _047_ = _017_ & ~(_046_);
-  assign _048_ = _047_ | _043_;
-  assign _049_ = _048_ ? blocks_dispatched[7] : _269_;
-  assign _297_[7] = core_reset[0] ? _049_ : blocks_dispatched[7];
-  assign _050_ = core_done[0] & core_start[0];
-  assign _051_ = _259_ & ~(_050_);
-  assign _052_ = start & ~(_051_);
-  assign _288_ = ~_050_;
-  assign _053_ = ~(_048_ & core_reset[0]);
-  assign _054_ = _288_ & ~(_053_);
-  assign _004_ = _052_ & ~(_054_);
-  assign _055_ = ~(start & core_reset[0]);
-  assign _002_ = ~(_055_ | _048_);
-  assign _056_ = start & core_reset[1];
-  assign _057_ = ~_276_;
-  assign _058_ = _266_ ^ _261_;
-  assign _059_ = _048_ ? _261_ : _058_;
-  assign _060_ = core_reset[0] ? _059_ : _261_;
-  assign _061_ = _057_ & ~(_060_);
-  assign _062_ = _061_ | _297_[7];
-  assign _063_ = _060_ ^ _276_;
-  assign _064_ = _063_ & ~(_297_[7]);
-  assign _065_ = _265_ & ~(_008_);
-  assign _066_ = _065_ ^ _286_;
-  assign _067_ = _048_ ? _286_ : _066_;
-  assign _068_ = core_reset[0] ? _067_ : _286_;
-  assign _069_ = _068_ | ~(_284_);
-  assign _070_ = _068_ ^ _284_;
-  assign _071_ = _265_ ^ _008_;
-  assign _072_ = _048_ ? _008_ : _071_;
-  assign _073_ = core_reset[0] ? _072_ : _008_;
-  assign _074_ = _009_ & ~(_073_);
-  assign _075_ = _074_ & ~(_070_);
-  assign _076_ = _069_ & ~(_075_);
-  assign _077_ = _064_ & ~(_076_);
-  assign _078_ = _077_ | _062_;
-  assign _079_ = _073_ ^ _009_;
-  assign _080_ = _079_ | _070_;
-  assign _081_ = _064_ & ~(_080_);
-  assign _082_ = ~_019_;
-  assign _083_ = ~blocks_dispatched[3];
-  assign _084_ = _264_ & ~(_026_);
-  assign _085_ = _084_ ^ _083_;
-  assign _086_ = _048_ ? _083_ : _085_;
-  assign _087_ = core_reset[0] ? _086_ : _083_;
-  assign _088_ = _087_ | _082_;
-  assign _089_ = _087_ ^ _082_;
-  assign _090_ = ~_022_;
-  assign _091_ = _264_ ^ _026_;
-  assign _092_ = _048_ ? _026_ : _091_;
-  assign _093_ = core_reset[0] ? _092_ : _026_;
-  assign _094_ = _093_ | _090_;
-  assign _095_ = _089_ & ~(_094_);
-  assign _096_ = _088_ & ~(_095_);
-  assign _097_ = _093_ ^ _022_;
-  assign _098_ = _089_ & ~(_097_);
-  assign _099_ = ~_030_;
-  assign _100_ = ~(blocks_dispatched[1] ^ blocks_dispatched[0]);
-  assign _101_ = _048_ ? _032_ : _100_;
-  assign _102_ = core_reset[0] ? _101_ : _032_;
-  assign _103_ = _102_ | _099_;
-  assign _104_ = _102_ ^ _099_;
-  assign _105_ = _048_ ^ _034_;
-  assign _297_[0] = core_reset[0] ? _105_ : blocks_dispatched[0];
-  assign _106_ = _036_ & ~(_297_[0]);
-  assign _107_ = _104_ & ~(_106_);
-  assign _108_ = _103_ & ~(_107_);
-  assign _109_ = _098_ & ~(_108_);
-  assign _110_ = _096_ & ~(_109_);
-  assign _111_ = _081_ & ~(_110_);
-  assign _112_ = _111_ | _078_;
-  assign _003_ = _056_ & ~(_112_);
-  assign _113_ = ~core_reset[1];
-  assign _114_ = core_done[1] & core_start[1];
-  assign _115_ = _113_ & ~(_114_);
-  assign _116_ = start & ~(_115_);
-  assign _290_ = ~_114_;
-  assign _117_ = ~(_112_ & core_reset[1]);
-  assign _118_ = _290_ & ~(_117_);
-  assign _005_ = _116_ & ~(_118_);
-  assign _119_ = _036_ ^ blocks_done[0];
-  assign _120_ = ~blocks_done[1];
-  assign _121_ = _030_ ^ _120_;
-  assign _122_ = _121_ | _119_;
-  assign _123_ = ~blocks_done[2];
-  assign _124_ = _022_ ^ _123_;
-  assign _125_ = ~blocks_done[3];
-  assign _126_ = _019_ ^ _125_;
-  assign _127_ = _126_ | _124_;
-  assign _128_ = _127_ | _122_;
-  assign _129_ = ~blocks_done[4];
-  assign _130_ = _009_ ^ _129_;
-  assign _131_ = ~blocks_done[5];
-  assign _132_ = _284_ ^ _131_;
-  assign _133_ = _132_ | _130_;
-  assign _134_ = _276_ ^ blocks_done[6];
-  assign _135_ = _134_ | blocks_done[7];
-  assign _136_ = _135_ | _133_;
-  assign _137_ = _136_ | _128_;
-  assign _006_ = start & ~(_137_);
-  assign _138_ = ~(_036_ ^ _030_);
-  assign _139_ = _138_ ^ blocks_dispatched[1];
-  assign _140_ = ~(_139_ & _044_);
-  assign _141_ = _030_ & ~(_036_);
-  assign _142_ = _141_ ^ _022_;
-  assign _143_ = _142_ ^ _026_;
-  assign _144_ = _141_ & ~(_090_);
-  assign _145_ = _144_ ^ _019_;
-  assign _146_ = _145_ ^ _083_;
-  assign _147_ = _146_ | _143_;
-  assign _148_ = _147_ | _140_;
-  assign _149_ = _019_ & ~(_090_);
-  assign _150_ = _149_ & ~(_141_);
-  assign _151_ = _149_ & ~(_150_);
-  assign _152_ = _151_ ^ _009_;
-  assign _153_ = _152_ ^ _008_;
-  assign _154_ = _151_ & _009_;
-  assign _155_ = _154_ ^ _284_;
-  assign _156_ = _155_ ^ _286_;
-  assign _157_ = _156_ | _153_;
-  assign _158_ = ~(_009_ & _284_);
-  assign _159_ = ~(_158_ | _151_);
-  assign _160_ = ~(_159_ | _158_);
-  assign _161_ = _160_ ^ _057_;
-  assign _162_ = _161_ ^ _261_;
-  assign _163_ = _160_ & ~(_276_);
-  assign _164_ = _163_ ^ blocks_dispatched[7];
-  assign _165_ = _164_ | _162_;
-  assign _166_ = _165_ | _157_;
-  assign _167_ = _166_ | _148_;
-  assign _168_ = _057_ & ~(_158_);
-  assign _169_ = _168_ & ~(_151_);
-  assign _170_ = _168_ & ~(_169_);
-  assign _171_ = _170_ | _167_;
-  assign _291_ = thread_count[0] & ~(_171_);
-  assign _292_ = thread_count[1] & ~(_171_);
-  assign _172_ = thread_count[2] ^ blocks_dispatched[0];
-  assign _293_ = _172_ | _171_;
-  assign _173_ = ~(_297_[0] ^ _036_);
-  assign _174_ = _138_ ^ _102_;
-  assign _175_ = _174_ | _173_;
-  assign _176_ = _142_ ^ _093_;
-  assign _177_ = _145_ ^ _087_;
-  assign _178_ = _177_ | _176_;
-  assign _179_ = _178_ | _175_;
-  assign _180_ = _152_ ^ _073_;
-  assign _181_ = _155_ ^ _068_;
-  assign _182_ = _181_ | _180_;
-  assign _183_ = _161_ ^ _060_;
-  assign _184_ = _163_ ^ _297_[7];
-  assign _185_ = _184_ | _183_;
-  assign _186_ = _185_ | _182_;
-  assign _187_ = _186_ | _179_;
-  assign _188_ = _187_ | _170_;
-  assign _294_ = thread_count[0] & ~(_188_);
-  assign _295_ = thread_count[1] & ~(_188_);
-  assign _189_ = _297_[0] ^ thread_count[2];
-  assign _296_ = _189_ | _188_;
-  assign _190_ = ~(_050_ ^ blocks_done[0]);
-  assign _000_[0] = _190_ ^ _290_;
-  assign _191_ = ~(blocks_done[1] ^ blocks_done[0]);
-  assign _192_ = _050_ ? _191_ : _120_;
-  assign _193_ = ~_192_;
-  assign _194_ = _192_ ^ _190_;
-  assign _000_[1] = _114_ ? _194_ : _193_;
-  assign _195_ = blocks_done[1] & blocks_done[0];
-  assign _196_ = _195_ ^ _123_;
-  assign _197_ = _050_ ? _196_ : _123_;
+  assign _265_ = start & core_reset[0];
+  assign _266_ = thread_count[7] & thread_count[6];
+  assign _267_ = ~(thread_count[5] & thread_count[4]);
+  assign _268_ = _266_ & ~(_267_);
+  assign _269_ = ~(thread_count[3] & thread_count[2]);
+  assign _270_ = ~(thread_count[1] | thread_count[0]);
+  assign _271_ = _270_ | _269_;
+  assign _272_ = _268_ & ~(_271_);
+  assign _273_ = blocks_dispatched[6] & ~(_272_);
+  assign _274_ = _273_ | blocks_dispatched[7];
+  assign _275_ = ~blocks_dispatched[7];
+  assign _276_ = _272_ ^ blocks_dispatched[6];
+  assign _277_ = _275_ & ~(_276_);
+  assign _278_ = ~blocks_dispatched[5];
+  assign _279_ = ~thread_count[6];
+  assign _280_ = ~(_271_ | _267_);
+  assign _281_ = _280_ & ~(_279_);
+  assign _282_ = _281_ ^ thread_count[7];
+  assign _283_ = _282_ | _278_;
+  assign _284_ = ~(_281_ ^ thread_count[7]);
+  assign _285_ = _284_ ^ _278_;
+  assign _286_ = _280_ ^ thread_count[6];
+  assign _287_ = blocks_dispatched[4] & ~(_286_);
+  assign _288_ = _287_ & ~(_285_);
+  assign _289_ = _283_ & ~(_288_);
+  assign _290_ = _277_ & ~(_289_);
+  assign _291_ = _290_ | _274_;
+  assign _292_ = _286_ ^ blocks_dispatched[4];
+  assign _007_ = _292_ | _285_;
+  assign _008_ = _277_ & ~(_007_);
+  assign _009_ = thread_count[4] & ~(_271_);
+  assign _010_ = ~(_009_ ^ thread_count[5]);
+  assign _011_ = ~(_010_ & blocks_dispatched[3]);
+  assign _012_ = _010_ ^ blocks_dispatched[3];
+  assign _013_ = _271_ ^ thread_count[4];
+  assign _014_ = ~(_013_ & blocks_dispatched[2]);
+  assign _015_ = _012_ & ~(_014_);
+  assign _016_ = _011_ & ~(_015_);
+  assign _017_ = ~blocks_dispatched[2];
+  assign _018_ = _013_ ^ _017_;
+  assign _019_ = _012_ & ~(_018_);
+  assign _020_ = thread_count[2] & ~(_270_);
+  assign _021_ = ~(_020_ ^ thread_count[3]);
+  assign _022_ = ~(_021_ & blocks_dispatched[1]);
+  assign _023_ = _021_ ^ blocks_dispatched[1];
+  assign _024_ = ~blocks_dispatched[0];
+  assign _025_ = _270_ ^ thread_count[2];
+  assign _026_ = _024_ & ~(_025_);
+  assign _027_ = _023_ & ~(_026_);
+  assign _028_ = _022_ & ~(_027_);
+  assign _029_ = _019_ & ~(_028_);
+  assign _030_ = _016_ & ~(_029_);
+  assign _031_ = _008_ & ~(_030_);
+  assign _032_ = _031_ | _291_;
+  assign _002_ = _265_ & ~(_032_);
+  assign _033_ = ~core_reset[0];
+  assign _034_ = _032_ & ~(_033_);
+  assign _035_ = core_done[0] & core_start[0];
+  assign _294_ = ~_035_;
+  assign _036_ = _294_ & _034_;
+  assign _037_ = start & ~(_036_);
+  assign _038_ = _033_ & ~(_035_);
+  assign _004_ = _037_ & ~(_038_);
+  assign _039_ = ~core_reset[1];
+  assign _040_ = core_done[1] & core_start[1];
+  assign _041_ = _039_ & ~(_040_);
+  assign _042_ = start & ~(_041_);
+  assign _296_ = ~_040_;
+  assign _043_ = ~blocks_dispatched[6];
+  assign _044_ = blocks_dispatched[5] & blocks_dispatched[4];
+  assign _045_ = blocks_dispatched[3] & blocks_dispatched[2];
+  assign _046_ = blocks_dispatched[1] & blocks_dispatched[0];
+  assign _047_ = _046_ & _045_;
+  assign _048_ = _047_ & _044_;
+  assign _049_ = _048_ & ~(_043_);
+  assign _050_ = _049_ ^ _275_;
+  assign _051_ = ~_050_;
+  assign _052_ = _032_ ? blocks_dispatched[7] : _051_;
+  assign _303_[7] = core_reset[0] ? _052_ : blocks_dispatched[7];
+  assign _053_ = _048_ ^ _043_;
+  assign _054_ = _032_ ? _043_ : _053_;
+  assign _055_ = core_reset[0] ? _054_ : _043_;
+  assign _056_ = ~(_055_ & _272_);
+  assign _057_ = _056_ | _303_[7];
+  assign _058_ = _055_ ^ _272_;
+  assign _059_ = _058_ & ~(_303_[7]);
+  assign _060_ = ~blocks_dispatched[4];
+  assign _061_ = _047_ & ~(_060_);
+  assign _062_ = _061_ ^ _278_;
+  assign _063_ = _032_ ? _278_ : _062_;
+  assign _064_ = core_reset[0] ? _063_ : _278_;
+  assign _065_ = ~(_064_ & _282_);
+  assign _066_ = _064_ ^ _284_;
+  assign _067_ = _047_ ^ _060_;
+  assign _068_ = ~_067_;
+  assign _069_ = _032_ ? blocks_dispatched[4] : _068_;
+  assign _303_[4] = core_reset[0] ? _069_ : blocks_dispatched[4];
+  assign _070_ = _286_ & ~(_303_[4]);
+  assign _071_ = _070_ & ~(_066_);
+  assign _072_ = _065_ & ~(_071_);
+  assign _073_ = _059_ & ~(_072_);
+  assign _074_ = _057_ & ~(_073_);
+  assign _075_ = _303_[4] ^ _286_;
+  assign _076_ = _075_ | _066_;
+  assign _077_ = _059_ & ~(_076_);
+  assign _078_ = ~_010_;
+  assign _079_ = ~blocks_dispatched[3];
+  assign _080_ = _046_ & ~(_017_);
+  assign _081_ = _080_ ^ _079_;
+  assign _082_ = _032_ ? _079_ : _081_;
+  assign _083_ = core_reset[0] ? _082_ : _079_;
+  assign _084_ = ~(_083_ & _078_);
+  assign _085_ = _083_ ^ _078_;
+  assign _086_ = _046_ ^ _017_;
+  assign _087_ = ~_086_;
+  assign _088_ = _032_ ? blocks_dispatched[2] : _087_;
+  assign _303_[2] = core_reset[0] ? _088_ : blocks_dispatched[2];
+  assign _089_ = _303_[2] | _013_;
+  assign _090_ = _085_ & ~(_089_);
+  assign _091_ = _084_ & ~(_090_);
+  assign _092_ = _032_ ? _017_ : _086_;
+  assign _093_ = core_reset[0] ? _092_ : _017_;
+  assign _094_ = _093_ ^ _013_;
+  assign _095_ = _094_ | ~(_085_);
+  assign _096_ = ~(blocks_dispatched[1] ^ blocks_dispatched[0]);
+  assign _097_ = ~_096_;
+  assign _098_ = _032_ ? blocks_dispatched[1] : _097_;
+  assign _303_[1] = core_reset[0] ? _098_ : blocks_dispatched[1];
+  assign _099_ = _303_[1] | _021_;
+  assign _100_ = ~blocks_dispatched[1];
+  assign _101_ = _032_ ? _100_ : _096_;
+  assign _102_ = core_reset[0] ? _101_ : _100_;
+  assign _103_ = _102_ ^ _021_;
+  assign _104_ = ~_025_;
+  assign _105_ = _032_ ^ blocks_dispatched[0];
+  assign _106_ = core_reset[0] ? _105_ : _024_;
+  assign _107_ = _106_ | _104_;
+  assign _108_ = _107_ & ~(_103_);
+  assign _109_ = _108_ | ~(_099_);
+  assign _110_ = _109_ & ~(_095_);
+  assign _111_ = _091_ & ~(_110_);
+  assign _112_ = _077_ & ~(_111_);
+  assign _113_ = _074_ & ~(_112_);
+  assign _114_ = _106_ ^ _025_;
+  assign _115_ = _114_ | _103_;
+  assign _116_ = _115_ | _095_;
+  assign _117_ = _077_ & ~(_116_);
+  assign _118_ = _117_ | _113_;
+  assign _119_ = ~(_118_ & core_reset[1]);
+  assign _120_ = _296_ & ~(_119_);
+  assign _005_ = _042_ & ~(_120_);
+  assign _121_ = ~blocks_done[0];
+  assign _122_ = _025_ ^ _121_;
+  assign _123_ = ~blocks_done[1];
+  assign _124_ = _021_ ^ _123_;
+  assign _125_ = _124_ | _122_;
+  assign _126_ = ~blocks_done[2];
+  assign _127_ = _013_ ^ _126_;
+  assign _128_ = ~blocks_done[3];
+  assign _129_ = _010_ ^ _128_;
+  assign _130_ = _129_ | _127_;
+  assign _131_ = _130_ | _125_;
+  assign _132_ = _286_ ^ blocks_done[4];
+  assign _133_ = ~blocks_done[5];
+  assign _134_ = _284_ ^ _133_;
+  assign _135_ = _134_ | _132_;
+  assign _136_ = _272_ ^ blocks_done[6];
+  assign _137_ = _136_ | blocks_done[7];
+  assign _138_ = _137_ | _135_;
+  assign _139_ = _138_ | _131_;
+  assign _006_ = start & ~(_139_);
+  assign _140_ = ~(start & core_reset[1]);
+  assign _003_ = ~(_140_ | _118_);
+  assign _141_ = _025_ ^ blocks_dispatched[0];
+  assign _142_ = _025_ ^ _021_;
+  assign _143_ = _142_ ^ _100_;
+  assign _144_ = _143_ | _141_;
+  assign _145_ = _021_ & ~(_104_);
+  assign _146_ = _145_ ^ _013_;
+  assign _147_ = _146_ ^ _017_;
+  assign _148_ = ~_013_;
+  assign _149_ = _145_ & ~(_148_);
+  assign _150_ = _149_ ^ _010_;
+  assign _151_ = _150_ ^ _079_;
+  assign _152_ = _151_ | _147_;
+  assign _153_ = _152_ | _144_;
+  assign _154_ = _010_ & ~(_148_);
+  assign _155_ = _154_ & ~(_145_);
+  assign _156_ = _154_ & ~(_155_);
+  assign _157_ = ~(_156_ ^ _286_);
+  assign _158_ = _157_ ^ _060_;
+  assign _159_ = _156_ & ~(_286_);
+  assign _160_ = _159_ ^ _284_;
+  assign _161_ = _160_ ^ _278_;
+  assign _162_ = _161_ | _158_;
+  assign _163_ = ~_272_;
+  assign _164_ = _286_ | _282_;
+  assign _165_ = ~(_164_ | _156_);
+  assign _166_ = ~(_165_ | _164_);
+  assign _167_ = _166_ ^ _163_;
+  assign _168_ = _167_ ^ _043_;
+  assign _169_ = _166_ & ~(_272_);
+  assign _170_ = _169_ ^ blocks_dispatched[7];
+  assign _171_ = _170_ | _168_;
+  assign _172_ = _171_ | _162_;
+  assign _173_ = _172_ | _153_;
+  assign _174_ = _163_ & ~(_164_);
+  assign _175_ = _174_ & ~(_156_);
+  assign _176_ = _174_ & ~(_175_);
+  assign _177_ = _176_ | _173_;
+  assign _297_ = thread_count[0] & ~(_177_);
+  assign _298_ = thread_count[1] & ~(_177_);
+  assign _178_ = thread_count[2] ^ blocks_dispatched[0];
+  assign _299_ = _178_ | _177_;
+  assign _179_ = _142_ ^ _303_[1];
+  assign _180_ = ~(_179_ & _114_);
+  assign _181_ = _146_ ^ _093_;
+  assign _182_ = _150_ ^ _083_;
+  assign _183_ = _182_ | _181_;
+  assign _184_ = _183_ | _180_;
+  assign _185_ = ~(_157_ ^ _303_[4]);
+  assign _186_ = _160_ ^ _064_;
+  assign _187_ = _186_ | _185_;
+  assign _188_ = _167_ ^ _055_;
+  assign _189_ = _169_ ^ _303_[7];
+  assign _190_ = _189_ | _188_;
+  assign _191_ = _190_ | _187_;
+  assign _192_ = _191_ | _184_;
+  assign _193_ = _192_ | _176_;
+  assign _300_ = thread_count[0] & ~(_193_);
+  assign _301_ = thread_count[1] & ~(_193_);
+  assign _194_ = ~(_106_ ^ thread_count[2]);
+  assign _302_ = _194_ | _193_;
+  assign _195_ = _035_ ^ _121_;
+  assign _000_[0] = _195_ ^ _296_;
+  assign _196_ = ~(blocks_done[1] ^ blocks_done[0]);
+  assign _197_ = _035_ ? _196_ : _123_;
   assign _198_ = ~_197_;
-  assign _199_ = ~(_192_ | _190_);
-  assign _200_ = ~(_199_ ^ _197_);
-  assign _000_[2] = _114_ ? _200_ : _198_;
-  assign _201_ = _195_ & ~(_123_);
-  assign _202_ = _201_ ^ _125_;
-  assign _203_ = _050_ ? _202_ : _125_;
-  assign _204_ = ~_203_;
-  assign _205_ = _197_ | ~(_199_);
-  assign _206_ = _205_ ^ _203_;
-  assign _000_[3] = _114_ ? _206_ : _204_;
-  assign _207_ = ~(blocks_done[3] & blocks_done[2]);
-  assign _208_ = _195_ & ~(_207_);
-  assign _209_ = _208_ ^ _129_;
-  assign _210_ = _050_ ? _209_ : _129_;
-  assign _211_ = ~_210_;
-  assign _212_ = _203_ | _197_;
-  assign _213_ = _199_ & ~(_212_);
-  assign _214_ = _213_ ^ _211_;
-  assign _000_[4] = _114_ ? _214_ : _211_;
-  assign _215_ = _208_ & ~(_129_);
-  assign _216_ = _215_ ^ _131_;
-  assign _217_ = _050_ ? _216_ : _131_;
-  assign _218_ = ~_217_;
-  assign _219_ = _213_ & ~(_210_);
-  assign _220_ = _219_ ^ _218_;
-  assign _000_[5] = _114_ ? _220_ : _218_;
-  assign _221_ = ~(blocks_done[5] & blocks_done[4]);
-  assign _222_ = _208_ & ~(_221_);
-  assign _223_ = _222_ ^ blocks_done[6];
-  assign _224_ = _050_ ? _223_ : blocks_done[6];
-  assign _225_ = _217_ | _210_;
-  assign _226_ = _213_ & ~(_225_);
-  assign _227_ = _226_ ^ _224_;
-  assign _000_[6] = _114_ ? _227_ : _224_;
-  assign _228_ = _222_ & blocks_done[6];
-  assign _229_ = _228_ ^ blocks_done[7];
-  assign _230_ = _050_ ? _229_ : blocks_done[7];
-  assign _231_ = _226_ & _224_;
-  assign _232_ = _231_ ^ _230_;
-  assign _000_[7] = _114_ ? _232_ : _230_;
-  assign _297_[1] = ~_102_;
-  assign _297_[2] = ~_093_;
-  assign _297_[3] = ~_087_;
-  assign _297_[4] = ~_073_;
-  assign _297_[5] = ~_068_;
-  assign _297_[6] = ~_060_;
-  assign _233_ = ~_297_[0];
-  assign _234_ = _112_ ^ _233_;
-  assign _001_[0] = core_reset[1] ? _234_ : _297_[0];
-  assign _235_ = ~(_297_[0] ^ _102_);
-  assign _236_ = _112_ ? _297_[1] : _235_;
-  assign _001_[1] = core_reset[1] ? _236_ : _297_[1];
-  assign _237_ = _297_[0] & ~(_102_);
-  assign _238_ = _237_ ^ _297_[2];
-  assign _239_ = _112_ ? _297_[2] : _238_;
-  assign _001_[2] = core_reset[1] ? _239_ : _297_[2];
-  assign _240_ = _237_ & ~(_093_);
-  assign _241_ = _240_ ^ _297_[3];
-  assign _242_ = _112_ ? _297_[3] : _241_;
-  assign _001_[3] = core_reset[1] ? _242_ : _297_[3];
-  assign _243_ = _093_ | _087_;
-  assign _244_ = _237_ & ~(_243_);
-  assign _245_ = _244_ ^ _297_[4];
-  assign _246_ = _112_ ? _297_[4] : _245_;
-  assign _001_[4] = core_reset[1] ? _246_ : _297_[4];
-  assign _247_ = _244_ & ~(_073_);
-  assign _248_ = _247_ ^ _297_[5];
-  assign _249_ = _112_ ? _297_[5] : _248_;
-  assign _001_[5] = core_reset[1] ? _249_ : _297_[5];
-  assign _250_ = ~(_073_ | _068_);
-  assign _251_ = ~(_250_ & _244_);
-  assign _252_ = _251_ ^ _060_;
-  assign _253_ = _112_ ? _297_[6] : _252_;
-  assign _001_[6] = core_reset[1] ? _253_ : _297_[6];
-  assign _254_ = _297_[6] & ~(_251_);
-  assign _255_ = _254_ ^ _297_[7];
-  assign _256_ = _112_ ? _297_[7] : _255_;
-  assign _001_[7] = core_reset[1] ? _256_ : _297_[7];
-  assign _257_ = ~(start_execution | core_reset[0]);
-  assign _287_ = _257_ | _050_;
-  assign _258_ = ~(start_execution | core_reset[1]);
-  assign _289_ = _258_ | _114_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  assign _199_ = _197_ ^ _195_;
+  assign _000_[1] = _040_ ? _199_ : _198_;
+  assign _200_ = blocks_done[1] & blocks_done[0];
+  assign _201_ = _200_ ^ _126_;
+  assign _202_ = _035_ ? _201_ : _126_;
+  assign _203_ = ~_202_;
+  assign _204_ = ~(_197_ | _195_);
+  assign _205_ = ~(_204_ ^ _202_);
+  assign _000_[2] = _040_ ? _205_ : _203_;
+  assign _206_ = _200_ & ~(_126_);
+  assign _207_ = _206_ ^ _128_;
+  assign _208_ = _035_ ? _207_ : _128_;
+  assign _209_ = ~_208_;
+  assign _210_ = _202_ | ~(_204_);
+  assign _211_ = _210_ ^ _208_;
+  assign _000_[3] = _040_ ? _211_ : _209_;
+  assign _212_ = ~blocks_done[4];
+  assign _213_ = ~(blocks_done[3] & blocks_done[2]);
+  assign _214_ = _200_ & ~(_213_);
+  assign _215_ = _214_ ^ _212_;
+  assign _216_ = _035_ ? _215_ : _212_;
+  assign _217_ = ~_216_;
+  assign _218_ = _208_ | _202_;
+  assign _219_ = _204_ & ~(_218_);
+  assign _220_ = _219_ ^ _217_;
+  assign _000_[4] = _040_ ? _220_ : _217_;
+  assign _221_ = _214_ & ~(_212_);
+  assign _222_ = _221_ ^ _133_;
+  assign _223_ = _035_ ? _222_ : _133_;
+  assign _224_ = ~_223_;
+  assign _225_ = _219_ & ~(_216_);
+  assign _226_ = _225_ ^ _224_;
+  assign _000_[5] = _040_ ? _226_ : _224_;
+  assign _227_ = ~(blocks_done[5] & blocks_done[4]);
+  assign _228_ = _214_ & ~(_227_);
+  assign _229_ = _228_ ^ blocks_done[6];
+  assign _230_ = _035_ ? _229_ : blocks_done[6];
+  assign _231_ = _223_ | _216_;
+  assign _232_ = _219_ & ~(_231_);
+  assign _233_ = _232_ ^ _230_;
+  assign _000_[6] = _040_ ? _233_ : _230_;
+  assign _234_ = _228_ & blocks_done[6];
+  assign _235_ = _234_ ^ blocks_done[7];
+  assign _236_ = _035_ ? _235_ : blocks_done[7];
+  assign _237_ = _232_ & _230_;
+  assign _238_ = _237_ ^ _236_;
+  assign _000_[7] = _040_ ? _238_ : _236_;
+  assign _303_[0] = ~_106_;
+  assign _303_[3] = ~_083_;
+  assign _303_[5] = ~_064_;
+  assign _303_[6] = ~_055_;
+  assign _239_ = _118_ ^ _106_;
+  assign _001_[0] = core_reset[1] ? _239_ : _303_[0];
+  assign _240_ = _106_ ^ _102_;
+  assign _241_ = _118_ ? _303_[1] : _240_;
+  assign _001_[1] = core_reset[1] ? _241_ : _303_[1];
+  assign _242_ = _106_ | _102_;
+  assign _243_ = _242_ ^ _093_;
+  assign _244_ = _118_ ? _303_[2] : _243_;
+  assign _001_[2] = core_reset[1] ? _244_ : _303_[2];
+  assign _245_ = _303_[2] & ~(_242_);
+  assign _246_ = _245_ ^ _303_[3];
+  assign _247_ = _118_ ? _303_[3] : _246_;
+  assign _001_[3] = core_reset[1] ? _247_ : _303_[3];
+  assign _248_ = ~_303_[4];
+  assign _249_ = _093_ | _083_;
+  assign _250_ = _249_ | _242_;
+  assign _251_ = _250_ ^ _248_;
+  assign _252_ = _118_ ? _303_[4] : _251_;
+  assign _001_[4] = core_reset[1] ? _252_ : _303_[4];
+  assign _253_ = _303_[4] & ~(_250_);
+  assign _254_ = _253_ ^ _303_[5];
+  assign _255_ = _118_ ? _303_[5] : _254_;
+  assign _001_[5] = core_reset[1] ? _255_ : _303_[5];
+  assign _256_ = _064_ | ~(_303_[4]);
+  assign _257_ = _256_ | _250_;
+  assign _258_ = _257_ ^ _055_;
+  assign _259_ = _118_ ? _303_[6] : _258_;
+  assign _001_[6] = core_reset[1] ? _259_ : _303_[6];
+  assign _260_ = _303_[6] & ~(_257_);
+  assign _261_ = _260_ ^ _303_[7];
+  assign _262_ = _118_ ? _303_[7] : _261_;
+  assign _001_[7] = core_reset[1] ? _262_ : _303_[7];
+  assign _263_ = ~(start_execution | core_reset[0]);
+  assign _293_ = _263_ | _035_;
+  assign _264_ = ~(start_execution | core_reset[1]);
+  assign _295_ = _264_ | _040_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_thread_count[3] <= 1'h0;
-    else if (_003_) core_thread_count[3] <= _294_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_003_) core_thread_count[3] <= _300_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_thread_count[4] <= 1'h0;
-    else if (_003_) core_thread_count[4] <= _295_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_003_) core_thread_count[4] <= _301_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_thread_count[5] <= 1'h1;
-    else if (_003_) core_thread_count[5] <= _296_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[8] <= 1'h0;
-    else if (_003_) core_block_id[8] <= _297_[0];
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[9] <= 1'h0;
-    else if (_003_) core_block_id[9] <= _297_[1];
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[10] <= 1'h0;
-    else if (_003_) core_block_id[10] <= _297_[2];
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[11] <= 1'h0;
-    else if (_003_) core_block_id[11] <= _297_[3];
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[12] <= 1'h0;
-    else if (_003_) core_block_id[12] <= _297_[4];
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[13] <= 1'h0;
-    else if (_003_) core_block_id[13] <= _297_[5];
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[14] <= 1'h0;
-    else if (_003_) core_block_id[14] <= _297_[6];
-  (* src = "../build/gpu.v:800.2-850.6" *)
-  always @(posedge clk)
-    if (reset) core_block_id[15] <= 1'h0;
-    else if (_003_) core_block_id[15] <= _297_[7];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_003_) core_thread_count[5] <= _302_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_start[1] <= 1'h0;
-    else if (_005_) core_start[1] <= _290_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_005_) core_start[1] <= _296_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[8] <= 1'h0;
+    else if (_003_) core_block_id[8] <= _303_[0];
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[9] <= 1'h0;
+    else if (_003_) core_block_id[9] <= _303_[1];
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[10] <= 1'h0;
+    else if (_003_) core_block_id[10] <= _303_[2];
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[11] <= 1'h0;
+    else if (_003_) core_block_id[11] <= _303_[3];
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[12] <= 1'h0;
+    else if (_003_) core_block_id[12] <= _303_[4];
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[13] <= 1'h0;
+    else if (_003_) core_block_id[13] <= _303_[5];
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[14] <= 1'h0;
+    else if (_003_) core_block_id[14] <= _303_[6];
+  (* src = "../build/gpu.v:860.2-910.6" *)
+  always @(posedge clk)
+    if (reset) core_block_id[15] <= 1'h0;
+    else if (_003_) core_block_id[15] <= _303_[7];
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) done <= 1'h0;
     else if (_006_) done <= 1'h1;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_start[0] <= 1'h0;
-    else if (_004_) core_start[0] <= _288_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_004_) core_start[0] <= _294_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_reset[0] <= 1'h1;
-    else if (start) core_reset[0] <= _287_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (start) core_reset[0] <= _293_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_reset[1] <= 1'h1;
-    else if (start) core_reset[1] <= _289_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (start) core_reset[1] <= _295_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[0] <= 1'h0;
     else if (_002_) core_block_id[0] <= blocks_dispatched[0];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[1] <= 1'h0;
     else if (_002_) core_block_id[1] <= blocks_dispatched[1];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[2] <= 1'h0;
     else if (_002_) core_block_id[2] <= blocks_dispatched[2];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[3] <= 1'h0;
     else if (_002_) core_block_id[3] <= blocks_dispatched[3];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[4] <= 1'h0;
     else if (_002_) core_block_id[4] <= blocks_dispatched[4];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[5] <= 1'h0;
     else if (_002_) core_block_id[5] <= blocks_dispatched[5];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[6] <= 1'h0;
     else if (_002_) core_block_id[6] <= blocks_dispatched[6];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_block_id[7] <= 1'h0;
     else if (_002_) core_block_id[7] <= blocks_dispatched[7];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_thread_count[0] <= 1'h0;
-    else if (_002_) core_thread_count[0] <= _291_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_002_) core_thread_count[0] <= _297_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_thread_count[1] <= 1'h0;
-    else if (_002_) core_thread_count[1] <= _292_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_002_) core_thread_count[1] <= _298_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) core_thread_count[2] <= 1'h1;
-    else if (_002_) core_thread_count[2] <= _293_;
-  (* src = "../build/gpu.v:800.2-850.6" *)
+    else if (_002_) core_thread_count[2] <= _299_;
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[0] <= 1'h0;
     else if (start) blocks_dispatched[0] <= _001_[0];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[1] <= 1'h0;
     else if (start) blocks_dispatched[1] <= _001_[1];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[2] <= 1'h0;
     else if (start) blocks_dispatched[2] <= _001_[2];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[3] <= 1'h0;
     else if (start) blocks_dispatched[3] <= _001_[3];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[4] <= 1'h0;
     else if (start) blocks_dispatched[4] <= _001_[4];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[5] <= 1'h0;
     else if (start) blocks_dispatched[5] <= _001_[5];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[6] <= 1'h0;
     else if (start) blocks_dispatched[6] <= _001_[6];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_dispatched[7] <= 1'h0;
     else if (start) blocks_dispatched[7] <= _001_[7];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[0] <= 1'h0;
     else if (start) blocks_done[0] <= _000_[0];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[1] <= 1'h0;
     else if (start) blocks_done[1] <= _000_[1];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[2] <= 1'h0;
     else if (start) blocks_done[2] <= _000_[2];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[3] <= 1'h0;
     else if (start) blocks_done[3] <= _000_[3];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[4] <= 1'h0;
     else if (start) blocks_done[4] <= _000_[4];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[5] <= 1'h0;
     else if (start) blocks_done[5] <= _000_[5];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[6] <= 1'h0;
     else if (start) blocks_done[6] <= _000_[6];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) blocks_done[7] <= 1'h0;
     else if (start) blocks_done[7] <= _000_[7];
-  (* src = "../build/gpu.v:800.2-850.6" *)
+  (* src = "../build/gpu.v:860.2-910.6" *)
   always @(posedge clk)
     if (reset) start_execution <= 1'h0;
     else if (start) start_execution <= 1'h1;
@@ -3048,7 +3058,7 @@ endmodule
 
 (* dynports =  1  *)
 (* hdlname = "registers" *)
-(* src = "../build/gpu.v:1474.1-1549.10" *)
+(* src = "../build/gpu.v:1534.1-1609.10" *)
 module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset, enable, block_id, core_state, decoded_rd_address, decoded_rs_address, decoded_rt_address, decoded_reg_write_enable, decoded_reg_input_mux, decoded_immediate, alu_out, lsu_out, rs, rt);
   wire [7:0] _000_;
   wire [7:0] _001_;
@@ -3391,40 +3401,40 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
   wire _338_;
   wire _339_;
   wire _340_;
-  (* src = "../build/gpu.v:1505.31-1505.38" *)
+  (* src = "../build/gpu.v:1565.31-1565.38" *)
   input [7:0] alu_out;
   wire [7:0] alu_out;
-  (* src = "../build/gpu.v:1497.19-1497.27" *)
+  (* src = "../build/gpu.v:1557.19-1557.27" *)
   input [7:0] block_id;
   wire [7:0] block_id;
-  (* src = "../build/gpu.v:1494.13-1494.16" *)
+  (* src = "../build/gpu.v:1554.13-1554.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1498.19-1498.29" *)
+  (* src = "../build/gpu.v:1558.19-1558.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:1504.31-1504.48" *)
+  (* src = "../build/gpu.v:1564.31-1564.48" *)
   input [7:0] decoded_immediate;
   wire [7:0] decoded_immediate;
-  (* src = "../build/gpu.v:1499.19-1499.37" *)
+  (* src = "../build/gpu.v:1559.19-1559.37" *)
   input [3:0] decoded_rd_address;
   wire [3:0] decoded_rd_address;
-  (* src = "../build/gpu.v:1503.19-1503.40" *)
+  (* src = "../build/gpu.v:1563.19-1563.40" *)
   input [1:0] decoded_reg_input_mux;
   wire [1:0] decoded_reg_input_mux;
-  (* src = "../build/gpu.v:1502.13-1502.37" *)
+  (* src = "../build/gpu.v:1562.13-1562.37" *)
   input decoded_reg_write_enable;
   wire decoded_reg_write_enable;
-  (* src = "../build/gpu.v:1500.19-1500.37" *)
+  (* src = "../build/gpu.v:1560.19-1560.37" *)
   input [3:0] decoded_rs_address;
   wire [3:0] decoded_rs_address;
-  (* src = "../build/gpu.v:1501.19-1501.37" *)
+  (* src = "../build/gpu.v:1561.19-1561.37" *)
   input [3:0] decoded_rt_address;
   wire [3:0] decoded_rt_address;
-  (* src = "../build/gpu.v:1496.13-1496.19" *)
+  (* src = "../build/gpu.v:1556.13-1556.19" *)
   input enable;
   wire enable;
-  (* src = "../build/gpu.v:1506.31-1506.38" *)
+  (* src = "../build/gpu.v:1566.31-1566.38" *)
   input [7:0] lsu_out;
   wire [7:0] lsu_out;
   reg [7:0] \registers[0] ;
@@ -3443,17 +3453,17 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
   reg [7:0] \registers[7] ;
   reg [7:0] \registers[8] ;
   reg [7:0] \registers[9] ;
-  (* src = "../build/gpu.v:1495.13-1495.18" *)
+  (* src = "../build/gpu.v:1555.13-1555.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1507.19-1507.21" *)
+  (* src = "../build/gpu.v:1567.19-1567.21" *)
   output [7:0] rs;
   reg [7:0] rs;
-  (* src = "../build/gpu.v:1508.19-1508.21" *)
+  (* src = "../build/gpu.v:1568.19-1568.21" *)
   output [7:0] rt;
   reg [7:0] rt;
   assign _050_ = ~(decoded_rd_address[0] | decoded_rd_address[1]);
-  assign _051_ = decoded_rd_address[3] & decoded_rd_address[2];
+  assign _051_ = decoded_rd_address[2] & decoded_rd_address[3];
   assign _052_ = _051_ & _050_;
   assign _053_ = ~enable;
   assign _054_ = core_state[1] & ~(core_state[0]);
@@ -3479,58 +3489,58 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
   assign _074_ = _073_ | _068_;
   assign _030_ = _074_ & _052_;
   assign _014_ = _030_ | reset;
-  assign _075_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
+  assign _075_ = ~(decoded_rd_address[0] & decoded_rd_address[1]);
   assign _076_ = decoded_rd_address[2] | ~(decoded_rd_address[3]);
   assign _077_ = _076_ | _075_;
-  assign _028_ = _074_ & ~(_077_);
-  assign _016_ = _028_ | reset;
-  assign _078_ = decoded_rd_address[1] | ~(decoded_rd_address[0]);
-  assign _079_ = _078_ | ~(_051_);
-  assign _080_ = _074_ & ~(_079_);
-  assign _081_ = enable | reset;
-  assign _013_ = _081_ | _080_;
-  assign _082_ = decoded_rd_address[3] | decoded_rd_address[2];
-  assign _083_ = _082_ | _078_;
-  assign _033_ = _074_ & ~(_083_);
-  assign _010_ = _033_ | reset;
-  assign _084_ = _075_ | ~(_051_);
-  assign _031_ = _074_ & ~(_084_);
-  assign _012_ = _031_ | reset;
-  assign _085_ = ~(decoded_rd_address[0] & decoded_rd_address[1]);
-  assign _086_ = _085_ | ~(_051_);
-  assign _032_ = _074_ & ~(_086_);
-  assign _011_ = _032_ | reset;
-  assign _087_ = _085_ | _076_;
-  assign _029_ = _074_ & ~(_087_);
+  assign _029_ = _074_ & ~(_077_);
   assign _015_ = _029_ | reset;
-  assign _088_ = _082_ | ~(_050_);
+  assign _078_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
+  assign _079_ = _078_ | ~(_051_);
+  assign _031_ = _074_ & ~(_079_);
+  assign _012_ = _031_ | reset;
+  assign _080_ = _075_ | ~(_051_);
+  assign _032_ = _074_ & ~(_080_);
+  assign _011_ = _032_ | reset;
+  assign _081_ = decoded_rd_address[2] | decoded_rd_address[3];
+  assign _082_ = _081_ | _075_;
+  assign _035_ = _074_ & ~(_082_);
+  assign _008_ = _035_ | reset;
+  assign _083_ = decoded_rd_address[3] | ~(decoded_rd_address[2]);
+  assign _084_ = _083_ | _075_;
+  assign _039_ = _074_ & ~(_084_);
+  assign _004_ = _039_ | reset;
+  assign _085_ = decoded_rd_address[1] | ~(decoded_rd_address[0]);
+  assign _086_ = _076_ | _085_;
+  assign _041_ = _074_ & ~(_086_);
+  assign _002_ = _041_ | reset;
+  assign _087_ = _076_ | ~(_050_);
+  assign _040_ = _074_ & ~(_087_);
+  assign _003_ = _040_ | reset;
+  assign _088_ = _081_ | ~(_050_);
   assign _027_ = _074_ & ~(_088_);
   assign _017_ = _027_ | reset;
-  assign _089_ = _082_ | _075_;
-  assign _034_ = _074_ & ~(_089_);
-  assign _009_ = _034_ | reset;
-  assign _090_ = _085_ | _082_;
-  assign _035_ = _074_ & ~(_090_);
-  assign _008_ = _035_ | reset;
-  assign _091_ = decoded_rd_address[3] | ~(decoded_rd_address[2]);
-  assign _092_ = _091_ | ~(_050_);
-  assign _036_ = _074_ & ~(_092_);
+  assign _089_ = _078_ | _076_;
+  assign _028_ = _074_ & ~(_089_);
+  assign _016_ = _028_ | reset;
+  assign _090_ = _085_ | ~(_051_);
+  assign _091_ = _074_ & ~(_090_);
+  assign _092_ = enable | reset;
+  assign _013_ = _092_ | _091_;
+  assign _093_ = _081_ | _085_;
+  assign _033_ = _074_ & ~(_093_);
+  assign _010_ = _033_ | reset;
+  assign _094_ = _083_ | ~(_050_);
+  assign _036_ = _074_ & ~(_094_);
   assign _007_ = _036_ | reset;
-  assign _093_ = _091_ | _078_;
-  assign _037_ = _074_ & ~(_093_);
+  assign _095_ = _081_ | _078_;
+  assign _034_ = _074_ & ~(_095_);
+  assign _009_ = _034_ | reset;
+  assign _096_ = _083_ | _085_;
+  assign _037_ = _074_ & ~(_096_);
   assign _006_ = _037_ | reset;
-  assign _094_ = _091_ | _075_;
-  assign _038_ = _074_ & ~(_094_);
+  assign _097_ = _083_ | _078_;
+  assign _038_ = _074_ & ~(_097_);
   assign _005_ = _038_ | reset;
-  assign _095_ = _076_ | _078_;
-  assign _041_ = _074_ & ~(_095_);
-  assign _002_ = _041_ | reset;
-  assign _096_ = _091_ | _085_;
-  assign _039_ = _074_ & ~(_096_);
-  assign _004_ = _039_ | reset;
-  assign _097_ = _076_ | ~(_050_);
-  assign _040_ = _074_ & ~(_097_);
-  assign _003_ = _040_ | reset;
   assign _098_ = ~(core_state[0] & core_state[1]);
   assign _099_ = _098_ | core_state[2];
   assign _018_ = enable & ~(_099_);
@@ -3658,35 +3668,35 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
   assign _019_ = _073_ ? decoded_immediate[0] : _212_;
   assign _213_ = reset | ~(enable);
   assign _214_ = block_id[0] & ~(_213_);
-  assign _042_ = _080_ ? _019_ : _214_;
+  assign _042_ = _091_ ? _019_ : _214_;
   assign _215_ = _067_ ? alu_out[1] : lsu_out[1];
   assign _020_ = _073_ ? decoded_immediate[1] : _215_;
   assign _216_ = block_id[1] & ~(_213_);
-  assign _043_ = _080_ ? _020_ : _216_;
+  assign _043_ = _091_ ? _020_ : _216_;
   assign _217_ = _067_ ? alu_out[2] : lsu_out[2];
   assign _021_ = _073_ ? decoded_immediate[2] : _217_;
   assign _218_ = block_id[2] & ~(_213_);
-  assign _044_ = _080_ ? _021_ : _218_;
+  assign _044_ = _091_ ? _021_ : _218_;
   assign _219_ = _067_ ? alu_out[3] : lsu_out[3];
   assign _022_ = _073_ ? decoded_immediate[3] : _219_;
   assign _220_ = block_id[3] & ~(_213_);
-  assign _045_ = _080_ ? _022_ : _220_;
+  assign _045_ = _091_ ? _022_ : _220_;
   assign _221_ = _067_ ? alu_out[4] : lsu_out[4];
   assign _023_ = _073_ ? decoded_immediate[4] : _221_;
   assign _222_ = block_id[4] & ~(_213_);
-  assign _046_ = _080_ ? _023_ : _222_;
+  assign _046_ = _091_ ? _023_ : _222_;
   assign _223_ = _067_ ? alu_out[5] : lsu_out[5];
   assign _024_ = _073_ ? decoded_immediate[5] : _223_;
   assign _224_ = block_id[5] & ~(_213_);
-  assign _047_ = _080_ ? _024_ : _224_;
+  assign _047_ = _091_ ? _024_ : _224_;
   assign _225_ = _067_ ? alu_out[6] : lsu_out[6];
   assign _025_ = _073_ ? decoded_immediate[6] : _225_;
   assign _226_ = block_id[6] & ~(_213_);
-  assign _048_ = _080_ ? _025_ : _226_;
+  assign _048_ = _091_ ? _025_ : _226_;
   assign _227_ = _067_ ? alu_out[7] : lsu_out[7];
   assign _026_ = _073_ ? decoded_immediate[7] : _227_;
   assign _228_ = block_id[7] & ~(_213_);
-  assign _049_ = _080_ ? _026_ : _228_;
+  assign _049_ = _091_ ? _026_ : _228_;
   assign _229_ = decoded_rs_address[0] ? \registers[1] [0] : \registers[0] [0];
   assign _230_ = decoded_rs_address[0] ? \registers[3] [0] : \registers[2] [0];
   assign _231_ = decoded_rs_address[1] ? _230_ : _229_;
@@ -3832,6 +3842,294 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
     if (reset) rs[7] <= 1'h0;
     else if (_018_) rs[7] <= _001_[7];
   always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [0] <= 1'h0;
+      else \registers[15] [0] <= _019_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [1] <= 1'h1;
+      else \registers[15] [1] <= _020_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [2] <= 1'h0;
+      else \registers[15] [2] <= _021_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [3] <= 1'h0;
+      else \registers[15] [3] <= _022_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [4] <= 1'h0;
+      else \registers[15] [4] <= _023_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [5] <= 1'h0;
+      else \registers[15] [5] <= _024_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [6] <= 1'h0;
+      else \registers[15] [6] <= _025_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [7] <= 1'h0;
+      else \registers[15] [7] <= _026_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [0] <= 1'h0;
+      else \registers[10] [0] <= _019_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [1] <= 1'h0;
+      else \registers[10] [1] <= _020_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [2] <= 1'h0;
+      else \registers[10] [2] <= _021_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [3] <= 1'h0;
+      else \registers[10] [3] <= _022_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [4] <= 1'h0;
+      else \registers[10] [4] <= _023_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [5] <= 1'h0;
+      else \registers[10] [5] <= _024_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [6] <= 1'h0;
+      else \registers[10] [6] <= _025_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [7] <= 1'h0;
+      else \registers[10] [7] <= _026_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [0] <= 1'h0;
+      else \registers[6] [0] <= _019_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [1] <= 1'h0;
+      else \registers[6] [1] <= _020_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [2] <= 1'h0;
+      else \registers[6] [2] <= _021_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [3] <= 1'h0;
+      else \registers[6] [3] <= _022_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [4] <= 1'h0;
+      else \registers[6] [4] <= _023_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [5] <= 1'h0;
+      else \registers[6] [5] <= _024_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [6] <= 1'h0;
+      else \registers[6] [6] <= _025_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [7] <= 1'h0;
+      else \registers[6] [7] <= _026_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [0] <= 1'h0;
+      else \registers[8] [0] <= _019_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [1] <= 1'h0;
+      else \registers[8] [1] <= _020_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [2] <= 1'h0;
+      else \registers[8] [2] <= _021_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [3] <= 1'h0;
+      else \registers[8] [3] <= _022_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [4] <= 1'h0;
+      else \registers[8] [4] <= _023_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [5] <= 1'h0;
+      else \registers[8] [5] <= _024_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [6] <= 1'h0;
+      else \registers[8] [6] <= _025_;
+  always @(posedge clk)
+    if (_003_)
+      if (!_040_) \registers[8] [7] <= 1'h0;
+      else \registers[8] [7] <= _026_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [0] <= 1'h0;
+      else \registers[4] [0] <= _019_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [1] <= 1'h0;
+      else \registers[4] [1] <= _020_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [2] <= 1'h0;
+      else \registers[4] [2] <= _021_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [3] <= 1'h0;
+      else \registers[4] [3] <= _022_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [4] <= 1'h0;
+      else \registers[4] [4] <= _023_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [5] <= 1'h0;
+      else \registers[4] [5] <= _024_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [6] <= 1'h0;
+      else \registers[4] [6] <= _025_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [7] <= 1'h0;
+      else \registers[4] [7] <= _026_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [0] <= 1'h0;
+      else \registers[14] [0] <= _019_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [1] <= 1'h0;
+      else \registers[14] [1] <= _020_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [2] <= 1'h1;
+      else \registers[14] [2] <= _021_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [3] <= 1'h0;
+      else \registers[14] [3] <= _022_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [4] <= 1'h0;
+      else \registers[14] [4] <= _023_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [5] <= 1'h0;
+      else \registers[14] [5] <= _024_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [6] <= 1'h0;
+      else \registers[14] [6] <= _025_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [7] <= 1'h0;
+      else \registers[14] [7] <= _026_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [0] <= 1'h0;
+      else \registers[5] [0] <= _019_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [1] <= 1'h0;
+      else \registers[5] [1] <= _020_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [2] <= 1'h0;
+      else \registers[5] [2] <= _021_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [3] <= 1'h0;
+      else \registers[5] [3] <= _022_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [4] <= 1'h0;
+      else \registers[5] [4] <= _023_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [5] <= 1'h0;
+      else \registers[5] [5] <= _024_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [6] <= 1'h0;
+      else \registers[5] [6] <= _025_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [7] <= 1'h0;
+      else \registers[5] [7] <= _026_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [0] <= 1'h0;
+      else \registers[9] [0] <= _019_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [1] <= 1'h0;
+      else \registers[9] [1] <= _020_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [2] <= 1'h0;
+      else \registers[9] [2] <= _021_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [3] <= 1'h0;
+      else \registers[9] [3] <= _022_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [4] <= 1'h0;
+      else \registers[9] [4] <= _023_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [5] <= 1'h0;
+      else \registers[9] [5] <= _024_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [6] <= 1'h0;
+      else \registers[9] [6] <= _025_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [7] <= 1'h0;
+      else \registers[9] [7] <= _026_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [0] <= 1'h0;
+      else \registers[1] [0] <= _019_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [1] <= 1'h0;
+      else \registers[1] [1] <= _020_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [2] <= 1'h0;
+      else \registers[1] [2] <= _021_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [3] <= 1'h0;
+      else \registers[1] [3] <= _022_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [4] <= 1'h0;
+      else \registers[1] [4] <= _023_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [5] <= 1'h0;
+      else \registers[1] [5] <= _024_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [6] <= 1'h0;
+      else \registers[1] [6] <= _025_;
+  always @(posedge clk)
+    if (_010_)
+      if (!_033_) \registers[1] [7] <= 1'h0;
+      else \registers[1] [7] <= _026_;
+  always @(posedge clk)
     if (_004_)
       if (!_039_) \registers[7] [0] <= 1'h0;
       else \registers[7] [0] <= _019_;
@@ -3863,6 +4161,70 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
     if (_004_)
       if (!_039_) \registers[7] [7] <= 1'h0;
       else \registers[7] [7] <= _026_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [0] <= 1'h0;
+      else \registers[3] [0] <= _019_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [1] <= 1'h0;
+      else \registers[3] [1] <= _020_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [2] <= 1'h0;
+      else \registers[3] [2] <= _021_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [3] <= 1'h0;
+      else \registers[3] [3] <= _022_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [4] <= 1'h0;
+      else \registers[3] [4] <= _023_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [5] <= 1'h0;
+      else \registers[3] [5] <= _024_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [6] <= 1'h0;
+      else \registers[3] [6] <= _025_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [7] <= 1'h0;
+      else \registers[3] [7] <= _026_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [0] <= 1'h0;
+      else \registers[0] [0] <= _019_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [1] <= 1'h0;
+      else \registers[0] [1] <= _020_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [2] <= 1'h0;
+      else \registers[0] [2] <= _021_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [3] <= 1'h0;
+      else \registers[0] [3] <= _022_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [4] <= 1'h0;
+      else \registers[0] [4] <= _023_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [5] <= 1'h0;
+      else \registers[0] [5] <= _024_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [6] <= 1'h0;
+      else \registers[0] [6] <= _025_;
+  always @(posedge clk)
+    if (_017_)
+      if (!_027_) \registers[0] [7] <= 1'h0;
+      else \registers[0] [7] <= _026_;
   always @(posedge clk)
     if (_013_) \registers[13] [0] <= _042_;
   always @(posedge clk)
@@ -3944,134 +4306,6 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
       if (!_029_) \registers[11] [7] <= 1'h0;
       else \registers[11] [7] <= _026_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [0] <= 1'h0;
-      else \registers[10] [0] <= _019_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [1] <= 1'h0;
-      else \registers[10] [1] <= _020_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [2] <= 1'h0;
-      else \registers[10] [2] <= _021_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [3] <= 1'h0;
-      else \registers[10] [3] <= _022_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [4] <= 1'h0;
-      else \registers[10] [4] <= _023_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [5] <= 1'h0;
-      else \registers[10] [5] <= _024_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [6] <= 1'h0;
-      else \registers[10] [6] <= _025_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [7] <= 1'h0;
-      else \registers[10] [7] <= _026_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [0] <= 1'h0;
-      else \registers[14] [0] <= _019_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [1] <= 1'h0;
-      else \registers[14] [1] <= _020_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [2] <= 1'h1;
-      else \registers[14] [2] <= _021_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [3] <= 1'h0;
-      else \registers[14] [3] <= _022_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [4] <= 1'h0;
-      else \registers[14] [4] <= _023_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [5] <= 1'h0;
-      else \registers[14] [5] <= _024_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [6] <= 1'h0;
-      else \registers[14] [6] <= _025_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [7] <= 1'h0;
-      else \registers[14] [7] <= _026_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [0] <= 1'h0;
-      else \registers[6] [0] <= _019_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [1] <= 1'h0;
-      else \registers[6] [1] <= _020_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [2] <= 1'h0;
-      else \registers[6] [2] <= _021_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [3] <= 1'h0;
-      else \registers[6] [3] <= _022_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [4] <= 1'h0;
-      else \registers[6] [4] <= _023_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [5] <= 1'h0;
-      else \registers[6] [5] <= _024_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [6] <= 1'h0;
-      else \registers[6] [6] <= _025_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [7] <= 1'h0;
-      else \registers[6] [7] <= _026_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [0] <= 1'h0;
-      else \registers[8] [0] <= _019_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [1] <= 1'h0;
-      else \registers[8] [1] <= _020_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [2] <= 1'h0;
-      else \registers[8] [2] <= _021_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [3] <= 1'h0;
-      else \registers[8] [3] <= _022_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [4] <= 1'h0;
-      else \registers[8] [4] <= _023_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [5] <= 1'h0;
-      else \registers[8] [5] <= _024_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [6] <= 1'h0;
-      else \registers[8] [6] <= _025_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [7] <= 1'h0;
-      else \registers[8] [7] <= _026_;
-  always @(posedge clk)
     if (_009_)
       if (!_034_) \registers[2] [0] <= 1'h0;
       else \registers[2] [0] <= _019_;
@@ -4104,230 +4338,6 @@ module \$paramod$a747760de5c733b6f88bb63119f261e23521a1b9\registers (clk, reset,
       if (!_034_) \registers[2] [7] <= 1'h0;
       else \registers[2] [7] <= _026_;
   always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [0] <= 1'h0;
-      else \registers[1] [0] <= _019_;
-  always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [1] <= 1'h0;
-      else \registers[1] [1] <= _020_;
-  always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [2] <= 1'h0;
-      else \registers[1] [2] <= _021_;
-  always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [3] <= 1'h0;
-      else \registers[1] [3] <= _022_;
-  always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [4] <= 1'h0;
-      else \registers[1] [4] <= _023_;
-  always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [5] <= 1'h0;
-      else \registers[1] [5] <= _024_;
-  always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [6] <= 1'h0;
-      else \registers[1] [6] <= _025_;
-  always @(posedge clk)
-    if (_010_)
-      if (!_033_) \registers[1] [7] <= 1'h0;
-      else \registers[1] [7] <= _026_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [0] <= 1'h0;
-      else \registers[15] [0] <= _019_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [1] <= 1'h1;
-      else \registers[15] [1] <= _020_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [2] <= 1'h0;
-      else \registers[15] [2] <= _021_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [3] <= 1'h0;
-      else \registers[15] [3] <= _022_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [4] <= 1'h0;
-      else \registers[15] [4] <= _023_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [5] <= 1'h0;
-      else \registers[15] [5] <= _024_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [6] <= 1'h0;
-      else \registers[15] [6] <= _025_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [7] <= 1'h0;
-      else \registers[15] [7] <= _026_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [0] <= 1'h0;
-      else \registers[9] [0] <= _019_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [1] <= 1'h0;
-      else \registers[9] [1] <= _020_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [2] <= 1'h0;
-      else \registers[9] [2] <= _021_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [3] <= 1'h0;
-      else \registers[9] [3] <= _022_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [4] <= 1'h0;
-      else \registers[9] [4] <= _023_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [5] <= 1'h0;
-      else \registers[9] [5] <= _024_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [6] <= 1'h0;
-      else \registers[9] [6] <= _025_;
-  always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [7] <= 1'h0;
-      else \registers[9] [7] <= _026_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [0] <= 1'h0;
-      else \registers[0] [0] <= _019_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [1] <= 1'h0;
-      else \registers[0] [1] <= _020_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [2] <= 1'h0;
-      else \registers[0] [2] <= _021_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [3] <= 1'h0;
-      else \registers[0] [3] <= _022_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [4] <= 1'h0;
-      else \registers[0] [4] <= _023_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [5] <= 1'h0;
-      else \registers[0] [5] <= _024_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [6] <= 1'h0;
-      else \registers[0] [6] <= _025_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [7] <= 1'h0;
-      else \registers[0] [7] <= _026_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [0] <= 1'h0;
-      else \registers[3] [0] <= _019_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [1] <= 1'h0;
-      else \registers[3] [1] <= _020_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [2] <= 1'h0;
-      else \registers[3] [2] <= _021_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [3] <= 1'h0;
-      else \registers[3] [3] <= _022_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [4] <= 1'h0;
-      else \registers[3] [4] <= _023_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [5] <= 1'h0;
-      else \registers[3] [5] <= _024_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [6] <= 1'h0;
-      else \registers[3] [6] <= _025_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [7] <= 1'h0;
-      else \registers[3] [7] <= _026_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [0] <= 1'h0;
-      else \registers[5] [0] <= _019_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [1] <= 1'h0;
-      else \registers[5] [1] <= _020_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [2] <= 1'h0;
-      else \registers[5] [2] <= _021_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [3] <= 1'h0;
-      else \registers[5] [3] <= _022_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [4] <= 1'h0;
-      else \registers[5] [4] <= _023_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [5] <= 1'h0;
-      else \registers[5] [5] <= _024_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [6] <= 1'h0;
-      else \registers[5] [6] <= _025_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [7] <= 1'h0;
-      else \registers[5] [7] <= _026_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [0] <= 1'h0;
-      else \registers[4] [0] <= _019_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [1] <= 1'h0;
-      else \registers[4] [1] <= _020_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [2] <= 1'h0;
-      else \registers[4] [2] <= _021_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [3] <= 1'h0;
-      else \registers[4] [3] <= _022_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [4] <= 1'h0;
-      else \registers[4] [4] <= _023_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [5] <= 1'h0;
-      else \registers[4] [5] <= _024_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [6] <= 1'h0;
-      else \registers[4] [6] <= _025_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [7] <= 1'h0;
-      else \registers[4] [7] <= _026_;
-  always @(posedge clk)
     if (reset) rt[0] <= 1'h0;
     else if (_018_) rt[0] <= _000_[0];
   always @(posedge clk)
@@ -4355,7 +4365,7 @@ endmodule
 
 (* dynports =  1  *)
 (* hdlname = "fetcher" *)
-(* src = "../build/gpu.v:984.1-1060.10" *)
+(* src = "../build/gpu.v:1044.1-1120.10" *)
 module \$paramod$beb00772bac1a1e06ce8ff4195cf7b0af620cd82\fetcher (clk, reset, core_state, current_pc, mem_read_valid, mem_read_address, mem_read_ready, mem_read_data, fetcher_state, instruction);
   wire _00_;
   wire _01_;
@@ -4374,180 +4384,180 @@ module \$paramod$beb00772bac1a1e06ce8ff4195cf7b0af620cd82\fetcher (clk, reset, c
   wire _14_;
   wire _15_;
   (* force_downto = 32'd1 *)
-  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:1043.4-1059.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
+  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:1103.4-1119.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
   wire [1:0] _16_;
-  (* src = "../build/gpu.v:998.13-998.16" *)
+  (* src = "../build/gpu.v:1058.13-1058.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1000.19-1000.29" *)
+  (* src = "../build/gpu.v:1060.19-1060.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:1001.19-1001.29" *)
+  (* src = "../build/gpu.v:1061.19-1061.29" *)
   input [7:0] current_pc;
   wire [7:0] current_pc;
-  (* src = "../build/gpu.v:1006.19-1006.32" *)
+  (* src = "../build/gpu.v:1066.19-1066.32" *)
   output [2:0] fetcher_state;
   wire [2:0] fetcher_state;
-  (* src = "../build/gpu.v:1007.43-1007.54" *)
+  (* src = "../build/gpu.v:1067.43-1067.54" *)
   output [15:0] instruction;
   reg [15:0] instruction;
-  (* src = "../build/gpu.v:1018.26-1018.38" *)
+  (* src = "../build/gpu.v:1078.26-1078.38" *)
   reg [7:0] \mem_if.read_address ;
-  (* src = "../build/gpu.v:1020.27-1020.36" *)
+  (* src = "../build/gpu.v:1080.27-1080.36" *)
   wire [15:0] \mem_if.read_data ;
-  (* src = "../build/gpu.v:1019.9-1019.19" *)
+  (* src = "../build/gpu.v:1079.9-1079.19" *)
   wire \mem_if.read_ready ;
-  (* src = "../build/gpu.v:1017.8-1017.18" *)
+  (* src = "../build/gpu.v:1077.8-1077.18" *)
   reg \mem_if.read_valid ;
-  (* src = "../build/gpu.v:1003.43-1003.59" *)
+  (* src = "../build/gpu.v:1063.43-1063.59" *)
   output [7:0] mem_read_address;
   wire [7:0] mem_read_address;
-  (* src = "../build/gpu.v:1005.43-1005.56" *)
+  (* src = "../build/gpu.v:1065.43-1065.56" *)
   input [15:0] mem_read_data;
   wire [15:0] mem_read_data;
-  (* src = "../build/gpu.v:1004.13-1004.27" *)
+  (* src = "../build/gpu.v:1064.13-1064.27" *)
   input mem_read_ready;
   wire mem_read_ready;
-  (* src = "../build/gpu.v:1002.13-1002.27" *)
+  (* src = "../build/gpu.v:1062.13-1062.27" *)
   output mem_read_valid;
   wire mem_read_valid;
-  (* src = "../build/gpu.v:999.13-999.18" *)
+  (* src = "../build/gpu.v:1059.13-1059.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1030.33-1030.47" *)
+  (* src = "../build/gpu.v:1090.33-1090.47" *)
   wire [8:1] sv2v_tmp_9FB2F;
-  (* src = "../build/gpu.v:1027.13-1027.27" *)
+  (* src = "../build/gpu.v:1087.13-1087.27" *)
   wire sv2v_tmp_AF88B;
+  assign _05_ = core_state[1] | ~(core_state[0]);
+  assign _06_ = _05_ | core_state[2];
+  assign _07_ = fetcher_state[1] | fetcher_state[0];
+  assign _00_ = ~(_07_ | _06_);
   assign _04_ = fetcher_state[1] | ~(fetcher_state[0]);
+  assign _08_ = _04_ | mem_read_ready;
+  assign _09_ = _06_ & ~(_07_);
+  assign _10_ = _08_ & ~(_09_);
+  assign _11_ = _04_ & _07_;
+  assign _01_ = _10_ & ~(_11_);
   assign _02_ = mem_read_ready & ~(_04_);
-  assign _05_ = _04_ | mem_read_ready;
-  assign _06_ = core_state[1] | ~(core_state[0]);
-  assign _07_ = ~(_06_ | core_state[2]);
-  assign _08_ = ~(fetcher_state[0] | fetcher_state[1]);
-  assign _09_ = _08_ & ~(_07_);
-  assign _10_ = _05_ & ~(_09_);
-  assign _11_ = core_state[0] | ~(core_state[1]);
-  assign _12_ = _11_ | core_state[2];
-  assign _13_ = fetcher_state[1] & ~(fetcher_state[0]);
-  assign _14_ = _04_ & ~(_08_);
-  assign _15_ = _13_ ? _12_ : _14_;
+  assign _12_ = core_state[0] | ~(core_state[1]);
+  assign _13_ = _12_ | core_state[2];
+  assign _14_ = fetcher_state[0] | ~(fetcher_state[1]);
+  assign _15_ = _14_ ? _11_ : _13_;
   assign _03_ = _10_ & ~(_15_);
-  assign _00_ = _08_ & _07_;
-  assign _01_ = _10_ & ~(_14_);
-  assign _16_[0] = _04_ & ~(_13_);
+  assign _16_[0] = _14_ & _04_;
   assign _16_[1] = fetcher_state[0] & ~(fetcher_state[1]);
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[0] <= 1'h0;
-    else if (_02_) instruction[0] <= mem_read_data[0];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[1] <= 1'h0;
-    else if (_02_) instruction[1] <= mem_read_data[1];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[2] <= 1'h0;
-    else if (_02_) instruction[2] <= mem_read_data[2];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[3] <= 1'h0;
-    else if (_02_) instruction[3] <= mem_read_data[3];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[4] <= 1'h0;
-    else if (_02_) instruction[4] <= mem_read_data[4];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[5] <= 1'h0;
-    else if (_02_) instruction[5] <= mem_read_data[5];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[6] <= 1'h0;
-    else if (_02_) instruction[6] <= mem_read_data[6];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[7] <= 1'h0;
-    else if (_02_) instruction[7] <= mem_read_data[7];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[8] <= 1'h0;
-    else if (_02_) instruction[8] <= mem_read_data[8];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[9] <= 1'h0;
-    else if (_02_) instruction[9] <= mem_read_data[9];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[10] <= 1'h0;
-    else if (_02_) instruction[10] <= mem_read_data[10];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[11] <= 1'h0;
-    else if (_02_) instruction[11] <= mem_read_data[11];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[12] <= 1'h0;
-    else if (_02_) instruction[12] <= mem_read_data[12];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[13] <= 1'h0;
-    else if (_02_) instruction[13] <= mem_read_data[13];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[14] <= 1'h0;
-    else if (_02_) instruction[14] <= mem_read_data[14];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) instruction[15] <= 1'h0;
-    else if (_02_) instruction[15] <= mem_read_data[15];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_valid  <= 1'h0;
-    else if (_01_) \mem_if.read_valid  <= _04_;
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [0] <= 1'h0;
-    else if (_00_) \mem_if.read_address [0] <= current_pc[0];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [1] <= 1'h0;
-    else if (_00_) \mem_if.read_address [1] <= current_pc[1];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [2] <= 1'h0;
-    else if (_00_) \mem_if.read_address [2] <= current_pc[2];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [3] <= 1'h0;
-    else if (_00_) \mem_if.read_address [3] <= current_pc[3];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [4] <= 1'h0;
-    else if (_00_) \mem_if.read_address [4] <= current_pc[4];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [5] <= 1'h0;
-    else if (_00_) \mem_if.read_address [5] <= current_pc[5];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [6] <= 1'h0;
-    else if (_00_) \mem_if.read_address [6] <= current_pc[6];
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
-  always @(posedge clk)
-    if (reset) \mem_if.read_address [7] <= 1'h0;
-    else if (_00_) \mem_if.read_address [7] <= current_pc[7];
   reg \fetcher_state_reg[0] ;
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
   always @(posedge clk)
     if (reset) \fetcher_state_reg[0]  <= 1'h0;
     else if (_03_) \fetcher_state_reg[0]  <= _16_[0];
   assign fetcher_state[0] = \fetcher_state_reg[0] ;
   reg \fetcher_state_reg[1] ;
-  (* src = "../build/gpu.v:1035.2-1059.11" *)
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
   always @(posedge clk)
     if (reset) \fetcher_state_reg[1]  <= 1'h0;
     else if (_03_) \fetcher_state_reg[1]  <= _16_[1];
   assign fetcher_state[1] = \fetcher_state_reg[1] ;
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[0] <= 1'h0;
+    else if (_02_) instruction[0] <= mem_read_data[0];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[1] <= 1'h0;
+    else if (_02_) instruction[1] <= mem_read_data[1];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[2] <= 1'h0;
+    else if (_02_) instruction[2] <= mem_read_data[2];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[3] <= 1'h0;
+    else if (_02_) instruction[3] <= mem_read_data[3];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[4] <= 1'h0;
+    else if (_02_) instruction[4] <= mem_read_data[4];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[5] <= 1'h0;
+    else if (_02_) instruction[5] <= mem_read_data[5];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[6] <= 1'h0;
+    else if (_02_) instruction[6] <= mem_read_data[6];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[7] <= 1'h0;
+    else if (_02_) instruction[7] <= mem_read_data[7];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[8] <= 1'h0;
+    else if (_02_) instruction[8] <= mem_read_data[8];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[9] <= 1'h0;
+    else if (_02_) instruction[9] <= mem_read_data[9];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[10] <= 1'h0;
+    else if (_02_) instruction[10] <= mem_read_data[10];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[11] <= 1'h0;
+    else if (_02_) instruction[11] <= mem_read_data[11];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[12] <= 1'h0;
+    else if (_02_) instruction[12] <= mem_read_data[12];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[13] <= 1'h0;
+    else if (_02_) instruction[13] <= mem_read_data[13];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[14] <= 1'h0;
+    else if (_02_) instruction[14] <= mem_read_data[14];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) instruction[15] <= 1'h0;
+    else if (_02_) instruction[15] <= mem_read_data[15];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_valid  <= 1'h0;
+    else if (_01_) \mem_if.read_valid  <= _04_;
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [0] <= 1'h0;
+    else if (_00_) \mem_if.read_address [0] <= current_pc[0];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [1] <= 1'h0;
+    else if (_00_) \mem_if.read_address [1] <= current_pc[1];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [2] <= 1'h0;
+    else if (_00_) \mem_if.read_address [2] <= current_pc[2];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [3] <= 1'h0;
+    else if (_00_) \mem_if.read_address [3] <= current_pc[3];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [4] <= 1'h0;
+    else if (_00_) \mem_if.read_address [4] <= current_pc[4];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [5] <= 1'h0;
+    else if (_00_) \mem_if.read_address [5] <= current_pc[5];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [6] <= 1'h0;
+    else if (_00_) \mem_if.read_address [6] <= current_pc[6];
+  (* src = "../build/gpu.v:1095.2-1119.11" *)
+  always @(posedge clk)
+    if (reset) \mem_if.read_address [7] <= 1'h0;
+    else if (_00_) \mem_if.read_address [7] <= current_pc[7];
   assign fetcher_state[2] = 1'h0;
   assign \mem_if.read_data  = mem_read_data;
   assign \mem_if.read_ready  = mem_read_ready;
@@ -4559,7 +4569,7 @@ endmodule
 
 (* dynports =  1  *)
 (* hdlname = "registers" *)
-(* src = "../build/gpu.v:1474.1-1549.10" *)
+(* src = "../build/gpu.v:1534.1-1609.10" *)
 module \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers (clk, reset, enable, block_id, core_state, decoded_rd_address, decoded_rs_address, decoded_rt_address, decoded_reg_write_enable, decoded_reg_input_mux, decoded_immediate, alu_out, lsu_out, rs, rt);
   wire [7:0] _000_;
   wire [7:0] _001_;
@@ -4902,41 +4912,40 @@ module \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers (clk, reset,
   wire _338_;
   wire _339_;
   wire _340_;
-  wire _341_;
-  (* src = "../build/gpu.v:1505.31-1505.38" *)
+  (* src = "../build/gpu.v:1565.31-1565.38" *)
   input [7:0] alu_out;
   wire [7:0] alu_out;
-  (* src = "../build/gpu.v:1497.19-1497.27" *)
+  (* src = "../build/gpu.v:1557.19-1557.27" *)
   input [7:0] block_id;
   wire [7:0] block_id;
-  (* src = "../build/gpu.v:1494.13-1494.16" *)
+  (* src = "../build/gpu.v:1554.13-1554.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1498.19-1498.29" *)
+  (* src = "../build/gpu.v:1558.19-1558.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:1504.31-1504.48" *)
+  (* src = "../build/gpu.v:1564.31-1564.48" *)
   input [7:0] decoded_immediate;
   wire [7:0] decoded_immediate;
-  (* src = "../build/gpu.v:1499.19-1499.37" *)
+  (* src = "../build/gpu.v:1559.19-1559.37" *)
   input [3:0] decoded_rd_address;
   wire [3:0] decoded_rd_address;
-  (* src = "../build/gpu.v:1503.19-1503.40" *)
+  (* src = "../build/gpu.v:1563.19-1563.40" *)
   input [1:0] decoded_reg_input_mux;
   wire [1:0] decoded_reg_input_mux;
-  (* src = "../build/gpu.v:1502.13-1502.37" *)
+  (* src = "../build/gpu.v:1562.13-1562.37" *)
   input decoded_reg_write_enable;
   wire decoded_reg_write_enable;
-  (* src = "../build/gpu.v:1500.19-1500.37" *)
+  (* src = "../build/gpu.v:1560.19-1560.37" *)
   input [3:0] decoded_rs_address;
   wire [3:0] decoded_rs_address;
-  (* src = "../build/gpu.v:1501.19-1501.37" *)
+  (* src = "../build/gpu.v:1561.19-1561.37" *)
   input [3:0] decoded_rt_address;
   wire [3:0] decoded_rt_address;
-  (* src = "../build/gpu.v:1496.13-1496.19" *)
+  (* src = "../build/gpu.v:1556.13-1556.19" *)
   input enable;
   wire enable;
-  (* src = "../build/gpu.v:1506.31-1506.38" *)
+  (* src = "../build/gpu.v:1566.31-1566.38" *)
   input [7:0] lsu_out;
   wire [7:0] lsu_out;
   reg [7:0] \registers[0] ;
@@ -4955,371 +4964,370 @@ module \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers (clk, reset,
   reg [7:0] \registers[7] ;
   reg [7:0] \registers[8] ;
   reg [7:0] \registers[9] ;
-  (* src = "../build/gpu.v:1495.13-1495.18" *)
+  (* src = "../build/gpu.v:1555.13-1555.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1507.19-1507.21" *)
+  (* src = "../build/gpu.v:1567.19-1567.21" *)
   output [7:0] rs;
   reg [7:0] rs;
-  (* src = "../build/gpu.v:1508.19-1508.21" *)
+  (* src = "../build/gpu.v:1568.19-1568.21" *)
   output [7:0] rt;
   reg [7:0] rt;
-  assign _050_ = decoded_rd_address[0] & ~(decoded_rd_address[1]);
-  assign _051_ = decoded_rd_address[2] | ~(decoded_rd_address[3]);
+  assign _050_ = ~(decoded_rd_address[0] | decoded_rd_address[1]);
+  assign _051_ = decoded_rd_address[3] | ~(decoded_rd_address[2]);
   assign _052_ = _050_ & ~(_051_);
   assign _053_ = ~enable;
   assign _054_ = core_state[1] & ~(core_state[0]);
   assign _055_ = ~(_054_ & core_state[2]);
   assign _056_ = decoded_rd_address[3] & decoded_rd_address[2];
-  assign _057_ = ~(decoded_rd_address[0] | decoded_rd_address[1]);
-  assign _058_ = _057_ | ~(_056_);
-  assign _059_ = ~(_058_ & decoded_reg_write_enable);
-  assign _060_ = decoded_reg_input_mux[1] | decoded_reg_input_mux[0];
-  assign _061_ = _060_ | _059_;
-  assign _062_ = _061_ | _055_;
-  assign _063_ = _062_ | _053_;
-  assign _064_ = _063_ | reset;
-  assign _065_ = decoded_reg_input_mux[1] | ~(decoded_reg_input_mux[0]);
-  assign _066_ = _065_ | _059_;
-  assign _067_ = _066_ | _055_;
-  assign _068_ = _067_ | _053_;
-  assign _069_ = _068_ | reset;
-  assign _070_ = ~(_069_ & _064_);
-  assign _071_ = decoded_reg_input_mux[0] | ~(decoded_reg_input_mux[1]);
-  assign _072_ = _071_ | _059_;
-  assign _073_ = _072_ | _055_;
-  assign _074_ = enable & ~(_073_);
-  assign _075_ = _074_ & ~(reset);
-  assign _076_ = _075_ | _070_;
-  assign _041_ = _076_ & _052_;
-  assign _002_ = _041_ | reset;
-  assign _077_ = decoded_rd_address[0] | decoded_rd_address[1];
-  assign _078_ = _077_ | _051_;
-  assign _040_ = _076_ & ~(_078_);
-  assign _003_ = _040_ | reset;
-  assign _079_ = ~(decoded_rd_address[0] & decoded_rd_address[1]);
-  assign _080_ = _079_ | ~(_056_);
-  assign _032_ = _076_ & ~(_080_);
-  assign _011_ = _032_ | reset;
-  assign _081_ = decoded_rd_address[3] | decoded_rd_address[2];
-  assign _082_ = _081_ | ~(_050_);
-  assign _033_ = _076_ & ~(_082_);
-  assign _010_ = _033_ | reset;
-  assign _083_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
-  assign _084_ = _083_ | _081_;
-  assign _034_ = _076_ & ~(_084_);
-  assign _009_ = _034_ | reset;
-  assign _085_ = _081_ | _079_;
-  assign _035_ = _076_ & ~(_085_);
-  assign _008_ = _035_ | reset;
-  assign _086_ = _083_ | _051_;
-  assign _028_ = _076_ & ~(_086_);
-  assign _016_ = _028_ | reset;
-  assign _087_ = decoded_rd_address[3] | ~(decoded_rd_address[2]);
-  assign _088_ = _087_ | _077_;
-  assign _036_ = _076_ & ~(_088_);
+  assign _057_ = _050_ | ~(_056_);
+  assign _058_ = ~(_057_ & decoded_reg_write_enable);
+  assign _059_ = decoded_reg_input_mux[0] | decoded_reg_input_mux[1];
+  assign _060_ = _059_ | _058_;
+  assign _061_ = _060_ | _055_;
+  assign _062_ = _061_ | _053_;
+  assign _063_ = _062_ | reset;
+  assign _064_ = decoded_reg_input_mux[1] | ~(decoded_reg_input_mux[0]);
+  assign _065_ = _064_ | _058_;
+  assign _066_ = _065_ | _055_;
+  assign _067_ = _066_ | _053_;
+  assign _068_ = _067_ | reset;
+  assign _069_ = ~(_068_ & _063_);
+  assign _070_ = decoded_reg_input_mux[0] | ~(decoded_reg_input_mux[1]);
+  assign _071_ = _070_ | _058_;
+  assign _072_ = _071_ | _055_;
+  assign _073_ = enable & ~(_072_);
+  assign _074_ = _073_ & ~(reset);
+  assign _075_ = _074_ | _069_;
+  assign _036_ = _075_ & _052_;
   assign _007_ = _036_ | reset;
-  assign _089_ = _079_ | _051_;
-  assign _029_ = _076_ & ~(_089_);
+  assign _076_ = ~(decoded_rd_address[0] & decoded_rd_address[1]);
+  assign _077_ = decoded_rd_address[2] | ~(decoded_rd_address[3]);
+  assign _078_ = _077_ | _076_;
+  assign _029_ = _075_ & ~(_078_);
   assign _015_ = _029_ | reset;
-  assign _090_ = _077_ | ~(_056_);
-  assign _030_ = _076_ & ~(_090_);
-  assign _014_ = _030_ | reset;
-  assign _091_ = _087_ | ~(_050_);
-  assign _037_ = _076_ & ~(_091_);
-  assign _006_ = _037_ | reset;
-  assign _092_ = ~(_056_ & _050_);
-  assign _093_ = _076_ & ~(_092_);
-  assign _094_ = enable | reset;
-  assign _013_ = _094_ | _093_;
-  assign _095_ = _081_ | _077_;
-  assign _027_ = _076_ & ~(_095_);
+  assign _079_ = decoded_rd_address[1] | ~(decoded_rd_address[0]);
+  assign _080_ = decoded_rd_address[3] | decoded_rd_address[2];
+  assign _081_ = _080_ | _079_;
+  assign _033_ = _075_ & ~(_081_);
+  assign _010_ = _033_ | reset;
+  assign _082_ = _080_ | ~(_050_);
+  assign _027_ = _075_ & ~(_082_);
   assign _017_ = _027_ | reset;
-  assign _096_ = _083_ | ~(_056_);
-  assign _031_ = _076_ & ~(_096_);
-  assign _012_ = _031_ | reset;
-  assign _097_ = _087_ | _083_;
-  assign _038_ = _076_ & ~(_097_);
-  assign _005_ = _038_ | reset;
-  assign _098_ = _087_ | _079_;
-  assign _039_ = _076_ & ~(_098_);
+  assign _083_ = _080_ | _076_;
+  assign _035_ = _075_ & ~(_083_);
+  assign _008_ = _035_ | reset;
+  assign _084_ = _076_ | ~(_056_);
+  assign _032_ = _075_ & ~(_084_);
+  assign _011_ = _032_ | reset;
+  assign _085_ = _079_ | _051_;
+  assign _037_ = _075_ & ~(_085_);
+  assign _006_ = _037_ | reset;
+  assign _086_ = _076_ | _051_;
+  assign _039_ = _075_ & ~(_086_);
   assign _004_ = _039_ | reset;
-  assign _099_ = ~(core_state[0] & core_state[1]);
-  assign _100_ = _099_ | core_state[2];
-  assign _018_ = enable & ~(_100_);
-  assign _101_ = _069_ ? alu_out[0] : lsu_out[0];
-  assign _019_ = _075_ ? decoded_immediate[0] : _101_;
-  assign _102_ = reset | ~(enable);
-  assign _103_ = block_id[0] & ~(_102_);
-  assign _042_ = _093_ ? _019_ : _103_;
-  assign _104_ = _069_ ? alu_out[1] : lsu_out[1];
-  assign _020_ = _075_ ? decoded_immediate[1] : _104_;
-  assign _105_ = block_id[1] & ~(_102_);
-  assign _043_ = _093_ ? _020_ : _105_;
-  assign _106_ = _069_ ? alu_out[2] : lsu_out[2];
-  assign _021_ = _075_ ? decoded_immediate[2] : _106_;
-  assign _107_ = block_id[2] & ~(_102_);
-  assign _044_ = _093_ ? _021_ : _107_;
-  assign _108_ = _069_ ? alu_out[3] : lsu_out[3];
-  assign _022_ = _075_ ? decoded_immediate[3] : _108_;
-  assign _109_ = block_id[3] & ~(_102_);
-  assign _045_ = _093_ ? _022_ : _109_;
-  assign _110_ = _069_ ? alu_out[4] : lsu_out[4];
-  assign _023_ = _075_ ? decoded_immediate[4] : _110_;
-  assign _111_ = block_id[4] & ~(_102_);
-  assign _046_ = _093_ ? _023_ : _111_;
-  assign _112_ = _069_ ? alu_out[5] : lsu_out[5];
-  assign _024_ = _075_ ? decoded_immediate[5] : _112_;
-  assign _113_ = block_id[5] & ~(_102_);
-  assign _047_ = _093_ ? _024_ : _113_;
-  assign _114_ = _069_ ? alu_out[6] : lsu_out[6];
-  assign _025_ = _075_ ? decoded_immediate[6] : _114_;
-  assign _115_ = block_id[6] & ~(_102_);
-  assign _048_ = _093_ ? _025_ : _115_;
-  assign _116_ = _069_ ? alu_out[7] : lsu_out[7];
-  assign _026_ = _075_ ? decoded_immediate[7] : _116_;
-  assign _117_ = block_id[7] & ~(_102_);
-  assign _049_ = _093_ ? _026_ : _117_;
-  assign _118_ = decoded_rs_address[0] ? \registers[1] [0] : \registers[0] [0];
-  assign _119_ = decoded_rs_address[0] ? \registers[3] [0] : \registers[2] [0];
-  assign _120_ = decoded_rs_address[1] ? _119_ : _118_;
-  assign _121_ = decoded_rs_address[0] ? \registers[5] [0] : \registers[4] [0];
-  assign _122_ = decoded_rs_address[0] ? \registers[7] [0] : \registers[6] [0];
-  assign _123_ = decoded_rs_address[1] ? _122_ : _121_;
-  assign _124_ = decoded_rs_address[2] ? _123_ : _120_;
-  assign _125_ = decoded_rs_address[0] ? \registers[9] [0] : \registers[8] [0];
-  assign _126_ = decoded_rs_address[0] ? \registers[11] [0] : \registers[10] [0];
-  assign _127_ = decoded_rs_address[1] ? _126_ : _125_;
-  assign _128_ = decoded_rs_address[0] ? \registers[13] [0] : \registers[12] [0];
-  assign _129_ = decoded_rs_address[0] ? \registers[15] [0] : \registers[14] [0];
-  assign _130_ = decoded_rs_address[1] ? _129_ : _128_;
-  assign _131_ = decoded_rs_address[2] ? _130_ : _127_;
-  assign _001_[0] = decoded_rs_address[3] ? _131_ : _124_;
-  assign _132_ = decoded_rs_address[0] ? \registers[1] [1] : \registers[0] [1];
-  assign _133_ = decoded_rs_address[0] ? \registers[3] [1] : \registers[2] [1];
-  assign _134_ = decoded_rs_address[1] ? _133_ : _132_;
-  assign _135_ = decoded_rs_address[0] ? \registers[5] [1] : \registers[4] [1];
-  assign _136_ = decoded_rs_address[0] ? \registers[7] [1] : \registers[6] [1];
-  assign _137_ = decoded_rs_address[1] ? _136_ : _135_;
-  assign _138_ = decoded_rs_address[2] ? _137_ : _134_;
-  assign _139_ = decoded_rs_address[0] ? \registers[9] [1] : \registers[8] [1];
-  assign _140_ = decoded_rs_address[0] ? \registers[11] [1] : \registers[10] [1];
-  assign _141_ = decoded_rs_address[1] ? _140_ : _139_;
-  assign _142_ = decoded_rs_address[0] ? \registers[13] [1] : \registers[12] [1];
-  assign _143_ = decoded_rs_address[0] ? \registers[15] [1] : \registers[14] [1];
-  assign _144_ = decoded_rs_address[1] ? _143_ : _142_;
-  assign _145_ = decoded_rs_address[2] ? _144_ : _141_;
-  assign _001_[1] = decoded_rs_address[3] ? _145_ : _138_;
-  assign _146_ = decoded_rs_address[0] ? \registers[1] [2] : \registers[0] [2];
-  assign _147_ = decoded_rs_address[0] ? \registers[3] [2] : \registers[2] [2];
-  assign _148_ = decoded_rs_address[1] ? _147_ : _146_;
-  assign _149_ = decoded_rs_address[0] ? \registers[5] [2] : \registers[4] [2];
-  assign _150_ = decoded_rs_address[0] ? \registers[7] [2] : \registers[6] [2];
-  assign _151_ = decoded_rs_address[1] ? _150_ : _149_;
-  assign _152_ = decoded_rs_address[2] ? _151_ : _148_;
-  assign _153_ = decoded_rs_address[0] ? \registers[9] [2] : \registers[8] [2];
-  assign _154_ = decoded_rs_address[0] ? \registers[11] [2] : \registers[10] [2];
-  assign _155_ = decoded_rs_address[1] ? _154_ : _153_;
-  assign _156_ = decoded_rs_address[0] ? \registers[13] [2] : \registers[12] [2];
-  assign _157_ = decoded_rs_address[0] ? \registers[15] [2] : \registers[14] [2];
-  assign _158_ = decoded_rs_address[1] ? _157_ : _156_;
-  assign _159_ = decoded_rs_address[2] ? _158_ : _155_;
-  assign _001_[2] = decoded_rs_address[3] ? _159_ : _152_;
-  assign _160_ = decoded_rs_address[0] ? \registers[1] [3] : \registers[0] [3];
-  assign _161_ = decoded_rs_address[0] ? \registers[3] [3] : \registers[2] [3];
-  assign _162_ = decoded_rs_address[1] ? _161_ : _160_;
-  assign _163_ = decoded_rs_address[0] ? \registers[5] [3] : \registers[4] [3];
-  assign _164_ = decoded_rs_address[0] ? \registers[7] [3] : \registers[6] [3];
-  assign _165_ = decoded_rs_address[1] ? _164_ : _163_;
-  assign _166_ = decoded_rs_address[2] ? _165_ : _162_;
-  assign _167_ = decoded_rs_address[0] ? \registers[9] [3] : \registers[8] [3];
-  assign _168_ = decoded_rs_address[0] ? \registers[11] [3] : \registers[10] [3];
-  assign _169_ = decoded_rs_address[1] ? _168_ : _167_;
-  assign _170_ = decoded_rs_address[0] ? \registers[13] [3] : \registers[12] [3];
-  assign _171_ = decoded_rs_address[0] ? \registers[15] [3] : \registers[14] [3];
-  assign _172_ = decoded_rs_address[1] ? _171_ : _170_;
-  assign _173_ = decoded_rs_address[2] ? _172_ : _169_;
-  assign _001_[3] = decoded_rs_address[3] ? _173_ : _166_;
-  assign _174_ = decoded_rs_address[0] ? \registers[1] [4] : \registers[0] [4];
-  assign _175_ = decoded_rs_address[0] ? \registers[3] [4] : \registers[2] [4];
-  assign _176_ = decoded_rs_address[1] ? _175_ : _174_;
-  assign _177_ = decoded_rs_address[0] ? \registers[5] [4] : \registers[4] [4];
-  assign _178_ = decoded_rs_address[0] ? \registers[7] [4] : \registers[6] [4];
-  assign _179_ = decoded_rs_address[1] ? _178_ : _177_;
-  assign _180_ = decoded_rs_address[2] ? _179_ : _176_;
-  assign _181_ = decoded_rs_address[0] ? \registers[9] [4] : \registers[8] [4];
-  assign _182_ = decoded_rs_address[0] ? \registers[11] [4] : \registers[10] [4];
-  assign _183_ = decoded_rs_address[1] ? _182_ : _181_;
-  assign _184_ = decoded_rs_address[0] ? \registers[13] [4] : \registers[12] [4];
-  assign _185_ = decoded_rs_address[0] ? \registers[15] [4] : \registers[14] [4];
-  assign _186_ = decoded_rs_address[1] ? _185_ : _184_;
-  assign _187_ = decoded_rs_address[2] ? _186_ : _183_;
-  assign _001_[4] = decoded_rs_address[3] ? _187_ : _180_;
-  assign _188_ = decoded_rs_address[0] ? \registers[1] [5] : \registers[0] [5];
-  assign _189_ = decoded_rs_address[0] ? \registers[3] [5] : \registers[2] [5];
-  assign _190_ = decoded_rs_address[1] ? _189_ : _188_;
-  assign _191_ = decoded_rs_address[0] ? \registers[5] [5] : \registers[4] [5];
-  assign _192_ = decoded_rs_address[0] ? \registers[7] [5] : \registers[6] [5];
-  assign _193_ = decoded_rs_address[1] ? _192_ : _191_;
-  assign _194_ = decoded_rs_address[2] ? _193_ : _190_;
-  assign _195_ = decoded_rs_address[0] ? \registers[9] [5] : \registers[8] [5];
-  assign _196_ = decoded_rs_address[0] ? \registers[11] [5] : \registers[10] [5];
-  assign _197_ = decoded_rs_address[1] ? _196_ : _195_;
-  assign _198_ = decoded_rs_address[0] ? \registers[13] [5] : \registers[12] [5];
-  assign _199_ = decoded_rs_address[0] ? \registers[15] [5] : \registers[14] [5];
-  assign _200_ = decoded_rs_address[1] ? _199_ : _198_;
-  assign _201_ = decoded_rs_address[2] ? _200_ : _197_;
-  assign _001_[5] = decoded_rs_address[3] ? _201_ : _194_;
-  assign _202_ = decoded_rs_address[0] ? \registers[1] [6] : \registers[0] [6];
-  assign _203_ = decoded_rs_address[0] ? \registers[3] [6] : \registers[2] [6];
-  assign _204_ = decoded_rs_address[1] ? _203_ : _202_;
-  assign _205_ = decoded_rs_address[0] ? \registers[5] [6] : \registers[4] [6];
-  assign _206_ = decoded_rs_address[0] ? \registers[7] [6] : \registers[6] [6];
-  assign _207_ = decoded_rs_address[1] ? _206_ : _205_;
-  assign _208_ = decoded_rs_address[2] ? _207_ : _204_;
-  assign _209_ = decoded_rs_address[0] ? \registers[9] [6] : \registers[8] [6];
-  assign _210_ = decoded_rs_address[0] ? \registers[11] [6] : \registers[10] [6];
-  assign _211_ = decoded_rs_address[1] ? _210_ : _209_;
-  assign _212_ = decoded_rs_address[0] ? \registers[13] [6] : \registers[12] [6];
-  assign _213_ = decoded_rs_address[0] ? \registers[15] [6] : \registers[14] [6];
-  assign _214_ = decoded_rs_address[1] ? _213_ : _212_;
-  assign _215_ = decoded_rs_address[2] ? _214_ : _211_;
-  assign _001_[6] = decoded_rs_address[3] ? _215_ : _208_;
-  assign _216_ = decoded_rs_address[0] ? \registers[1] [7] : \registers[0] [7];
-  assign _217_ = decoded_rs_address[0] ? \registers[3] [7] : \registers[2] [7];
-  assign _218_ = decoded_rs_address[1] ? _217_ : _216_;
-  assign _219_ = decoded_rs_address[0] ? \registers[5] [7] : \registers[4] [7];
-  assign _220_ = decoded_rs_address[0] ? \registers[7] [7] : \registers[6] [7];
-  assign _221_ = decoded_rs_address[1] ? _220_ : _219_;
-  assign _222_ = decoded_rs_address[2] ? _221_ : _218_;
-  assign _223_ = decoded_rs_address[0] ? \registers[9] [7] : \registers[8] [7];
-  assign _224_ = decoded_rs_address[0] ? \registers[11] [7] : \registers[10] [7];
-  assign _225_ = decoded_rs_address[1] ? _224_ : _223_;
-  assign _226_ = decoded_rs_address[0] ? \registers[13] [7] : \registers[12] [7];
-  assign _227_ = decoded_rs_address[0] ? \registers[15] [7] : \registers[14] [7];
-  assign _228_ = decoded_rs_address[1] ? _227_ : _226_;
-  assign _229_ = decoded_rs_address[2] ? _228_ : _225_;
-  assign _001_[7] = decoded_rs_address[3] ? _229_ : _222_;
-  assign _230_ = decoded_rt_address[0] ? \registers[1] [0] : \registers[0] [0];
-  assign _231_ = decoded_rt_address[0] ? \registers[3] [0] : \registers[2] [0];
-  assign _232_ = decoded_rt_address[1] ? _231_ : _230_;
-  assign _233_ = decoded_rt_address[0] ? \registers[5] [0] : \registers[4] [0];
-  assign _234_ = decoded_rt_address[0] ? \registers[7] [0] : \registers[6] [0];
-  assign _235_ = decoded_rt_address[1] ? _234_ : _233_;
-  assign _236_ = decoded_rt_address[2] ? _235_ : _232_;
-  assign _237_ = decoded_rt_address[0] ? \registers[9] [0] : \registers[8] [0];
-  assign _238_ = decoded_rt_address[0] ? \registers[11] [0] : \registers[10] [0];
-  assign _239_ = decoded_rt_address[1] ? _238_ : _237_;
-  assign _240_ = decoded_rt_address[0] ? \registers[13] [0] : \registers[12] [0];
-  assign _241_ = decoded_rt_address[0] ? \registers[15] [0] : \registers[14] [0];
-  assign _242_ = decoded_rt_address[1] ? _241_ : _240_;
-  assign _243_ = decoded_rt_address[2] ? _242_ : _239_;
-  assign _000_[0] = decoded_rt_address[3] ? _243_ : _236_;
-  assign _244_ = decoded_rt_address[0] ? \registers[1] [1] : \registers[0] [1];
-  assign _245_ = decoded_rt_address[0] ? \registers[3] [1] : \registers[2] [1];
-  assign _246_ = decoded_rt_address[1] ? _245_ : _244_;
-  assign _247_ = decoded_rt_address[0] ? \registers[5] [1] : \registers[4] [1];
-  assign _248_ = decoded_rt_address[0] ? \registers[7] [1] : \registers[6] [1];
-  assign _249_ = decoded_rt_address[1] ? _248_ : _247_;
-  assign _250_ = decoded_rt_address[2] ? _249_ : _246_;
-  assign _251_ = decoded_rt_address[0] ? \registers[9] [1] : \registers[8] [1];
-  assign _252_ = decoded_rt_address[0] ? \registers[11] [1] : \registers[10] [1];
-  assign _253_ = decoded_rt_address[1] ? _252_ : _251_;
-  assign _254_ = decoded_rt_address[0] ? \registers[13] [1] : \registers[12] [1];
-  assign _255_ = decoded_rt_address[0] ? \registers[15] [1] : \registers[14] [1];
-  assign _256_ = decoded_rt_address[1] ? _255_ : _254_;
-  assign _257_ = decoded_rt_address[2] ? _256_ : _253_;
-  assign _000_[1] = decoded_rt_address[3] ? _257_ : _250_;
-  assign _258_ = decoded_rt_address[0] ? \registers[1] [2] : \registers[0] [2];
-  assign _259_ = decoded_rt_address[0] ? \registers[3] [2] : \registers[2] [2];
-  assign _260_ = decoded_rt_address[1] ? _259_ : _258_;
-  assign _261_ = decoded_rt_address[0] ? \registers[5] [2] : \registers[4] [2];
-  assign _262_ = decoded_rt_address[0] ? \registers[7] [2] : \registers[6] [2];
-  assign _263_ = decoded_rt_address[1] ? _262_ : _261_;
-  assign _264_ = decoded_rt_address[2] ? _263_ : _260_;
-  assign _265_ = decoded_rt_address[0] ? \registers[9] [2] : \registers[8] [2];
-  assign _266_ = decoded_rt_address[0] ? \registers[11] [2] : \registers[10] [2];
-  assign _267_ = decoded_rt_address[1] ? _266_ : _265_;
-  assign _268_ = decoded_rt_address[0] ? \registers[13] [2] : \registers[12] [2];
-  assign _269_ = decoded_rt_address[0] ? \registers[15] [2] : \registers[14] [2];
-  assign _270_ = decoded_rt_address[1] ? _269_ : _268_;
-  assign _271_ = decoded_rt_address[2] ? _270_ : _267_;
-  assign _000_[2] = decoded_rt_address[3] ? _271_ : _264_;
-  assign _272_ = decoded_rt_address[0] ? \registers[1] [3] : \registers[0] [3];
-  assign _273_ = decoded_rt_address[0] ? \registers[3] [3] : \registers[2] [3];
-  assign _274_ = decoded_rt_address[1] ? _273_ : _272_;
-  assign _275_ = decoded_rt_address[0] ? \registers[5] [3] : \registers[4] [3];
-  assign _276_ = decoded_rt_address[0] ? \registers[7] [3] : \registers[6] [3];
-  assign _277_ = decoded_rt_address[1] ? _276_ : _275_;
-  assign _278_ = decoded_rt_address[2] ? _277_ : _274_;
-  assign _279_ = decoded_rt_address[0] ? \registers[9] [3] : \registers[8] [3];
-  assign _280_ = decoded_rt_address[0] ? \registers[11] [3] : \registers[10] [3];
-  assign _281_ = decoded_rt_address[1] ? _280_ : _279_;
-  assign _282_ = decoded_rt_address[0] ? \registers[13] [3] : \registers[12] [3];
-  assign _283_ = decoded_rt_address[0] ? \registers[15] [3] : \registers[14] [3];
-  assign _284_ = decoded_rt_address[1] ? _283_ : _282_;
-  assign _285_ = decoded_rt_address[2] ? _284_ : _281_;
-  assign _000_[3] = decoded_rt_address[3] ? _285_ : _278_;
-  assign _286_ = decoded_rt_address[0] ? \registers[1] [4] : \registers[0] [4];
-  assign _287_ = decoded_rt_address[0] ? \registers[3] [4] : \registers[2] [4];
-  assign _288_ = decoded_rt_address[1] ? _287_ : _286_;
-  assign _289_ = decoded_rt_address[0] ? \registers[5] [4] : \registers[4] [4];
-  assign _290_ = decoded_rt_address[0] ? \registers[7] [4] : \registers[6] [4];
-  assign _291_ = decoded_rt_address[1] ? _290_ : _289_;
-  assign _292_ = decoded_rt_address[2] ? _291_ : _288_;
-  assign _293_ = decoded_rt_address[0] ? \registers[9] [4] : \registers[8] [4];
-  assign _294_ = decoded_rt_address[0] ? \registers[11] [4] : \registers[10] [4];
-  assign _295_ = decoded_rt_address[1] ? _294_ : _293_;
-  assign _296_ = decoded_rt_address[0] ? \registers[13] [4] : \registers[12] [4];
-  assign _297_ = decoded_rt_address[0] ? \registers[15] [4] : \registers[14] [4];
-  assign _298_ = decoded_rt_address[1] ? _297_ : _296_;
-  assign _299_ = decoded_rt_address[2] ? _298_ : _295_;
-  assign _000_[4] = decoded_rt_address[3] ? _299_ : _292_;
-  assign _300_ = decoded_rt_address[0] ? \registers[1] [5] : \registers[0] [5];
-  assign _301_ = decoded_rt_address[0] ? \registers[3] [5] : \registers[2] [5];
-  assign _302_ = decoded_rt_address[1] ? _301_ : _300_;
-  assign _303_ = decoded_rt_address[0] ? \registers[5] [5] : \registers[4] [5];
-  assign _304_ = decoded_rt_address[0] ? \registers[7] [5] : \registers[6] [5];
-  assign _305_ = decoded_rt_address[1] ? _304_ : _303_;
-  assign _306_ = decoded_rt_address[2] ? _305_ : _302_;
-  assign _307_ = decoded_rt_address[0] ? \registers[9] [5] : \registers[8] [5];
-  assign _308_ = decoded_rt_address[0] ? \registers[11] [5] : \registers[10] [5];
-  assign _309_ = decoded_rt_address[1] ? _308_ : _307_;
-  assign _310_ = decoded_rt_address[0] ? \registers[13] [5] : \registers[12] [5];
-  assign _311_ = decoded_rt_address[0] ? \registers[15] [5] : \registers[14] [5];
-  assign _312_ = decoded_rt_address[1] ? _311_ : _310_;
-  assign _313_ = decoded_rt_address[2] ? _312_ : _309_;
-  assign _000_[5] = decoded_rt_address[3] ? _313_ : _306_;
-  assign _314_ = decoded_rt_address[0] ? \registers[1] [6] : \registers[0] [6];
-  assign _315_ = decoded_rt_address[0] ? \registers[3] [6] : \registers[2] [6];
-  assign _316_ = decoded_rt_address[1] ? _315_ : _314_;
-  assign _317_ = decoded_rt_address[0] ? \registers[5] [6] : \registers[4] [6];
-  assign _318_ = decoded_rt_address[0] ? \registers[7] [6] : \registers[6] [6];
-  assign _319_ = decoded_rt_address[1] ? _318_ : _317_;
-  assign _320_ = decoded_rt_address[2] ? _319_ : _316_;
-  assign _321_ = decoded_rt_address[0] ? \registers[9] [6] : \registers[8] [6];
-  assign _322_ = decoded_rt_address[0] ? \registers[11] [6] : \registers[10] [6];
-  assign _323_ = decoded_rt_address[1] ? _322_ : _321_;
-  assign _324_ = decoded_rt_address[0] ? \registers[13] [6] : \registers[12] [6];
-  assign _325_ = decoded_rt_address[0] ? \registers[15] [6] : \registers[14] [6];
-  assign _326_ = decoded_rt_address[1] ? _325_ : _324_;
-  assign _327_ = decoded_rt_address[2] ? _326_ : _323_;
-  assign _000_[6] = decoded_rt_address[3] ? _327_ : _320_;
-  assign _328_ = decoded_rt_address[0] ? \registers[1] [7] : \registers[0] [7];
-  assign _329_ = decoded_rt_address[0] ? \registers[3] [7] : \registers[2] [7];
-  assign _330_ = decoded_rt_address[1] ? _329_ : _328_;
-  assign _331_ = decoded_rt_address[0] ? \registers[5] [7] : \registers[4] [7];
-  assign _332_ = decoded_rt_address[0] ? \registers[7] [7] : \registers[6] [7];
-  assign _333_ = decoded_rt_address[1] ? _332_ : _331_;
-  assign _334_ = decoded_rt_address[2] ? _333_ : _330_;
-  assign _335_ = decoded_rt_address[0] ? \registers[9] [7] : \registers[8] [7];
-  assign _336_ = decoded_rt_address[0] ? \registers[11] [7] : \registers[10] [7];
-  assign _337_ = decoded_rt_address[1] ? _336_ : _335_;
-  assign _338_ = decoded_rt_address[0] ? \registers[13] [7] : \registers[12] [7];
-  assign _339_ = decoded_rt_address[0] ? \registers[15] [7] : \registers[14] [7];
-  assign _340_ = decoded_rt_address[1] ? _339_ : _338_;
-  assign _341_ = decoded_rt_address[2] ? _340_ : _337_;
-  assign _000_[7] = decoded_rt_address[3] ? _341_ : _334_;
+  assign _087_ = ~(_056_ & _050_);
+  assign _030_ = _075_ & ~(_087_);
+  assign _014_ = _030_ | reset;
+  assign _088_ = _077_ | ~(_050_);
+  assign _040_ = _075_ & ~(_088_);
+  assign _003_ = _040_ | reset;
+  assign _089_ = _077_ | _079_;
+  assign _041_ = _075_ & ~(_089_);
+  assign _002_ = _041_ | reset;
+  assign _090_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
+  assign _091_ = _090_ | _077_;
+  assign _028_ = _075_ & ~(_091_);
+  assign _016_ = _028_ | reset;
+  assign _092_ = _090_ | ~(_056_);
+  assign _031_ = _075_ & ~(_092_);
+  assign _012_ = _031_ | reset;
+  assign _093_ = _090_ | _051_;
+  assign _038_ = _075_ & ~(_093_);
+  assign _005_ = _038_ | reset;
+  assign _094_ = _079_ | ~(_056_);
+  assign _095_ = _075_ & ~(_094_);
+  assign _096_ = enable | reset;
+  assign _013_ = _096_ | _095_;
+  assign _097_ = _090_ | _080_;
+  assign _034_ = _075_ & ~(_097_);
+  assign _009_ = _034_ | reset;
+  assign _098_ = ~(core_state[0] & core_state[1]);
+  assign _099_ = _098_ | core_state[2];
+  assign _018_ = enable & ~(_099_);
+  assign _100_ = _068_ ? alu_out[0] : lsu_out[0];
+  assign _019_ = _074_ ? decoded_immediate[0] : _100_;
+  assign _101_ = reset | ~(enable);
+  assign _102_ = block_id[0] & ~(_101_);
+  assign _042_ = _095_ ? _019_ : _102_;
+  assign _103_ = _068_ ? alu_out[1] : lsu_out[1];
+  assign _020_ = _074_ ? decoded_immediate[1] : _103_;
+  assign _104_ = block_id[1] & ~(_101_);
+  assign _043_ = _095_ ? _020_ : _104_;
+  assign _105_ = _068_ ? alu_out[2] : lsu_out[2];
+  assign _021_ = _074_ ? decoded_immediate[2] : _105_;
+  assign _106_ = block_id[2] & ~(_101_);
+  assign _044_ = _095_ ? _021_ : _106_;
+  assign _107_ = _068_ ? alu_out[3] : lsu_out[3];
+  assign _022_ = _074_ ? decoded_immediate[3] : _107_;
+  assign _108_ = block_id[3] & ~(_101_);
+  assign _045_ = _095_ ? _022_ : _108_;
+  assign _109_ = _068_ ? alu_out[4] : lsu_out[4];
+  assign _023_ = _074_ ? decoded_immediate[4] : _109_;
+  assign _110_ = block_id[4] & ~(_101_);
+  assign _046_ = _095_ ? _023_ : _110_;
+  assign _111_ = _068_ ? alu_out[5] : lsu_out[5];
+  assign _024_ = _074_ ? decoded_immediate[5] : _111_;
+  assign _112_ = block_id[5] & ~(_101_);
+  assign _047_ = _095_ ? _024_ : _112_;
+  assign _113_ = _068_ ? alu_out[6] : lsu_out[6];
+  assign _025_ = _074_ ? decoded_immediate[6] : _113_;
+  assign _114_ = block_id[6] & ~(_101_);
+  assign _048_ = _095_ ? _025_ : _114_;
+  assign _115_ = _068_ ? alu_out[7] : lsu_out[7];
+  assign _026_ = _074_ ? decoded_immediate[7] : _115_;
+  assign _116_ = block_id[7] & ~(_101_);
+  assign _049_ = _095_ ? _026_ : _116_;
+  assign _117_ = decoded_rt_address[0] ? \registers[1] [0] : \registers[0] [0];
+  assign _118_ = decoded_rt_address[0] ? \registers[3] [0] : \registers[2] [0];
+  assign _119_ = decoded_rt_address[1] ? _118_ : _117_;
+  assign _120_ = decoded_rt_address[0] ? \registers[5] [0] : \registers[4] [0];
+  assign _121_ = decoded_rt_address[0] ? \registers[7] [0] : \registers[6] [0];
+  assign _122_ = decoded_rt_address[1] ? _121_ : _120_;
+  assign _123_ = decoded_rt_address[2] ? _122_ : _119_;
+  assign _124_ = decoded_rt_address[0] ? \registers[9] [0] : \registers[8] [0];
+  assign _125_ = decoded_rt_address[0] ? \registers[11] [0] : \registers[10] [0];
+  assign _126_ = decoded_rt_address[1] ? _125_ : _124_;
+  assign _127_ = decoded_rt_address[0] ? \registers[13] [0] : \registers[12] [0];
+  assign _128_ = decoded_rt_address[0] ? \registers[15] [0] : \registers[14] [0];
+  assign _129_ = decoded_rt_address[1] ? _128_ : _127_;
+  assign _130_ = decoded_rt_address[2] ? _129_ : _126_;
+  assign _000_[0] = decoded_rt_address[3] ? _130_ : _123_;
+  assign _131_ = decoded_rt_address[0] ? \registers[1] [1] : \registers[0] [1];
+  assign _132_ = decoded_rt_address[0] ? \registers[3] [1] : \registers[2] [1];
+  assign _133_ = decoded_rt_address[1] ? _132_ : _131_;
+  assign _134_ = decoded_rt_address[0] ? \registers[5] [1] : \registers[4] [1];
+  assign _135_ = decoded_rt_address[0] ? \registers[7] [1] : \registers[6] [1];
+  assign _136_ = decoded_rt_address[1] ? _135_ : _134_;
+  assign _137_ = decoded_rt_address[2] ? _136_ : _133_;
+  assign _138_ = decoded_rt_address[0] ? \registers[9] [1] : \registers[8] [1];
+  assign _139_ = decoded_rt_address[0] ? \registers[11] [1] : \registers[10] [1];
+  assign _140_ = decoded_rt_address[1] ? _139_ : _138_;
+  assign _141_ = decoded_rt_address[0] ? \registers[13] [1] : \registers[12] [1];
+  assign _142_ = decoded_rt_address[0] ? \registers[15] [1] : \registers[14] [1];
+  assign _143_ = decoded_rt_address[1] ? _142_ : _141_;
+  assign _144_ = decoded_rt_address[2] ? _143_ : _140_;
+  assign _000_[1] = decoded_rt_address[3] ? _144_ : _137_;
+  assign _145_ = decoded_rt_address[0] ? \registers[1] [2] : \registers[0] [2];
+  assign _146_ = decoded_rt_address[0] ? \registers[3] [2] : \registers[2] [2];
+  assign _147_ = decoded_rt_address[1] ? _146_ : _145_;
+  assign _148_ = decoded_rt_address[0] ? \registers[5] [2] : \registers[4] [2];
+  assign _149_ = decoded_rt_address[0] ? \registers[7] [2] : \registers[6] [2];
+  assign _150_ = decoded_rt_address[1] ? _149_ : _148_;
+  assign _151_ = decoded_rt_address[2] ? _150_ : _147_;
+  assign _152_ = decoded_rt_address[0] ? \registers[9] [2] : \registers[8] [2];
+  assign _153_ = decoded_rt_address[0] ? \registers[11] [2] : \registers[10] [2];
+  assign _154_ = decoded_rt_address[1] ? _153_ : _152_;
+  assign _155_ = decoded_rt_address[0] ? \registers[13] [2] : \registers[12] [2];
+  assign _156_ = decoded_rt_address[0] ? \registers[15] [2] : \registers[14] [2];
+  assign _157_ = decoded_rt_address[1] ? _156_ : _155_;
+  assign _158_ = decoded_rt_address[2] ? _157_ : _154_;
+  assign _000_[2] = decoded_rt_address[3] ? _158_ : _151_;
+  assign _159_ = decoded_rt_address[0] ? \registers[1] [3] : \registers[0] [3];
+  assign _160_ = decoded_rt_address[0] ? \registers[3] [3] : \registers[2] [3];
+  assign _161_ = decoded_rt_address[1] ? _160_ : _159_;
+  assign _162_ = decoded_rt_address[0] ? \registers[5] [3] : \registers[4] [3];
+  assign _163_ = decoded_rt_address[0] ? \registers[7] [3] : \registers[6] [3];
+  assign _164_ = decoded_rt_address[1] ? _163_ : _162_;
+  assign _165_ = decoded_rt_address[2] ? _164_ : _161_;
+  assign _166_ = decoded_rt_address[0] ? \registers[9] [3] : \registers[8] [3];
+  assign _167_ = decoded_rt_address[0] ? \registers[11] [3] : \registers[10] [3];
+  assign _168_ = decoded_rt_address[1] ? _167_ : _166_;
+  assign _169_ = decoded_rt_address[0] ? \registers[13] [3] : \registers[12] [3];
+  assign _170_ = decoded_rt_address[0] ? \registers[15] [3] : \registers[14] [3];
+  assign _171_ = decoded_rt_address[1] ? _170_ : _169_;
+  assign _172_ = decoded_rt_address[2] ? _171_ : _168_;
+  assign _000_[3] = decoded_rt_address[3] ? _172_ : _165_;
+  assign _173_ = decoded_rt_address[0] ? \registers[1] [4] : \registers[0] [4];
+  assign _174_ = decoded_rt_address[0] ? \registers[3] [4] : \registers[2] [4];
+  assign _175_ = decoded_rt_address[1] ? _174_ : _173_;
+  assign _176_ = decoded_rt_address[0] ? \registers[5] [4] : \registers[4] [4];
+  assign _177_ = decoded_rt_address[0] ? \registers[7] [4] : \registers[6] [4];
+  assign _178_ = decoded_rt_address[1] ? _177_ : _176_;
+  assign _179_ = decoded_rt_address[2] ? _178_ : _175_;
+  assign _180_ = decoded_rt_address[0] ? \registers[9] [4] : \registers[8] [4];
+  assign _181_ = decoded_rt_address[0] ? \registers[11] [4] : \registers[10] [4];
+  assign _182_ = decoded_rt_address[1] ? _181_ : _180_;
+  assign _183_ = decoded_rt_address[0] ? \registers[13] [4] : \registers[12] [4];
+  assign _184_ = decoded_rt_address[0] ? \registers[15] [4] : \registers[14] [4];
+  assign _185_ = decoded_rt_address[1] ? _184_ : _183_;
+  assign _186_ = decoded_rt_address[2] ? _185_ : _182_;
+  assign _000_[4] = decoded_rt_address[3] ? _186_ : _179_;
+  assign _187_ = decoded_rt_address[0] ? \registers[1] [5] : \registers[0] [5];
+  assign _188_ = decoded_rt_address[0] ? \registers[3] [5] : \registers[2] [5];
+  assign _189_ = decoded_rt_address[1] ? _188_ : _187_;
+  assign _190_ = decoded_rt_address[0] ? \registers[5] [5] : \registers[4] [5];
+  assign _191_ = decoded_rt_address[0] ? \registers[7] [5] : \registers[6] [5];
+  assign _192_ = decoded_rt_address[1] ? _191_ : _190_;
+  assign _193_ = decoded_rt_address[2] ? _192_ : _189_;
+  assign _194_ = decoded_rt_address[0] ? \registers[9] [5] : \registers[8] [5];
+  assign _195_ = decoded_rt_address[0] ? \registers[11] [5] : \registers[10] [5];
+  assign _196_ = decoded_rt_address[1] ? _195_ : _194_;
+  assign _197_ = decoded_rt_address[0] ? \registers[13] [5] : \registers[12] [5];
+  assign _198_ = decoded_rt_address[0] ? \registers[15] [5] : \registers[14] [5];
+  assign _199_ = decoded_rt_address[1] ? _198_ : _197_;
+  assign _200_ = decoded_rt_address[2] ? _199_ : _196_;
+  assign _000_[5] = decoded_rt_address[3] ? _200_ : _193_;
+  assign _201_ = decoded_rt_address[0] ? \registers[1] [6] : \registers[0] [6];
+  assign _202_ = decoded_rt_address[0] ? \registers[3] [6] : \registers[2] [6];
+  assign _203_ = decoded_rt_address[1] ? _202_ : _201_;
+  assign _204_ = decoded_rt_address[0] ? \registers[5] [6] : \registers[4] [6];
+  assign _205_ = decoded_rt_address[0] ? \registers[7] [6] : \registers[6] [6];
+  assign _206_ = decoded_rt_address[1] ? _205_ : _204_;
+  assign _207_ = decoded_rt_address[2] ? _206_ : _203_;
+  assign _208_ = decoded_rt_address[0] ? \registers[9] [6] : \registers[8] [6];
+  assign _209_ = decoded_rt_address[0] ? \registers[11] [6] : \registers[10] [6];
+  assign _210_ = decoded_rt_address[1] ? _209_ : _208_;
+  assign _211_ = decoded_rt_address[0] ? \registers[13] [6] : \registers[12] [6];
+  assign _212_ = decoded_rt_address[0] ? \registers[15] [6] : \registers[14] [6];
+  assign _213_ = decoded_rt_address[1] ? _212_ : _211_;
+  assign _214_ = decoded_rt_address[2] ? _213_ : _210_;
+  assign _000_[6] = decoded_rt_address[3] ? _214_ : _207_;
+  assign _215_ = decoded_rt_address[0] ? \registers[1] [7] : \registers[0] [7];
+  assign _216_ = decoded_rt_address[0] ? \registers[3] [7] : \registers[2] [7];
+  assign _217_ = decoded_rt_address[1] ? _216_ : _215_;
+  assign _218_ = decoded_rt_address[0] ? \registers[5] [7] : \registers[4] [7];
+  assign _219_ = decoded_rt_address[0] ? \registers[7] [7] : \registers[6] [7];
+  assign _220_ = decoded_rt_address[1] ? _219_ : _218_;
+  assign _221_ = decoded_rt_address[2] ? _220_ : _217_;
+  assign _222_ = decoded_rt_address[0] ? \registers[9] [7] : \registers[8] [7];
+  assign _223_ = decoded_rt_address[0] ? \registers[11] [7] : \registers[10] [7];
+  assign _224_ = decoded_rt_address[1] ? _223_ : _222_;
+  assign _225_ = decoded_rt_address[0] ? \registers[13] [7] : \registers[12] [7];
+  assign _226_ = decoded_rt_address[0] ? \registers[15] [7] : \registers[14] [7];
+  assign _227_ = decoded_rt_address[1] ? _226_ : _225_;
+  assign _228_ = decoded_rt_address[2] ? _227_ : _224_;
+  assign _000_[7] = decoded_rt_address[3] ? _228_ : _221_;
+  assign _229_ = decoded_rs_address[0] ? \registers[1] [0] : \registers[0] [0];
+  assign _230_ = decoded_rs_address[0] ? \registers[3] [0] : \registers[2] [0];
+  assign _231_ = decoded_rs_address[1] ? _230_ : _229_;
+  assign _232_ = decoded_rs_address[0] ? \registers[5] [0] : \registers[4] [0];
+  assign _233_ = decoded_rs_address[0] ? \registers[7] [0] : \registers[6] [0];
+  assign _234_ = decoded_rs_address[1] ? _233_ : _232_;
+  assign _235_ = decoded_rs_address[2] ? _234_ : _231_;
+  assign _236_ = decoded_rs_address[0] ? \registers[9] [0] : \registers[8] [0];
+  assign _237_ = decoded_rs_address[0] ? \registers[11] [0] : \registers[10] [0];
+  assign _238_ = decoded_rs_address[1] ? _237_ : _236_;
+  assign _239_ = decoded_rs_address[0] ? \registers[13] [0] : \registers[12] [0];
+  assign _240_ = decoded_rs_address[0] ? \registers[15] [0] : \registers[14] [0];
+  assign _241_ = decoded_rs_address[1] ? _240_ : _239_;
+  assign _242_ = decoded_rs_address[2] ? _241_ : _238_;
+  assign _001_[0] = decoded_rs_address[3] ? _242_ : _235_;
+  assign _243_ = decoded_rs_address[0] ? \registers[1] [1] : \registers[0] [1];
+  assign _244_ = decoded_rs_address[0] ? \registers[3] [1] : \registers[2] [1];
+  assign _245_ = decoded_rs_address[1] ? _244_ : _243_;
+  assign _246_ = decoded_rs_address[0] ? \registers[5] [1] : \registers[4] [1];
+  assign _247_ = decoded_rs_address[0] ? \registers[7] [1] : \registers[6] [1];
+  assign _248_ = decoded_rs_address[1] ? _247_ : _246_;
+  assign _249_ = decoded_rs_address[2] ? _248_ : _245_;
+  assign _250_ = decoded_rs_address[0] ? \registers[9] [1] : \registers[8] [1];
+  assign _251_ = decoded_rs_address[0] ? \registers[11] [1] : \registers[10] [1];
+  assign _252_ = decoded_rs_address[1] ? _251_ : _250_;
+  assign _253_ = decoded_rs_address[0] ? \registers[13] [1] : \registers[12] [1];
+  assign _254_ = decoded_rs_address[0] ? \registers[15] [1] : \registers[14] [1];
+  assign _255_ = decoded_rs_address[1] ? _254_ : _253_;
+  assign _256_ = decoded_rs_address[2] ? _255_ : _252_;
+  assign _001_[1] = decoded_rs_address[3] ? _256_ : _249_;
+  assign _257_ = decoded_rs_address[0] ? \registers[1] [2] : \registers[0] [2];
+  assign _258_ = decoded_rs_address[0] ? \registers[3] [2] : \registers[2] [2];
+  assign _259_ = decoded_rs_address[1] ? _258_ : _257_;
+  assign _260_ = decoded_rs_address[0] ? \registers[5] [2] : \registers[4] [2];
+  assign _261_ = decoded_rs_address[0] ? \registers[7] [2] : \registers[6] [2];
+  assign _262_ = decoded_rs_address[1] ? _261_ : _260_;
+  assign _263_ = decoded_rs_address[2] ? _262_ : _259_;
+  assign _264_ = decoded_rs_address[0] ? \registers[9] [2] : \registers[8] [2];
+  assign _265_ = decoded_rs_address[0] ? \registers[11] [2] : \registers[10] [2];
+  assign _266_ = decoded_rs_address[1] ? _265_ : _264_;
+  assign _267_ = decoded_rs_address[0] ? \registers[13] [2] : \registers[12] [2];
+  assign _268_ = decoded_rs_address[0] ? \registers[15] [2] : \registers[14] [2];
+  assign _269_ = decoded_rs_address[1] ? _268_ : _267_;
+  assign _270_ = decoded_rs_address[2] ? _269_ : _266_;
+  assign _001_[2] = decoded_rs_address[3] ? _270_ : _263_;
+  assign _271_ = decoded_rs_address[0] ? \registers[1] [3] : \registers[0] [3];
+  assign _272_ = decoded_rs_address[0] ? \registers[3] [3] : \registers[2] [3];
+  assign _273_ = decoded_rs_address[1] ? _272_ : _271_;
+  assign _274_ = decoded_rs_address[0] ? \registers[5] [3] : \registers[4] [3];
+  assign _275_ = decoded_rs_address[0] ? \registers[7] [3] : \registers[6] [3];
+  assign _276_ = decoded_rs_address[1] ? _275_ : _274_;
+  assign _277_ = decoded_rs_address[2] ? _276_ : _273_;
+  assign _278_ = decoded_rs_address[0] ? \registers[9] [3] : \registers[8] [3];
+  assign _279_ = decoded_rs_address[0] ? \registers[11] [3] : \registers[10] [3];
+  assign _280_ = decoded_rs_address[1] ? _279_ : _278_;
+  assign _281_ = decoded_rs_address[0] ? \registers[13] [3] : \registers[12] [3];
+  assign _282_ = decoded_rs_address[0] ? \registers[15] [3] : \registers[14] [3];
+  assign _283_ = decoded_rs_address[1] ? _282_ : _281_;
+  assign _284_ = decoded_rs_address[2] ? _283_ : _280_;
+  assign _001_[3] = decoded_rs_address[3] ? _284_ : _277_;
+  assign _285_ = decoded_rs_address[0] ? \registers[1] [4] : \registers[0] [4];
+  assign _286_ = decoded_rs_address[0] ? \registers[3] [4] : \registers[2] [4];
+  assign _287_ = decoded_rs_address[1] ? _286_ : _285_;
+  assign _288_ = decoded_rs_address[0] ? \registers[5] [4] : \registers[4] [4];
+  assign _289_ = decoded_rs_address[0] ? \registers[7] [4] : \registers[6] [4];
+  assign _290_ = decoded_rs_address[1] ? _289_ : _288_;
+  assign _291_ = decoded_rs_address[2] ? _290_ : _287_;
+  assign _292_ = decoded_rs_address[0] ? \registers[9] [4] : \registers[8] [4];
+  assign _293_ = decoded_rs_address[0] ? \registers[11] [4] : \registers[10] [4];
+  assign _294_ = decoded_rs_address[1] ? _293_ : _292_;
+  assign _295_ = decoded_rs_address[0] ? \registers[13] [4] : \registers[12] [4];
+  assign _296_ = decoded_rs_address[0] ? \registers[15] [4] : \registers[14] [4];
+  assign _297_ = decoded_rs_address[1] ? _296_ : _295_;
+  assign _298_ = decoded_rs_address[2] ? _297_ : _294_;
+  assign _001_[4] = decoded_rs_address[3] ? _298_ : _291_;
+  assign _299_ = decoded_rs_address[0] ? \registers[1] [5] : \registers[0] [5];
+  assign _300_ = decoded_rs_address[0] ? \registers[3] [5] : \registers[2] [5];
+  assign _301_ = decoded_rs_address[1] ? _300_ : _299_;
+  assign _302_ = decoded_rs_address[0] ? \registers[5] [5] : \registers[4] [5];
+  assign _303_ = decoded_rs_address[0] ? \registers[7] [5] : \registers[6] [5];
+  assign _304_ = decoded_rs_address[1] ? _303_ : _302_;
+  assign _305_ = decoded_rs_address[2] ? _304_ : _301_;
+  assign _306_ = decoded_rs_address[0] ? \registers[9] [5] : \registers[8] [5];
+  assign _307_ = decoded_rs_address[0] ? \registers[11] [5] : \registers[10] [5];
+  assign _308_ = decoded_rs_address[1] ? _307_ : _306_;
+  assign _309_ = decoded_rs_address[0] ? \registers[13] [5] : \registers[12] [5];
+  assign _310_ = decoded_rs_address[0] ? \registers[15] [5] : \registers[14] [5];
+  assign _311_ = decoded_rs_address[1] ? _310_ : _309_;
+  assign _312_ = decoded_rs_address[2] ? _311_ : _308_;
+  assign _001_[5] = decoded_rs_address[3] ? _312_ : _305_;
+  assign _313_ = decoded_rs_address[0] ? \registers[1] [6] : \registers[0] [6];
+  assign _314_ = decoded_rs_address[0] ? \registers[3] [6] : \registers[2] [6];
+  assign _315_ = decoded_rs_address[1] ? _314_ : _313_;
+  assign _316_ = decoded_rs_address[0] ? \registers[5] [6] : \registers[4] [6];
+  assign _317_ = decoded_rs_address[0] ? \registers[7] [6] : \registers[6] [6];
+  assign _318_ = decoded_rs_address[1] ? _317_ : _316_;
+  assign _319_ = decoded_rs_address[2] ? _318_ : _315_;
+  assign _320_ = decoded_rs_address[0] ? \registers[9] [6] : \registers[8] [6];
+  assign _321_ = decoded_rs_address[0] ? \registers[11] [6] : \registers[10] [6];
+  assign _322_ = decoded_rs_address[1] ? _321_ : _320_;
+  assign _323_ = decoded_rs_address[0] ? \registers[13] [6] : \registers[12] [6];
+  assign _324_ = decoded_rs_address[0] ? \registers[15] [6] : \registers[14] [6];
+  assign _325_ = decoded_rs_address[1] ? _324_ : _323_;
+  assign _326_ = decoded_rs_address[2] ? _325_ : _322_;
+  assign _001_[6] = decoded_rs_address[3] ? _326_ : _319_;
+  assign _327_ = decoded_rs_address[0] ? \registers[1] [7] : \registers[0] [7];
+  assign _328_ = decoded_rs_address[0] ? \registers[3] [7] : \registers[2] [7];
+  assign _329_ = decoded_rs_address[1] ? _328_ : _327_;
+  assign _330_ = decoded_rs_address[0] ? \registers[5] [7] : \registers[4] [7];
+  assign _331_ = decoded_rs_address[0] ? \registers[7] [7] : \registers[6] [7];
+  assign _332_ = decoded_rs_address[1] ? _331_ : _330_;
+  assign _333_ = decoded_rs_address[2] ? _332_ : _329_;
+  assign _334_ = decoded_rs_address[0] ? \registers[9] [7] : \registers[8] [7];
+  assign _335_ = decoded_rs_address[0] ? \registers[11] [7] : \registers[10] [7];
+  assign _336_ = decoded_rs_address[1] ? _335_ : _334_;
+  assign _337_ = decoded_rs_address[0] ? \registers[13] [7] : \registers[12] [7];
+  assign _338_ = decoded_rs_address[0] ? \registers[15] [7] : \registers[14] [7];
+  assign _339_ = decoded_rs_address[1] ? _338_ : _337_;
+  assign _340_ = decoded_rs_address[2] ? _339_ : _336_;
+  assign _001_[7] = decoded_rs_address[3] ? _340_ : _333_;
   always @(posedge clk)
     if (reset) rs[0] <= 1'h0;
     else if (_018_) rs[0] <= _001_[0];
@@ -5344,342 +5352,6 @@ module \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers (clk, reset,
   always @(posedge clk)
     if (reset) rs[7] <= 1'h0;
     else if (_018_) rs[7] <= _001_[7];
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [0] <= 1'h0;
-      else \registers[3] [0] <= _019_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [1] <= 1'h0;
-      else \registers[3] [1] <= _020_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [2] <= 1'h0;
-      else \registers[3] [2] <= _021_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [3] <= 1'h0;
-      else \registers[3] [3] <= _022_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [4] <= 1'h0;
-      else \registers[3] [4] <= _023_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [5] <= 1'h0;
-      else \registers[3] [5] <= _024_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [6] <= 1'h0;
-      else \registers[3] [6] <= _025_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [7] <= 1'h0;
-      else \registers[3] [7] <= _026_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [0] <= 1'h0;
-      else \registers[10] [0] <= _019_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [1] <= 1'h0;
-      else \registers[10] [1] <= _020_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [2] <= 1'h0;
-      else \registers[10] [2] <= _021_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [3] <= 1'h0;
-      else \registers[10] [3] <= _022_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [4] <= 1'h0;
-      else \registers[10] [4] <= _023_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [5] <= 1'h0;
-      else \registers[10] [5] <= _024_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [6] <= 1'h0;
-      else \registers[10] [6] <= _025_;
-  always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [7] <= 1'h0;
-      else \registers[10] [7] <= _026_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [0] <= _042_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [1] <= _043_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [2] <= _044_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [3] <= _045_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [4] <= _046_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [5] <= _047_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [6] <= _048_;
-  always @(posedge clk)
-    if (_013_) \registers[13] [7] <= _049_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [0] <= 1'h0;
-      else \registers[5] [0] <= _019_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [1] <= 1'h0;
-      else \registers[5] [1] <= _020_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [2] <= 1'h0;
-      else \registers[5] [2] <= _021_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [3] <= 1'h0;
-      else \registers[5] [3] <= _022_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [4] <= 1'h0;
-      else \registers[5] [4] <= _023_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [5] <= 1'h0;
-      else \registers[5] [5] <= _024_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [6] <= 1'h0;
-      else \registers[5] [6] <= _025_;
-  always @(posedge clk)
-    if (_006_)
-      if (!_037_) \registers[5] [7] <= 1'h0;
-      else \registers[5] [7] <= _026_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [0] <= 1'h0;
-      else \registers[4] [0] <= _019_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [1] <= 1'h0;
-      else \registers[4] [1] <= _020_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [2] <= 1'h0;
-      else \registers[4] [2] <= _021_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [3] <= 1'h0;
-      else \registers[4] [3] <= _022_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [4] <= 1'h0;
-      else \registers[4] [4] <= _023_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [5] <= 1'h0;
-      else \registers[4] [5] <= _024_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [6] <= 1'h0;
-      else \registers[4] [6] <= _025_;
-  always @(posedge clk)
-    if (_007_)
-      if (!_036_) \registers[4] [7] <= 1'h0;
-      else \registers[4] [7] <= _026_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [0] <= 1'h0;
-      else \registers[6] [0] <= _019_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [1] <= 1'h0;
-      else \registers[6] [1] <= _020_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [2] <= 1'h0;
-      else \registers[6] [2] <= _021_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [3] <= 1'h0;
-      else \registers[6] [3] <= _022_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [4] <= 1'h0;
-      else \registers[6] [4] <= _023_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [5] <= 1'h0;
-      else \registers[6] [5] <= _024_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [6] <= 1'h0;
-      else \registers[6] [6] <= _025_;
-  always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [7] <= 1'h0;
-      else \registers[6] [7] <= _026_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [0] <= 1'h0;
-      else \registers[11] [0] <= _019_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [1] <= 1'h0;
-      else \registers[11] [1] <= _020_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [2] <= 1'h0;
-      else \registers[11] [2] <= _021_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [3] <= 1'h0;
-      else \registers[11] [3] <= _022_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [4] <= 1'h0;
-      else \registers[11] [4] <= _023_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [5] <= 1'h0;
-      else \registers[11] [5] <= _024_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [6] <= 1'h0;
-      else \registers[11] [6] <= _025_;
-  always @(posedge clk)
-    if (_015_)
-      if (!_029_) \registers[11] [7] <= 1'h0;
-      else \registers[11] [7] <= _026_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [0] <= 1'h0;
-      else \registers[7] [0] <= _019_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [1] <= 1'h0;
-      else \registers[7] [1] <= _020_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [2] <= 1'h0;
-      else \registers[7] [2] <= _021_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [3] <= 1'h0;
-      else \registers[7] [3] <= _022_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [4] <= 1'h0;
-      else \registers[7] [4] <= _023_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [5] <= 1'h0;
-      else \registers[7] [5] <= _024_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [6] <= 1'h0;
-      else \registers[7] [6] <= _025_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [7] <= 1'h0;
-      else \registers[7] [7] <= _026_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [0] <= 1'h0;
-      else \registers[14] [0] <= _019_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [1] <= 1'h0;
-      else \registers[14] [1] <= _020_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [2] <= 1'h1;
-      else \registers[14] [2] <= _021_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [3] <= 1'h0;
-      else \registers[14] [3] <= _022_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [4] <= 1'h0;
-      else \registers[14] [4] <= _023_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [5] <= 1'h0;
-      else \registers[14] [5] <= _024_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [6] <= 1'h0;
-      else \registers[14] [6] <= _025_;
-  always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [7] <= 1'h0;
-      else \registers[14] [7] <= _026_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [0] <= 1'h0;
-      else \registers[12] [0] <= _019_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [1] <= 1'h0;
-      else \registers[12] [1] <= _020_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [2] <= 1'h0;
-      else \registers[12] [2] <= _021_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [3] <= 1'h0;
-      else \registers[12] [3] <= _022_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [4] <= 1'h0;
-      else \registers[12] [4] <= _023_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [5] <= 1'h0;
-      else \registers[12] [5] <= _024_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [6] <= 1'h0;
-      else \registers[12] [6] <= _025_;
-  always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [7] <= 1'h0;
-      else \registers[12] [7] <= _026_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [0] <= 1'h0;
-      else \registers[2] [0] <= _019_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [1] <= 1'h0;
-      else \registers[2] [1] <= _020_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [2] <= 1'h0;
-      else \registers[2] [2] <= _021_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [3] <= 1'h0;
-      else \registers[2] [3] <= _022_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [4] <= 1'h0;
-      else \registers[2] [4] <= _023_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [5] <= 1'h0;
-      else \registers[2] [5] <= _024_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [6] <= 1'h0;
-      else \registers[2] [6] <= _025_;
-  always @(posedge clk)
-    if (_009_)
-      if (!_034_) \registers[2] [7] <= 1'h0;
-      else \registers[2] [7] <= _026_;
   always @(posedge clk)
     if (_003_)
       if (!_040_) \registers[8] [0] <= 1'h0;
@@ -5745,37 +5417,181 @@ module \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers (clk, reset,
       if (!_027_) \registers[0] [7] <= 1'h0;
       else \registers[0] [7] <= _026_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [0] <= 1'h0;
-      else \registers[9] [0] <= _019_;
+    if (_008_)
+      if (!_035_) \registers[3] [0] <= 1'h0;
+      else \registers[3] [0] <= _019_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [1] <= 1'h0;
-      else \registers[9] [1] <= _020_;
+    if (_008_)
+      if (!_035_) \registers[3] [1] <= 1'h0;
+      else \registers[3] [1] <= _020_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [2] <= 1'h0;
-      else \registers[9] [2] <= _021_;
+    if (_008_)
+      if (!_035_) \registers[3] [2] <= 1'h0;
+      else \registers[3] [2] <= _021_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [3] <= 1'h0;
-      else \registers[9] [3] <= _022_;
+    if (_008_)
+      if (!_035_) \registers[3] [3] <= 1'h0;
+      else \registers[3] [3] <= _022_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [4] <= 1'h0;
-      else \registers[9] [4] <= _023_;
+    if (_008_)
+      if (!_035_) \registers[3] [4] <= 1'h0;
+      else \registers[3] [4] <= _023_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [5] <= 1'h0;
-      else \registers[9] [5] <= _024_;
+    if (_008_)
+      if (!_035_) \registers[3] [5] <= 1'h0;
+      else \registers[3] [5] <= _024_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [6] <= 1'h0;
-      else \registers[9] [6] <= _025_;
+    if (_008_)
+      if (!_035_) \registers[3] [6] <= 1'h0;
+      else \registers[3] [6] <= _025_;
   always @(posedge clk)
-    if (_002_)
-      if (!_041_) \registers[9] [7] <= 1'h0;
-      else \registers[9] [7] <= _026_;
+    if (_008_)
+      if (!_035_) \registers[3] [7] <= 1'h0;
+      else \registers[3] [7] <= _026_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [0] <= _042_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [1] <= _043_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [2] <= _044_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [3] <= _045_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [4] <= _046_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [5] <= _047_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [6] <= _048_;
+  always @(posedge clk)
+    if (_013_) \registers[13] [7] <= _049_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [0] <= 1'h0;
+      else \registers[14] [0] <= _019_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [1] <= 1'h0;
+      else \registers[14] [1] <= _020_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [2] <= 1'h1;
+      else \registers[14] [2] <= _021_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [3] <= 1'h0;
+      else \registers[14] [3] <= _022_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [4] <= 1'h0;
+      else \registers[14] [4] <= _023_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [5] <= 1'h0;
+      else \registers[14] [5] <= _024_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [6] <= 1'h0;
+      else \registers[14] [6] <= _025_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [7] <= 1'h0;
+      else \registers[14] [7] <= _026_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [0] <= 1'h0;
+      else \registers[15] [0] <= _019_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [1] <= 1'h0;
+      else \registers[15] [1] <= _020_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [2] <= 1'h0;
+      else \registers[15] [2] <= _021_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [3] <= 1'h0;
+      else \registers[15] [3] <= _022_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [4] <= 1'h0;
+      else \registers[15] [4] <= _023_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [5] <= 1'h0;
+      else \registers[15] [5] <= _024_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [6] <= 1'h0;
+      else \registers[15] [6] <= _025_;
+  always @(posedge clk)
+    if (_011_)
+      if (!_032_) \registers[15] [7] <= 1'h0;
+      else \registers[15] [7] <= _026_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [0] <= 1'h0;
+      else \registers[7] [0] <= _019_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [1] <= 1'h0;
+      else \registers[7] [1] <= _020_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [2] <= 1'h0;
+      else \registers[7] [2] <= _021_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [3] <= 1'h0;
+      else \registers[7] [3] <= _022_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [4] <= 1'h0;
+      else \registers[7] [4] <= _023_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [5] <= 1'h0;
+      else \registers[7] [5] <= _024_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [6] <= 1'h0;
+      else \registers[7] [6] <= _025_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [7] <= 1'h0;
+      else \registers[7] [7] <= _026_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [0] <= 1'h0;
+      else \registers[2] [0] <= _019_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [1] <= 1'h0;
+      else \registers[2] [1] <= _020_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [2] <= 1'h0;
+      else \registers[2] [2] <= _021_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [3] <= 1'h0;
+      else \registers[2] [3] <= _022_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [4] <= 1'h0;
+      else \registers[2] [4] <= _023_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [5] <= 1'h0;
+      else \registers[2] [5] <= _024_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [6] <= 1'h0;
+      else \registers[2] [6] <= _025_;
+  always @(posedge clk)
+    if (_009_)
+      if (!_034_) \registers[2] [7] <= 1'h0;
+      else \registers[2] [7] <= _026_;
   always @(posedge clk)
     if (_010_)
       if (!_033_) \registers[1] [0] <= 1'h0;
@@ -5809,6 +5625,198 @@ module \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers (clk, reset,
       if (!_033_) \registers[1] [7] <= 1'h0;
       else \registers[1] [7] <= _026_;
   always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [0] <= 1'h0;
+      else \registers[5] [0] <= _019_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [1] <= 1'h0;
+      else \registers[5] [1] <= _020_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [2] <= 1'h0;
+      else \registers[5] [2] <= _021_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [3] <= 1'h0;
+      else \registers[5] [3] <= _022_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [4] <= 1'h0;
+      else \registers[5] [4] <= _023_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [5] <= 1'h0;
+      else \registers[5] [5] <= _024_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [6] <= 1'h0;
+      else \registers[5] [6] <= _025_;
+  always @(posedge clk)
+    if (_006_)
+      if (!_037_) \registers[5] [7] <= 1'h0;
+      else \registers[5] [7] <= _026_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [0] <= 1'h0;
+      else \registers[9] [0] <= _019_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [1] <= 1'h0;
+      else \registers[9] [1] <= _020_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [2] <= 1'h0;
+      else \registers[9] [2] <= _021_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [3] <= 1'h0;
+      else \registers[9] [3] <= _022_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [4] <= 1'h0;
+      else \registers[9] [4] <= _023_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [5] <= 1'h0;
+      else \registers[9] [5] <= _024_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [6] <= 1'h0;
+      else \registers[9] [6] <= _025_;
+  always @(posedge clk)
+    if (_002_)
+      if (!_041_) \registers[9] [7] <= 1'h0;
+      else \registers[9] [7] <= _026_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [0] <= 1'h0;
+      else \registers[10] [0] <= _019_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [1] <= 1'h0;
+      else \registers[10] [1] <= _020_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [2] <= 1'h0;
+      else \registers[10] [2] <= _021_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [3] <= 1'h0;
+      else \registers[10] [3] <= _022_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [4] <= 1'h0;
+      else \registers[10] [4] <= _023_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [5] <= 1'h0;
+      else \registers[10] [5] <= _024_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [6] <= 1'h0;
+      else \registers[10] [6] <= _025_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [7] <= 1'h0;
+      else \registers[10] [7] <= _026_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [0] <= 1'h0;
+      else \registers[11] [0] <= _019_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [1] <= 1'h0;
+      else \registers[11] [1] <= _020_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [2] <= 1'h0;
+      else \registers[11] [2] <= _021_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [3] <= 1'h0;
+      else \registers[11] [3] <= _022_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [4] <= 1'h0;
+      else \registers[11] [4] <= _023_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [5] <= 1'h0;
+      else \registers[11] [5] <= _024_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [6] <= 1'h0;
+      else \registers[11] [6] <= _025_;
+  always @(posedge clk)
+    if (_015_)
+      if (!_029_) \registers[11] [7] <= 1'h0;
+      else \registers[11] [7] <= _026_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [0] <= 1'h0;
+      else \registers[12] [0] <= _019_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [1] <= 1'h0;
+      else \registers[12] [1] <= _020_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [2] <= 1'h0;
+      else \registers[12] [2] <= _021_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [3] <= 1'h0;
+      else \registers[12] [3] <= _022_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [4] <= 1'h0;
+      else \registers[12] [4] <= _023_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [5] <= 1'h0;
+      else \registers[12] [5] <= _024_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [6] <= 1'h0;
+      else \registers[12] [6] <= _025_;
+  always @(posedge clk)
+    if (_014_)
+      if (!_030_) \registers[12] [7] <= 1'h0;
+      else \registers[12] [7] <= _026_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [0] <= 1'h0;
+      else \registers[4] [0] <= _019_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [1] <= 1'h0;
+      else \registers[4] [1] <= _020_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [2] <= 1'h0;
+      else \registers[4] [2] <= _021_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [3] <= 1'h0;
+      else \registers[4] [3] <= _022_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [4] <= 1'h0;
+      else \registers[4] [4] <= _023_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [5] <= 1'h0;
+      else \registers[4] [5] <= _024_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [6] <= 1'h0;
+      else \registers[4] [6] <= _025_;
+  always @(posedge clk)
+    if (_007_)
+      if (!_036_) \registers[4] [7] <= 1'h0;
+      else \registers[4] [7] <= _026_;
+  always @(posedge clk)
     if (reset) rt[0] <= 1'h0;
     else if (_018_) rt[0] <= _000_[0];
   always @(posedge clk)
@@ -5833,49 +5841,51 @@ module \$paramod$c5a88488bedb7a9c9866110c9eda41ee27775c76\registers (clk, reset,
     if (reset) rt[7] <= 1'h0;
     else if (_018_) rt[7] <= _000_[7];
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [0] <= 1'h0;
-      else \registers[15] [0] <= _019_;
+    if (_005_)
+      if (!_038_) \registers[6] [0] <= 1'h0;
+      else \registers[6] [0] <= _019_;
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [1] <= 1'h0;
-      else \registers[15] [1] <= _020_;
+    if (_005_)
+      if (!_038_) \registers[6] [1] <= 1'h0;
+      else \registers[6] [1] <= _020_;
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [2] <= 1'h0;
-      else \registers[15] [2] <= _021_;
+    if (_005_)
+      if (!_038_) \registers[6] [2] <= 1'h0;
+      else \registers[6] [2] <= _021_;
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [3] <= 1'h0;
-      else \registers[15] [3] <= _022_;
+    if (_005_)
+      if (!_038_) \registers[6] [3] <= 1'h0;
+      else \registers[6] [3] <= _022_;
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [4] <= 1'h0;
-      else \registers[15] [4] <= _023_;
+    if (_005_)
+      if (!_038_) \registers[6] [4] <= 1'h0;
+      else \registers[6] [4] <= _023_;
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [5] <= 1'h0;
-      else \registers[15] [5] <= _024_;
+    if (_005_)
+      if (!_038_) \registers[6] [5] <= 1'h0;
+      else \registers[6] [5] <= _024_;
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [6] <= 1'h0;
-      else \registers[15] [6] <= _025_;
+    if (_005_)
+      if (!_038_) \registers[6] [6] <= 1'h0;
+      else \registers[6] [6] <= _025_;
   always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [7] <= 1'h0;
-      else \registers[15] [7] <= _026_;
+    if (_005_)
+      if (!_038_) \registers[6] [7] <= 1'h0;
+      else \registers[6] [7] <= _026_;
 endmodule
 
 (* dynports =  1  *)
 (* hdlname = "arbiter_cache" *)
-(* src = "../build/gpu.v:47.1-340.10" *)
+(* src = "../build/gpu.v:47.1-448.10" *)
 module \$paramod$c84a37d0835bc5adc05aad5e2304aba80bfedd7b\arbiter_cache (clk, reset, consumer_read_valid, consumer_read_address, consumer_read_ready, consumer_read_data, consumer_write_valid, consumer_write_address, consumer_write_ready, consumer_write_data, mem_read_valid, mem_read_address, mem_read_ready, mem_read_data, mem_write_valid, mem_write_address, mem_write_ready, mem_write_data);
+  (* src = "../build/gpu.v:152.30-152.46" *)
+  wire [15:0] cache_line_mutex;
   (* src = "../build/gpu.v:75.13-75.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[0].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[1].j ;
   (* src = "../build/gpu.v:151.28-151.42" *)
   wire [1:0] consumer_mutex;
@@ -5907,9 +5917,9 @@ module \$paramod$c84a37d0835bc5adc05aad5e2304aba80bfedd7b\arbiter_cache (clk, re
   wire [7:0] \controller_state[0] ;
   (* src = "../build/gpu.v:150.36-150.52" *)
   wire \current_consumer[0] ;
-  (* src = "../build/gpu.v:153.28-153.35" *)
-  wire [1:0] granted;
-  (* src = "../build/gpu.v:152.28-152.44" *)
+  (* src = "../build/gpu.v:155.25-155.32" *)
+  wire [17:0] granted;
+  (* src = "../build/gpu.v:153.28-153.44" *)
   wire [1:0] main_mem_request;
   (* src = "../build/gpu.v:86.48-86.64" *)
   output [7:0] mem_read_address;
@@ -5938,8 +5948,7 @@ module \$paramod$c84a37d0835bc5adc05aad5e2304aba80bfedd7b\arbiter_cache (clk, re
   (* src = "../build/gpu.v:76.13-76.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:200.25-200.56" *)
-  wire [2:1] sv2v_tmp_arbiter_instance_grant;
+  assign cache_line_mutex = 16'bxxxxxxxxxxxxxx00;
   assign \consumer_if[0].j  = 32'd0;
   assign \consumer_if[1].j  = 32'd1;
   assign consumer_mutex = 2'hx;
@@ -5948,19 +5957,18 @@ module \$paramod$c84a37d0835bc5adc05aad5e2304aba80bfedd7b\arbiter_cache (clk, re
   assign consumer_write_ready = 2'h0;
   assign \controller_state[0]  = 8'h00;
   assign \current_consumer[0]  = 1'h0;
-  assign granted = 2'h0;
+  assign granted = 18'bxxxxxxxxxxxxxxxx00;
   assign main_mem_request = 2'h0;
   assign mem_read_address = 8'h00;
   assign mem_read_valid = 1'h0;
   assign mem_write_address = 8'h00;
   assign mem_write_data = 16'h0000;
   assign mem_write_valid = 1'h0;
-  assign sv2v_tmp_arbiter_instance_grant = 2'h0;
 endmodule
 
 (* dynports =  1  *)
 (* hdlname = "registers" *)
-(* src = "../build/gpu.v:1474.1-1549.10" *)
+(* src = "../build/gpu.v:1534.1-1609.10" *)
 module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset, enable, block_id, core_state, decoded_rd_address, decoded_rs_address, decoded_rt_address, decoded_reg_write_enable, decoded_reg_input_mux, decoded_immediate, alu_out, lsu_out, rs, rt);
   wire [7:0] _000_;
   wire [7:0] _001_;
@@ -6303,40 +6311,41 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
   wire _338_;
   wire _339_;
   wire _340_;
-  (* src = "../build/gpu.v:1505.31-1505.38" *)
+  wire _341_;
+  (* src = "../build/gpu.v:1565.31-1565.38" *)
   input [7:0] alu_out;
   wire [7:0] alu_out;
-  (* src = "../build/gpu.v:1497.19-1497.27" *)
+  (* src = "../build/gpu.v:1557.19-1557.27" *)
   input [7:0] block_id;
   wire [7:0] block_id;
-  (* src = "../build/gpu.v:1494.13-1494.16" *)
+  (* src = "../build/gpu.v:1554.13-1554.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1498.19-1498.29" *)
+  (* src = "../build/gpu.v:1558.19-1558.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:1504.31-1504.48" *)
+  (* src = "../build/gpu.v:1564.31-1564.48" *)
   input [7:0] decoded_immediate;
   wire [7:0] decoded_immediate;
-  (* src = "../build/gpu.v:1499.19-1499.37" *)
+  (* src = "../build/gpu.v:1559.19-1559.37" *)
   input [3:0] decoded_rd_address;
   wire [3:0] decoded_rd_address;
-  (* src = "../build/gpu.v:1503.19-1503.40" *)
+  (* src = "../build/gpu.v:1563.19-1563.40" *)
   input [1:0] decoded_reg_input_mux;
   wire [1:0] decoded_reg_input_mux;
-  (* src = "../build/gpu.v:1502.13-1502.37" *)
+  (* src = "../build/gpu.v:1562.13-1562.37" *)
   input decoded_reg_write_enable;
   wire decoded_reg_write_enable;
-  (* src = "../build/gpu.v:1500.19-1500.37" *)
+  (* src = "../build/gpu.v:1560.19-1560.37" *)
   input [3:0] decoded_rs_address;
   wire [3:0] decoded_rs_address;
-  (* src = "../build/gpu.v:1501.19-1501.37" *)
+  (* src = "../build/gpu.v:1561.19-1561.37" *)
   input [3:0] decoded_rt_address;
   wire [3:0] decoded_rt_address;
-  (* src = "../build/gpu.v:1496.13-1496.19" *)
+  (* src = "../build/gpu.v:1556.13-1556.19" *)
   input enable;
   wire enable;
-  (* src = "../build/gpu.v:1506.31-1506.38" *)
+  (* src = "../build/gpu.v:1566.31-1566.38" *)
   input [7:0] lsu_out;
   wire [7:0] lsu_out;
   reg [7:0] \registers[0] ;
@@ -6355,370 +6364,371 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
   reg [7:0] \registers[7] ;
   reg [7:0] \registers[8] ;
   reg [7:0] \registers[9] ;
-  (* src = "../build/gpu.v:1495.13-1495.18" *)
+  (* src = "../build/gpu.v:1555.13-1555.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1507.19-1507.21" *)
+  (* src = "../build/gpu.v:1567.19-1567.21" *)
   output [7:0] rs;
   reg [7:0] rs;
-  (* src = "../build/gpu.v:1508.19-1508.21" *)
+  (* src = "../build/gpu.v:1568.19-1568.21" *)
   output [7:0] rt;
   reg [7:0] rt;
-  assign _050_ = ~(decoded_rd_address[0] | decoded_rd_address[1]);
-  assign _051_ = decoded_rd_address[2] | decoded_rd_address[3];
+  assign _050_ = decoded_rd_address[0] & decoded_rd_address[1];
+  assign _051_ = decoded_rd_address[2] | ~(decoded_rd_address[3]);
   assign _052_ = _050_ & ~(_051_);
   assign _053_ = ~enable;
   assign _054_ = core_state[1] & ~(core_state[0]);
   assign _055_ = ~(_054_ & core_state[2]);
   assign _056_ = decoded_rd_address[2] & decoded_rd_address[3];
-  assign _057_ = _050_ | ~(_056_);
-  assign _058_ = ~(_057_ & decoded_reg_write_enable);
-  assign _059_ = decoded_reg_input_mux[0] | decoded_reg_input_mux[1];
-  assign _060_ = _059_ | _058_;
-  assign _061_ = _060_ | _055_;
-  assign _062_ = _061_ | _053_;
-  assign _063_ = _062_ | reset;
-  assign _064_ = decoded_reg_input_mux[1] | ~(decoded_reg_input_mux[0]);
-  assign _065_ = _064_ | _058_;
-  assign _066_ = _065_ | _055_;
-  assign _067_ = _066_ | _053_;
-  assign _068_ = _067_ | reset;
-  assign _069_ = ~(_068_ & _063_);
-  assign _070_ = decoded_reg_input_mux[0] | ~(decoded_reg_input_mux[1]);
-  assign _071_ = _070_ | _058_;
-  assign _072_ = _071_ | _055_;
-  assign _073_ = enable & ~(_072_);
-  assign _074_ = _073_ & ~(reset);
-  assign _075_ = _074_ | _069_;
-  assign _027_ = _075_ & _052_;
-  assign _017_ = _027_ | reset;
-  assign _076_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
-  assign _077_ = decoded_rd_address[2] | ~(decoded_rd_address[3]);
-  assign _078_ = _077_ | _076_;
-  assign _028_ = _075_ & ~(_078_);
-  assign _016_ = _028_ | reset;
-  assign _079_ = ~(decoded_rd_address[0] & decoded_rd_address[1]);
-  assign _080_ = _079_ | _077_;
-  assign _029_ = _075_ & ~(_080_);
+  assign _057_ = ~(decoded_rd_address[0] | decoded_rd_address[1]);
+  assign _058_ = _057_ | ~(_056_);
+  assign _059_ = ~(_058_ & decoded_reg_write_enable);
+  assign _060_ = decoded_reg_input_mux[1] | decoded_reg_input_mux[0];
+  assign _061_ = _060_ | _059_;
+  assign _062_ = _061_ | _055_;
+  assign _063_ = _062_ | _053_;
+  assign _064_ = _063_ | reset;
+  assign _065_ = decoded_reg_input_mux[1] | ~(decoded_reg_input_mux[0]);
+  assign _066_ = _065_ | _059_;
+  assign _067_ = _066_ | _055_;
+  assign _068_ = _067_ | _053_;
+  assign _069_ = _068_ | reset;
+  assign _070_ = ~(_069_ & _064_);
+  assign _071_ = decoded_reg_input_mux[0] | ~(decoded_reg_input_mux[1]);
+  assign _072_ = _071_ | _059_;
+  assign _073_ = _072_ | _055_;
+  assign _074_ = enable & ~(_073_);
+  assign _075_ = _074_ & ~(reset);
+  assign _076_ = _075_ | _070_;
+  assign _029_ = _076_ & _052_;
   assign _015_ = _029_ | reset;
-  assign _081_ = ~(_056_ & _050_);
-  assign _030_ = _075_ & ~(_081_);
-  assign _014_ = _030_ | reset;
-  assign _082_ = decoded_rd_address[1] | ~(decoded_rd_address[0]);
-  assign _083_ = _082_ | ~(_056_);
-  assign _084_ = _075_ & ~(_083_);
-  assign _085_ = enable | reset;
-  assign _013_ = _085_ | _084_;
-  assign _086_ = _076_ | ~(_056_);
-  assign _031_ = _075_ & ~(_086_);
-  assign _012_ = _031_ | reset;
-  assign _087_ = _079_ | ~(_056_);
-  assign _032_ = _075_ & ~(_087_);
-  assign _011_ = _032_ | reset;
-  assign _088_ = _082_ | _051_;
-  assign _033_ = _075_ & ~(_088_);
+  assign _077_ = decoded_rd_address[1] | ~(decoded_rd_address[0]);
+  assign _078_ = _077_ | ~(_056_);
+  assign _079_ = _076_ & ~(_078_);
+  assign _080_ = enable | reset;
+  assign _013_ = _080_ | _079_;
+  assign _081_ = decoded_rd_address[2] | decoded_rd_address[3];
+  assign _082_ = _081_ | _077_;
+  assign _033_ = _076_ & ~(_082_);
   assign _010_ = _033_ | reset;
-  assign _089_ = _076_ | _051_;
-  assign _034_ = _075_ & ~(_089_);
-  assign _009_ = _034_ | reset;
-  assign _090_ = _079_ | _051_;
-  assign _035_ = _075_ & ~(_090_);
-  assign _008_ = _035_ | reset;
-  assign _091_ = decoded_rd_address[3] | ~(decoded_rd_address[2]);
-  assign _092_ = _091_ | ~(_050_);
-  assign _036_ = _075_ & ~(_092_);
+  assign _083_ = decoded_rd_address[0] | decoded_rd_address[1];
+  assign _084_ = decoded_rd_address[3] | ~(decoded_rd_address[2]);
+  assign _085_ = _084_ | _083_;
+  assign _036_ = _076_ & ~(_085_);
   assign _007_ = _036_ | reset;
-  assign _093_ = _091_ | _082_;
-  assign _037_ = _075_ & ~(_093_);
-  assign _006_ = _037_ | reset;
-  assign _094_ = _091_ | _076_;
-  assign _038_ = _075_ & ~(_094_);
-  assign _005_ = _038_ | reset;
-  assign _095_ = _091_ | _079_;
-  assign _039_ = _075_ & ~(_095_);
+  assign _086_ = _084_ | ~(_050_);
+  assign _039_ = _076_ & ~(_086_);
   assign _004_ = _039_ | reset;
-  assign _096_ = _077_ | ~(_050_);
-  assign _040_ = _075_ & ~(_096_);
-  assign _003_ = _040_ | reset;
-  assign _097_ = _077_ | _082_;
-  assign _041_ = _075_ & ~(_097_);
+  assign _087_ = _083_ | ~(_056_);
+  assign _030_ = _076_ & ~(_087_);
+  assign _014_ = _030_ | reset;
+  assign _088_ = ~(_056_ & _050_);
+  assign _032_ = _076_ & ~(_088_);
+  assign _011_ = _032_ | reset;
+  assign _089_ = _081_ | ~(_050_);
+  assign _035_ = _076_ & ~(_089_);
+  assign _008_ = _035_ | reset;
+  assign _090_ = decoded_rd_address[0] | ~(decoded_rd_address[1]);
+  assign _091_ = _090_ | _084_;
+  assign _038_ = _076_ & ~(_091_);
+  assign _005_ = _038_ | reset;
+  assign _092_ = _077_ | _051_;
+  assign _041_ = _076_ & ~(_092_);
   assign _002_ = _041_ | reset;
-  assign _098_ = ~(core_state[0] & core_state[1]);
-  assign _099_ = _098_ | core_state[2];
-  assign _018_ = enable & ~(_099_);
-  assign _100_ = decoded_rt_address[0] ? \registers[1] [0] : \registers[0] [0];
-  assign _101_ = decoded_rt_address[0] ? \registers[3] [0] : \registers[2] [0];
-  assign _102_ = decoded_rt_address[1] ? _101_ : _100_;
-  assign _103_ = decoded_rt_address[0] ? \registers[5] [0] : \registers[4] [0];
-  assign _104_ = decoded_rt_address[0] ? \registers[7] [0] : \registers[6] [0];
-  assign _105_ = decoded_rt_address[1] ? _104_ : _103_;
-  assign _106_ = decoded_rt_address[2] ? _105_ : _102_;
-  assign _107_ = decoded_rt_address[0] ? \registers[9] [0] : \registers[8] [0];
-  assign _108_ = decoded_rt_address[0] ? \registers[11] [0] : \registers[10] [0];
-  assign _109_ = decoded_rt_address[1] ? _108_ : _107_;
-  assign _110_ = decoded_rt_address[0] ? \registers[13] [0] : \registers[12] [0];
-  assign _111_ = decoded_rt_address[0] ? \registers[15] [0] : \registers[14] [0];
-  assign _112_ = decoded_rt_address[1] ? _111_ : _110_;
-  assign _113_ = decoded_rt_address[2] ? _112_ : _109_;
-  assign _000_[0] = decoded_rt_address[3] ? _113_ : _106_;
-  assign _114_ = decoded_rt_address[0] ? \registers[1] [1] : \registers[0] [1];
-  assign _115_ = decoded_rt_address[0] ? \registers[3] [1] : \registers[2] [1];
-  assign _116_ = decoded_rt_address[1] ? _115_ : _114_;
-  assign _117_ = decoded_rt_address[0] ? \registers[5] [1] : \registers[4] [1];
-  assign _118_ = decoded_rt_address[0] ? \registers[7] [1] : \registers[6] [1];
-  assign _119_ = decoded_rt_address[1] ? _118_ : _117_;
-  assign _120_ = decoded_rt_address[2] ? _119_ : _116_;
-  assign _121_ = decoded_rt_address[0] ? \registers[9] [1] : \registers[8] [1];
-  assign _122_ = decoded_rt_address[0] ? \registers[11] [1] : \registers[10] [1];
-  assign _123_ = decoded_rt_address[1] ? _122_ : _121_;
-  assign _124_ = decoded_rt_address[0] ? \registers[13] [1] : \registers[12] [1];
-  assign _125_ = decoded_rt_address[0] ? \registers[15] [1] : \registers[14] [1];
-  assign _126_ = decoded_rt_address[1] ? _125_ : _124_;
-  assign _127_ = decoded_rt_address[2] ? _126_ : _123_;
-  assign _000_[1] = decoded_rt_address[3] ? _127_ : _120_;
-  assign _128_ = decoded_rt_address[0] ? \registers[1] [2] : \registers[0] [2];
-  assign _129_ = decoded_rt_address[0] ? \registers[3] [2] : \registers[2] [2];
-  assign _130_ = decoded_rt_address[1] ? _129_ : _128_;
-  assign _131_ = decoded_rt_address[0] ? \registers[5] [2] : \registers[4] [2];
-  assign _132_ = decoded_rt_address[0] ? \registers[7] [2] : \registers[6] [2];
-  assign _133_ = decoded_rt_address[1] ? _132_ : _131_;
-  assign _134_ = decoded_rt_address[2] ? _133_ : _130_;
-  assign _135_ = decoded_rt_address[0] ? \registers[9] [2] : \registers[8] [2];
-  assign _136_ = decoded_rt_address[0] ? \registers[11] [2] : \registers[10] [2];
-  assign _137_ = decoded_rt_address[1] ? _136_ : _135_;
-  assign _138_ = decoded_rt_address[0] ? \registers[13] [2] : \registers[12] [2];
-  assign _139_ = decoded_rt_address[0] ? \registers[15] [2] : \registers[14] [2];
-  assign _140_ = decoded_rt_address[1] ? _139_ : _138_;
-  assign _141_ = decoded_rt_address[2] ? _140_ : _137_;
-  assign _000_[2] = decoded_rt_address[3] ? _141_ : _134_;
-  assign _142_ = decoded_rt_address[0] ? \registers[1] [3] : \registers[0] [3];
-  assign _143_ = decoded_rt_address[0] ? \registers[3] [3] : \registers[2] [3];
-  assign _144_ = decoded_rt_address[1] ? _143_ : _142_;
-  assign _145_ = decoded_rt_address[0] ? \registers[5] [3] : \registers[4] [3];
-  assign _146_ = decoded_rt_address[0] ? \registers[7] [3] : \registers[6] [3];
-  assign _147_ = decoded_rt_address[1] ? _146_ : _145_;
-  assign _148_ = decoded_rt_address[2] ? _147_ : _144_;
-  assign _149_ = decoded_rt_address[0] ? \registers[9] [3] : \registers[8] [3];
-  assign _150_ = decoded_rt_address[0] ? \registers[11] [3] : \registers[10] [3];
-  assign _151_ = decoded_rt_address[1] ? _150_ : _149_;
-  assign _152_ = decoded_rt_address[0] ? \registers[13] [3] : \registers[12] [3];
-  assign _153_ = decoded_rt_address[0] ? \registers[15] [3] : \registers[14] [3];
-  assign _154_ = decoded_rt_address[1] ? _153_ : _152_;
-  assign _155_ = decoded_rt_address[2] ? _154_ : _151_;
-  assign _000_[3] = decoded_rt_address[3] ? _155_ : _148_;
-  assign _156_ = decoded_rt_address[0] ? \registers[1] [4] : \registers[0] [4];
-  assign _157_ = decoded_rt_address[0] ? \registers[3] [4] : \registers[2] [4];
-  assign _158_ = decoded_rt_address[1] ? _157_ : _156_;
-  assign _159_ = decoded_rt_address[0] ? \registers[5] [4] : \registers[4] [4];
-  assign _160_ = decoded_rt_address[0] ? \registers[7] [4] : \registers[6] [4];
-  assign _161_ = decoded_rt_address[1] ? _160_ : _159_;
-  assign _162_ = decoded_rt_address[2] ? _161_ : _158_;
-  assign _163_ = decoded_rt_address[0] ? \registers[9] [4] : \registers[8] [4];
-  assign _164_ = decoded_rt_address[0] ? \registers[11] [4] : \registers[10] [4];
-  assign _165_ = decoded_rt_address[1] ? _164_ : _163_;
-  assign _166_ = decoded_rt_address[0] ? \registers[13] [4] : \registers[12] [4];
-  assign _167_ = decoded_rt_address[0] ? \registers[15] [4] : \registers[14] [4];
-  assign _168_ = decoded_rt_address[1] ? _167_ : _166_;
-  assign _169_ = decoded_rt_address[2] ? _168_ : _165_;
-  assign _000_[4] = decoded_rt_address[3] ? _169_ : _162_;
-  assign _170_ = decoded_rt_address[0] ? \registers[1] [5] : \registers[0] [5];
-  assign _171_ = decoded_rt_address[0] ? \registers[3] [5] : \registers[2] [5];
-  assign _172_ = decoded_rt_address[1] ? _171_ : _170_;
-  assign _173_ = decoded_rt_address[0] ? \registers[5] [5] : \registers[4] [5];
-  assign _174_ = decoded_rt_address[0] ? \registers[7] [5] : \registers[6] [5];
-  assign _175_ = decoded_rt_address[1] ? _174_ : _173_;
-  assign _176_ = decoded_rt_address[2] ? _175_ : _172_;
-  assign _177_ = decoded_rt_address[0] ? \registers[9] [5] : \registers[8] [5];
-  assign _178_ = decoded_rt_address[0] ? \registers[11] [5] : \registers[10] [5];
-  assign _179_ = decoded_rt_address[1] ? _178_ : _177_;
-  assign _180_ = decoded_rt_address[0] ? \registers[13] [5] : \registers[12] [5];
-  assign _181_ = decoded_rt_address[0] ? \registers[15] [5] : \registers[14] [5];
-  assign _182_ = decoded_rt_address[1] ? _181_ : _180_;
-  assign _183_ = decoded_rt_address[2] ? _182_ : _179_;
-  assign _000_[5] = decoded_rt_address[3] ? _183_ : _176_;
-  assign _184_ = decoded_rt_address[0] ? \registers[1] [6] : \registers[0] [6];
-  assign _185_ = decoded_rt_address[0] ? \registers[3] [6] : \registers[2] [6];
-  assign _186_ = decoded_rt_address[1] ? _185_ : _184_;
-  assign _187_ = decoded_rt_address[0] ? \registers[5] [6] : \registers[4] [6];
-  assign _188_ = decoded_rt_address[0] ? \registers[7] [6] : \registers[6] [6];
-  assign _189_ = decoded_rt_address[1] ? _188_ : _187_;
-  assign _190_ = decoded_rt_address[2] ? _189_ : _186_;
-  assign _191_ = decoded_rt_address[0] ? \registers[9] [6] : \registers[8] [6];
-  assign _192_ = decoded_rt_address[0] ? \registers[11] [6] : \registers[10] [6];
-  assign _193_ = decoded_rt_address[1] ? _192_ : _191_;
-  assign _194_ = decoded_rt_address[0] ? \registers[13] [6] : \registers[12] [6];
-  assign _195_ = decoded_rt_address[0] ? \registers[15] [6] : \registers[14] [6];
-  assign _196_ = decoded_rt_address[1] ? _195_ : _194_;
-  assign _197_ = decoded_rt_address[2] ? _196_ : _193_;
-  assign _000_[6] = decoded_rt_address[3] ? _197_ : _190_;
-  assign _198_ = decoded_rt_address[0] ? \registers[1] [7] : \registers[0] [7];
-  assign _199_ = decoded_rt_address[0] ? \registers[3] [7] : \registers[2] [7];
-  assign _200_ = decoded_rt_address[1] ? _199_ : _198_;
-  assign _201_ = decoded_rt_address[0] ? \registers[5] [7] : \registers[4] [7];
-  assign _202_ = decoded_rt_address[0] ? \registers[7] [7] : \registers[6] [7];
-  assign _203_ = decoded_rt_address[1] ? _202_ : _201_;
-  assign _204_ = decoded_rt_address[2] ? _203_ : _200_;
-  assign _205_ = decoded_rt_address[0] ? \registers[9] [7] : \registers[8] [7];
-  assign _206_ = decoded_rt_address[0] ? \registers[11] [7] : \registers[10] [7];
-  assign _207_ = decoded_rt_address[1] ? _206_ : _205_;
-  assign _208_ = decoded_rt_address[0] ? \registers[13] [7] : \registers[12] [7];
-  assign _209_ = decoded_rt_address[0] ? \registers[15] [7] : \registers[14] [7];
-  assign _210_ = decoded_rt_address[1] ? _209_ : _208_;
-  assign _211_ = decoded_rt_address[2] ? _210_ : _207_;
-  assign _000_[7] = decoded_rt_address[3] ? _211_ : _204_;
-  assign _212_ = _068_ ? alu_out[0] : lsu_out[0];
-  assign _019_ = _074_ ? decoded_immediate[0] : _212_;
-  assign _213_ = reset | ~(enable);
-  assign _214_ = block_id[0] & ~(_213_);
-  assign _042_ = _084_ ? _019_ : _214_;
-  assign _215_ = _068_ ? alu_out[1] : lsu_out[1];
-  assign _020_ = _074_ ? decoded_immediate[1] : _215_;
-  assign _216_ = block_id[1] & ~(_213_);
-  assign _043_ = _084_ ? _020_ : _216_;
-  assign _217_ = _068_ ? alu_out[2] : lsu_out[2];
-  assign _021_ = _074_ ? decoded_immediate[2] : _217_;
-  assign _218_ = block_id[2] & ~(_213_);
-  assign _044_ = _084_ ? _021_ : _218_;
-  assign _219_ = _068_ ? alu_out[3] : lsu_out[3];
-  assign _022_ = _074_ ? decoded_immediate[3] : _219_;
-  assign _220_ = block_id[3] & ~(_213_);
-  assign _045_ = _084_ ? _022_ : _220_;
-  assign _221_ = _068_ ? alu_out[4] : lsu_out[4];
-  assign _023_ = _074_ ? decoded_immediate[4] : _221_;
-  assign _222_ = block_id[4] & ~(_213_);
-  assign _046_ = _084_ ? _023_ : _222_;
-  assign _223_ = _068_ ? alu_out[5] : lsu_out[5];
-  assign _024_ = _074_ ? decoded_immediate[5] : _223_;
-  assign _224_ = block_id[5] & ~(_213_);
-  assign _047_ = _084_ ? _024_ : _224_;
-  assign _225_ = _068_ ? alu_out[6] : lsu_out[6];
-  assign _025_ = _074_ ? decoded_immediate[6] : _225_;
-  assign _226_ = block_id[6] & ~(_213_);
-  assign _048_ = _084_ ? _025_ : _226_;
-  assign _227_ = _068_ ? alu_out[7] : lsu_out[7];
-  assign _026_ = _074_ ? decoded_immediate[7] : _227_;
-  assign _228_ = block_id[7] & ~(_213_);
-  assign _049_ = _084_ ? _026_ : _228_;
-  assign _229_ = decoded_rs_address[0] ? \registers[1] [0] : \registers[0] [0];
-  assign _230_ = decoded_rs_address[0] ? \registers[3] [0] : \registers[2] [0];
-  assign _231_ = decoded_rs_address[1] ? _230_ : _229_;
-  assign _232_ = decoded_rs_address[0] ? \registers[5] [0] : \registers[4] [0];
-  assign _233_ = decoded_rs_address[0] ? \registers[7] [0] : \registers[6] [0];
-  assign _234_ = decoded_rs_address[1] ? _233_ : _232_;
-  assign _235_ = decoded_rs_address[2] ? _234_ : _231_;
-  assign _236_ = decoded_rs_address[0] ? \registers[9] [0] : \registers[8] [0];
-  assign _237_ = decoded_rs_address[0] ? \registers[11] [0] : \registers[10] [0];
-  assign _238_ = decoded_rs_address[1] ? _237_ : _236_;
-  assign _239_ = decoded_rs_address[0] ? \registers[13] [0] : \registers[12] [0];
-  assign _240_ = decoded_rs_address[0] ? \registers[15] [0] : \registers[14] [0];
-  assign _241_ = decoded_rs_address[1] ? _240_ : _239_;
-  assign _242_ = decoded_rs_address[2] ? _241_ : _238_;
-  assign _001_[0] = decoded_rs_address[3] ? _242_ : _235_;
-  assign _243_ = decoded_rs_address[0] ? \registers[1] [1] : \registers[0] [1];
-  assign _244_ = decoded_rs_address[0] ? \registers[3] [1] : \registers[2] [1];
-  assign _245_ = decoded_rs_address[1] ? _244_ : _243_;
-  assign _246_ = decoded_rs_address[0] ? \registers[5] [1] : \registers[4] [1];
-  assign _247_ = decoded_rs_address[0] ? \registers[7] [1] : \registers[6] [1];
-  assign _248_ = decoded_rs_address[1] ? _247_ : _246_;
-  assign _249_ = decoded_rs_address[2] ? _248_ : _245_;
-  assign _250_ = decoded_rs_address[0] ? \registers[9] [1] : \registers[8] [1];
-  assign _251_ = decoded_rs_address[0] ? \registers[11] [1] : \registers[10] [1];
-  assign _252_ = decoded_rs_address[1] ? _251_ : _250_;
-  assign _253_ = decoded_rs_address[0] ? \registers[13] [1] : \registers[12] [1];
-  assign _254_ = decoded_rs_address[0] ? \registers[15] [1] : \registers[14] [1];
-  assign _255_ = decoded_rs_address[1] ? _254_ : _253_;
-  assign _256_ = decoded_rs_address[2] ? _255_ : _252_;
-  assign _001_[1] = decoded_rs_address[3] ? _256_ : _249_;
-  assign _257_ = decoded_rs_address[0] ? \registers[1] [2] : \registers[0] [2];
-  assign _258_ = decoded_rs_address[0] ? \registers[3] [2] : \registers[2] [2];
-  assign _259_ = decoded_rs_address[1] ? _258_ : _257_;
-  assign _260_ = decoded_rs_address[0] ? \registers[5] [2] : \registers[4] [2];
-  assign _261_ = decoded_rs_address[0] ? \registers[7] [2] : \registers[6] [2];
-  assign _262_ = decoded_rs_address[1] ? _261_ : _260_;
-  assign _263_ = decoded_rs_address[2] ? _262_ : _259_;
-  assign _264_ = decoded_rs_address[0] ? \registers[9] [2] : \registers[8] [2];
-  assign _265_ = decoded_rs_address[0] ? \registers[11] [2] : \registers[10] [2];
-  assign _266_ = decoded_rs_address[1] ? _265_ : _264_;
-  assign _267_ = decoded_rs_address[0] ? \registers[13] [2] : \registers[12] [2];
-  assign _268_ = decoded_rs_address[0] ? \registers[15] [2] : \registers[14] [2];
-  assign _269_ = decoded_rs_address[1] ? _268_ : _267_;
-  assign _270_ = decoded_rs_address[2] ? _269_ : _266_;
-  assign _001_[2] = decoded_rs_address[3] ? _270_ : _263_;
-  assign _271_ = decoded_rs_address[0] ? \registers[1] [3] : \registers[0] [3];
-  assign _272_ = decoded_rs_address[0] ? \registers[3] [3] : \registers[2] [3];
-  assign _273_ = decoded_rs_address[1] ? _272_ : _271_;
-  assign _274_ = decoded_rs_address[0] ? \registers[5] [3] : \registers[4] [3];
-  assign _275_ = decoded_rs_address[0] ? \registers[7] [3] : \registers[6] [3];
-  assign _276_ = decoded_rs_address[1] ? _275_ : _274_;
-  assign _277_ = decoded_rs_address[2] ? _276_ : _273_;
-  assign _278_ = decoded_rs_address[0] ? \registers[9] [3] : \registers[8] [3];
-  assign _279_ = decoded_rs_address[0] ? \registers[11] [3] : \registers[10] [3];
-  assign _280_ = decoded_rs_address[1] ? _279_ : _278_;
-  assign _281_ = decoded_rs_address[0] ? \registers[13] [3] : \registers[12] [3];
-  assign _282_ = decoded_rs_address[0] ? \registers[15] [3] : \registers[14] [3];
-  assign _283_ = decoded_rs_address[1] ? _282_ : _281_;
-  assign _284_ = decoded_rs_address[2] ? _283_ : _280_;
-  assign _001_[3] = decoded_rs_address[3] ? _284_ : _277_;
-  assign _285_ = decoded_rs_address[0] ? \registers[1] [4] : \registers[0] [4];
-  assign _286_ = decoded_rs_address[0] ? \registers[3] [4] : \registers[2] [4];
-  assign _287_ = decoded_rs_address[1] ? _286_ : _285_;
-  assign _288_ = decoded_rs_address[0] ? \registers[5] [4] : \registers[4] [4];
-  assign _289_ = decoded_rs_address[0] ? \registers[7] [4] : \registers[6] [4];
-  assign _290_ = decoded_rs_address[1] ? _289_ : _288_;
-  assign _291_ = decoded_rs_address[2] ? _290_ : _287_;
-  assign _292_ = decoded_rs_address[0] ? \registers[9] [4] : \registers[8] [4];
-  assign _293_ = decoded_rs_address[0] ? \registers[11] [4] : \registers[10] [4];
-  assign _294_ = decoded_rs_address[1] ? _293_ : _292_;
-  assign _295_ = decoded_rs_address[0] ? \registers[13] [4] : \registers[12] [4];
-  assign _296_ = decoded_rs_address[0] ? \registers[15] [4] : \registers[14] [4];
-  assign _297_ = decoded_rs_address[1] ? _296_ : _295_;
-  assign _298_ = decoded_rs_address[2] ? _297_ : _294_;
-  assign _001_[4] = decoded_rs_address[3] ? _298_ : _291_;
-  assign _299_ = decoded_rs_address[0] ? \registers[1] [5] : \registers[0] [5];
-  assign _300_ = decoded_rs_address[0] ? \registers[3] [5] : \registers[2] [5];
-  assign _301_ = decoded_rs_address[1] ? _300_ : _299_;
-  assign _302_ = decoded_rs_address[0] ? \registers[5] [5] : \registers[4] [5];
-  assign _303_ = decoded_rs_address[0] ? \registers[7] [5] : \registers[6] [5];
-  assign _304_ = decoded_rs_address[1] ? _303_ : _302_;
-  assign _305_ = decoded_rs_address[2] ? _304_ : _301_;
-  assign _306_ = decoded_rs_address[0] ? \registers[9] [5] : \registers[8] [5];
-  assign _307_ = decoded_rs_address[0] ? \registers[11] [5] : \registers[10] [5];
-  assign _308_ = decoded_rs_address[1] ? _307_ : _306_;
-  assign _309_ = decoded_rs_address[0] ? \registers[13] [5] : \registers[12] [5];
-  assign _310_ = decoded_rs_address[0] ? \registers[15] [5] : \registers[14] [5];
-  assign _311_ = decoded_rs_address[1] ? _310_ : _309_;
-  assign _312_ = decoded_rs_address[2] ? _311_ : _308_;
-  assign _001_[5] = decoded_rs_address[3] ? _312_ : _305_;
-  assign _313_ = decoded_rs_address[0] ? \registers[1] [6] : \registers[0] [6];
-  assign _314_ = decoded_rs_address[0] ? \registers[3] [6] : \registers[2] [6];
-  assign _315_ = decoded_rs_address[1] ? _314_ : _313_;
-  assign _316_ = decoded_rs_address[0] ? \registers[5] [6] : \registers[4] [6];
-  assign _317_ = decoded_rs_address[0] ? \registers[7] [6] : \registers[6] [6];
-  assign _318_ = decoded_rs_address[1] ? _317_ : _316_;
-  assign _319_ = decoded_rs_address[2] ? _318_ : _315_;
-  assign _320_ = decoded_rs_address[0] ? \registers[9] [6] : \registers[8] [6];
-  assign _321_ = decoded_rs_address[0] ? \registers[11] [6] : \registers[10] [6];
-  assign _322_ = decoded_rs_address[1] ? _321_ : _320_;
-  assign _323_ = decoded_rs_address[0] ? \registers[13] [6] : \registers[12] [6];
-  assign _324_ = decoded_rs_address[0] ? \registers[15] [6] : \registers[14] [6];
-  assign _325_ = decoded_rs_address[1] ? _324_ : _323_;
-  assign _326_ = decoded_rs_address[2] ? _325_ : _322_;
-  assign _001_[6] = decoded_rs_address[3] ? _326_ : _319_;
-  assign _327_ = decoded_rs_address[0] ? \registers[1] [7] : \registers[0] [7];
-  assign _328_ = decoded_rs_address[0] ? \registers[3] [7] : \registers[2] [7];
-  assign _329_ = decoded_rs_address[1] ? _328_ : _327_;
-  assign _330_ = decoded_rs_address[0] ? \registers[5] [7] : \registers[4] [7];
-  assign _331_ = decoded_rs_address[0] ? \registers[7] [7] : \registers[6] [7];
-  assign _332_ = decoded_rs_address[1] ? _331_ : _330_;
-  assign _333_ = decoded_rs_address[2] ? _332_ : _329_;
-  assign _334_ = decoded_rs_address[0] ? \registers[9] [7] : \registers[8] [7];
-  assign _335_ = decoded_rs_address[0] ? \registers[11] [7] : \registers[10] [7];
-  assign _336_ = decoded_rs_address[1] ? _335_ : _334_;
-  assign _337_ = decoded_rs_address[0] ? \registers[13] [7] : \registers[12] [7];
-  assign _338_ = decoded_rs_address[0] ? \registers[15] [7] : \registers[14] [7];
-  assign _339_ = decoded_rs_address[1] ? _338_ : _337_;
-  assign _340_ = decoded_rs_address[2] ? _339_ : _336_;
-  assign _001_[7] = decoded_rs_address[3] ? _340_ : _333_;
+  assign _093_ = _083_ | _081_;
+  assign _027_ = _076_ & ~(_093_);
+  assign _017_ = _027_ | reset;
+  assign _094_ = _090_ | ~(_056_);
+  assign _031_ = _076_ & ~(_094_);
+  assign _012_ = _031_ | reset;
+  assign _095_ = _090_ | _081_;
+  assign _034_ = _076_ & ~(_095_);
+  assign _009_ = _034_ | reset;
+  assign _096_ = _084_ | _077_;
+  assign _037_ = _076_ & ~(_096_);
+  assign _006_ = _037_ | reset;
+  assign _097_ = _083_ | _051_;
+  assign _040_ = _076_ & ~(_097_);
+  assign _003_ = _040_ | reset;
+  assign _098_ = _090_ | _051_;
+  assign _028_ = _076_ & ~(_098_);
+  assign _016_ = _028_ | reset;
+  assign _099_ = ~(core_state[0] & core_state[1]);
+  assign _100_ = _099_ | core_state[2];
+  assign _018_ = enable & ~(_100_);
+  assign _101_ = decoded_rs_address[0] ? \registers[1] [0] : \registers[0] [0];
+  assign _102_ = decoded_rs_address[0] ? \registers[3] [0] : \registers[2] [0];
+  assign _103_ = decoded_rs_address[1] ? _102_ : _101_;
+  assign _104_ = decoded_rs_address[0] ? \registers[5] [0] : \registers[4] [0];
+  assign _105_ = decoded_rs_address[0] ? \registers[7] [0] : \registers[6] [0];
+  assign _106_ = decoded_rs_address[1] ? _105_ : _104_;
+  assign _107_ = decoded_rs_address[2] ? _106_ : _103_;
+  assign _108_ = decoded_rs_address[0] ? \registers[9] [0] : \registers[8] [0];
+  assign _109_ = decoded_rs_address[0] ? \registers[11] [0] : \registers[10] [0];
+  assign _110_ = decoded_rs_address[1] ? _109_ : _108_;
+  assign _111_ = decoded_rs_address[0] ? \registers[13] [0] : \registers[12] [0];
+  assign _112_ = decoded_rs_address[0] ? \registers[15] [0] : \registers[14] [0];
+  assign _113_ = decoded_rs_address[1] ? _112_ : _111_;
+  assign _114_ = decoded_rs_address[2] ? _113_ : _110_;
+  assign _001_[0] = decoded_rs_address[3] ? _114_ : _107_;
+  assign _115_ = decoded_rs_address[0] ? \registers[1] [1] : \registers[0] [1];
+  assign _116_ = decoded_rs_address[0] ? \registers[3] [1] : \registers[2] [1];
+  assign _117_ = decoded_rs_address[1] ? _116_ : _115_;
+  assign _118_ = decoded_rs_address[0] ? \registers[5] [1] : \registers[4] [1];
+  assign _119_ = decoded_rs_address[0] ? \registers[7] [1] : \registers[6] [1];
+  assign _120_ = decoded_rs_address[1] ? _119_ : _118_;
+  assign _121_ = decoded_rs_address[2] ? _120_ : _117_;
+  assign _122_ = decoded_rs_address[0] ? \registers[9] [1] : \registers[8] [1];
+  assign _123_ = decoded_rs_address[0] ? \registers[11] [1] : \registers[10] [1];
+  assign _124_ = decoded_rs_address[1] ? _123_ : _122_;
+  assign _125_ = decoded_rs_address[0] ? \registers[13] [1] : \registers[12] [1];
+  assign _126_ = decoded_rs_address[0] ? \registers[15] [1] : \registers[14] [1];
+  assign _127_ = decoded_rs_address[1] ? _126_ : _125_;
+  assign _128_ = decoded_rs_address[2] ? _127_ : _124_;
+  assign _001_[1] = decoded_rs_address[3] ? _128_ : _121_;
+  assign _129_ = decoded_rs_address[0] ? \registers[1] [2] : \registers[0] [2];
+  assign _130_ = decoded_rs_address[0] ? \registers[3] [2] : \registers[2] [2];
+  assign _131_ = decoded_rs_address[1] ? _130_ : _129_;
+  assign _132_ = decoded_rs_address[0] ? \registers[5] [2] : \registers[4] [2];
+  assign _133_ = decoded_rs_address[0] ? \registers[7] [2] : \registers[6] [2];
+  assign _134_ = decoded_rs_address[1] ? _133_ : _132_;
+  assign _135_ = decoded_rs_address[2] ? _134_ : _131_;
+  assign _136_ = decoded_rs_address[0] ? \registers[9] [2] : \registers[8] [2];
+  assign _137_ = decoded_rs_address[0] ? \registers[11] [2] : \registers[10] [2];
+  assign _138_ = decoded_rs_address[1] ? _137_ : _136_;
+  assign _139_ = decoded_rs_address[0] ? \registers[13] [2] : \registers[12] [2];
+  assign _140_ = decoded_rs_address[0] ? \registers[15] [2] : \registers[14] [2];
+  assign _141_ = decoded_rs_address[1] ? _140_ : _139_;
+  assign _142_ = decoded_rs_address[2] ? _141_ : _138_;
+  assign _001_[2] = decoded_rs_address[3] ? _142_ : _135_;
+  assign _143_ = decoded_rs_address[0] ? \registers[1] [3] : \registers[0] [3];
+  assign _144_ = decoded_rs_address[0] ? \registers[3] [3] : \registers[2] [3];
+  assign _145_ = decoded_rs_address[1] ? _144_ : _143_;
+  assign _146_ = decoded_rs_address[0] ? \registers[5] [3] : \registers[4] [3];
+  assign _147_ = decoded_rs_address[0] ? \registers[7] [3] : \registers[6] [3];
+  assign _148_ = decoded_rs_address[1] ? _147_ : _146_;
+  assign _149_ = decoded_rs_address[2] ? _148_ : _145_;
+  assign _150_ = decoded_rs_address[0] ? \registers[9] [3] : \registers[8] [3];
+  assign _151_ = decoded_rs_address[0] ? \registers[11] [3] : \registers[10] [3];
+  assign _152_ = decoded_rs_address[1] ? _151_ : _150_;
+  assign _153_ = decoded_rs_address[0] ? \registers[13] [3] : \registers[12] [3];
+  assign _154_ = decoded_rs_address[0] ? \registers[15] [3] : \registers[14] [3];
+  assign _155_ = decoded_rs_address[1] ? _154_ : _153_;
+  assign _156_ = decoded_rs_address[2] ? _155_ : _152_;
+  assign _001_[3] = decoded_rs_address[3] ? _156_ : _149_;
+  assign _157_ = decoded_rs_address[0] ? \registers[1] [4] : \registers[0] [4];
+  assign _158_ = decoded_rs_address[0] ? \registers[3] [4] : \registers[2] [4];
+  assign _159_ = decoded_rs_address[1] ? _158_ : _157_;
+  assign _160_ = decoded_rs_address[0] ? \registers[5] [4] : \registers[4] [4];
+  assign _161_ = decoded_rs_address[0] ? \registers[7] [4] : \registers[6] [4];
+  assign _162_ = decoded_rs_address[1] ? _161_ : _160_;
+  assign _163_ = decoded_rs_address[2] ? _162_ : _159_;
+  assign _164_ = decoded_rs_address[0] ? \registers[9] [4] : \registers[8] [4];
+  assign _165_ = decoded_rs_address[0] ? \registers[11] [4] : \registers[10] [4];
+  assign _166_ = decoded_rs_address[1] ? _165_ : _164_;
+  assign _167_ = decoded_rs_address[0] ? \registers[13] [4] : \registers[12] [4];
+  assign _168_ = decoded_rs_address[0] ? \registers[15] [4] : \registers[14] [4];
+  assign _169_ = decoded_rs_address[1] ? _168_ : _167_;
+  assign _170_ = decoded_rs_address[2] ? _169_ : _166_;
+  assign _001_[4] = decoded_rs_address[3] ? _170_ : _163_;
+  assign _171_ = decoded_rs_address[0] ? \registers[1] [5] : \registers[0] [5];
+  assign _172_ = decoded_rs_address[0] ? \registers[3] [5] : \registers[2] [5];
+  assign _173_ = decoded_rs_address[1] ? _172_ : _171_;
+  assign _174_ = decoded_rs_address[0] ? \registers[5] [5] : \registers[4] [5];
+  assign _175_ = decoded_rs_address[0] ? \registers[7] [5] : \registers[6] [5];
+  assign _176_ = decoded_rs_address[1] ? _175_ : _174_;
+  assign _177_ = decoded_rs_address[2] ? _176_ : _173_;
+  assign _178_ = decoded_rs_address[0] ? \registers[9] [5] : \registers[8] [5];
+  assign _179_ = decoded_rs_address[0] ? \registers[11] [5] : \registers[10] [5];
+  assign _180_ = decoded_rs_address[1] ? _179_ : _178_;
+  assign _181_ = decoded_rs_address[0] ? \registers[13] [5] : \registers[12] [5];
+  assign _182_ = decoded_rs_address[0] ? \registers[15] [5] : \registers[14] [5];
+  assign _183_ = decoded_rs_address[1] ? _182_ : _181_;
+  assign _184_ = decoded_rs_address[2] ? _183_ : _180_;
+  assign _001_[5] = decoded_rs_address[3] ? _184_ : _177_;
+  assign _185_ = decoded_rs_address[0] ? \registers[1] [6] : \registers[0] [6];
+  assign _186_ = decoded_rs_address[0] ? \registers[3] [6] : \registers[2] [6];
+  assign _187_ = decoded_rs_address[1] ? _186_ : _185_;
+  assign _188_ = decoded_rs_address[0] ? \registers[5] [6] : \registers[4] [6];
+  assign _189_ = decoded_rs_address[0] ? \registers[7] [6] : \registers[6] [6];
+  assign _190_ = decoded_rs_address[1] ? _189_ : _188_;
+  assign _191_ = decoded_rs_address[2] ? _190_ : _187_;
+  assign _192_ = decoded_rs_address[0] ? \registers[9] [6] : \registers[8] [6];
+  assign _193_ = decoded_rs_address[0] ? \registers[11] [6] : \registers[10] [6];
+  assign _194_ = decoded_rs_address[1] ? _193_ : _192_;
+  assign _195_ = decoded_rs_address[0] ? \registers[13] [6] : \registers[12] [6];
+  assign _196_ = decoded_rs_address[0] ? \registers[15] [6] : \registers[14] [6];
+  assign _197_ = decoded_rs_address[1] ? _196_ : _195_;
+  assign _198_ = decoded_rs_address[2] ? _197_ : _194_;
+  assign _001_[6] = decoded_rs_address[3] ? _198_ : _191_;
+  assign _199_ = decoded_rs_address[0] ? \registers[1] [7] : \registers[0] [7];
+  assign _200_ = decoded_rs_address[0] ? \registers[3] [7] : \registers[2] [7];
+  assign _201_ = decoded_rs_address[1] ? _200_ : _199_;
+  assign _202_ = decoded_rs_address[0] ? \registers[5] [7] : \registers[4] [7];
+  assign _203_ = decoded_rs_address[0] ? \registers[7] [7] : \registers[6] [7];
+  assign _204_ = decoded_rs_address[1] ? _203_ : _202_;
+  assign _205_ = decoded_rs_address[2] ? _204_ : _201_;
+  assign _206_ = decoded_rs_address[0] ? \registers[9] [7] : \registers[8] [7];
+  assign _207_ = decoded_rs_address[0] ? \registers[11] [7] : \registers[10] [7];
+  assign _208_ = decoded_rs_address[1] ? _207_ : _206_;
+  assign _209_ = decoded_rs_address[0] ? \registers[13] [7] : \registers[12] [7];
+  assign _210_ = decoded_rs_address[0] ? \registers[15] [7] : \registers[14] [7];
+  assign _211_ = decoded_rs_address[1] ? _210_ : _209_;
+  assign _212_ = decoded_rs_address[2] ? _211_ : _208_;
+  assign _001_[7] = decoded_rs_address[3] ? _212_ : _205_;
+  assign _213_ = decoded_rt_address[0] ? \registers[1] [0] : \registers[0] [0];
+  assign _214_ = decoded_rt_address[0] ? \registers[3] [0] : \registers[2] [0];
+  assign _215_ = decoded_rt_address[1] ? _214_ : _213_;
+  assign _216_ = decoded_rt_address[0] ? \registers[5] [0] : \registers[4] [0];
+  assign _217_ = decoded_rt_address[0] ? \registers[7] [0] : \registers[6] [0];
+  assign _218_ = decoded_rt_address[1] ? _217_ : _216_;
+  assign _219_ = decoded_rt_address[2] ? _218_ : _215_;
+  assign _220_ = decoded_rt_address[0] ? \registers[9] [0] : \registers[8] [0];
+  assign _221_ = decoded_rt_address[0] ? \registers[11] [0] : \registers[10] [0];
+  assign _222_ = decoded_rt_address[1] ? _221_ : _220_;
+  assign _223_ = decoded_rt_address[0] ? \registers[13] [0] : \registers[12] [0];
+  assign _224_ = decoded_rt_address[0] ? \registers[15] [0] : \registers[14] [0];
+  assign _225_ = decoded_rt_address[1] ? _224_ : _223_;
+  assign _226_ = decoded_rt_address[2] ? _225_ : _222_;
+  assign _000_[0] = decoded_rt_address[3] ? _226_ : _219_;
+  assign _227_ = decoded_rt_address[0] ? \registers[1] [1] : \registers[0] [1];
+  assign _228_ = decoded_rt_address[0] ? \registers[3] [1] : \registers[2] [1];
+  assign _229_ = decoded_rt_address[1] ? _228_ : _227_;
+  assign _230_ = decoded_rt_address[0] ? \registers[5] [1] : \registers[4] [1];
+  assign _231_ = decoded_rt_address[0] ? \registers[7] [1] : \registers[6] [1];
+  assign _232_ = decoded_rt_address[1] ? _231_ : _230_;
+  assign _233_ = decoded_rt_address[2] ? _232_ : _229_;
+  assign _234_ = decoded_rt_address[0] ? \registers[9] [1] : \registers[8] [1];
+  assign _235_ = decoded_rt_address[0] ? \registers[11] [1] : \registers[10] [1];
+  assign _236_ = decoded_rt_address[1] ? _235_ : _234_;
+  assign _237_ = decoded_rt_address[0] ? \registers[13] [1] : \registers[12] [1];
+  assign _238_ = decoded_rt_address[0] ? \registers[15] [1] : \registers[14] [1];
+  assign _239_ = decoded_rt_address[1] ? _238_ : _237_;
+  assign _240_ = decoded_rt_address[2] ? _239_ : _236_;
+  assign _000_[1] = decoded_rt_address[3] ? _240_ : _233_;
+  assign _241_ = decoded_rt_address[0] ? \registers[1] [2] : \registers[0] [2];
+  assign _242_ = decoded_rt_address[0] ? \registers[3] [2] : \registers[2] [2];
+  assign _243_ = decoded_rt_address[1] ? _242_ : _241_;
+  assign _244_ = decoded_rt_address[0] ? \registers[5] [2] : \registers[4] [2];
+  assign _245_ = decoded_rt_address[0] ? \registers[7] [2] : \registers[6] [2];
+  assign _246_ = decoded_rt_address[1] ? _245_ : _244_;
+  assign _247_ = decoded_rt_address[2] ? _246_ : _243_;
+  assign _248_ = decoded_rt_address[0] ? \registers[9] [2] : \registers[8] [2];
+  assign _249_ = decoded_rt_address[0] ? \registers[11] [2] : \registers[10] [2];
+  assign _250_ = decoded_rt_address[1] ? _249_ : _248_;
+  assign _251_ = decoded_rt_address[0] ? \registers[13] [2] : \registers[12] [2];
+  assign _252_ = decoded_rt_address[0] ? \registers[15] [2] : \registers[14] [2];
+  assign _253_ = decoded_rt_address[1] ? _252_ : _251_;
+  assign _254_ = decoded_rt_address[2] ? _253_ : _250_;
+  assign _000_[2] = decoded_rt_address[3] ? _254_ : _247_;
+  assign _255_ = decoded_rt_address[0] ? \registers[1] [3] : \registers[0] [3];
+  assign _256_ = decoded_rt_address[0] ? \registers[3] [3] : \registers[2] [3];
+  assign _257_ = decoded_rt_address[1] ? _256_ : _255_;
+  assign _258_ = decoded_rt_address[0] ? \registers[5] [3] : \registers[4] [3];
+  assign _259_ = decoded_rt_address[0] ? \registers[7] [3] : \registers[6] [3];
+  assign _260_ = decoded_rt_address[1] ? _259_ : _258_;
+  assign _261_ = decoded_rt_address[2] ? _260_ : _257_;
+  assign _262_ = decoded_rt_address[0] ? \registers[9] [3] : \registers[8] [3];
+  assign _263_ = decoded_rt_address[0] ? \registers[11] [3] : \registers[10] [3];
+  assign _264_ = decoded_rt_address[1] ? _263_ : _262_;
+  assign _265_ = decoded_rt_address[0] ? \registers[13] [3] : \registers[12] [3];
+  assign _266_ = decoded_rt_address[0] ? \registers[15] [3] : \registers[14] [3];
+  assign _267_ = decoded_rt_address[1] ? _266_ : _265_;
+  assign _268_ = decoded_rt_address[2] ? _267_ : _264_;
+  assign _000_[3] = decoded_rt_address[3] ? _268_ : _261_;
+  assign _269_ = decoded_rt_address[0] ? \registers[1] [4] : \registers[0] [4];
+  assign _270_ = decoded_rt_address[0] ? \registers[3] [4] : \registers[2] [4];
+  assign _271_ = decoded_rt_address[1] ? _270_ : _269_;
+  assign _272_ = decoded_rt_address[0] ? \registers[5] [4] : \registers[4] [4];
+  assign _273_ = decoded_rt_address[0] ? \registers[7] [4] : \registers[6] [4];
+  assign _274_ = decoded_rt_address[1] ? _273_ : _272_;
+  assign _275_ = decoded_rt_address[2] ? _274_ : _271_;
+  assign _276_ = decoded_rt_address[0] ? \registers[9] [4] : \registers[8] [4];
+  assign _277_ = decoded_rt_address[0] ? \registers[11] [4] : \registers[10] [4];
+  assign _278_ = decoded_rt_address[1] ? _277_ : _276_;
+  assign _279_ = decoded_rt_address[0] ? \registers[13] [4] : \registers[12] [4];
+  assign _280_ = decoded_rt_address[0] ? \registers[15] [4] : \registers[14] [4];
+  assign _281_ = decoded_rt_address[1] ? _280_ : _279_;
+  assign _282_ = decoded_rt_address[2] ? _281_ : _278_;
+  assign _000_[4] = decoded_rt_address[3] ? _282_ : _275_;
+  assign _283_ = decoded_rt_address[0] ? \registers[1] [5] : \registers[0] [5];
+  assign _284_ = decoded_rt_address[0] ? \registers[3] [5] : \registers[2] [5];
+  assign _285_ = decoded_rt_address[1] ? _284_ : _283_;
+  assign _286_ = decoded_rt_address[0] ? \registers[5] [5] : \registers[4] [5];
+  assign _287_ = decoded_rt_address[0] ? \registers[7] [5] : \registers[6] [5];
+  assign _288_ = decoded_rt_address[1] ? _287_ : _286_;
+  assign _289_ = decoded_rt_address[2] ? _288_ : _285_;
+  assign _290_ = decoded_rt_address[0] ? \registers[9] [5] : \registers[8] [5];
+  assign _291_ = decoded_rt_address[0] ? \registers[11] [5] : \registers[10] [5];
+  assign _292_ = decoded_rt_address[1] ? _291_ : _290_;
+  assign _293_ = decoded_rt_address[0] ? \registers[13] [5] : \registers[12] [5];
+  assign _294_ = decoded_rt_address[0] ? \registers[15] [5] : \registers[14] [5];
+  assign _295_ = decoded_rt_address[1] ? _294_ : _293_;
+  assign _296_ = decoded_rt_address[2] ? _295_ : _292_;
+  assign _000_[5] = decoded_rt_address[3] ? _296_ : _289_;
+  assign _297_ = decoded_rt_address[0] ? \registers[1] [6] : \registers[0] [6];
+  assign _298_ = decoded_rt_address[0] ? \registers[3] [6] : \registers[2] [6];
+  assign _299_ = decoded_rt_address[1] ? _298_ : _297_;
+  assign _300_ = decoded_rt_address[0] ? \registers[5] [6] : \registers[4] [6];
+  assign _301_ = decoded_rt_address[0] ? \registers[7] [6] : \registers[6] [6];
+  assign _302_ = decoded_rt_address[1] ? _301_ : _300_;
+  assign _303_ = decoded_rt_address[2] ? _302_ : _299_;
+  assign _304_ = decoded_rt_address[0] ? \registers[9] [6] : \registers[8] [6];
+  assign _305_ = decoded_rt_address[0] ? \registers[11] [6] : \registers[10] [6];
+  assign _306_ = decoded_rt_address[1] ? _305_ : _304_;
+  assign _307_ = decoded_rt_address[0] ? \registers[13] [6] : \registers[12] [6];
+  assign _308_ = decoded_rt_address[0] ? \registers[15] [6] : \registers[14] [6];
+  assign _309_ = decoded_rt_address[1] ? _308_ : _307_;
+  assign _310_ = decoded_rt_address[2] ? _309_ : _306_;
+  assign _000_[6] = decoded_rt_address[3] ? _310_ : _303_;
+  assign _311_ = decoded_rt_address[0] ? \registers[1] [7] : \registers[0] [7];
+  assign _312_ = decoded_rt_address[0] ? \registers[3] [7] : \registers[2] [7];
+  assign _313_ = decoded_rt_address[1] ? _312_ : _311_;
+  assign _314_ = decoded_rt_address[0] ? \registers[5] [7] : \registers[4] [7];
+  assign _315_ = decoded_rt_address[0] ? \registers[7] [7] : \registers[6] [7];
+  assign _316_ = decoded_rt_address[1] ? _315_ : _314_;
+  assign _317_ = decoded_rt_address[2] ? _316_ : _313_;
+  assign _318_ = decoded_rt_address[0] ? \registers[9] [7] : \registers[8] [7];
+  assign _319_ = decoded_rt_address[0] ? \registers[11] [7] : \registers[10] [7];
+  assign _320_ = decoded_rt_address[1] ? _319_ : _318_;
+  assign _321_ = decoded_rt_address[0] ? \registers[13] [7] : \registers[12] [7];
+  assign _322_ = decoded_rt_address[0] ? \registers[15] [7] : \registers[14] [7];
+  assign _323_ = decoded_rt_address[1] ? _322_ : _321_;
+  assign _324_ = decoded_rt_address[2] ? _323_ : _320_;
+  assign _000_[7] = decoded_rt_address[3] ? _324_ : _317_;
+  assign _325_ = _069_ ? alu_out[0] : lsu_out[0];
+  assign _019_ = _075_ ? decoded_immediate[0] : _325_;
+  assign _326_ = reset | ~(enable);
+  assign _327_ = block_id[0] & ~(_326_);
+  assign _042_ = _079_ ? _019_ : _327_;
+  assign _328_ = _069_ ? alu_out[1] : lsu_out[1];
+  assign _020_ = _075_ ? decoded_immediate[1] : _328_;
+  assign _329_ = block_id[1] & ~(_326_);
+  assign _043_ = _079_ ? _020_ : _329_;
+  assign _330_ = _069_ ? alu_out[2] : lsu_out[2];
+  assign _021_ = _075_ ? decoded_immediate[2] : _330_;
+  assign _331_ = block_id[2] & ~(_326_);
+  assign _044_ = _079_ ? _021_ : _331_;
+  assign _332_ = _069_ ? alu_out[3] : lsu_out[3];
+  assign _022_ = _075_ ? decoded_immediate[3] : _332_;
+  assign _333_ = block_id[3] & ~(_326_);
+  assign _045_ = _079_ ? _022_ : _333_;
+  assign _334_ = _069_ ? alu_out[4] : lsu_out[4];
+  assign _023_ = _075_ ? decoded_immediate[4] : _334_;
+  assign _335_ = block_id[4] & ~(_326_);
+  assign _046_ = _079_ ? _023_ : _335_;
+  assign _336_ = _069_ ? alu_out[5] : lsu_out[5];
+  assign _024_ = _075_ ? decoded_immediate[5] : _336_;
+  assign _337_ = block_id[5] & ~(_326_);
+  assign _047_ = _079_ ? _024_ : _337_;
+  assign _338_ = _069_ ? alu_out[6] : lsu_out[6];
+  assign _025_ = _075_ ? decoded_immediate[6] : _338_;
+  assign _339_ = block_id[6] & ~(_326_);
+  assign _048_ = _079_ ? _025_ : _339_;
+  assign _340_ = _069_ ? alu_out[7] : lsu_out[7];
+  assign _026_ = _075_ ? decoded_immediate[7] : _340_;
+  assign _341_ = block_id[7] & ~(_326_);
+  assign _049_ = _079_ ? _026_ : _341_;
   always @(posedge clk)
     if (reset) rs[0] <= 1'h0;
     else if (_018_) rs[0] <= _001_[0];
@@ -6743,38 +6753,6 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
   always @(posedge clk)
     if (reset) rs[7] <= 1'h0;
     else if (_018_) rs[7] <= _001_[7];
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [0] <= 1'h0;
-      else \registers[0] [0] <= _019_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [1] <= 1'h0;
-      else \registers[0] [1] <= _020_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [2] <= 1'h0;
-      else \registers[0] [2] <= _021_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [3] <= 1'h0;
-      else \registers[0] [3] <= _022_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [4] <= 1'h0;
-      else \registers[0] [4] <= _023_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [5] <= 1'h0;
-      else \registers[0] [5] <= _024_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [6] <= 1'h0;
-      else \registers[0] [6] <= _025_;
-  always @(posedge clk)
-    if (_017_)
-      if (!_027_) \registers[0] [7] <= 1'h0;
-      else \registers[0] [7] <= _026_;
   always @(posedge clk)
     if (_007_)
       if (!_036_) \registers[4] [0] <= 1'h0;
@@ -6808,6 +6786,38 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
       if (!_036_) \registers[4] [7] <= 1'h0;
       else \registers[4] [7] <= _026_;
   always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [0] <= 1'h0;
+      else \registers[10] [0] <= _019_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [1] <= 1'h0;
+      else \registers[10] [1] <= _020_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [2] <= 1'h0;
+      else \registers[10] [2] <= _021_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [3] <= 1'h0;
+      else \registers[10] [3] <= _022_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [4] <= 1'h0;
+      else \registers[10] [4] <= _023_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [5] <= 1'h0;
+      else \registers[10] [5] <= _024_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [6] <= 1'h0;
+      else \registers[10] [6] <= _025_;
+  always @(posedge clk)
+    if (_016_)
+      if (!_028_) \registers[10] [7] <= 1'h0;
+      else \registers[10] [7] <= _026_;
+  always @(posedge clk)
     if (_002_)
       if (!_041_) \registers[9] [0] <= 1'h0;
       else \registers[9] [0] <= _019_;
@@ -6840,165 +6850,37 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
       if (!_041_) \registers[9] [7] <= 1'h0;
       else \registers[9] [7] <= _026_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [0] <= 1'h0;
-      else \registers[14] [0] <= _019_;
+    if (_014_)
+      if (!_030_) \registers[12] [0] <= 1'h0;
+      else \registers[12] [0] <= _019_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [1] <= 1'h0;
-      else \registers[14] [1] <= _020_;
+    if (_014_)
+      if (!_030_) \registers[12] [1] <= 1'h0;
+      else \registers[12] [1] <= _020_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [2] <= 1'h1;
-      else \registers[14] [2] <= _021_;
+    if (_014_)
+      if (!_030_) \registers[12] [2] <= 1'h0;
+      else \registers[12] [2] <= _021_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [3] <= 1'h0;
-      else \registers[14] [3] <= _022_;
+    if (_014_)
+      if (!_030_) \registers[12] [3] <= 1'h0;
+      else \registers[12] [3] <= _022_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [4] <= 1'h0;
-      else \registers[14] [4] <= _023_;
+    if (_014_)
+      if (!_030_) \registers[12] [4] <= 1'h0;
+      else \registers[12] [4] <= _023_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [5] <= 1'h0;
-      else \registers[14] [5] <= _024_;
+    if (_014_)
+      if (!_030_) \registers[12] [5] <= 1'h0;
+      else \registers[12] [5] <= _024_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [6] <= 1'h0;
-      else \registers[14] [6] <= _025_;
+    if (_014_)
+      if (!_030_) \registers[12] [6] <= 1'h0;
+      else \registers[12] [6] <= _025_;
   always @(posedge clk)
-    if (_012_)
-      if (!_031_) \registers[14] [7] <= 1'h0;
-      else \registers[14] [7] <= _026_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [0] <= 1'h1;
-      else \registers[15] [0] <= _019_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [1] <= 1'h0;
-      else \registers[15] [1] <= _020_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [2] <= 1'h0;
-      else \registers[15] [2] <= _021_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [3] <= 1'h0;
-      else \registers[15] [3] <= _022_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [4] <= 1'h0;
-      else \registers[15] [4] <= _023_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [5] <= 1'h0;
-      else \registers[15] [5] <= _024_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [6] <= 1'h0;
-      else \registers[15] [6] <= _025_;
-  always @(posedge clk)
-    if (_011_)
-      if (!_032_) \registers[15] [7] <= 1'h0;
-      else \registers[15] [7] <= _026_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [0] <= 1'h0;
-      else \registers[8] [0] <= _019_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [1] <= 1'h0;
-      else \registers[8] [1] <= _020_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [2] <= 1'h0;
-      else \registers[8] [2] <= _021_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [3] <= 1'h0;
-      else \registers[8] [3] <= _022_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [4] <= 1'h0;
-      else \registers[8] [4] <= _023_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [5] <= 1'h0;
-      else \registers[8] [5] <= _024_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [6] <= 1'h0;
-      else \registers[8] [6] <= _025_;
-  always @(posedge clk)
-    if (_003_)
-      if (!_040_) \registers[8] [7] <= 1'h0;
-      else \registers[8] [7] <= _026_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [0] <= 1'h0;
-      else \registers[7] [0] <= _019_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [1] <= 1'h0;
-      else \registers[7] [1] <= _020_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [2] <= 1'h0;
-      else \registers[7] [2] <= _021_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [3] <= 1'h0;
-      else \registers[7] [3] <= _022_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [4] <= 1'h0;
-      else \registers[7] [4] <= _023_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [5] <= 1'h0;
-      else \registers[7] [5] <= _024_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [6] <= 1'h0;
-      else \registers[7] [6] <= _025_;
-  always @(posedge clk)
-    if (_004_)
-      if (!_039_) \registers[7] [7] <= 1'h0;
-      else \registers[7] [7] <= _026_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [0] <= 1'h0;
-      else \registers[3] [0] <= _019_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [1] <= 1'h0;
-      else \registers[3] [1] <= _020_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [2] <= 1'h0;
-      else \registers[3] [2] <= _021_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [3] <= 1'h0;
-      else \registers[3] [3] <= _022_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [4] <= 1'h0;
-      else \registers[3] [4] <= _023_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [5] <= 1'h0;
-      else \registers[3] [5] <= _024_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [6] <= 1'h0;
-      else \registers[3] [6] <= _025_;
-  always @(posedge clk)
-    if (_008_)
-      if (!_035_) \registers[3] [7] <= 1'h0;
-      else \registers[3] [7] <= _026_;
+    if (_014_)
+      if (!_030_) \registers[12] [7] <= 1'h0;
+      else \registers[12] [7] <= _026_;
   always @(posedge clk)
     if (_006_)
       if (!_037_) \registers[5] [0] <= 1'h0;
@@ -7064,37 +6946,21 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
       if (!_029_) \registers[11] [7] <= 1'h0;
       else \registers[11] [7] <= _026_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [0] <= 1'h0;
-      else \registers[6] [0] <= _019_;
+    if (_013_) \registers[13] [0] <= _042_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [1] <= 1'h0;
-      else \registers[6] [1] <= _020_;
+    if (_013_) \registers[13] [1] <= _043_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [2] <= 1'h0;
-      else \registers[6] [2] <= _021_;
+    if (_013_) \registers[13] [2] <= _044_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [3] <= 1'h0;
-      else \registers[6] [3] <= _022_;
+    if (_013_) \registers[13] [3] <= _045_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [4] <= 1'h0;
-      else \registers[6] [4] <= _023_;
+    if (_013_) \registers[13] [4] <= _046_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [5] <= 1'h0;
-      else \registers[6] [5] <= _024_;
+    if (_013_) \registers[13] [5] <= _047_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [6] <= 1'h0;
-      else \registers[6] [6] <= _025_;
+    if (_013_) \registers[13] [6] <= _048_;
   always @(posedge clk)
-    if (_005_)
-      if (!_038_) \registers[6] [7] <= 1'h0;
-      else \registers[6] [7] <= _026_;
+    if (_013_) \registers[13] [7] <= _049_;
   always @(posedge clk)
     if (_009_)
       if (!_034_) \registers[2] [0] <= 1'h0;
@@ -7128,85 +6994,133 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
       if (!_034_) \registers[2] [7] <= 1'h0;
       else \registers[2] [7] <= _026_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [0] <= 1'h0;
-      else \registers[12] [0] <= _019_;
+    if (_003_)
+      if (!_040_) \registers[8] [0] <= 1'h0;
+      else \registers[8] [0] <= _019_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [1] <= 1'h0;
-      else \registers[12] [1] <= _020_;
+    if (_003_)
+      if (!_040_) \registers[8] [1] <= 1'h0;
+      else \registers[8] [1] <= _020_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [2] <= 1'h0;
-      else \registers[12] [2] <= _021_;
+    if (_003_)
+      if (!_040_) \registers[8] [2] <= 1'h0;
+      else \registers[8] [2] <= _021_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [3] <= 1'h0;
-      else \registers[12] [3] <= _022_;
+    if (_003_)
+      if (!_040_) \registers[8] [3] <= 1'h0;
+      else \registers[8] [3] <= _022_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [4] <= 1'h0;
-      else \registers[12] [4] <= _023_;
+    if (_003_)
+      if (!_040_) \registers[8] [4] <= 1'h0;
+      else \registers[8] [4] <= _023_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [5] <= 1'h0;
-      else \registers[12] [5] <= _024_;
+    if (_003_)
+      if (!_040_) \registers[8] [5] <= 1'h0;
+      else \registers[8] [5] <= _024_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [6] <= 1'h0;
-      else \registers[12] [6] <= _025_;
+    if (_003_)
+      if (!_040_) \registers[8] [6] <= 1'h0;
+      else \registers[8] [6] <= _025_;
   always @(posedge clk)
-    if (_014_)
-      if (!_030_) \registers[12] [7] <= 1'h0;
-      else \registers[12] [7] <= _026_;
+    if (_003_)
+      if (!_040_) \registers[8] [7] <= 1'h0;
+      else \registers[8] [7] <= _026_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [0] <= 1'h0;
-      else \registers[10] [0] <= _019_;
+    if (_017_)
+      if (!_027_) \registers[0] [0] <= 1'h0;
+      else \registers[0] [0] <= _019_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [1] <= 1'h0;
-      else \registers[10] [1] <= _020_;
+    if (_017_)
+      if (!_027_) \registers[0] [1] <= 1'h0;
+      else \registers[0] [1] <= _020_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [2] <= 1'h0;
-      else \registers[10] [2] <= _021_;
+    if (_017_)
+      if (!_027_) \registers[0] [2] <= 1'h0;
+      else \registers[0] [2] <= _021_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [3] <= 1'h0;
-      else \registers[10] [3] <= _022_;
+    if (_017_)
+      if (!_027_) \registers[0] [3] <= 1'h0;
+      else \registers[0] [3] <= _022_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [4] <= 1'h0;
-      else \registers[10] [4] <= _023_;
+    if (_017_)
+      if (!_027_) \registers[0] [4] <= 1'h0;
+      else \registers[0] [4] <= _023_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [5] <= 1'h0;
-      else \registers[10] [5] <= _024_;
+    if (_017_)
+      if (!_027_) \registers[0] [5] <= 1'h0;
+      else \registers[0] [5] <= _024_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [6] <= 1'h0;
-      else \registers[10] [6] <= _025_;
+    if (_017_)
+      if (!_027_) \registers[0] [6] <= 1'h0;
+      else \registers[0] [6] <= _025_;
   always @(posedge clk)
-    if (_016_)
-      if (!_028_) \registers[10] [7] <= 1'h0;
-      else \registers[10] [7] <= _026_;
+    if (_017_)
+      if (!_027_) \registers[0] [7] <= 1'h0;
+      else \registers[0] [7] <= _026_;
   always @(posedge clk)
-    if (_013_) \registers[13] [0] <= _042_;
+    if (_011_)
+      if (!_032_) \registers[15] [0] <= 1'h1;
+      else \registers[15] [0] <= _019_;
   always @(posedge clk)
-    if (_013_) \registers[13] [1] <= _043_;
+    if (_011_)
+      if (!_032_) \registers[15] [1] <= 1'h0;
+      else \registers[15] [1] <= _020_;
   always @(posedge clk)
-    if (_013_) \registers[13] [2] <= _044_;
+    if (_011_)
+      if (!_032_) \registers[15] [2] <= 1'h0;
+      else \registers[15] [2] <= _021_;
   always @(posedge clk)
-    if (_013_) \registers[13] [3] <= _045_;
+    if (_011_)
+      if (!_032_) \registers[15] [3] <= 1'h0;
+      else \registers[15] [3] <= _022_;
   always @(posedge clk)
-    if (_013_) \registers[13] [4] <= _046_;
+    if (_011_)
+      if (!_032_) \registers[15] [4] <= 1'h0;
+      else \registers[15] [4] <= _023_;
   always @(posedge clk)
-    if (_013_) \registers[13] [5] <= _047_;
+    if (_011_)
+      if (!_032_) \registers[15] [5] <= 1'h0;
+      else \registers[15] [5] <= _024_;
   always @(posedge clk)
-    if (_013_) \registers[13] [6] <= _048_;
+    if (_011_)
+      if (!_032_) \registers[15] [6] <= 1'h0;
+      else \registers[15] [6] <= _025_;
   always @(posedge clk)
-    if (_013_) \registers[13] [7] <= _049_;
+    if (_011_)
+      if (!_032_) \registers[15] [7] <= 1'h0;
+      else \registers[15] [7] <= _026_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [0] <= 1'h0;
+      else \registers[6] [0] <= _019_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [1] <= 1'h0;
+      else \registers[6] [1] <= _020_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [2] <= 1'h0;
+      else \registers[6] [2] <= _021_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [3] <= 1'h0;
+      else \registers[6] [3] <= _022_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [4] <= 1'h0;
+      else \registers[6] [4] <= _023_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [5] <= 1'h0;
+      else \registers[6] [5] <= _024_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [6] <= 1'h0;
+      else \registers[6] [6] <= _025_;
+  always @(posedge clk)
+    if (_005_)
+      if (!_038_) \registers[6] [7] <= 1'h0;
+      else \registers[6] [7] <= _026_;
   always @(posedge clk)
     if (_010_)
       if (!_033_) \registers[1] [0] <= 1'h0;
@@ -7240,6 +7154,102 @@ module \$paramod$d08f185179db4eb8eac8d58da9007fec10c7c29b\registers (clk, reset,
       if (!_033_) \registers[1] [7] <= 1'h0;
       else \registers[1] [7] <= _026_;
   always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [0] <= 1'h0;
+      else \registers[3] [0] <= _019_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [1] <= 1'h0;
+      else \registers[3] [1] <= _020_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [2] <= 1'h0;
+      else \registers[3] [2] <= _021_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [3] <= 1'h0;
+      else \registers[3] [3] <= _022_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [4] <= 1'h0;
+      else \registers[3] [4] <= _023_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [5] <= 1'h0;
+      else \registers[3] [5] <= _024_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [6] <= 1'h0;
+      else \registers[3] [6] <= _025_;
+  always @(posedge clk)
+    if (_008_)
+      if (!_035_) \registers[3] [7] <= 1'h0;
+      else \registers[3] [7] <= _026_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [0] <= 1'h0;
+      else \registers[14] [0] <= _019_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [1] <= 1'h0;
+      else \registers[14] [1] <= _020_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [2] <= 1'h1;
+      else \registers[14] [2] <= _021_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [3] <= 1'h0;
+      else \registers[14] [3] <= _022_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [4] <= 1'h0;
+      else \registers[14] [4] <= _023_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [5] <= 1'h0;
+      else \registers[14] [5] <= _024_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [6] <= 1'h0;
+      else \registers[14] [6] <= _025_;
+  always @(posedge clk)
+    if (_012_)
+      if (!_031_) \registers[14] [7] <= 1'h0;
+      else \registers[14] [7] <= _026_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [0] <= 1'h0;
+      else \registers[7] [0] <= _019_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [1] <= 1'h0;
+      else \registers[7] [1] <= _020_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [2] <= 1'h0;
+      else \registers[7] [2] <= _021_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [3] <= 1'h0;
+      else \registers[7] [3] <= _022_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [4] <= 1'h0;
+      else \registers[7] [4] <= _023_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [5] <= 1'h0;
+      else \registers[7] [5] <= _024_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [6] <= 1'h0;
+      else \registers[7] [6] <= _025_;
+  always @(posedge clk)
+    if (_004_)
+      if (!_039_) \registers[7] [7] <= 1'h0;
+      else \registers[7] [7] <= _026_;
+  always @(posedge clk)
     if (reset) rt[0] <= 1'h0;
     else if (_018_) rt[0] <= _000_[0];
   always @(posedge clk)
@@ -7267,26 +7277,28 @@ endmodule
 
 (* dynports =  1  *)
 (* hdlname = "arbiter_cache" *)
-(* src = "../build/gpu.v:47.1-340.10" *)
+(* src = "../build/gpu.v:47.1-448.10" *)
 module \$paramod$d52b8421c71588f1b1a109a76f121397216ebdc2\arbiter_cache (clk, reset, consumer_read_valid, consumer_read_address, consumer_read_ready, consumer_read_data, consumer_write_valid, consumer_write_address, consumer_write_ready, consumer_write_data, mem_read_valid, mem_read_address, mem_read_ready, mem_read_data, mem_write_valid, mem_write_address, mem_write_ready, mem_write_data);
+  (* src = "../build/gpu.v:152.30-152.46" *)
+  wire [15:0] cache_line_mutex;
   (* src = "../build/gpu.v:75.13-75.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[0].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[1].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[2].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[3].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[4].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[5].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[6].j ;
-  (* src = "../build/gpu.v:212.22-212.23" *)
+  (* src = "../build/gpu.v:270.22-270.23" *)
   wire [31:0] \consumer_if[7].j ;
   (* src = "../build/gpu.v:151.28-151.42" *)
   wire [7:0] consumer_mutex;
@@ -7330,9 +7342,9 @@ module \$paramod$d52b8421c71588f1b1a109a76f121397216ebdc2\arbiter_cache (clk, re
   wire [2:0] \current_consumer[2] ;
   (* src = "../build/gpu.v:150.36-150.52" *)
   wire [2:0] \current_consumer[3] ;
-  (* src = "../build/gpu.v:153.28-153.35" *)
-  wire [7:0] granted;
-  (* src = "../build/gpu.v:152.28-152.44" *)
+  (* src = "../build/gpu.v:155.25-155.32" *)
+  wire [23:0] granted;
+  (* src = "../build/gpu.v:153.28-153.44" *)
   wire [7:0] main_mem_request;
   (* src = "../build/gpu.v:86.48-86.64" *)
   output [31:0] mem_read_address;
@@ -7361,8 +7373,7 @@ module \$paramod$d52b8421c71588f1b1a109a76f121397216ebdc2\arbiter_cache (clk, re
   (* src = "../build/gpu.v:76.13-76.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:200.25-200.56" *)
-  wire [8:1] sv2v_tmp_arbiter_instance_grant;
+  assign cache_line_mutex = 16'hxx00;
   assign \consumer_if[0].j  = 32'd0;
   assign \consumer_if[1].j  = 32'd1;
   assign \consumer_if[2].j  = 32'd2;
@@ -7371,7 +7382,7 @@ module \$paramod$d52b8421c71588f1b1a109a76f121397216ebdc2\arbiter_cache (clk, re
   assign \consumer_if[5].j  = 32'd5;
   assign \consumer_if[6].j  = 32'd6;
   assign \consumer_if[7].j  = 32'd7;
-  assign consumer_mutex = 8'hxx;
+  assign consumer_mutex = 8'h00;
   assign consumer_read_data = 64'h0000000000000000;
   assign consumer_read_ready = 8'h00;
   assign consumer_write_ready = 8'h00;
@@ -7383,19 +7394,18 @@ module \$paramod$d52b8421c71588f1b1a109a76f121397216ebdc2\arbiter_cache (clk, re
   assign \current_consumer[1]  = 3'h0;
   assign \current_consumer[2]  = 3'h0;
   assign \current_consumer[3]  = 3'h0;
-  assign granted = 8'h00;
+  assign granted = 24'hxxxx00;
   assign main_mem_request = 8'h00;
   assign mem_read_address = 32'd0;
   assign mem_read_valid = 4'h0;
   assign mem_write_address = 32'd0;
   assign mem_write_data = 32'd0;
   assign mem_write_valid = 4'h0;
-  assign sv2v_tmp_arbiter_instance_grant = 8'h00;
 endmodule
 
 (* dynports =  1  *)
 (* hdlname = "scheduler" *)
-(* src = "../build/gpu.v:1551.1-1646.10" *)
+(* src = "../build/gpu.v:1611.1-1706.10" *)
 module \$paramod\scheduler\THREADS_PER_BLOCK=s32'00000000000000000000000000000100 (clk, reset, start, decoded_mem_read_enable, decoded_mem_write_enable, decoded_ret, fetcher_state, lsu_state, current_pc, next_pc, core_state, done);
   wire _000_;
   wire _001_;
@@ -7451,55 +7461,55 @@ module \$paramod\scheduler\THREADS_PER_BLOCK=s32'0000000000000000000000000000010
   wire _051_;
   wire _052_;
   (* force_downto = 32'd1 *)
-  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:1595.4-1644.11|/usr/bin/../share/yosys/techmap.v:583.28-583.35" *)
+  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:1655.4-1704.11|/usr/bin/../share/yosys/techmap.v:583.28-583.35" *)
   (* unused_bits = "3 7 8 9 11 14 15 16 19" *)
   wire [20:0] _053_;
   (* force_downto = 32'd1 *)
-  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:1595.4-1644.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
+  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:1655.4-1704.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
   wire [2:0] _054_;
-  (* src = "../build/gpu.v:1566.13-1566.16" *)
+  (* src = "../build/gpu.v:1626.13-1626.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1576.19-1576.29" *)
+  (* src = "../build/gpu.v:1636.19-1636.29" *)
   output [2:0] core_state;
   reg [2:0] core_state;
-  (* src = "../build/gpu.v:1574.19-1574.29" *)
+  (* src = "../build/gpu.v:1634.19-1634.29" *)
   output [7:0] current_pc;
   reg [7:0] current_pc;
-  (* src = "../build/gpu.v:1569.13-1569.36" *)
+  (* src = "../build/gpu.v:1629.13-1629.36" *)
   input decoded_mem_read_enable;
   wire decoded_mem_read_enable;
-  (* src = "../build/gpu.v:1570.13-1570.37" *)
+  (* src = "../build/gpu.v:1630.13-1630.37" *)
   input decoded_mem_write_enable;
   wire decoded_mem_write_enable;
-  (* src = "../build/gpu.v:1571.13-1571.24" *)
+  (* src = "../build/gpu.v:1631.13-1631.24" *)
   input decoded_ret;
   wire decoded_ret;
-  (* src = "../build/gpu.v:1577.13-1577.17" *)
+  (* src = "../build/gpu.v:1637.13-1637.17" *)
   output done;
   reg done;
-  (* src = "../build/gpu.v:1572.19-1572.32" *)
+  (* src = "../build/gpu.v:1632.19-1632.32" *)
   input [2:0] fetcher_state;
   wire [2:0] fetcher_state;
-  (* src = "../build/gpu.v:1573.45-1573.54" *)
+  (* src = "../build/gpu.v:1633.45-1633.54" *)
   input [7:0] lsu_state;
   wire [7:0] lsu_state;
-  (* src = "../build/gpu.v:1575.45-1575.52" *)
+  (* src = "../build/gpu.v:1635.45-1635.52" *)
   input [31:0] next_pc;
   wire [31:0] next_pc;
-  (* src = "../build/gpu.v:1567.13-1567.18" *)
+  (* src = "../build/gpu.v:1627.13-1627.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1568.13-1568.18" *)
+  (* src = "../build/gpu.v:1628.13-1628.18" *)
   input start;
   wire start;
-  assign _002_ = core_state[0] | core_state[1];
+  assign _002_ = core_state[1] | core_state[0];
   assign _003_ = core_state[2] & ~(_002_);
   assign _004_ = ~core_state[2];
   assign _005_ = core_state[0] | ~(core_state[1]);
   assign _006_ = _005_ | _004_;
   assign _007_ = _003_ | ~(_006_);
-  assign _008_ = ~(core_state[0] & core_state[1]);
+  assign _008_ = ~(core_state[1] & core_state[0]);
   assign _009_ = core_state[2] & ~(_008_);
   assign _010_ = core_state[1] | ~(core_state[0]);
   assign _011_ = core_state[2] & ~(_010_);
@@ -7517,14 +7527,14 @@ module \$paramod\scheduler\THREADS_PER_BLOCK=s32'0000000000000000000000000000010
   assign _023_ = _022_ & ~(fetcher_state[2]);
   assign _024_ = _017_ & ~(_023_);
   assign _025_ = _021_ & ~(_024_);
-  assign _026_ = ~(lsu_state[0] ^ lsu_state[1]);
-  assign _027_ = lsu_state[2] ^ lsu_state[3];
+  assign _026_ = ~(lsu_state[1] ^ lsu_state[0]);
+  assign _027_ = lsu_state[3] ^ lsu_state[2];
   assign _028_ = _027_ | ~(_026_);
   assign _029_ = _026_ & ~(_027_);
-  assign _030_ = lsu_state[4] ^ lsu_state[5];
+  assign _030_ = lsu_state[5] ^ lsu_state[4];
   assign _031_ = _029_ & ~(_030_);
   assign _032_ = _028_ ? _029_ : _031_;
-  assign _033_ = lsu_state[6] ^ lsu_state[7];
+  assign _033_ = lsu_state[7] ^ lsu_state[6];
   assign _034_ = _032_ & ~(_033_);
   assign _035_ = _030_ | _028_;
   assign _036_ = _035_ ? _032_ : _034_;
@@ -7550,51 +7560,51 @@ module \$paramod\scheduler\THREADS_PER_BLOCK=s32'0000000000000000000000000000010
   assign _051_ = ~(_043_ | _053_[5]);
   assign _052_ = _051_ & ~(_014_);
   assign _054_[2] = _046_ & ~(_052_);
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) core_state[0] <= 1'h0;
     else if (_001_) core_state[0] <= _054_[0];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) core_state[1] <= 1'h0;
     else if (_001_) core_state[1] <= _054_[1];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) core_state[2] <= 1'h0;
     else if (_001_) core_state[2] <= _054_[2];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) done <= 1'h0;
     else if (_053_[5]) done <= 1'h1;
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[0] <= 1'h0;
     else if (_000_) current_pc[0] <= next_pc[24];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[1] <= 1'h0;
     else if (_000_) current_pc[1] <= next_pc[25];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[2] <= 1'h0;
     else if (_000_) current_pc[2] <= next_pc[26];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[3] <= 1'h0;
     else if (_000_) current_pc[3] <= next_pc[27];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[4] <= 1'h0;
     else if (_000_) current_pc[4] <= next_pc[28];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[5] <= 1'h0;
     else if (_000_) current_pc[5] <= next_pc[29];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[6] <= 1'h0;
     else if (_000_) current_pc[6] <= next_pc[30];
-  (* src = "../build/gpu.v:1586.2-1645.5" *)
+  (* src = "../build/gpu.v:1646.2-1705.5" *)
   always @(posedge clk)
     if (reset) current_pc[7] <= 1'h0;
     else if (_000_) current_pc[7] <= next_pc[31];
@@ -8288,7 +8298,6 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   wire _0682_;
   wire _0683_;
   wire _0684_;
-  wire _0685_;
   (* src = "../build/gpu.v:22.20-22.27" *)
   output [7:0] alu_out;
   wire [7:0] alu_out;
@@ -8333,12 +8342,12 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0371_ = rt[0] ^ rs[7];
   assign _0382_ = _0360_ & ~(_0371_);
   assign _0393_ = _0382_ & _0349_;
-  assign _0403_ = rs[3] | rs[2];
-  assign _0414_ = rs[0] | rs[1];
+  assign _0403_ = rs[2] | rs[3];
+  assign _0414_ = rs[1] | rs[0];
   assign _0425_ = _0414_ | _0403_;
   assign _0435_ = _0425_ | ~(_0393_);
-  assign _0446_ = rt[4] | rt[3];
-  assign _0456_ = rt[2] | rt[1];
+  assign _0446_ = rt[2] | rt[1];
+  assign _0456_ = rt[4] | rt[3];
   assign _0467_ = _0456_ | _0446_;
   assign _0478_ = rt[6] | rt[5];
   assign _0489_ = _0478_ | rt[7];
@@ -8354,74 +8363,74 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0616_ = _0574_ & ~(_0605_);
   assign _0627_ = _0616_ | _0467_;
   assign _0638_ = _0627_ | _0478_;
-  assign _0649_ = _0327_ & ~(_0638_);
-  assign _0650_ = _0510_ & ~(_0649_);
-  assign _0651_ = _0349_ & ~(_0594_);
-  assign _0652_ = _0349_ & ~(_0651_);
-  assign _0653_ = _0652_ & ~(rs[6]);
-  assign _0654_ = ~(_0653_ ^ _0371_);
-  assign _0655_ = _0650_ ? _0338_ : _0654_;
-  assign _0656_ = ~rs[5];
-  assign _0657_ = _0594_ & ~(rs[4]);
-  assign _0658_ = _0657_ ^ _0656_;
-  assign _0659_ = _0650_ ? _0656_ : _0658_;
-  assign _0660_ = ~rs[4];
-  assign _0661_ = _0594_ ^ _0660_;
-  assign _0662_ = ~_0661_;
-  assign _0663_ = _0650_ ? rs[4] : _0662_;
-  assign _0664_ = _0663_ | ~(_0659_);
-  assign _0665_ = _0655_ ^ rt[1];
-  assign _0666_ = ~rt[0];
-  assign _0667_ = _0652_ ^ _0360_;
-  assign _0668_ = _0650_ ? _0360_ : _0667_;
-  assign _0669_ = _0668_ ^ _0666_;
-  assign _0670_ = _0665_ & ~(_0669_);
-  assign _0671_ = _0664_ | ~(_0670_);
-  assign _0672_ = _0671_ | _0425_;
-  assign _0673_ = ~(rt[7] | rt[6]);
-  assign _0674_ = ~_0673_;
-  assign _0675_ = ~(rt[5] | rt[4]);
-  assign _0676_ = ~(rt[3] | rt[2]);
-  assign _0677_ = ~(_0676_ & _0675_);
-  assign _0001_ = _0677_ | _0674_;
-  assign _0002_ = _0001_ | _0672_;
-  assign _0003_ = _0655_ | rt[1];
-  assign _0004_ = _0668_ | rt[0];
-  assign _0005_ = _0665_ & ~(_0004_);
+  assign _0648_ = _0327_ & ~(_0638_);
+  assign _0649_ = _0510_ & ~(_0648_);
+  assign _0650_ = _0349_ & ~(_0594_);
+  assign _0651_ = _0349_ & ~(_0650_);
+  assign _0652_ = _0651_ & ~(rs[6]);
+  assign _0653_ = ~(_0652_ ^ _0371_);
+  assign _0654_ = _0649_ ? _0338_ : _0653_;
+  assign _0655_ = ~rs[5];
+  assign _0656_ = _0594_ & ~(rs[4]);
+  assign _0657_ = _0656_ ^ _0655_;
+  assign _0658_ = _0649_ ? _0655_ : _0657_;
+  assign _0659_ = ~rs[4];
+  assign _0660_ = _0594_ ^ _0659_;
+  assign _0661_ = ~_0660_;
+  assign _0662_ = _0649_ ? rs[4] : _0661_;
+  assign _0663_ = _0662_ | ~(_0658_);
+  assign _0664_ = _0654_ ^ rt[1];
+  assign _0665_ = ~rt[0];
+  assign _0666_ = _0651_ ^ _0360_;
+  assign _0667_ = _0649_ ? _0360_ : _0666_;
+  assign _0668_ = _0667_ ^ _0665_;
+  assign _0669_ = _0664_ & ~(_0668_);
+  assign _0670_ = _0663_ | ~(_0669_);
+  assign _0671_ = _0670_ | _0425_;
+  assign _0672_ = ~(rt[7] | rt[6]);
+  assign _0673_ = ~_0672_;
+  assign _0674_ = ~(rt[5] | rt[4]);
+  assign _0675_ = ~(rt[3] | rt[2]);
+  assign _0676_ = ~(_0675_ & _0674_);
+  assign _0001_ = _0676_ | _0673_;
+  assign _0002_ = _0001_ | _0671_;
+  assign _0003_ = _0654_ | rt[1];
+  assign _0004_ = _0667_ | rt[0];
+  assign _0005_ = _0664_ & ~(_0004_);
   assign _0006_ = _0003_ & ~(_0005_);
-  assign _0007_ = _0659_ & ~(_0663_);
-  assign _0008_ = _0670_ & ~(_0007_);
+  assign _0007_ = _0658_ & ~(_0662_);
+  assign _0008_ = _0669_ & ~(_0007_);
   assign _0009_ = _0006_ & ~(_0008_);
   assign _0010_ = ~_0594_;
-  assign _0011_ = _0010_ & ~(_0671_);
+  assign _0011_ = _0010_ & ~(_0670_);
   assign _0012_ = _0009_ & ~(_0011_);
-  assign _0013_ = _0012_ | _0677_;
-  assign _0014_ = _0673_ & ~(_0013_);
+  assign _0013_ = _0012_ | _0676_;
+  assign _0014_ = _0672_ & ~(_0013_);
   assign _0015_ = _0002_ & ~(_0014_);
-  assign _0016_ = ~_0669_;
-  assign _0017_ = _0010_ & ~(_0664_);
+  assign _0016_ = ~_0668_;
+  assign _0017_ = _0010_ & ~(_0663_);
   assign _0018_ = _0007_ & ~(_0017_);
   assign _0019_ = _0016_ & ~(_0018_);
   assign _0020_ = _0004_ & ~(_0019_);
-  assign _0021_ = _0020_ ^ _0665_;
-  assign _0022_ = _0015_ ? _0655_ : _0021_;
-  assign _0023_ = _0594_ & ~(_0663_);
-  assign _0024_ = _0023_ ^ _0659_;
-  assign _0025_ = _0015_ ? _0659_ : _0024_;
+  assign _0021_ = _0020_ ^ _0664_;
+  assign _0022_ = _0015_ ? _0654_ : _0021_;
+  assign _0023_ = _0594_ & ~(_0662_);
+  assign _0024_ = _0023_ ^ _0658_;
+  assign _0025_ = _0015_ ? _0658_ : _0024_;
   assign _0026_ = _0025_ ^ rt[0];
-  assign _0027_ = ~_0663_;
-  assign _0028_ = _0663_ ^ _0010_;
+  assign _0027_ = ~_0662_;
+  assign _0028_ = _0662_ ^ _0010_;
   assign _0029_ = _0015_ ? _0027_ : _0028_;
   assign _0030_ = ~(_0029_ & _0026_);
   assign _0031_ = _0022_ ^ rt[2];
   assign _0032_ = ~rt[1];
   assign _0033_ = _0018_ ^ _0016_;
-  assign _0034_ = _0015_ ? _0668_ : _0033_;
+  assign _0034_ = _0015_ ? _0667_ : _0033_;
   assign _0035_ = _0034_ ^ _0032_;
   assign _0036_ = _0031_ & ~(_0035_);
   assign _0037_ = _0030_ | ~(_0036_);
   assign _0038_ = _0037_ | _0425_;
-  assign _0039_ = _0478_ | _0446_;
+  assign _0039_ = _0478_ | _0456_;
   assign _0040_ = _0039_ | rt[7];
   assign _0041_ = _0040_ | _0038_;
   assign _0042_ = _0022_ | rt[2];
@@ -8445,14 +8454,14 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0060_ = _0043_ & ~(_0059_);
   assign _0061_ = _0060_ ^ _0031_;
   assign _0062_ = _0055_ ? _0022_ : _0061_;
-  assign _0063_ = _0675_ & _0673_;
+  assign _0063_ = _0674_ & _0672_;
   assign _0064_ = _0029_ & ~(_0010_);
   assign _0065_ = _0064_ ^ _0026_;
   assign _0066_ = _0055_ ? _0025_ : _0065_;
   assign _0067_ = _0066_ ^ rt[1];
   assign _0068_ = _0029_ ^ _0594_;
   assign _0069_ = _0055_ ? _0029_ : _0068_;
-  assign _0070_ = _0069_ ^ _0666_;
+  assign _0070_ = _0069_ ^ _0665_;
   assign _0071_ = _0070_ | ~(_0067_);
   assign _0072_ = _0062_ ^ rt[3];
   assign _0073_ = ~rt[2];
@@ -8556,7 +8565,7 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0171_ = ~(_0170_ & _0168_);
   assign _0172_ = ~(_0171_ | _0414_);
   assign _0173_ = ~(_0172_ & _0164_);
-  assign _0174_ = _0173_ | _0674_;
+  assign _0174_ = _0173_ | _0673_;
   assign _0175_ = _0148_ | rt[5];
   assign _0176_ = _0161_ | rt[4];
   assign _0177_ = _0158_ & ~(_0176_);
@@ -8574,7 +8583,7 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0189_ = _0171_ & ~(_0188_);
   assign _0190_ = _0164_ & ~(_0189_);
   assign _0191_ = _0184_ & ~(_0190_);
-  assign _0192_ = _0673_ & ~(_0191_);
+  assign _0192_ = _0672_ & ~(_0191_);
   assign _0193_ = _0174_ & ~(_0192_);
   assign _0194_ = ~_0162_;
   assign _0195_ = _0157_ & ~(_0189_);
@@ -8702,17 +8711,17 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0324_ = _0295_ & ~(_0323_);
   assign _0325_ = _0324_ | ~(_0322_);
   assign _0326_ = _0306_ ? _0273_ : _0325_;
-  assign _0678_ = _0326_ & ~(decoded_alu_output_mux);
+  assign _0677_ = _0326_ & ~(decoded_alu_output_mux);
   assign _0328_ = ~decoded_alu_output_mux;
-  assign _0329_ = decoded_alu_arithmetic_mux[0] & ~(decoded_alu_arithmetic_mux[1]);
-  assign _0330_ = ~(rt[0] ^ rt[1]);
-  assign _0331_ = _0329_ ? _0032_ : _0330_;
-  assign _0332_ = _0331_ ^ _0304_;
-  assign _0333_ = rt[0] & ~(rs[0]);
-  assign _0334_ = _0333_ ^ _0332_;
+  assign _0329_ = rt[0] & ~(rs[0]);
+  assign _0330_ = decoded_alu_arithmetic_mux[0] & ~(decoded_alu_arithmetic_mux[1]);
+  assign _0331_ = ~(rt[0] ^ rt[1]);
+  assign _0332_ = _0330_ ? _0032_ : _0331_;
+  assign _0333_ = _0332_ ^ _0304_;
+  assign _0334_ = _0333_ ^ _0329_;
   assign _0335_ = ~(_0253_ | _0317_);
   assign _0336_ = rt[0] & rs[1];
-  assign _0337_ = rs[0] & rt[1];
+  assign _0337_ = rt[1] & rs[0];
   assign _0339_ = ~(_0337_ ^ _0336_);
   assign _0340_ = _0295_ & ~(_0339_);
   assign _0341_ = _0340_ | _0335_;
@@ -8722,81 +8731,81 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0345_ = rt[6] | ~(rs[6]);
   assign _0346_ = ~(_0345_ | _0344_);
   assign _0347_ = ~(_0346_ | _0343_);
-  assign _0348_ = rs[5] & ~(rt[5]);
-  assign _0350_ = rs[5] ^ rt[5];
-  assign _0351_ = rt[4] | ~(rs[4]);
-  assign _0352_ = ~(_0351_ | _0350_);
-  assign _0353_ = ~(_0352_ | _0348_);
-  assign _0354_ = rs[6] ^ rt[6];
-  assign _0355_ = _0354_ | _0344_;
-  assign _0356_ = ~(_0355_ | _0353_);
+  assign _0348_ = rs[6] ^ rt[6];
+  assign _0350_ = ~(_0348_ | _0344_);
+  assign _0351_ = rt[5] | ~(rs[5]);
+  assign _0352_ = rs[5] ^ rt[5];
+  assign _0353_ = rt[4] | ~(rs[4]);
+  assign _0354_ = ~(_0353_ | _0352_);
+  assign _0355_ = _0351_ & ~(_0354_);
+  assign _0356_ = _0350_ & ~(_0355_);
   assign _0357_ = _0347_ & ~(_0356_);
-  assign _0358_ = rs[3] & ~(rt[3]);
-  assign _0359_ = rs[3] ^ rt[3];
-  assign _0361_ = rt[2] | ~(rs[2]);
-  assign _0362_ = ~(_0361_ | _0359_);
-  assign _0363_ = _0362_ | _0358_;
-  assign _0364_ = rs[1] & ~(rt[1]);
-  assign _0365_ = rt[1] ^ rs[1];
-  assign _0366_ = ~(_0365_ | _0333_);
-  assign _0367_ = ~(_0366_ | _0364_);
-  assign _0368_ = rt[2] ^ rs[2];
-  assign _0369_ = ~(_0368_ | _0359_);
-  assign _0370_ = _0369_ & ~(_0367_);
-  assign _0372_ = _0370_ | _0363_;
-  assign _0373_ = rs[4] ^ rt[4];
-  assign _0374_ = _0373_ | _0350_;
-  assign _0375_ = _0374_ | _0355_;
-  assign _0376_ = _0372_ & ~(_0375_);
+  assign _0358_ = rs[4] ^ rt[4];
+  assign _0359_ = ~(_0358_ | _0352_);
+  assign _0361_ = _0359_ & _0350_;
+  assign _0362_ = rt[3] | ~(rs[3]);
+  assign _0363_ = rt[3] ^ rs[3];
+  assign _0364_ = rt[2] | ~(rs[2]);
+  assign _0365_ = ~(_0364_ | _0363_);
+  assign _0366_ = _0362_ & ~(_0365_);
+  assign _0367_ = rt[2] ^ rs[2];
+  assign _0368_ = ~(_0367_ | _0363_);
+  assign _0369_ = rt[1] | ~(rs[1]);
+  assign _0370_ = rt[1] ^ rs[1];
+  assign _0372_ = ~(_0370_ | _0329_);
+  assign _0373_ = _0369_ & ~(_0372_);
+  assign _0374_ = _0368_ & ~(_0373_);
+  assign _0375_ = _0366_ & ~(_0374_);
+  assign _0376_ = _0361_ & ~(_0375_);
   assign _0377_ = _0357_ & ~(_0376_);
-  assign _0378_ = _0365_ ^ _0333_;
-  assign _0379_ = _0378_ | _0273_;
-  assign _0380_ = _0368_ ^ _0367_;
-  assign _0381_ = ~(_0368_ | _0367_);
-  assign _0383_ = _0361_ & ~(_0381_);
-  assign _0384_ = _0383_ ^ _0359_;
-  assign _0385_ = _0384_ | _0380_;
-  assign _0386_ = _0385_ | _0379_;
-  assign _0387_ = ~(_0373_ ^ _0372_);
-  assign _0388_ = _0372_ & ~(_0373_);
-  assign _0389_ = _0351_ & ~(_0388_);
-  assign _0390_ = _0389_ ^ _0350_;
-  assign _0391_ = _0390_ | _0387_;
-  assign _0392_ = _0372_ & ~(_0374_);
-  assign _0394_ = _0353_ & ~(_0392_);
-  assign _0395_ = _0394_ ^ _0354_;
-  assign _0396_ = ~(_0394_ | _0354_);
-  assign _0397_ = _0345_ & ~(_0396_);
-  assign _0398_ = _0397_ ^ _0344_;
-  assign _0399_ = _0398_ | _0395_;
-  assign _0400_ = _0399_ | _0391_;
-  assign _0401_ = _0400_ | _0386_;
+  assign _0378_ = _0359_ & ~(_0375_);
+  assign _0379_ = _0355_ & ~(_0378_);
+  assign _0380_ = ~(_0379_ | _0348_);
+  assign _0381_ = _0345_ & ~(_0380_);
+  assign _0383_ = _0381_ ^ _0344_;
+  assign _0384_ = _0379_ ^ _0348_;
+  assign _0385_ = _0384_ | _0383_;
+  assign _0386_ = ~(_0375_ | _0358_);
+  assign _0387_ = _0353_ & ~(_0386_);
+  assign _0388_ = _0387_ ^ _0352_;
+  assign _0389_ = _0375_ ^ _0358_;
+  assign _0390_ = _0389_ | _0388_;
+  assign _0391_ = _0390_ | _0385_;
+  assign _0392_ = ~(_0373_ | _0367_);
+  assign _0394_ = _0364_ & ~(_0392_);
+  assign _0395_ = _0394_ ^ _0363_;
+  assign _0396_ = _0373_ ^ _0367_;
+  assign _0397_ = _0396_ | _0395_;
+  assign _0398_ = _0370_ ^ _0329_;
+  assign _0399_ = _0398_ | _0273_;
+  assign _0400_ = _0399_ | _0397_;
+  assign _0401_ = _0400_ | _0391_;
   assign _0402_ = ~(_0401_ | _0377_);
-  assign _0679_ = decoded_alu_output_mux ? _0402_ : _0342_;
+  assign _0678_ = decoded_alu_output_mux ? _0402_ : _0342_;
   assign _0404_ = ~_0402_;
   assign _0405_ = ~(rt[0] | rt[1]);
   assign _0406_ = _0405_ ^ rt[2];
-  assign _0407_ = _0329_ ? _0073_ : _0406_;
+  assign _0407_ = _0330_ ? _0073_ : _0406_;
   assign _0408_ = _0407_ ^ _0222_;
-  assign _0409_ = _0331_ & ~(_0304_);
-  assign _0410_ = ~(_0333_ | _0332_);
+  assign _0409_ = _0332_ & ~(_0304_);
+  assign _0410_ = ~(_0333_ | _0329_);
   assign _0411_ = ~(_0410_ | _0409_);
   assign _0412_ = _0411_ ^ _0408_;
   assign _0413_ = _0284_ & ~(_0193_);
-  assign _0415_ = rt[1] & rs[1];
-  assign _0416_ = rt[0] & rs[2];
-  assign _0417_ = rs[0] & rt[2];
-  assign _0418_ = ~(_0417_ ^ _0416_);
-  assign _0419_ = _0418_ ^ _0415_;
-  assign _0420_ = _0337_ & _0336_;
+  assign _0415_ = rt[0] & rs[2];
+  assign _0416_ = rt[1] & rs[1];
+  assign _0417_ = ~(_0416_ ^ _0415_);
+  assign _0418_ = _0337_ & _0336_;
+  assign _0419_ = _0418_ ^ _0417_;
+  assign _0420_ = rt[2] & rs[0];
   assign _0421_ = _0420_ ^ _0419_;
   assign _0422_ = _0295_ & ~(_0421_);
   assign _0423_ = _0422_ | _0413_;
   assign _0424_ = _0306_ ? _0412_ : _0423_;
-  assign _0680_ = decoded_alu_output_mux ? _0404_ : _0424_;
+  assign _0679_ = decoded_alu_output_mux ? _0404_ : _0424_;
   assign _0426_ = _0405_ & ~(rt[2]);
   assign _0427_ = _0426_ ^ rt[3];
-  assign _0428_ = _0329_ ? _0112_ : _0427_;
+  assign _0428_ = _0330_ ? _0112_ : _0427_;
   assign _0429_ = _0428_ ^ _0165_;
   assign _0430_ = ~(_0407_ & rs[2]);
   assign _0431_ = ~(_0411_ | _0408_);
@@ -8805,25 +8814,25 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0434_ = _0141_ | _0317_;
   assign _0436_ = rt[1] & rs[2];
   assign _0437_ = rt[0] & rs[3];
-  assign _0438_ = ~(rs[0] & rt[3]);
-  assign _0439_ = rt[2] & rs[1];
-  assign _0440_ = _0439_ ^ _0438_;
-  assign _0441_ = _0440_ ^ _0437_;
-  assign _0442_ = _0441_ ^ _0436_;
-  assign _0443_ = _0415_ & ~(_0418_);
+  assign _0438_ = rt[3] & rs[0];
+  assign _0439_ = ~(_0438_ ^ _0437_);
+  assign _0440_ = _0439_ ^ _0436_;
+  assign _0441_ = _0416_ & _0415_;
+  assign _0442_ = _0441_ ^ _0440_;
+  assign _0443_ = rt[2] & rs[1];
   assign _0444_ = _0443_ ^ _0442_;
-  assign _0445_ = _0417_ & _0416_;
-  assign _0447_ = _0445_ ^ _0444_;
-  assign _0448_ = _0420_ & ~(_0419_);
-  assign _0449_ = _0448_ ^ _0447_;
+  assign _0445_ = _0417_ | ~(_0418_);
+  assign _0447_ = _0420_ & ~(_0419_);
+  assign _0448_ = _0445_ & ~(_0447_);
+  assign _0449_ = ~(_0448_ ^ _0444_);
   assign _0450_ = _0295_ & ~(_0449_);
   assign _0451_ = _0434_ & ~(_0450_);
   assign _0452_ = _0306_ ? _0433_ : _0451_;
-  assign _0681_ = _0328_ & ~(_0452_);
-  assign _0453_ = _0405_ & _0676_;
+  assign _0680_ = _0328_ & ~(_0452_);
+  assign _0453_ = _0405_ & _0675_;
   assign _0454_ = _0453_ ^ rt[4];
-  assign _0455_ = _0329_ ? _0159_ : _0454_;
-  assign _0457_ = _0455_ ^ _0660_;
+  assign _0455_ = _0330_ ? _0159_ : _0454_;
+  assign _0457_ = _0455_ ^ _0659_;
   assign _0458_ = ~_0457_;
   assign _0459_ = ~(_0428_ & rs[3]);
   assign _0460_ = ~(_0430_ | _0429_);
@@ -8833,267 +8842,266 @@ module alu(clk, reset, enable, core_state, decoded_alu_arithmetic_mux, decoded_a
   assign _0464_ = _0461_ & ~(_0463_);
   assign _0465_ = _0464_ ^ _0458_;
   assign _0466_ = _0094_ | _0317_;
-  assign _0468_ = rs[3] & rt[1];
-  assign _0469_ = rs[0] & rt[4];
-  assign _0470_ = ~(_0469_ ^ _0468_);
-  assign _0471_ = ~_0470_;
-  assign _0472_ = rt[2] & rs[2];
-  assign _0473_ = rt[3] & rs[1];
-  assign _0474_ = ~(_0473_ ^ _0472_);
-  assign _0475_ = rt[0] & rs[4];
+  assign _0468_ = rt[1] & rs[3];
+  assign _0469_ = rt[0] & rs[4];
+  assign _0470_ = rt[4] & rs[0];
+  assign _0471_ = ~(_0470_ ^ _0469_);
+  assign _0472_ = rt[3] & rs[1];
+  assign _0473_ = _0472_ ^ _0471_;
+  assign _0474_ = _0473_ ^ _0468_;
+  assign _0475_ = _0436_ & ~(_0439_);
   assign _0476_ = _0475_ ^ _0474_;
-  assign _0477_ = _0476_ ^ _0471_;
-  assign _0479_ = _0436_ & ~(_0441_);
-  assign _0480_ = _0479_ ^ _0477_;
-  assign _0481_ = _0438_ | ~(_0439_);
-  assign _0482_ = _0437_ & ~(_0440_);
-  assign _0483_ = _0481_ & ~(_0482_);
-  assign _0484_ = ~(_0483_ ^ _0480_);
-  assign _0485_ = ~_0484_;
-  assign _0486_ = _0442_ | ~(_0443_);
-  assign _0487_ = _0445_ & ~(_0444_);
-  assign _0488_ = _0486_ & ~(_0487_);
-  assign _0490_ = _0488_ ^ _0485_;
-  assign _0491_ = _0448_ & ~(_0447_);
-  assign _0492_ = _0491_ ^ _0490_;
-  assign _0493_ = _0295_ & ~(_0492_);
-  assign _0494_ = _0466_ & ~(_0493_);
-  assign _0495_ = _0306_ ? _0465_ : _0494_;
-  assign _0682_ = _0328_ & ~(_0495_);
-  assign _0496_ = _0453_ & ~(rt[4]);
-  assign _0497_ = _0496_ ^ rt[5];
-  assign _0498_ = _0329_ ? _0212_ : _0497_;
-  assign _0500_ = _0498_ ^ _0656_;
-  assign _0501_ = ~(_0455_ & rs[4]);
-  assign _0502_ = _0458_ & ~(_0464_);
-  assign _0503_ = _0502_ | ~(_0501_);
-  assign _0504_ = _0503_ ^ _0500_;
-  assign _0505_ = _0055_ | _0317_;
-  assign _0506_ = rs[4] & rt[1];
-  assign _0507_ = rs[0] & rt[5];
-  assign _0508_ = ~(_0507_ ^ _0506_);
-  assign _0509_ = rt[4] & rs[1];
-  assign _0511_ = _0509_ ^ _0508_;
-  assign _0512_ = _0469_ & _0468_;
-  assign _0513_ = _0512_ ^ _0511_;
-  assign _0514_ = rt[3] & rs[2];
-  assign _0515_ = rs[3] & rt[2];
-  assign _0516_ = ~(_0515_ ^ _0514_);
-  assign _0517_ = rt[0] & rs[5];
-  assign _0518_ = _0517_ ^ _0516_;
-  assign _0519_ = ~(_0518_ ^ _0513_);
-  assign _0520_ = _0471_ & ~(_0476_);
-  assign _0522_ = _0520_ ^ _0519_;
-  assign _0523_ = ~(_0473_ & _0472_);
-  assign _0524_ = _0475_ & ~(_0474_);
+  assign _0477_ = rt[2] & rs[2];
+  assign _0479_ = ~_0477_;
+  assign _0480_ = _0438_ & _0437_;
+  assign _0481_ = _0480_ ^ _0479_;
+  assign _0482_ = ~(_0481_ ^ _0476_);
+  assign _0483_ = _0440_ | ~(_0441_);
+  assign _0484_ = _0443_ & ~(_0442_);
+  assign _0485_ = _0483_ & ~(_0484_);
+  assign _0486_ = ~(_0485_ ^ _0482_);
+  assign _0487_ = ~(_0448_ | _0444_);
+  assign _0488_ = _0487_ ^ _0486_;
+  assign _0490_ = _0295_ & ~(_0488_);
+  assign _0491_ = _0466_ & ~(_0490_);
+  assign _0492_ = _0306_ ? _0465_ : _0491_;
+  assign _0681_ = _0328_ & ~(_0492_);
+  assign _0493_ = _0453_ & ~(rt[4]);
+  assign _0494_ = _0493_ ^ rt[5];
+  assign _0495_ = _0330_ ? _0212_ : _0494_;
+  assign _0496_ = _0495_ ^ _0655_;
+  assign _0497_ = ~(_0455_ & rs[4]);
+  assign _0498_ = _0458_ & ~(_0464_);
+  assign _0500_ = _0498_ | ~(_0497_);
+  assign _0501_ = _0500_ ^ _0496_;
+  assign _0502_ = _0055_ | _0317_;
+  assign _0503_ = rs[4] & rt[1];
+  assign _0504_ = rt[5] & rs[0];
+  assign _0505_ = ~(_0504_ ^ _0503_);
+  assign _0506_ = ~_0505_;
+  assign _0507_ = rt[0] & rs[5];
+  assign _0508_ = rt[4] & rs[1];
+  assign _0509_ = ~(_0508_ ^ _0507_);
+  assign _0511_ = rt[3] & rs[2];
+  assign _0512_ = _0511_ ^ _0509_;
+  assign _0513_ = _0512_ ^ _0506_;
+  assign _0514_ = _0468_ & ~(_0473_);
+  assign _0515_ = _0514_ ^ _0513_;
+  assign _0516_ = _0470_ & _0469_;
+  assign _0517_ = _0472_ & ~(_0471_);
+  assign _0518_ = ~(_0517_ | _0516_);
+  assign _0519_ = rt[2] & rs[3];
+  assign _0520_ = _0519_ ^ _0518_;
+  assign _0522_ = ~(_0520_ ^ _0515_);
+  assign _0523_ = _0474_ | ~(_0475_);
+  assign _0524_ = ~(_0481_ | _0476_);
   assign _0525_ = _0523_ & ~(_0524_);
   assign _0526_ = ~(_0525_ ^ _0522_);
-  assign _0527_ = _0477_ | ~(_0479_);
-  assign _0528_ = ~(_0483_ | _0480_);
-  assign _0529_ = _0527_ & ~(_0528_);
-  assign _0530_ = ~(_0529_ ^ _0526_);
-  assign _0531_ = _0485_ & ~(_0488_);
+  assign _0527_ = _0480_ & ~(_0479_);
+  assign _0528_ = _0527_ ^ _0526_;
+  assign _0529_ = ~(_0485_ | _0482_);
+  assign _0530_ = _0529_ ^ _0528_;
+  assign _0531_ = _0487_ & ~(_0486_);
   assign _0533_ = _0531_ ^ _0530_;
-  assign _0534_ = _0491_ & ~(_0490_);
-  assign _0535_ = _0534_ ^ _0533_;
-  assign _0536_ = _0295_ & ~(_0535_);
-  assign _0537_ = _0505_ & ~(_0536_);
-  assign _0538_ = _0306_ ? _0504_ : _0537_;
-  assign _0683_ = _0328_ & ~(_0538_);
-  assign _0539_ = _0453_ & _0675_;
-  assign _0540_ = _0539_ ^ rt[6];
-  assign _0541_ = _0329_ ? _0268_ : _0540_;
-  assign _0543_ = _0541_ ^ rs[6];
-  assign _0544_ = ~(_0498_ & rs[5]);
-  assign _0545_ = ~(_0501_ | _0500_);
-  assign _0546_ = _0544_ & ~(_0545_);
-  assign _0547_ = _0500_ | _0457_;
-  assign _0548_ = ~(_0547_ | _0464_);
-  assign _0549_ = _0546_ & ~(_0548_);
-  assign _0550_ = _0549_ ^ _0543_;
-  assign _0551_ = _0015_ | _0317_;
-  assign _0552_ = rs[5] & rt[1];
+  assign _0534_ = _0295_ & ~(_0533_);
+  assign _0535_ = _0502_ & ~(_0534_);
+  assign _0536_ = _0306_ ? _0501_ : _0535_;
+  assign _0682_ = _0328_ & ~(_0536_);
+  assign _0537_ = _0453_ & _0674_;
+  assign _0538_ = _0537_ ^ rt[6];
+  assign _0539_ = _0330_ ? _0268_ : _0538_;
+  assign _0540_ = _0539_ ^ rs[6];
+  assign _0541_ = ~(_0495_ & rs[5]);
+  assign _0543_ = ~(_0497_ | _0496_);
+  assign _0544_ = _0541_ & ~(_0543_);
+  assign _0545_ = _0496_ | _0457_;
+  assign _0546_ = ~(_0545_ | _0464_);
+  assign _0547_ = _0544_ & ~(_0546_);
+  assign _0548_ = _0547_ ^ _0540_;
+  assign _0549_ = _0015_ | _0317_;
+  assign _0550_ = rs[5] & rt[1];
+  assign _0551_ = rt[6] & rs[0];
+  assign _0552_ = ~(_0551_ ^ _0550_);
   assign _0553_ = rt[5] & rs[1];
-  assign _0554_ = ~(_0553_ ^ _0552_);
-  assign _0555_ = rt[4] & rs[2];
+  assign _0554_ = _0553_ ^ _0552_;
+  assign _0555_ = _0504_ & _0503_;
   assign _0556_ = _0555_ ^ _0554_;
-  assign _0557_ = ~(_0507_ & _0506_);
-  assign _0558_ = _0509_ & ~(_0508_);
-  assign _0559_ = _0557_ & ~(_0558_);
-  assign _0560_ = ~(_0559_ ^ _0556_);
-  assign _0561_ = rs[3] & rt[3];
-  assign _0562_ = rs[4] & rt[2];
-  assign _0564_ = ~(_0562_ ^ _0561_);
-  assign _0565_ = rt[0] & rs[6];
-  assign _0566_ = _0565_ ^ _0564_;
-  assign _0567_ = ~(_0566_ ^ _0560_);
-  assign _0568_ = _0511_ | ~(_0512_);
-  assign _0569_ = ~(_0518_ | _0513_);
-  assign _0570_ = _0568_ & ~(_0569_);
-  assign _0571_ = ~(_0570_ ^ _0567_);
-  assign _0572_ = _0515_ & _0514_;
-  assign _0573_ = _0517_ & ~(_0516_);
-  assign _0575_ = ~(_0573_ | _0572_);
-  assign _0576_ = rs[0] & rt[6];
-  assign _0577_ = _0576_ ^ _0575_;
-  assign _0578_ = ~(_0577_ ^ _0571_);
-  assign _0579_ = _0519_ | ~(_0520_);
-  assign _0580_ = ~(_0525_ | _0522_);
+  assign _0557_ = rt[3] & rs[3];
+  assign _0558_ = ~(rt[0] & rs[6]);
+  assign _0559_ = rt[4] & rs[2];
+  assign _0560_ = _0559_ ^ _0558_;
+  assign _0561_ = _0560_ ^ _0557_;
+  assign _0562_ = ~(_0561_ ^ _0556_);
+  assign _0564_ = _0506_ & ~(_0512_);
+  assign _0565_ = _0564_ ^ _0562_;
+  assign _0566_ = _0508_ & _0507_;
+  assign _0567_ = _0511_ & ~(_0509_);
+  assign _0568_ = ~(_0567_ | _0566_);
+  assign _0569_ = rs[4] & rt[2];
+  assign _0570_ = _0569_ ^ _0568_;
+  assign _0571_ = ~(_0570_ ^ _0565_);
+  assign _0572_ = _0513_ | ~(_0514_);
+  assign _0573_ = ~(_0520_ | _0515_);
+  assign _0575_ = _0572_ & ~(_0573_);
+  assign _0576_ = ~(_0575_ ^ _0571_);
+  assign _0577_ = _0519_ & ~(_0518_);
+  assign _0578_ = _0577_ ^ _0576_;
+  assign _0579_ = _0525_ | _0522_;
+  assign _0580_ = _0527_ & ~(_0526_);
   assign _0581_ = _0579_ & ~(_0580_);
-  assign _0582_ = ~(_0581_ ^ _0578_);
-  assign _0583_ = ~(_0529_ | _0526_);
-  assign _0584_ = ~_0583_;
-  assign _0585_ = _0584_ ^ _0582_;
-  assign _0586_ = _0530_ | ~(_0531_);
-  assign _0587_ = _0534_ & ~(_0533_);
-  assign _0588_ = _0586_ & ~(_0587_);
-  assign _0589_ = _0588_ ^ _0585_;
-  assign _0590_ = _0295_ & ~(_0589_);
-  assign _0591_ = _0551_ & ~(_0590_);
-  assign _0592_ = _0306_ ? _0550_ : _0591_;
-  assign _0684_ = _0328_ & ~(_0592_);
-  assign _0593_ = _0539_ & ~(rt[6]);
-  assign _0595_ = _0593_ ^ rt[7];
-  assign _0596_ = _0329_ ? _0327_ : _0595_;
-  assign _0597_ = _0596_ ^ rs[7];
-  assign _0598_ = ~(_0541_ & rs[6]);
-  assign _0599_ = _0543_ & ~(_0549_);
-  assign _0600_ = _0598_ & ~(_0599_);
-  assign _0601_ = _0600_ ^ _0597_;
-  assign _0602_ = _0650_ | _0317_;
-  assign _0603_ = ~(rs[6] & rt[1]);
-  assign _0604_ = rt[5] & rs[2];
-  assign _0606_ = _0604_ ^ _0603_;
-  assign _0607_ = rs[3] & rt[4];
-  assign _0608_ = _0607_ ^ _0606_;
-  assign _0609_ = ~(_0553_ & _0552_);
-  assign _0610_ = _0555_ & ~(_0554_);
-  assign _0611_ = _0609_ & ~(_0610_);
-  assign _0612_ = _0611_ ^ _0608_;
-  assign _0613_ = rt[0] & rs[7];
-  assign _0614_ = ~(rs[4] & rt[3]);
-  assign _0615_ = rs[5] & rt[2];
-  assign _0617_ = _0615_ ^ _0614_;
-  assign _0618_ = _0617_ ^ _0613_;
-  assign _0619_ = _0618_ ^ _0612_;
-  assign _0620_ = _0559_ | _0556_;
-  assign _0621_ = ~(_0566_ | _0560_);
-  assign _0622_ = _0620_ & ~(_0621_);
-  assign _0623_ = _0622_ ^ _0619_;
-  assign _0624_ = ~(_0562_ & _0561_);
-  assign _0625_ = _0565_ & ~(_0564_);
-  assign _0626_ = _0624_ & ~(_0625_);
-  assign _0628_ = rt[6] & rs[1];
-  assign _0629_ = _0628_ ^ _0626_;
-  assign _0630_ = rs[0] & rt[7];
-  assign _0631_ = _0630_ ^ _0629_;
-  assign _0632_ = _0631_ ^ _0623_;
-  assign _0633_ = _0570_ | _0567_;
-  assign _0634_ = ~(_0577_ | _0571_);
-  assign _0635_ = _0633_ & ~(_0634_);
-  assign _0636_ = _0635_ ^ _0632_;
-  assign _0637_ = _0576_ & ~(_0575_);
-  assign _0639_ = _0637_ ^ _0636_;
-  assign _0640_ = ~(_0581_ | _0578_);
-  assign _0641_ = _0640_ ^ _0639_;
-  assign _0642_ = _0584_ | _0582_;
-  assign _0643_ = _0585_ & ~(_0588_);
-  assign _0644_ = _0642_ & ~(_0643_);
-  assign _0645_ = _0644_ ^ _0641_;
-  assign _0646_ = _0295_ & ~(_0645_);
-  assign _0647_ = _0602_ & ~(_0646_);
-  assign _0648_ = _0306_ ? _0601_ : _0647_;
-  assign _0685_ = _0328_ & ~(_0648_);
+  assign _0582_ = _0581_ ^ _0578_;
+  assign _0583_ = _0528_ | ~(_0529_);
+  assign _0584_ = _0531_ & ~(_0530_);
+  assign _0585_ = _0583_ & ~(_0584_);
+  assign _0586_ = _0585_ ^ _0582_;
+  assign _0587_ = _0295_ & ~(_0586_);
+  assign _0588_ = _0549_ & ~(_0587_);
+  assign _0589_ = _0306_ ? _0548_ : _0588_;
+  assign _0683_ = _0328_ & ~(_0589_);
+  assign _0590_ = _0537_ & ~(rt[6]);
+  assign _0591_ = _0590_ ^ rt[7];
+  assign _0592_ = _0330_ ? _0327_ : _0591_;
+  assign _0593_ = _0592_ ^ rs[7];
+  assign _0595_ = ~(_0539_ & rs[6]);
+  assign _0596_ = _0540_ & ~(_0547_);
+  assign _0597_ = _0595_ & ~(_0596_);
+  assign _0598_ = _0597_ ^ _0593_;
+  assign _0599_ = _0649_ | _0317_;
+  assign _0600_ = rs[6] & rt[1];
+  assign _0601_ = rt[6] & rs[1];
+  assign _0602_ = _0601_ ^ _0600_;
+  assign _0603_ = rt[5] & rs[2];
+  assign _0604_ = _0603_ ^ _0602_;
+  assign _0606_ = ~(_0551_ & _0550_);
+  assign _0607_ = _0553_ & ~(_0552_);
+  assign _0608_ = _0606_ & ~(_0607_);
+  assign _0609_ = _0608_ ^ _0604_;
+  assign _0610_ = ~(rt[0] & rs[7]);
+  assign _0611_ = rt[4] & rs[3];
+  assign _0612_ = _0611_ ^ _0610_;
+  assign _0613_ = rs[4] & rt[3];
+  assign _0614_ = _0613_ ^ _0612_;
+  assign _0615_ = _0614_ ^ _0609_;
+  assign _0617_ = _0554_ | ~(_0555_);
+  assign _0618_ = ~(_0561_ | _0556_);
+  assign _0619_ = _0617_ & ~(_0618_);
+  assign _0620_ = _0619_ ^ _0615_;
+  assign _0621_ = _0558_ | ~(_0559_);
+  assign _0622_ = _0557_ & ~(_0560_);
+  assign _0623_ = _0621_ & ~(_0622_);
+  assign _0624_ = rs[5] & rt[2];
+  assign _0625_ = _0624_ ^ _0623_;
+  assign _0626_ = rt[7] & rs[0];
+  assign _0628_ = _0626_ ^ _0625_;
+  assign _0629_ = _0628_ ^ _0620_;
+  assign _0630_ = _0562_ | ~(_0564_);
+  assign _0631_ = ~(_0570_ | _0565_);
+  assign _0632_ = _0630_ & ~(_0631_);
+  assign _0633_ = _0632_ ^ _0629_;
+  assign _0634_ = _0569_ & ~(_0568_);
+  assign _0635_ = _0634_ ^ _0633_;
+  assign _0636_ = _0575_ | _0571_;
+  assign _0637_ = _0577_ & ~(_0576_);
+  assign _0639_ = _0636_ & ~(_0637_);
+  assign _0640_ = _0639_ ^ _0635_;
+  assign _0641_ = _0581_ | _0578_;
+  assign _0642_ = _0582_ & ~(_0585_);
+  assign _0643_ = _0641_ & ~(_0642_);
+  assign _0644_ = _0643_ ^ _0640_;
+  assign _0645_ = _0295_ & ~(_0644_);
+  assign _0646_ = _0599_ & ~(_0645_);
+  assign _0647_ = _0306_ ? _0598_ : _0646_;
+  assign _0684_ = _0328_ & ~(_0647_);
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[0] <= 1'h0;
-    else if (_0000_) alu_out_reg[0] <= _0678_;
+    else if (_0000_) alu_out_reg[0] <= _0677_;
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[1] <= 1'h0;
-    else if (_0000_) alu_out_reg[1] <= _0679_;
+    else if (_0000_) alu_out_reg[1] <= _0678_;
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[2] <= 1'h0;
-    else if (_0000_) alu_out_reg[2] <= _0680_;
+    else if (_0000_) alu_out_reg[2] <= _0679_;
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[3] <= 1'h0;
-    else if (_0000_) alu_out_reg[3] <= _0681_;
+    else if (_0000_) alu_out_reg[3] <= _0680_;
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[4] <= 1'h0;
-    else if (_0000_) alu_out_reg[4] <= _0682_;
+    else if (_0000_) alu_out_reg[4] <= _0681_;
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[5] <= 1'h0;
-    else if (_0000_) alu_out_reg[5] <= _0683_;
+    else if (_0000_) alu_out_reg[5] <= _0682_;
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[6] <= 1'h0;
-    else if (_0000_) alu_out_reg[6] <= _0684_;
+    else if (_0000_) alu_out_reg[6] <= _0683_;
   (* src = "../build/gpu.v:29.2-44.6" *)
   always @(posedge clk)
     if (reset) alu_out_reg[7] <= 1'h0;
-    else if (_0000_) alu_out_reg[7] <= _0685_;
+    else if (_0000_) alu_out_reg[7] <= _0684_;
   assign alu_out = alu_out_reg;
 endmodule
 
-(* src = "../build/gpu.v:626.1-645.10" *)
+(* src = "../build/gpu.v:686.1-705.10" *)
 module dcr(clk, reset, device_control_write_enable, device_control_data, thread_count);
-  (* src = "../build/gpu.v:633.13-633.16" *)
+  (* src = "../build/gpu.v:693.13-693.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:638.12-638.34" *)
+  (* src = "../build/gpu.v:698.12-698.34" *)
   reg [7:0] device_conrol_register;
-  (* src = "../build/gpu.v:636.19-636.38" *)
+  (* src = "../build/gpu.v:696.19-696.38" *)
   input [7:0] device_control_data;
   wire [7:0] device_control_data;
-  (* src = "../build/gpu.v:635.13-635.40" *)
+  (* src = "../build/gpu.v:695.13-695.40" *)
   input device_control_write_enable;
   wire device_control_write_enable;
-  (* src = "../build/gpu.v:634.13-634.18" *)
+  (* src = "../build/gpu.v:694.13-694.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:637.20-637.32" *)
+  (* src = "../build/gpu.v:697.20-697.32" *)
   output [7:0] thread_count;
   wire [7:0] thread_count;
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[0] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[0] <= device_control_data[0];
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[1] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[1] <= device_control_data[1];
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[2] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[2] <= device_control_data[2];
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[3] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[3] <= device_control_data[3];
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[4] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[4] <= device_control_data[4];
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[5] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[5] <= device_control_data[5];
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[6] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[6] <= device_control_data[6];
-  (* src = "../build/gpu.v:640.2-644.50" *)
+  (* src = "../build/gpu.v:700.2-704.50" *)
   always @(posedge clk)
     if (reset) device_conrol_register[7] <= 1'h0;
     else if (device_control_write_enable) device_conrol_register[7] <= device_control_data[7];
   assign thread_count = device_conrol_register;
 endmodule
 
-(* src = "../build/gpu.v:647.1-769.10" *)
+(* src = "../build/gpu.v:707.1-829.10" *)
 module decoder(clk, reset, core_state, instruction, decoded_rd_address, decoded_rs_address, decoded_rt_address, decoded_nzp, decoded_immediate, decoded_reg_write_enable, decoded_mem_read_enable, decoded_mem_write_enable, decoded_nzp_write_enable, decoded_reg_input_mux, decoded_alu_arithmetic_mux, decoded_alu_output_mux, decoded_pc_mux, decoded_ret);
   wire _00_;
   wire _01_;
@@ -9123,72 +9131,72 @@ module decoder(clk, reset, core_state, instruction, decoded_rd_address, decoded_
   wire _25_;
   wire _26_;
   (* force_downto = 32'd1 *)
-  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:728.4-767.11|/usr/bin/../share/yosys/techmap.v:583.28-583.35" *)
+  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:788.4-827.11|/usr/bin/../share/yosys/techmap.v:583.28-583.35" *)
   (* unused_bits = "1" *)
   wire [3:0] _27_;
   (* force_downto = 32'd1 *)
-  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:728.4-767.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
+  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:788.4-827.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
   wire [1:0] _28_;
   (* force_downto = 32'd1 *)
-  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:728.4-767.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
+  (* src = "../build/gpu.v:0.0-0.0|../build/gpu.v:788.4-827.11|/usr/bin/../share/yosys/techmap.v:575.21-575.22" *)
   wire [1:0] _29_;
-  (* src = "../build/gpu.v:667.13-667.16" *)
+  (* src = "../build/gpu.v:727.13-727.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:669.19-669.29" *)
+  (* src = "../build/gpu.v:729.19-729.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:681.19-681.45" *)
+  (* src = "../build/gpu.v:741.19-741.45" *)
   output [1:0] decoded_alu_arithmetic_mux;
   reg [1:0] decoded_alu_arithmetic_mux;
-  (* src = "../build/gpu.v:682.13-682.35" *)
+  (* src = "../build/gpu.v:742.13-742.35" *)
   output decoded_alu_output_mux;
   wire decoded_alu_output_mux;
-  (* src = "../build/gpu.v:675.19-675.36" *)
+  (* src = "../build/gpu.v:735.19-735.36" *)
   output [7:0] decoded_immediate;
   wire [7:0] decoded_immediate;
-  (* src = "../build/gpu.v:677.13-677.36" *)
+  (* src = "../build/gpu.v:737.13-737.36" *)
   output decoded_mem_read_enable;
   reg decoded_mem_read_enable;
-  (* src = "../build/gpu.v:678.13-678.37" *)
+  (* src = "../build/gpu.v:738.13-738.37" *)
   output decoded_mem_write_enable;
   reg decoded_mem_write_enable;
-  (* src = "../build/gpu.v:674.19-674.30" *)
+  (* src = "../build/gpu.v:734.19-734.30" *)
   output [2:0] decoded_nzp;
   reg [2:0] decoded_nzp;
-  (* src = "../build/gpu.v:679.13-679.37" *)
+  (* src = "../build/gpu.v:739.13-739.37" *)
   output decoded_nzp_write_enable;
   reg decoded_nzp_write_enable;
-  (* src = "../build/gpu.v:683.13-683.27" *)
+  (* src = "../build/gpu.v:743.13-743.27" *)
   output decoded_pc_mux;
   reg decoded_pc_mux;
-  (* src = "../build/gpu.v:671.19-671.37" *)
+  (* src = "../build/gpu.v:731.19-731.37" *)
   output [3:0] decoded_rd_address;
   wire [3:0] decoded_rd_address;
-  (* src = "../build/gpu.v:680.19-680.40" *)
+  (* src = "../build/gpu.v:740.19-740.40" *)
   output [1:0] decoded_reg_input_mux;
   wire [1:0] decoded_reg_input_mux;
-  (* src = "../build/gpu.v:676.13-676.37" *)
+  (* src = "../build/gpu.v:736.13-736.37" *)
   output decoded_reg_write_enable;
   reg decoded_reg_write_enable;
-  (* src = "../build/gpu.v:684.13-684.24" *)
+  (* src = "../build/gpu.v:744.13-744.24" *)
   output decoded_ret;
   reg decoded_ret;
-  (* src = "../build/gpu.v:672.19-672.37" *)
+  (* src = "../build/gpu.v:732.19-732.37" *)
   output [3:0] decoded_rs_address;
   wire [3:0] decoded_rs_address;
-  (* src = "../build/gpu.v:673.19-673.37" *)
+  (* src = "../build/gpu.v:733.19-733.37" *)
   output [3:0] decoded_rt_address;
   wire [3:0] decoded_rt_address;
-  (* src = "../build/gpu.v:670.20-670.31" *)
+  (* src = "../build/gpu.v:730.20-730.31" *)
   input [15:0] instruction;
   wire [15:0] instruction;
-  (* src = "../build/gpu.v:668.13-668.18" *)
+  (* src = "../build/gpu.v:728.13-728.18" *)
   input reset;
   wire reset;
   assign _02_ = core_state[0] | ~(core_state[1]);
   assign _01_ = _02_ | core_state[2];
-  assign _03_ = instruction[12] & instruction[13];
+  assign _03_ = instruction[13] & instruction[12];
   assign _04_ = instruction[15] | ~(instruction[14]);
   assign _27_[2] = _03_ & ~(_04_);
   assign _05_ = instruction[13] | ~(instruction[12]);
@@ -9201,7 +9209,7 @@ module decoder(clk, reset, core_state, instruction, decoded_rd_address, decoded_
   assign _12_ = _11_ & ~(_05_);
   assign _13_ = ~(_12_ | _10_);
   assign _14_ = ~(_13_ & _08_);
-  assign _15_ = instruction[12] | instruction[13];
+  assign _15_ = instruction[13] | instruction[12];
   assign _16_ = _11_ & ~(_15_);
   assign _17_ = instruction[15] | instruction[14];
   assign _18_ = _03_ & ~(_17_);
@@ -9212,112 +9220,112 @@ module decoder(clk, reset, core_state, instruction, decoded_rd_address, decoded_
   assign _24_ = ~(_17_ | _05_);
   assign _25_ = _09_ & ~(_17_);
   assign _26_ = _06_ & ~(_15_);
+  assign _28_[1] = _07_ & ~(_08_);
   assign _21_ = _16_ | _10_;
   assign _22_ = _13_ & ~(_16_);
   assign _29_[0] = _21_ & ~(_22_);
   assign _29_[1] = _12_ | _10_;
-  assign _28_[1] = _07_ & ~(_08_);
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_alu_arithmetic_mux[0] <= 1'h0;
     else if (!_01_) decoded_alu_arithmetic_mux[0] <= _29_[0];
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_alu_arithmetic_mux[1] <= 1'h0;
     else if (!_01_) decoded_alu_arithmetic_mux[1] <= _29_[1];
   reg \decoded_rd_address_reg[0] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_rd_address_reg[0]  <= 1'h0;
     else if (!_01_) \decoded_rd_address_reg[0]  <= instruction[8];
   assign decoded_rd_address[0] = \decoded_rd_address_reg[0] ;
   reg \decoded_rs_address_reg[2] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_rs_address_reg[2]  <= 1'h0;
     else if (!_01_) \decoded_rs_address_reg[2]  <= instruction[6];
   assign decoded_rs_address[2] = \decoded_rs_address_reg[2] ;
   reg \decoded_rt_address_reg[1] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_rt_address_reg[1]  <= 1'h0;
     else if (!_01_) \decoded_rt_address_reg[1]  <= instruction[1];
   assign decoded_rt_address[1] = \decoded_rt_address_reg[1] ;
   reg \decoded_rt_address_reg[2] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_rt_address_reg[2]  <= 1'h0;
     else if (!_01_) \decoded_rt_address_reg[2]  <= instruction[2];
   assign decoded_rt_address[2] = \decoded_rt_address_reg[2] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_nzp[0] <= 1'h0;
     else if (!_01_) decoded_nzp[0] <= instruction[9];
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_nzp[1] <= 1'h0;
     else if (!_01_) decoded_nzp[1] <= instruction[10];
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_nzp[2] <= 1'h0;
     else if (!_01_) decoded_nzp[2] <= instruction[11];
   reg \decoded_immediate_reg[0] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_immediate_reg[0]  <= 1'h0;
     else if (!_01_) \decoded_immediate_reg[0]  <= instruction[0];
   assign decoded_immediate[0] = \decoded_immediate_reg[0] ;
   reg \decoded_immediate_reg[3] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_immediate_reg[3]  <= 1'h0;
     else if (!_01_) \decoded_immediate_reg[3]  <= instruction[3];
   assign decoded_immediate[3] = \decoded_immediate_reg[3] ;
   reg \decoded_immediate_reg[4] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_immediate_reg[4]  <= 1'h0;
     else if (!_01_) \decoded_immediate_reg[4]  <= instruction[4];
   assign decoded_immediate[4] = \decoded_immediate_reg[4] ;
   reg \decoded_immediate_reg[5] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_immediate_reg[5]  <= 1'h0;
     else if (!_01_) \decoded_immediate_reg[5]  <= instruction[5];
   assign decoded_immediate[5] = \decoded_immediate_reg[5] ;
   reg \decoded_immediate_reg[7] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_immediate_reg[7]  <= 1'h0;
     else if (!_01_) \decoded_immediate_reg[7]  <= instruction[7];
   assign decoded_immediate[7] = \decoded_immediate_reg[7] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_reg_write_enable <= 1'h0;
     else if (!_01_) decoded_reg_write_enable <= _00_;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_mem_read_enable <= 1'h0;
     else if (!_01_) decoded_mem_read_enable <= _27_[2];
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_mem_write_enable <= 1'h0;
     else if (!_01_) decoded_mem_write_enable <= _26_;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_nzp_write_enable <= 1'h0;
     else if (!_01_) decoded_nzp_write_enable <= _25_;
   reg \decoded_reg_input_mux_reg[1] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) \decoded_reg_input_mux_reg[1]  <= 1'h0;
     else if (!_01_) \decoded_reg_input_mux_reg[1]  <= _28_[1];
   assign decoded_reg_input_mux[1] = \decoded_reg_input_mux_reg[1] ;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_pc_mux <= 1'h0;
     else if (!_01_) decoded_pc_mux <= _24_;
-  (* src = "../build/gpu.v:696.2-768.6" *)
+  (* src = "../build/gpu.v:756.2-828.6" *)
   always @(posedge clk)
     if (reset) decoded_ret <= 1'h0;
     else if (!_01_) decoded_ret <= _23_;
@@ -9333,1041 +9341,1041 @@ endmodule
 
 (* dynports =  1  *)
 (* top =  1  *)
-(* src = "../build/gpu.v:1062.1-1323.10" *)
+(* src = "../build/gpu.v:1122.1-1383.10" *)
 module gpu(clk, reset, start, done, device_control_write_enable, device_control_data, program_mem_read_valid, program_mem_read_address, program_mem_read_ready, program_mem_read_data, data_mem_read_valid, data_mem_read_address, data_mem_read_ready, data_mem_read_data, data_mem_write_valid, data_mem_write_address, data_mem_write_ready, data_mem_write_data);
-  (* src = "../build/gpu.v:1090.13-1090.16" *)
+  (* src = "../build/gpu.v:1150.13-1150.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1115.38-1115.51" *)
+  (* src = "../build/gpu.v:1175.38-1175.51" *)
   wire [15:0] core_block_id;
-  (* src = "../build/gpu.v:1114.33-1114.42" *)
+  (* src = "../build/gpu.v:1174.33-1174.42" *)
   wire [1:0] core_done;
-  (* src = "../build/gpu.v:1113.32-1113.42" *)
+  (* src = "../build/gpu.v:1173.32-1173.42" *)
   wire [1:0] core_reset;
-  (* src = "../build/gpu.v:1112.32-1112.42" *)
+  (* src = "../build/gpu.v:1172.32-1172.42" *)
   wire [1:0] core_start;
-  (* src = "../build/gpu.v:1116.260-1116.277" *)
+  (* src = "../build/gpu.v:1176.260-1176.277" *)
   wire [5:0] core_thread_count;
-  (* src = "../build/gpu.v:1212.52-1212.98" *)
+  (* src = "../build/gpu.v:1272.52-1272.98" *)
   wire [32:1] \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address ;
-  (* src = "../build/gpu.v:1210.31-1210.75" *)
+  (* src = "../build/gpu.v:1270.31-1270.75" *)
   wire [4:1] \cores[0].sv2v_tmp_core_instance_data_mem_2_read_valid ;
-  (* src = "../build/gpu.v:1216.52-1216.99" *)
+  (* src = "../build/gpu.v:1276.52-1276.99" *)
   wire [32:1] \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address ;
-  (* src = "../build/gpu.v:1218.52-1218.96" *)
+  (* src = "../build/gpu.v:1278.52-1278.96" *)
   wire [32:1] \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data ;
-  (* src = "../build/gpu.v:1214.31-1214.76" *)
+  (* src = "../build/gpu.v:1274.31-1274.76" *)
   wire [4:1] \cores[0].sv2v_tmp_core_instance_data_mem_2_write_valid ;
-  (* src = "../build/gpu.v:1198.52-1198.96" *)
+  (* src = "../build/gpu.v:1258.52-1258.96" *)
   wire [32:1] \cores[0].sv2v_tmp_core_instance_data_mem_read_address ;
-  (* src = "../build/gpu.v:1196.31-1196.73" *)
+  (* src = "../build/gpu.v:1256.31-1256.73" *)
   wire [4:1] \cores[0].sv2v_tmp_core_instance_data_mem_read_valid ;
-  (* src = "../build/gpu.v:1202.52-1202.97" *)
+  (* src = "../build/gpu.v:1262.52-1262.97" *)
   wire [32:1] \cores[0].sv2v_tmp_core_instance_data_mem_write_address ;
-  (* src = "../build/gpu.v:1204.52-1204.94" *)
+  (* src = "../build/gpu.v:1264.52-1264.94" *)
   wire [32:1] \cores[0].sv2v_tmp_core_instance_data_mem_write_data ;
-  (* src = "../build/gpu.v:1200.31-1200.74" *)
+  (* src = "../build/gpu.v:1260.31-1260.74" *)
   wire [4:1] \cores[0].sv2v_tmp_core_instance_data_mem_write_valid ;
-  (* src = "../build/gpu.v:1208.39-1208.88" *)
+  (* src = "../build/gpu.v:1268.39-1268.88" *)
   wire [8:1] \cores[0].sv2v_tmp_core_instance_program_mem_2_read_address ;
-  (* src = "../build/gpu.v:1206.15-1206.62" *)
+  (* src = "../build/gpu.v:1266.15-1266.62" *)
   wire \cores[0].sv2v_tmp_core_instance_program_mem_2_read_valid ;
-  (* src = "../build/gpu.v:1194.39-1194.86" *)
+  (* src = "../build/gpu.v:1254.39-1254.86" *)
   wire [8:1] \cores[0].sv2v_tmp_core_instance_program_mem_read_address ;
-  (* src = "../build/gpu.v:1192.15-1192.60" *)
+  (* src = "../build/gpu.v:1252.15-1252.60" *)
   wire \cores[0].sv2v_tmp_core_instance_program_mem_read_valid ;
-  (* src = "../build/gpu.v:1101.67-1101.88" *)
+  (* src = "../build/gpu.v:1161.67-1161.88" *)
   output [31:0] data_mem_read_address;
   wire [31:0] data_mem_read_address;
-  (* src = "../build/gpu.v:1103.66-1103.84" *)
+  (* src = "../build/gpu.v:1163.66-1163.84" *)
   input [31:0] data_mem_read_data;
   wire [31:0] data_mem_read_data;
-  (* src = "../build/gpu.v:1102.43-1102.62" *)
+  (* src = "../build/gpu.v:1162.43-1162.62" *)
   input [3:0] data_mem_read_ready;
   wire [3:0] data_mem_read_ready;
-  (* src = "../build/gpu.v:1100.44-1100.63" *)
+  (* src = "../build/gpu.v:1160.44-1160.63" *)
   output [3:0] data_mem_read_valid;
   wire [3:0] data_mem_read_valid;
-  (* src = "../build/gpu.v:1105.67-1105.89" *)
+  (* src = "../build/gpu.v:1165.67-1165.89" *)
   output [31:0] data_mem_write_address;
   wire [31:0] data_mem_write_address;
-  (* src = "../build/gpu.v:1107.67-1107.86" *)
+  (* src = "../build/gpu.v:1167.67-1167.86" *)
   output [31:0] data_mem_write_data;
   wire [31:0] data_mem_write_data;
-  (* src = "../build/gpu.v:1106.43-1106.63" *)
+  (* src = "../build/gpu.v:1166.43-1166.63" *)
   input [3:0] data_mem_write_ready;
   wire [3:0] data_mem_write_ready;
-  (* src = "../build/gpu.v:1104.44-1104.64" *)
+  (* src = "../build/gpu.v:1164.44-1164.64" *)
   output [3:0] data_mem_write_valid;
   wire [3:0] data_mem_write_valid;
-  (* src = "../build/gpu.v:1095.19-1095.38" *)
+  (* src = "../build/gpu.v:1155.19-1155.38" *)
   input [7:0] device_control_data;
   wire [7:0] device_control_data;
-  (* src = "../build/gpu.v:1094.13-1094.40" *)
+  (* src = "../build/gpu.v:1154.13-1154.40" *)
   input device_control_write_enable;
   wire device_control_write_enable;
-  (* src = "../build/gpu.v:1093.14-1093.18" *)
+  (* src = "../build/gpu.v:1153.14-1153.18" *)
   output done;
   wire done;
-  (* src = "../build/gpu.v:1156.53-1156.73" *)
+  (* src = "../build/gpu.v:1216.53-1216.73" *)
   wire [15:0] fetcher_read_address;
-  (* src = "../build/gpu.v:1158.53-1158.70" *)
+  (* src = "../build/gpu.v:1218.53-1218.70" *)
   wire [31:0] fetcher_read_data;
-  (* src = "../build/gpu.v:1157.27-1157.45" *)
+  (* src = "../build/gpu.v:1217.27-1217.45" *)
   wire [1:0] fetcher_read_ready;
-  (* src = "../build/gpu.v:1155.27-1155.45" *)
+  (* src = "../build/gpu.v:1215.27-1215.45" *)
   wire [1:0] fetcher_read_valid;
-  (* src = "../build/gpu.v:1148.46-1148.62" *)
+  (* src = "../build/gpu.v:1208.46-1208.62" *)
   reg [63:0] lsu_read_address;
-  (* src = "../build/gpu.v:1150.46-1150.59" *)
+  (* src = "../build/gpu.v:1210.46-1210.59" *)
   wire [63:0] lsu_read_data;
-  (* src = "../build/gpu.v:1149.23-1149.37" *)
+  (* src = "../build/gpu.v:1209.23-1209.37" *)
   wire [7:0] lsu_read_ready;
-  (* src = "../build/gpu.v:1147.23-1147.37" *)
+  (* src = "../build/gpu.v:1207.23-1207.37" *)
   reg [7:0] lsu_read_valid;
-  (* src = "../build/gpu.v:1152.46-1152.63" *)
+  (* src = "../build/gpu.v:1212.46-1212.63" *)
   reg [63:0] lsu_write_address;
-  (* src = "../build/gpu.v:1154.46-1154.60" *)
+  (* src = "../build/gpu.v:1214.46-1214.60" *)
   reg [63:0] lsu_write_data;
-  (* src = "../build/gpu.v:1153.23-1153.38" *)
+  (* src = "../build/gpu.v:1213.23-1213.38" *)
   wire [7:0] lsu_write_ready;
-  (* src = "../build/gpu.v:1151.23-1151.38" *)
+  (* src = "../build/gpu.v:1211.23-1211.38" *)
   reg [7:0] lsu_write_valid;
-  (* src = "../build/gpu.v:1164.57-1164.78" *)
+  (* src = "../build/gpu.v:1224.57-1224.78" *)
   wire [31:0] \per_core_accoutrements[0].core_lsu_read_address ;
-  (* src = "../build/gpu.v:1166.57-1166.75" *)
+  (* src = "../build/gpu.v:1226.57-1226.75" *)
   reg [31:0] \per_core_accoutrements[0].core_lsu_read_data ;
-  (* src = "../build/gpu.v:1165.34-1165.53" *)
+  (* src = "../build/gpu.v:1225.34-1225.53" *)
   reg [3:0] \per_core_accoutrements[0].core_lsu_read_ready ;
-  (* src = "../build/gpu.v:1163.34-1163.53" *)
+  (* src = "../build/gpu.v:1223.34-1223.53" *)
   wire [3:0] \per_core_accoutrements[0].core_lsu_read_valid ;
-  (* src = "../build/gpu.v:1168.57-1168.79" *)
+  (* src = "../build/gpu.v:1228.57-1228.79" *)
   wire [31:0] \per_core_accoutrements[0].core_lsu_write_address ;
-  (* src = "../build/gpu.v:1170.57-1170.76" *)
+  (* src = "../build/gpu.v:1230.57-1230.76" *)
   wire [31:0] \per_core_accoutrements[0].core_lsu_write_data ;
-  (* src = "../build/gpu.v:1169.34-1169.54" *)
+  (* src = "../build/gpu.v:1229.34-1229.54" *)
   reg [3:0] \per_core_accoutrements[0].core_lsu_write_ready ;
-  (* src = "../build/gpu.v:1167.34-1167.54" *)
+  (* src = "../build/gpu.v:1227.34-1227.54" *)
   wire [3:0] \per_core_accoutrements[0].core_lsu_write_valid ;
-  (* src = "../build/gpu.v:1164.57-1164.78" *)
+  (* src = "../build/gpu.v:1224.57-1224.78" *)
   wire [31:0] \per_core_accoutrements[1].core_lsu_read_address ;
-  (* src = "../build/gpu.v:1166.57-1166.75" *)
+  (* src = "../build/gpu.v:1226.57-1226.75" *)
   reg [31:0] \per_core_accoutrements[1].core_lsu_read_data ;
-  (* src = "../build/gpu.v:1165.34-1165.53" *)
+  (* src = "../build/gpu.v:1225.34-1225.53" *)
   reg [3:0] \per_core_accoutrements[1].core_lsu_read_ready ;
-  (* src = "../build/gpu.v:1163.34-1163.53" *)
+  (* src = "../build/gpu.v:1223.34-1223.53" *)
   wire [3:0] \per_core_accoutrements[1].core_lsu_read_valid ;
-  (* src = "../build/gpu.v:1168.57-1168.79" *)
+  (* src = "../build/gpu.v:1228.57-1228.79" *)
   wire [31:0] \per_core_accoutrements[1].core_lsu_write_address ;
-  (* src = "../build/gpu.v:1170.57-1170.76" *)
+  (* src = "../build/gpu.v:1230.57-1230.76" *)
   wire [31:0] \per_core_accoutrements[1].core_lsu_write_data ;
-  (* src = "../build/gpu.v:1169.34-1169.54" *)
+  (* src = "../build/gpu.v:1229.34-1229.54" *)
   reg [3:0] \per_core_accoutrements[1].core_lsu_write_ready ;
-  (* src = "../build/gpu.v:1167.34-1167.54" *)
+  (* src = "../build/gpu.v:1227.34-1227.54" *)
   wire [3:0] \per_core_accoutrements[1].core_lsu_write_valid ;
-  (* src = "../build/gpu.v:1097.73-1097.97" *)
+  (* src = "../build/gpu.v:1157.73-1157.97" *)
   output [7:0] program_mem_read_address;
   wire [7:0] program_mem_read_address;
-  (* src = "../build/gpu.v:1099.72-1099.93" *)
+  (* src = "../build/gpu.v:1159.72-1159.93" *)
   input [15:0] program_mem_read_data;
   wire [15:0] program_mem_read_data;
-  (* src = "../build/gpu.v:1098.46-1098.68" *)
+  (* src = "../build/gpu.v:1158.46-1158.68" *)
   input program_mem_read_ready;
   wire program_mem_read_ready;
-  (* src = "../build/gpu.v:1096.47-1096.69" *)
+  (* src = "../build/gpu.v:1156.47-1156.69" *)
   output program_mem_read_valid;
   wire program_mem_read_valid;
-  (* src = "../build/gpu.v:1091.13-1091.18" *)
+  (* src = "../build/gpu.v:1151.13-1151.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1092.13-1092.18" *)
+  (* src = "../build/gpu.v:1152.13-1152.18" *)
   input start;
   wire start;
-  (* src = "../build/gpu.v:1269.41-1269.91" *)
+  (* src = "../build/gpu.v:1329.41-1329.91" *)
   wire [64:1] sv2v_tmp_data_memory_controller_consumer_read_data;
-  (* src = "../build/gpu.v:1267.20-1267.71" *)
+  (* src = "../build/gpu.v:1327.20-1327.71" *)
   wire [8:1] sv2v_tmp_data_memory_controller_consumer_read_ready;
-  (* src = "../build/gpu.v:1265.20-1265.72" *)
+  (* src = "../build/gpu.v:1325.20-1325.72" *)
   wire [8:1] sv2v_tmp_data_memory_controller_consumer_write_ready;
-  (* src = "../build/gpu.v:1128.33-1128.73" *)
+  (* src = "../build/gpu.v:1188.33-1188.73" *)
   wire [16:1] sv2v_tmp_dispatch_instance_core_block_id;
-  (* src = "../build/gpu.v:1126.29-1126.66" *)
+  (* src = "../build/gpu.v:1186.29-1186.66" *)
   wire [2:1] sv2v_tmp_dispatch_instance_core_reset;
-  (* src = "../build/gpu.v:1124.29-1124.66" *)
+  (* src = "../build/gpu.v:1184.29-1184.66" *)
   wire [2:1] sv2v_tmp_dispatch_instance_core_start;
-  (* src = "../build/gpu.v:1130.792-1130.836" *)
+  (* src = "../build/gpu.v:1190.792-1190.836" *)
   wire [6:1] sv2v_tmp_dispatch_instance_core_thread_count;
-  (* src = "../build/gpu.v:1299.48-1299.101" *)
+  (* src = "../build/gpu.v:1359.48-1359.101" *)
   wire [32:1] sv2v_tmp_program_memory_controller_consumer_read_data;
-  (* src = "../build/gpu.v:1297.24-1297.78" *)
+  (* src = "../build/gpu.v:1357.24-1357.78" *)
   wire [2:1] sv2v_tmp_program_memory_controller_consumer_read_ready;
-  (* src = "../build/gpu.v:1111.13-1111.25" *)
+  (* src = "../build/gpu.v:1171.13-1171.25" *)
   wire [7:0] thread_count;
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[7] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_valid [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[56] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [25];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[57] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [26];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[58] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [27];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[59] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [28];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[60] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [29];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[61] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [30];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[62] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [31];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[63] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [32];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[7] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_valid [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[56] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [25];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[57] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [26];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[58] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [27];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[59] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [28];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[60] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [29];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[61] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [30];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[62] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [31];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[63] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [32];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[56] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [25];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[57] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [26];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[58] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [27];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[59] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [28];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[60] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [29];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[61] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [30];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[62] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [31];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[63] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [32];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_ready [3] <= sv2v_tmp_data_memory_controller_consumer_read_ready[8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [24] <= sv2v_tmp_data_memory_controller_consumer_read_data[57];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [25] <= sv2v_tmp_data_memory_controller_consumer_read_data[58];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [26] <= sv2v_tmp_data_memory_controller_consumer_read_data[59];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [27] <= sv2v_tmp_data_memory_controller_consumer_read_data[60];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [28] <= sv2v_tmp_data_memory_controller_consumer_read_data[61];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [29] <= sv2v_tmp_data_memory_controller_consumer_read_data[62];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [30] <= sv2v_tmp_data_memory_controller_consumer_read_data[63];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [31] <= sv2v_tmp_data_memory_controller_consumer_read_data[64];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_write_ready [3] <= sv2v_tmp_data_memory_controller_consumer_write_ready[8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[6] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_valid [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[48] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [17];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[49] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [18];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[50] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [19];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[51] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [20];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[52] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [21];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[53] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [22];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[54] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [23];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[55] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [24];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[6] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_valid [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[48] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [17];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[49] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [18];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[50] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [19];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[51] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [20];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[52] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [21];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[53] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [22];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[54] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [23];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[55] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [24];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[48] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [17];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[49] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [18];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[50] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [19];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[51] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [20];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[52] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [21];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[53] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [22];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[54] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [23];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[55] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [24];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_ready [2] <= sv2v_tmp_data_memory_controller_consumer_read_ready[7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [16] <= sv2v_tmp_data_memory_controller_consumer_read_data[49];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [17] <= sv2v_tmp_data_memory_controller_consumer_read_data[50];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [18] <= sv2v_tmp_data_memory_controller_consumer_read_data[51];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [19] <= sv2v_tmp_data_memory_controller_consumer_read_data[52];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [20] <= sv2v_tmp_data_memory_controller_consumer_read_data[53];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [21] <= sv2v_tmp_data_memory_controller_consumer_read_data[54];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [22] <= sv2v_tmp_data_memory_controller_consumer_read_data[55];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [23] <= sv2v_tmp_data_memory_controller_consumer_read_data[56];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_write_ready [2] <= sv2v_tmp_data_memory_controller_consumer_write_ready[7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[5] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_valid [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[40] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [9];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[41] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [10];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[42] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [11];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[43] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [12];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[44] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [13];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[45] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [14];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[46] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [15];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[47] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [16];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[5] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_valid [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[40] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [9];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[41] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [10];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[42] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [11];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[43] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [12];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[44] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [13];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[45] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [14];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[46] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [15];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[47] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [16];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[40] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [9];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[41] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [10];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[42] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [11];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[43] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [12];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[44] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [13];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[45] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [14];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[46] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [15];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[47] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [16];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_ready [1] <= sv2v_tmp_data_memory_controller_consumer_read_ready[6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [8] <= sv2v_tmp_data_memory_controller_consumer_read_data[41];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [9] <= sv2v_tmp_data_memory_controller_consumer_read_data[42];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [10] <= sv2v_tmp_data_memory_controller_consumer_read_data[43];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [11] <= sv2v_tmp_data_memory_controller_consumer_read_data[44];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [12] <= sv2v_tmp_data_memory_controller_consumer_read_data[45];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [13] <= sv2v_tmp_data_memory_controller_consumer_read_data[46];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [14] <= sv2v_tmp_data_memory_controller_consumer_read_data[47];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [15] <= sv2v_tmp_data_memory_controller_consumer_read_data[48];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_write_ready [1] <= sv2v_tmp_data_memory_controller_consumer_write_ready[6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[4] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_valid [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[32] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[33] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[34] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[35] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[36] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[37] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[38] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[39] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_read_address [8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[4] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_valid [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[32] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[33] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[34] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[35] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[36] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[37] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[38] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[39] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_address [8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[32] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[33] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[34] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[35] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[36] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[37] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[38] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[39] <= \cores[0].sv2v_tmp_core_instance_data_mem_2_write_data [8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_ready [0] <= sv2v_tmp_data_memory_controller_consumer_read_ready[5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [0] <= sv2v_tmp_data_memory_controller_consumer_read_data[33];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [1] <= sv2v_tmp_data_memory_controller_consumer_read_data[34];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [2] <= sv2v_tmp_data_memory_controller_consumer_read_data[35];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [3] <= sv2v_tmp_data_memory_controller_consumer_read_data[36];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [4] <= sv2v_tmp_data_memory_controller_consumer_read_data[37];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [5] <= sv2v_tmp_data_memory_controller_consumer_read_data[38];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [6] <= sv2v_tmp_data_memory_controller_consumer_read_data[39];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_read_data [7] <= sv2v_tmp_data_memory_controller_consumer_read_data[40];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[1].core_lsu_write_ready [0] <= sv2v_tmp_data_memory_controller_consumer_write_ready[5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[3] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_valid [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[24] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [25];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[25] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [26];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[26] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [27];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[27] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [28];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[28] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [29];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[29] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [30];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[30] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [31];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[31] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [32];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[3] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_valid [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[24] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [25];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[25] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [26];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[26] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [27];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[27] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [28];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[28] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [29];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[29] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [30];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[30] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [31];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[31] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [32];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[24] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [25];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[25] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [26];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[26] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [27];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[27] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [28];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[28] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [29];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[29] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [30];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[30] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [31];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[31] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [32];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_ready [3] <= sv2v_tmp_data_memory_controller_consumer_read_ready[4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [24] <= sv2v_tmp_data_memory_controller_consumer_read_data[25];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [25] <= sv2v_tmp_data_memory_controller_consumer_read_data[26];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [26] <= sv2v_tmp_data_memory_controller_consumer_read_data[27];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [27] <= sv2v_tmp_data_memory_controller_consumer_read_data[28];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [28] <= sv2v_tmp_data_memory_controller_consumer_read_data[29];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [29] <= sv2v_tmp_data_memory_controller_consumer_read_data[30];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [30] <= sv2v_tmp_data_memory_controller_consumer_read_data[31];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [31] <= sv2v_tmp_data_memory_controller_consumer_read_data[32];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_write_ready [3] <= sv2v_tmp_data_memory_controller_consumer_write_ready[4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[2] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_valid [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[16] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [17];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[17] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [18];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[18] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [19];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[19] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [20];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[20] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [21];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[21] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [22];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[22] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [23];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[23] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [24];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[2] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_valid [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[16] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [17];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[17] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [18];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[18] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [19];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[19] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [20];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[20] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [21];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[21] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [22];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[22] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [23];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[23] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [24];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[16] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [17];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[17] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [18];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[18] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [19];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[19] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [20];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[20] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [21];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[21] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [22];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[22] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [23];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[23] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [24];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_ready [2] <= sv2v_tmp_data_memory_controller_consumer_read_ready[3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [16] <= sv2v_tmp_data_memory_controller_consumer_read_data[17];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [17] <= sv2v_tmp_data_memory_controller_consumer_read_data[18];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [18] <= sv2v_tmp_data_memory_controller_consumer_read_data[19];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [19] <= sv2v_tmp_data_memory_controller_consumer_read_data[20];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [20] <= sv2v_tmp_data_memory_controller_consumer_read_data[21];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [21] <= sv2v_tmp_data_memory_controller_consumer_read_data[22];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [22] <= sv2v_tmp_data_memory_controller_consumer_read_data[23];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [23] <= sv2v_tmp_data_memory_controller_consumer_read_data[24];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_write_ready [2] <= sv2v_tmp_data_memory_controller_consumer_write_ready[3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[1] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_valid [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[8] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [9];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[9] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [10];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[10] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [11];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[11] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [12];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[12] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [13];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[13] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [14];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[14] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [15];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[15] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [16];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[1] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_valid [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[8] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [9];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[9] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [10];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[10] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [11];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[11] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [12];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[12] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [13];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[13] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [14];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[14] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [15];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[15] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [16];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[8] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [9];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[9] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [10];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[10] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [11];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[11] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [12];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[12] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [13];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[13] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [14];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[14] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [15];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[15] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [16];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_ready [1] <= sv2v_tmp_data_memory_controller_consumer_read_ready[2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [8] <= sv2v_tmp_data_memory_controller_consumer_read_data[9];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [9] <= sv2v_tmp_data_memory_controller_consumer_read_data[10];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [10] <= sv2v_tmp_data_memory_controller_consumer_read_data[11];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [11] <= sv2v_tmp_data_memory_controller_consumer_read_data[12];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [12] <= sv2v_tmp_data_memory_controller_consumer_read_data[13];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [13] <= sv2v_tmp_data_memory_controller_consumer_read_data[14];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [14] <= sv2v_tmp_data_memory_controller_consumer_read_data[15];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [15] <= sv2v_tmp_data_memory_controller_consumer_read_data[16];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_write_ready [1] <= sv2v_tmp_data_memory_controller_consumer_write_ready[2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_valid[0] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_valid [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[0] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[1] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[2] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[3] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[4] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[5] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[6] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_read_address[7] <= \cores[0].sv2v_tmp_core_instance_data_mem_read_address [8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_valid[0] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_valid [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[0] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[1] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[2] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[3] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[4] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[5] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[6] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_address[7] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_address [8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[0] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[1] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[2] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[3] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[4] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[5] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[6] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     lsu_write_data[7] <= \cores[0].sv2v_tmp_core_instance_data_mem_write_data [8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_ready [0] <= sv2v_tmp_data_memory_controller_consumer_read_ready[1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [0] <= sv2v_tmp_data_memory_controller_consumer_read_data[1];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [1] <= sv2v_tmp_data_memory_controller_consumer_read_data[2];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [2] <= sv2v_tmp_data_memory_controller_consumer_read_data[3];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [3] <= sv2v_tmp_data_memory_controller_consumer_read_data[4];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [4] <= sv2v_tmp_data_memory_controller_consumer_read_data[5];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [5] <= sv2v_tmp_data_memory_controller_consumer_read_data[6];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [6] <= sv2v_tmp_data_memory_controller_consumer_read_data[7];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_read_data [7] <= sv2v_tmp_data_memory_controller_consumer_read_data[8];
-  (* src = "../build/gpu.v:1175.5-1184.8" *)
+  (* src = "../build/gpu.v:1235.5-1244.8" *)
   always @(posedge clk)
     \per_core_accoutrements[0].core_lsu_write_ready [0] <= sv2v_tmp_data_memory_controller_consumer_write_ready[1];
-  (* src = "../build/gpu.v:1226.6-1262.5" *)
+  (* src = "../build/gpu.v:1286.6-1322.5" *)
   \$paramod$787a5da62fabe7841ceed3cf3518dd70b3e7c326\ducttape2cores  \cores[0].core_instance  (
     .block_id(core_block_id[7:0]),
     .block_id_2(core_block_id[15:8]),
@@ -10405,7 +10413,7 @@ module gpu(clk, reset, start, done, device_control_write_enable, device_control_
     .thread_count(core_thread_count[2:0]),
     .thread_count_2(core_thread_count[5:3])
   );
-  (* src = "../build/gpu.v:1277.4-1296.3" *)
+  (* src = "../build/gpu.v:1337.4-1356.3" *)
   \$paramod$d52b8421c71588f1b1a109a76f121397216ebdc2\arbiter_cache  data_memory_controller (
     .clk(clk),
     .consumer_read_address(lsu_read_address),
@@ -10427,7 +10435,7 @@ module gpu(clk, reset, start, done, device_control_write_enable, device_control_
     .reset(reset)
   );
   (* module_not_derived = 32'd1 *)
-  (* src = "../build/gpu.v:1117.6-1123.3" *)
+  (* src = "../build/gpu.v:1177.6-1183.3" *)
   dcr dcr_instance (
     .clk(clk),
     .device_control_data(device_control_data),
@@ -10435,7 +10443,7 @@ module gpu(clk, reset, start, done, device_control_write_enable, device_control_
     .reset(reset),
     .thread_count(thread_count)
   );
-  (* src = "../build/gpu.v:1135.4-1146.3" *)
+  (* src = "../build/gpu.v:1195.4-1206.3" *)
   \$paramod$7b6d06001638ea57df1f39f9a8db092ea6b39b0a\dispatch  dispatch_instance (
     .clk(clk),
     .core_block_id(core_block_id),
@@ -10448,7 +10456,7 @@ module gpu(clk, reset, start, done, device_control_write_enable, device_control_
     .start(start),
     .thread_count(thread_count)
   );
-  (* src = "../build/gpu.v:1307.4-1318.3" *)
+  (* src = "../build/gpu.v:1367.4-1378.3" *)
   \$paramod$c84a37d0835bc5adc05aad5e2304aba80bfedd7b\arbiter_cache  program_memory_controller (
     .clk(clk),
     .consumer_read_address({ \cores[0].sv2v_tmp_core_instance_program_mem_2_read_address , \cores[0].sv2v_tmp_core_instance_program_mem_read_address  }),
@@ -10484,7 +10492,7 @@ module gpu(clk, reset, start, done, device_control_write_enable, device_control_
   assign sv2v_tmp_program_memory_controller_consumer_read_ready = fetcher_read_ready;
 endmodule
 
-(* src = "../build/gpu.v:1325.1-1419.10" *)
+(* src = "../build/gpu.v:1385.1-1479.10" *)
 module lsu(clk, reset, enable, core_state, decoded_mem_read_enable, decoded_mem_write_enable, rs, rt, mem_read_valid, mem_read_address, mem_read_ready, mem_read_data, mem_write_valid, mem_write_address, mem_write_data, mem_write_ready, lsu_state, lsu_out);
   wire _000_;
   wire _001_;
@@ -10552,78 +10560,78 @@ module lsu(clk, reset, enable, core_state, decoded_mem_read_enable, decoded_mem_
   wire _063_;
   wire _064_;
   wire _065_;
-  (* src = "../build/gpu.v:1345.13-1345.16" *)
+  (* src = "../build/gpu.v:1405.13-1405.16" *)
   input clk;
   wire clk;
-  (* src = "../build/gpu.v:1348.19-1348.29" *)
+  (* src = "../build/gpu.v:1408.19-1408.29" *)
   input [2:0] core_state;
   wire [2:0] core_state;
-  (* src = "../build/gpu.v:1349.13-1349.36" *)
+  (* src = "../build/gpu.v:1409.13-1409.36" *)
   input decoded_mem_read_enable;
   wire decoded_mem_read_enable;
-  (* src = "../build/gpu.v:1350.13-1350.37" *)
+  (* src = "../build/gpu.v:1410.13-1410.37" *)
   input decoded_mem_write_enable;
   wire decoded_mem_write_enable;
-  (* src = "../build/gpu.v:1347.13-1347.19" *)
+  (* src = "../build/gpu.v:1407.13-1407.19" *)
   input enable;
   wire enable;
-  (* src = "../build/gpu.v:1362.19-1362.26" *)
+  (* src = "../build/gpu.v:1422.19-1422.26" *)
   output [7:0] lsu_out;
   reg [7:0] lsu_out;
-  (* src = "../build/gpu.v:1361.19-1361.28" *)
+  (* src = "../build/gpu.v:1421.19-1421.28" *)
   output [1:0] lsu_state;
   reg [1:0] lsu_state;
-  (* src = "../build/gpu.v:1354.19-1354.35" *)
+  (* src = "../build/gpu.v:1414.19-1414.35" *)
   output [7:0] mem_read_address;
   reg [7:0] mem_read_address;
-  (* src = "../build/gpu.v:1356.19-1356.32" *)
+  (* src = "../build/gpu.v:1416.19-1416.32" *)
   input [7:0] mem_read_data;
   wire [7:0] mem_read_data;
-  (* src = "../build/gpu.v:1355.13-1355.27" *)
+  (* src = "../build/gpu.v:1415.13-1415.27" *)
   input mem_read_ready;
   wire mem_read_ready;
-  (* src = "../build/gpu.v:1353.13-1353.27" *)
+  (* src = "../build/gpu.v:1413.13-1413.27" *)
   output mem_read_valid;
   reg mem_read_valid;
-  (* src = "../build/gpu.v:1358.19-1358.36" *)
+  (* src = "../build/gpu.v:1418.19-1418.36" *)
   output [7:0] mem_write_address;
   reg [7:0] mem_write_address;
-  (* src = "../build/gpu.v:1359.19-1359.33" *)
+  (* src = "../build/gpu.v:1419.19-1419.33" *)
   output [7:0] mem_write_data;
   reg [7:0] mem_write_data;
-  (* src = "../build/gpu.v:1360.13-1360.28" *)
+  (* src = "../build/gpu.v:1420.13-1420.28" *)
   input mem_write_ready;
   wire mem_write_ready;
-  (* src = "../build/gpu.v:1357.13-1357.28" *)
+  (* src = "../build/gpu.v:1417.13-1417.28" *)
   output mem_write_valid;
   reg mem_write_valid;
-  (* src = "../build/gpu.v:1346.13-1346.18" *)
+  (* src = "../build/gpu.v:1406.13-1406.18" *)
   input reset;
   wire reset;
-  (* src = "../build/gpu.v:1351.19-1351.21" *)
+  (* src = "../build/gpu.v:1411.19-1411.21" *)
   input [7:0] rs;
   wire [7:0] rs;
-  (* src = "../build/gpu.v:1352.19-1352.21" *)
+  (* src = "../build/gpu.v:1412.19-1412.21" *)
   input [7:0] rt;
   wire [7:0] rt;
-  assign _006_ = decoded_mem_write_enable & enable;
-  assign _007_ = lsu_state[1] & ~(lsu_state[0]);
-  assign _008_ = lsu_state[0] & ~(lsu_state[1]);
-  assign _009_ = _007_ ? mem_write_ready : _008_;
-  assign _002_ = _009_ & _006_;
-  assign _010_ = decoded_mem_read_enable & enable;
-  assign _003_ = _010_ & _008_;
-  assign _005_ = ~_007_;
-  assign _011_ = _007_ ? mem_read_ready : _008_;
-  assign _004_ = _011_ & _010_;
-  assign _001_ = _008_ & _006_;
-  assign _012_ = enable & mem_read_ready;
-  assign _013_ = ~(_007_ & decoded_mem_read_enable);
-  assign _000_ = _012_ & ~(_013_);
+  assign _006_ = lsu_state[1] & ~(lsu_state[0]);
+  assign _005_ = ~_006_;
+  assign _007_ = mem_read_ready & enable;
+  assign _008_ = ~(_006_ & decoded_mem_read_enable);
+  assign _000_ = _007_ & ~(_008_);
+  assign _009_ = decoded_mem_write_enable & enable;
+  assign _010_ = lsu_state[0] & ~(lsu_state[1]);
+  assign _001_ = _010_ & _009_;
+  assign _011_ = _006_ ? mem_write_ready : _010_;
+  assign _002_ = _011_ & _009_;
+  assign _012_ = decoded_mem_read_enable & enable;
+  assign _003_ = _012_ & _010_;
+  assign _013_ = _006_ ? mem_read_ready : _010_;
+  assign _004_ = _013_ & _012_;
   assign _014_ = lsu_state[1] & lsu_state[0];
-  assign _015_ = ~(_014_ | _007_);
+  assign _015_ = ~(_014_ | _006_);
   assign _016_ = ~(lsu_state[1] | lsu_state[0]);
-  assign _017_ = _016_ | _008_;
+  assign _017_ = _016_ | _010_;
   assign _018_ = _015_ & ~(_017_);
   assign _019_ = ~lsu_state[0];
   assign _020_ = core_state[0] | ~(core_state[1]);
@@ -10631,7 +10639,7 @@ module lsu(clk, reset, enable, core_state, decoded_mem_read_enable, decoded_mem_
   assign _022_ = _021_ | _019_;
   assign _023_ = _014_ & ~(_022_);
   assign _024_ = ~(mem_read_ready | lsu_state[0]);
-  assign _025_ = _007_ & ~(_024_);
+  assign _025_ = _006_ & ~(_024_);
   assign _026_ = _025_ | _023_;
   assign _027_ = core_state[1] & core_state[0];
   assign _028_ = _027_ & ~(core_state[2]);
@@ -10644,7 +10652,7 @@ module lsu(clk, reset, enable, core_state, decoded_mem_read_enable, decoded_mem_
   assign _035_ = _014_ & ~(_034_);
   assign _036_ = ~mem_write_ready;
   assign _037_ = _036_ & ~(_033_);
-  assign _038_ = _007_ & ~(_037_);
+  assign _038_ = _006_ & ~(_037_);
   assign _039_ = _038_ | _035_;
   assign _040_ = ~(_033_ | _028_);
   assign _041_ = _016_ & ~(_040_);
@@ -10654,165 +10662,165 @@ module lsu(clk, reset, enable, core_state, decoded_mem_read_enable, decoded_mem_
   assign _044_ = ~lsu_state[1];
   assign _045_ = _021_ | _044_;
   assign _046_ = _045_ | ~(_014_);
-  assign _047_ = _046_ & ~(_007_);
-  assign _048_ = _008_ | ~(_047_);
+  assign _047_ = _046_ & ~(_006_);
+  assign _048_ = _010_ | ~(_047_);
   assign _049_ = _018_ ? lsu_state[1] : _048_;
   assign _050_ = decoded_mem_read_enable ? _049_ : lsu_state[1];
-  assign _051_ = _047_ & ~(_008_);
+  assign _051_ = _047_ & ~(_010_);
   assign _052_ = _018_ ? _044_ : _051_;
   assign _053_ = decoded_mem_read_enable ? _052_ : _044_;
   assign _054_ = _053_ | _021_;
   assign _055_ = _014_ & ~(_054_);
   assign _056_ = _036_ & ~(_050_);
-  assign _057_ = _007_ & ~(_056_);
+  assign _057_ = _006_ & ~(_056_);
   assign _058_ = _057_ | _055_;
   assign _059_ = _053_ | _028_;
   assign _060_ = _016_ & ~(_059_);
-  assign _061_ = _060_ | _008_;
+  assign _061_ = _060_ | _010_;
   assign _062_ = _061_ | _058_;
   assign _063_ = _018_ ? _050_ : _062_;
   assign _065_ = decoded_mem_write_enable ? _063_ : _050_;
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_valid <= 1'h0;
     else if (_004_) mem_read_valid <= _005_;
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[0] <= 1'h0;
     else if (_003_) mem_read_address[0] <= rs[0];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[1] <= 1'h0;
     else if (_003_) mem_read_address[1] <= rs[1];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[2] <= 1'h0;
     else if (_003_) mem_read_address[2] <= rs[2];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[3] <= 1'h0;
     else if (_003_) mem_read_address[3] <= rs[3];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[4] <= 1'h0;
     else if (_003_) mem_read_address[4] <= rs[4];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[5] <= 1'h0;
     else if (_003_) mem_read_address[5] <= rs[5];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[6] <= 1'h0;
     else if (_003_) mem_read_address[6] <= rs[6];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_read_address[7] <= 1'h0;
     else if (_003_) mem_read_address[7] <= rs[7];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_valid <= 1'h0;
     else if (_002_) mem_write_valid <= _005_;
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[0] <= 1'h0;
     else if (_001_) mem_write_address[0] <= rs[0];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[1] <= 1'h0;
     else if (_001_) mem_write_address[1] <= rs[1];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[2] <= 1'h0;
     else if (_001_) mem_write_address[2] <= rs[2];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[3] <= 1'h0;
     else if (_001_) mem_write_address[3] <= rs[3];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[4] <= 1'h0;
     else if (_001_) mem_write_address[4] <= rs[4];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[5] <= 1'h0;
     else if (_001_) mem_write_address[5] <= rs[5];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[6] <= 1'h0;
     else if (_001_) mem_write_address[6] <= rs[6];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_address[7] <= 1'h0;
     else if (_001_) mem_write_address[7] <= rs[7];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[0] <= 1'h0;
     else if (_001_) mem_write_data[0] <= rt[0];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[1] <= 1'h0;
     else if (_001_) mem_write_data[1] <= rt[1];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[2] <= 1'h0;
     else if (_001_) mem_write_data[2] <= rt[2];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[3] <= 1'h0;
     else if (_001_) mem_write_data[3] <= rt[3];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[4] <= 1'h0;
     else if (_001_) mem_write_data[4] <= rt[4];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[5] <= 1'h0;
     else if (_001_) mem_write_data[5] <= rt[5];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[6] <= 1'h0;
     else if (_001_) mem_write_data[6] <= rt[6];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) mem_write_data[7] <= 1'h0;
     else if (_001_) mem_write_data[7] <= rt[7];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_state[0] <= 1'h0;
     else if (enable) lsu_state[0] <= _064_;
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_state[1] <= 1'h0;
     else if (enable) lsu_state[1] <= _065_;
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[0] <= 1'h0;
     else if (_000_) lsu_out[0] <= mem_read_data[0];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[1] <= 1'h0;
     else if (_000_) lsu_out[1] <= mem_read_data[1];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[2] <= 1'h0;
     else if (_000_) lsu_out[2] <= mem_read_data[2];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[3] <= 1'h0;
     else if (_000_) lsu_out[3] <= mem_read_data[3];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[4] <= 1'h0;
     else if (_000_) lsu_out[4] <= mem_read_data[4];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[5] <= 1'h0;
     else if (_000_) lsu_out[5] <= mem_read_data[5];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[6] <= 1'h0;
     else if (_000_) lsu_out[6] <= mem_read_data[6];
-  (* src = "../build/gpu.v:1367.2-1418.6" *)
+  (* src = "../build/gpu.v:1427.2-1478.6" *)
   always @(posedge clk)
     if (reset) lsu_out[7] <= 1'h0;
     else if (_000_) lsu_out[7] <= mem_read_data[7];
