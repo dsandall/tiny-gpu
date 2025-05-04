@@ -159,14 +159,40 @@ module arbiter_cache #(
     `define CC_REQUESTED_TAG (`CC_IS_READ ? consumer_read_address[`CC][`TAG_BITS] :( `CC_IS_WRITE ? consumer_write_address[`CC][`TAG_BITS]: 0))
     `define CC_REQUESTED_OFFSET (`CC_IS_READ ? consumer_read_address[`CC][`OFFSET_BITS] :( `CC_IS_WRITE ? consumer_write_address[`CC][`OFFSET_BITS]: 0))
 
-    arbiter #(
-        .NUM_CONSUMERS(NUM_CONSUMERS),
-    ) arbiter_instance (
-        .clk(clk),
-        .rst(reset),
-        .request(main_mem_request),
-        .grant(granted)
-    );
+
+    //localparam int TOTAL_GRANT_OPTIONS = NUM_CONSUMERS + CACHE_NUM_LINES
+    logic [$clog2(NUM_CONSUMERS)-1:0] last_grant;
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            last_grant <= 0;
+            granted <= 0;
+        end else begin
+            granted <= 0;
+            // Round-robin arbitration
+            for (int z = 0; z < NUM_CONSUMERS; z++) begin
+                int j = (last_grant + 1 + z) % NUM_CONSUMERS;
+
+                // logic req_line_valid = cache[`REQUESTED_LINE].valid[`REQUESTED_OFFSET];
+                // logic tag_valid = (cache[`REQUESTED_LINE].tag == `REQUESTED_TAG); 
+                // logic valid_but_not_read_cache_hit = !(`IS_READ && (req_line_valid && tag_valid)) && !(!(`IS_READ) && !(`IS_WRITE));
+
+                // if (granted[j] && `IS_UNSERVED && valid_but_not_read_cache_hit) begin 
+
+                if (main_mem_request[j] && !consumer_mutex[j]) begin
+
+                    granted[j] <= 1;
+                    last_grant <= j;
+                    break;
+                end
+            end
+
+        end
+    end
+/////////////////////
+/////////////////////
+/////////////////////
+/////////////////////
 
     generate
 
@@ -185,8 +211,8 @@ module arbiter_cache #(
         //// Idle state, waiting for transaction
         IDLE: begin
 
-          // if not in cache,
-          if (!(req_line_valid && tag_valid)) begin
+          // if not in cache, and is valid
+          if (!(req_line_valid && tag_valid) && (`IS_READ || `IS_WRITE)) begin
             // forward to other state machine if not already on
             if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end
             
@@ -274,65 +300,98 @@ module arbiter_cache #(
 
                 // While this channel is idle, 
                 // poll through consumers looking for one with a pending request
-                for (int proto_j = 0; proto_j < NUM_CONSUMERS; proto_j = proto_j + 1) begin 
-
-                    //int j = (proto_j + i) % NUM_CONSUMERS; // we add i to give each hardware controller a different preferred consumer
-                    int j = proto_j;//temp
+                for (int j = 0; j < NUM_CONSUMERS; j++) begin 
 
                       //check if data is in the cache
                       logic req_line_valid = cache[`REQUESTED_LINE].valid[`REQUESTED_OFFSET];
                       logic tag_valid = (cache[`REQUESTED_LINE].tag == `REQUESTED_TAG); 
-                      
-                      //memcontrollers should only handle read cache misses, or write requests forwarded from other module
-                      if (granted[j] && `IS_READ && `IS_UNSERVED && !(req_line_valid && tag_valid)) begin
+                      logic valid_but_not_read_cache_hit = !(`IS_READ && (req_line_valid && tag_valid)) && !(!(`IS_READ) && !(`IS_WRITE));
+
+                      if (granted[j] && valid_but_not_read_cache_hit) begin 
+                          //memcontrollers should only handle read cache misses, or write requests forwarded from other module
+
+                          if (`IS_READ) begin
+                            if (!(req_line_valid && tag_valid)) begin
+
+                                 // set up memory read
+                                 mem_read_address[i] <= consumer_read_address[j] & CACHE_OFFSET_MASK; // | chunks_read; // todo: parameterize masking out the offset bit 
+                                 mem_read_valid[i] <= 1;
+                                 
+                                 // save some data for next cycle
+                                 consumer_req_offset <= `REQUESTED_OFFSET; //how many bits to offset into the cache line 
+                                 `NEXTSTATE(CACHE_MISS);
+                            end
+                               
+                          //// Consumer Write Request Available
+                          end else if (`IS_WRITE) begin
+
+                                if (!(req_line_valid && tag_valid)) begin 
+                                    // //// Writing Data to cache line (if you
+                                    // with to overwrite cache when threads
+                                    // write)
+                                    //
+                                    // // Update cache line data and valid bit for this chunk
+                                    // cache[`REQUESTED_LINE].data <= cache_write_by_offset(
+                                    //     cache[`REQUESTED_LINE].data,
+                                    //     `REQUESTED_OFFSET,
+                                    //     consumer_write_data[j]
+                                    // );
+        
+                                    // cache[`REQUESTED_LINE].valid <= cache[`REQUESTED_LINE].valid |
+                                    //     cache_valid_mask_by_offset(`REQUESTED_OFFSET);
+                                    // cache[`REQUESTED_LINE].dirty <= 1'b1;
+
+                                end else if (req_line_valid && tag_valid) begin
+                                    // cache was already written by consumer
+                                    // earlier
+                                end
+
+                                // Memory Write Request (direct from consumer)
+                                mem_write_valid[i] <= 1;
+                                mem_write_address[i] <= consumer_write_address[j];
+                                mem_write_data[i] <= consumer_write_data[j];
+
+                                `NEXTSTATE(DIRECT_WRITE_WAITING);
+
+                          end
+
+                          // TODO: implement consumer or cache controller writeback
                           //mutex-like behavior
                           consumer_mutex[j] = 1;
                           `CC <= j;
 
-                          // set up memory read
-                          mem_read_address[i] <= consumer_read_address[j] & CACHE_OFFSET_MASK; // | chunks_read; // todo: parameterize masking out the offset bit 
-                          mem_read_valid[i] <= 1;
-                          `NEXTSTATE(CACHE_MISS);
-                          
-                          // save some data for next cycle
-                          consumer_req_offset <= `REQUESTED_OFFSET; //how many bits to offset into the cache line 
-                          
                           // Once we find a pending request, pick it up with this channel and stop looking for requests
                           break;
-    
-                      //// Consumer Write Request Available
-                      end else if (granted[j] && `IS_WRITE && `IS_UNSERVED) begin 
+                    end
+ 
+                    //// check cache line dirty reqs
+                    //else begin
+                    //  for (int l = 0; l < cache_lines; l++) begin
+                    //    if (granted[NUM_CONSUMERS+l]) begin
+                    //      //TODO:
 
-                        // TODO: implement consumer or cache controller writeback
-                         //mutex-like behavior
-                         consumer_mutex[j] = 1;
-                         `CC <= j;
-        
-                           //// Writing Data to cache line
-                           // Update cache line data and valid bit for this chunk
-                           cache[`REQUESTED_LINE].data <= cache_write_by_offset(
-                               cache[`REQUESTED_LINE].data,
-                               `REQUESTED_OFFSET,
-                               consumer_write_data[j]
-                           );
-        
-                           cache[`REQUESTED_LINE].valid <= cache[`REQUESTED_LINE].valid |
-                               cache_valid_mask_by_offset(`REQUESTED_OFFSET);
-                           cache[`REQUESTED_LINE].dirty <= 1'b1;
-                           
-                           // Memory Write Request
-                           mem_write_valid[i] <= 1;
-                           mem_write_address[i] <= consumer_write_address[j];
-                           mem_write_data[i] <= consumer_write_data[j];
-
-                           `NEXTSTATE(WRITE_WAITING);
-                         end
-                      end
+                    //      
+                    //    end
+                    //  end
+                    //end
                 end
-    
+            end
+
+
+            // WARN: ?
+            // WARN: for dirty reqs, where we have no consumer to free
+            // WARN: ?
+            INDIRECT_WRITE_WAITING: begin 
+                if (mem_write_ready[i]) begin 
+                    mem_write_valid[i] <= 0;
+                    //consumer_write_ready[`CC] <= 1;
+                    `NEXTSTATE(IDLE);
+                end
+            end
+
             ////
             //// Wait for response from memory for pending write request
-            WRITE_WAITING: begin 
+            DIRECT_WRITE_WAITING: begin 
                 if (mem_write_ready[i]) begin 
                     mem_write_valid[i] <= 0;
                     consumer_write_ready[`CC] <= 1;
@@ -342,7 +401,6 @@ module arbiter_cache #(
 
             /// Cache Miss States: manages the sequence for filling a line
             // with chunks
-            ////
             ////
             CACHE_MISS_WAIT: begin
                 //start another read request
@@ -406,40 +464,4 @@ module arbiter_cache #(
         end
     end
     endgenerate
-endmodule
-
-
-
-
-module arbiter #(
-    parameter NUM_CONSUMERS = 8
-)(
-    input  logic clk,
-    input  logic rst,
-
-    input  logic [NUM_CONSUMERS-1:0] request,   // From consumers
-    output logic [NUM_CONSUMERS-1:0] grant      // One-hot grant
-);
-
-    logic [$clog2(NUM_CONSUMERS)-1:0] last_grant;
-
-    always_ff @(posedge clk or posedge rst) begin
-        if (rst) begin
-            last_grant <= 0;
-            grant <= 0;
-        end else begin
-            grant <= 0;
-            // Round-robin arbitration
-            for (int i = 0; i < NUM_CONSUMERS; i++) begin
-                int j = (last_grant + 1 + i) % NUM_CONSUMERS;
-
-                if (request[j]) begin
-
-                    grant[j] <= 1;
-                    last_grant <= j;
-                    break;
-                end
-            end
-        end
-    end
 endmodule

@@ -39,7 +39,8 @@ class Memory:
                 for i in range(self.channels)
             ]
             mem_read_address = [
-                int(str(self.mem_read_address.value)[i * self.addr_bits:(i + 1) * self.addr_bits], 2)
+                int(str(self.mem_read_address.value)[
+                    i * self.addr_bits:(i + 1) * self.addr_bits], 2)
                 for i in range(self.channels)
             ]
             mem_read_ready = [0] * self.channels
@@ -47,11 +48,11 @@ class Memory:
 
             for i in range(self.channels):
                 if self.delay == 0 and mem_read_valid[i]:
-                # if no delay 
+                    # if no delay
                     mem_read_data[i] = self.memory[mem_read_address[i]]
                     mem_read_ready[i] = 1
-                elif self.delay !=0 and mem_read_valid[i]:
-                # if delay
+                elif self.delay != 0 and mem_read_valid[i]:
+                    # if delay
                     if self.read_delay_counters[i] == 0:
                         # Start the delay counter
                         self.read_delay_counters[i] = self.delay
@@ -66,8 +67,10 @@ class Memory:
                 else:
                     self.read_delay_counters[i] = 0
 
-            self.mem_read_data.value = int(''.join(format(d, f'0{self.data_bits}b') for d in mem_read_data), 2)
-            self.mem_read_ready.value = int(''.join(format(r, '01b') for r in mem_read_ready), 2)
+            self.mem_read_data.value = int(
+                ''.join(format(d, f'0{self.data_bits}b') for d in mem_read_data), 2)
+            self.mem_read_ready.value = int(
+                ''.join(format(r, '01b') for r in mem_read_ready), 2)
 
             # Write handling with 2-cycle delay
             if self.name != "program":
@@ -76,11 +79,13 @@ class Memory:
                     for i in range(self.channels)
                 ]
                 mem_write_address = [
-                    int(str(self.mem_write_address.value)[i * self.addr_bits:(i + 1) * self.addr_bits], 2)
+                    int(str(self.mem_write_address.value)[
+                        i * self.addr_bits:(i + 1) * self.addr_bits], 2)
                     for i in range(self.channels)
                 ]
                 mem_write_data = [
-                    int(str(self.mem_write_data.value)[i * self.data_bits:(i + 1) * self.data_bits], 2)
+                    int(str(self.mem_write_data.value)[
+                        i * self.data_bits:(i + 1) * self.data_bits], 2)
                     for i in range(self.channels)
                 ]
                 mem_write_ready = [0] * self.channels
@@ -89,7 +94,7 @@ class Memory:
                     if self.delay == 0 and mem_write_valid[i]:
                         self.memory[mem_write_address[i]] = mem_write_data[i]
                         mem_write_ready[i] = 1
-                    if self.delay !=0 and mem_write_valid[i]:
+                    if self.delay != 0 and mem_write_valid[i]:
                         if self.write_delay_counters[i] == 0:
                             # Start the delay counter
                             self.write_delay_counters[i] = self.delay
@@ -98,17 +103,21 @@ class Memory:
                             self.write_delay_counters[i] -= 1
                         else:
                             # Perform the write after n cycles
-                            self.memory[mem_write_address[i]] = mem_write_data[i]
+                            self.memory[mem_write_address[i]
+                                        ] = mem_write_data[i]
                             mem_write_ready[i] = 1
                             self.write_delay_counters[i] = 0
                     else:
                         self.write_delay_counters[i] = 0
 
-                self.mem_write_ready.value = int(''.join(format(w, '01b') for w in mem_write_ready), 2)
+                self.mem_write_ready.value = int(
+                    ''.join(format(w, '01b') for w in mem_write_ready), 2)
 
 
-###### Functions for testbench init and display, instantaneous
+# Functions for testbench init and display, instantaneous
 #########################################################
+
+
     def write(self, address, data):
         if address < len(self.memory):
             self.memory[address] = data
@@ -120,7 +129,7 @@ class Memory:
     def display(self, rows, decimal=True):
         logger.info("\n")
         logger.info(f"{self.name.upper()} MEMORY")
-        
+
         table_size = (8 * 2) + 3
         logger.info("+" + "-" * (table_size - 3) + "+")
 

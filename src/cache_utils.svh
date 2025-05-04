@@ -73,7 +73,10 @@ typedef enum logic [7:0] {
     READ_RELAYING,
     WRITE_WAITING,
     WRITE_RELAYING,
-    MAIN_MEM_RELAYING
+    MAIN_MEM_RELAYING,
+    DIRECT_WRITE_WAITING,
+    INDIRECT_WRITE_WAITING,
+    ERROR
 } controller_state_t;
 
 // ------------------------------------

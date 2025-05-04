@@ -2,20 +2,11 @@ from typing import List, Optional
 from .logger import logger
 
 
-def safe_int(signal, base=8):
-    s = str(signal)
-    if 'x' in s or 'z' in s:
+def safe_int(signal: str, base=8):
+    if 'x' in signal or 'z' in signal:
         # print(f"[WARN] Signal not ready: {signal}")
         return None
-    return int(s, base)
-
-
-def safe_hex(signal):
-    s = str(signal)
-    if 'x' in s or 'z' in s:
-        # print(f"[WARN] Signal not ready: {signal}")
-        return "X"
-    return hex(int(s, 2))
+    return int(signal, base)
 
 
 def format_register(register: int) -> str:
@@ -27,6 +18,7 @@ def format_register(register: int) -> str:
         return f"%blockDim"
     if register == 15:
         return f"%threadIdx"
+    return "impossible"
 
 
 def format_instruction(instruction: str) -> str:
@@ -92,8 +84,8 @@ def format_fetcher_state(logical_core) -> str:
 
     fetcher_state_map = {
         "000": "IDLE",
-        "001": f"FETCHING",
-        "010": f"FETCHED"
+        "001": "FETCHING",
+        "010": "FETCHED"
     }
 
     return fetcher_state_map.get(fetcher_state, f"INVALID({fetcher_state})")
@@ -107,7 +99,7 @@ def format_lsu_state(lsu_state: str) -> str:
 
 def format_memory_controller_state(state) -> str:
 
-    a = safe_int(state, 2)
+    a = safe_int(str(state), 2)
     if a is None:
         return "X"
 
@@ -182,79 +174,155 @@ def format_cache(memory_controller):
     return "\n".join(lines)
 
 
+def safe_getattr(obj, attr_chain, default="N/A"):
+    try:
+        for attr in attr_chain.split('.'):
+            if '[' in attr and ']' in attr:
+                base, idx = attr[:-1].split('[')
+                obj = getattr(obj, base)[int(idx)]
+            else:
+                obj = getattr(obj, attr)
+        return obj.value if hasattr(obj, 'value') else obj
+    except Exception:
+        return default
+
+
 # no previous state at initialization, log all state
 previous_values = {}
 
 
-def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
+def log_if_changed(tag, val, header_fn=None):
+    if previous_values.get(tag) != val:
+        if header_fn:
+            header_fn()
+        logger.debug(f"{tag[1] if isinstance(tag, tuple) else tag}: {val}")
+        previous_values[tag] = val
+
+
+def walk_dut_limited(handle, prefix="", depth=0, max_depth=4, header_state={"printed": False}):
+    if depth > max_depth:
+        return
+
+    for name in dir(handle):
+        if name.startswith("_"):
+            continue
+        try:
+            sub = getattr(handle, name)
+            full_name = f"{prefix}.{name}" if prefix else name
+
+            if hasattr(sub, "value"):
+                # Capture value (str ensures consistent comparison)
+                val = str(sub.value)
+                log_if_changed(
+                    tag=(handle, full_name),
+                    val=val,
+                    header_fn=(lambda: logger.debug(
+                        f"\n{'  ' * depth}Changed in {prefix or 'dut'}:"))
+                    if not header_state["printed"] else None
+                )
+                header_state["printed"] = True
+            else:
+                # Recurse into submodule
+                walk_dut_limited(sub, full_name, depth + 1,
+                                 max_depth, header_state)
+        except Exception as e:
+            continue  # optionally log errors here
+
+# Usage in a cycle:
+
+
+def format_cycle(dut, cycle_id: int):
     logger.debug(f"\n========== Cycle {cycle_id} ==========")
+    walk_dut_limited(dut)
+
+    return
 
     gpu_vals = {
-        "dut done": str(dut.done.value),
-        "dut start": str(dut.start.value),
-        "logical core start sigs": str(dut.core_start.value),
-        "dispatcher done": str(dut.dispatch_instance.done.value),
-        "dispatcher done": str(dut.dispatch_instance.done.value),
-        "total_blocks": safe_int(dut.dispatch_instance.total_blocks.value),
-        "blocks_dispatched": safe_int(dut.dispatch_instance.blocks_dispatched.value),
-        "blocks_done": safe_int(dut.dispatch_instance.blocks_done.value),
-        "start_execution": str(dut.dispatch_instance.start_execution.value),
-        "Dmem controllerer_state(0)": format_memory_controller_state(dut.data_memory_controller.controller_state[0].value),
-        "Dmem controllerer_state(1)": format_memory_controller_state(dut.data_memory_controller.controller_state[1].value),
-        "Dmem controllerer_state(2)": format_memory_controller_state(dut.data_memory_controller.controller_state[2].value),
-        "Dmem controllerer_state(3)": format_memory_controller_state(dut.data_memory_controller.controller_state[3].value),
-        "Dmem consumer_state(0)": format_memory_controller_state(dut.data_memory_controller.consumer_state[0].value),
-        "Dmem consumer_state(1)": format_memory_controller_state(dut.data_memory_controller.consumer_state[1].value),
-        "Dmem consumer_state(2)": format_memory_controller_state(dut.data_memory_controller.consumer_state[2].value),
-        "Dmem consumer_state(3)": format_memory_controller_state(dut.data_memory_controller.consumer_state[3].value),
-        "Dmem consumer_state(4)": format_memory_controller_state(dut.data_memory_controller.consumer_state[4].value),
-        "Dmem consumer_state(5)": format_memory_controller_state(dut.data_memory_controller.consumer_state[5].value),
-        "Dmem consumer_state(6)": format_memory_controller_state(dut.data_memory_controller.consumer_state[6].value),
-        "Dmem consumer_state(7)": format_memory_controller_state(dut.data_memory_controller.consumer_state[7].value),
-        # "Dmem mutex": str(dut.data_memory_controller.consumer_mutex.value),
-        # "Dmem active main_mem requests": str(dut.data_memory_controller.main_mem_request.value),
-        "Dmem cache": format_cache(dut.data_memory_controller),
-        "Dmem list": str(dut.data_memory_controller),
-        # "pmem consumer_state array": str(dut.program_memory_controller.consumer_state.value),
-        "pmem controllerer_state": format_memory_controller_state(dut.program_memory_controller.controller_state[0].value),
-        # "pmem consumer_state(0)": format_memory_controller_state(dut.program_memory_controller.consumer_state[0].value),
-        # "pmem consumer_state(1)": format_memory_controller_state(dut.program_memory_controller.consumer_state[1].value),
-        "pmem cache": format_cache(dut.program_memory_controller),
-        # "pmem mutex": str(dut.program_memory_controller.consumer_mutex.value),
-        # "pmem cons0 line valid": str(dut.program_memory_controller.consumer_if[0].req_line_valid.value),
-        # "pmem cons0 tag valid": str(dut.program_memory_controller.consumer_if[0].tag_valid.value),
-        # "pmem cons1 line valid": str(dut.program_memory_controller.consumer_if[1].req_line_valid.value),
-        # "pmem cons1 tag valid": str(dut.program_memory_controller.consumer_if[1].tag_valid.value),
-        "pmem list": str(dut.program_memory_controller)
+        "dut done": str(safe_getattr(dut, "done")),
+        "dut start": str(safe_getattr(dut, "start")),
+        "logical core start sigs": str(safe_getattr(dut, "core_start")),
+
+        "dispatcher done": str(safe_getattr(dut, "dispatch_instance.done")),
+        "total_blocks": safe_int(safe_getattr(dut, "dispatch_instance.total_blocks")),
+        "blocks_dispatched": safe_int(safe_getattr(dut, "dispatch_instance.blocks_dispatched")),
+        "blocks_done": safe_int(safe_getattr(dut, "dispatch_instance.blocks_done")),
+        "start_execution": str(safe_getattr(dut, "dispatch_instance.start_execution")),
+
+        # Dmem controller and consumers
+        **{
+            f"Dmem controller_state({i})": format_memory_controller_state(
+                safe_getattr(
+                    dut, f"data_memory_controller.controller_state[{i}]")
+            ) for i in range(4)
+        },
+        **{
+            f"Dmem consumer_state({i})": format_memory_controller_state(
+                safe_getattr(
+                    dut, f"data_memory_controller.consumer_state[{i}]")
+            ) for i in range(8)
+        },
+        "Dmem mutex": str(safe_getattr(dut, "data_memory_controller.consumer_mutex")),
+        "Dmem active main_mem requests": str(safe_getattr(dut, "data_memory_controller.main_mem_request")),
+        "Dmem cache": format_cache(safe_getattr(dut, "data_memory_controller")),
+        "Dmem list": str(safe_getattr(dut, "data_memory_controller")),
+
+        # Pmem controller
+        "pmem controller_state": format_memory_controller_state(
+            safe_getattr(dut, "program_memory_controller.controller_state[0]")
+        ),
+        **{
+            f"pmem consumer_state({i})": format_memory_controller_state(
+                safe_getattr(
+                    dut, f"program_memory_controller.consumer_state[{i}]")
+            ) for i in range(2)
+        },
+        "pmem cache": format_cache(safe_getattr(dut, "program_memory_controller")),
+        "pmem mutex": str(safe_getattr(dut, "program_memory_controller.consumer_mutex")),
+        "pmem cons0 line valid": str(safe_getattr(dut, "program_memory_controller.consumer_if[0].req_line_valid")),
+        "pmem cons0 tag valid": str(safe_getattr(dut, "program_memory_controller.consumer_if[0].tag_valid")),
+        "pmem cons1 line valid": str(safe_getattr(dut, "program_memory_controller.consumer_if[1].req_line_valid")),
+        "pmem cons1 tag valid": str(safe_getattr(dut, "program_memory_controller.consumer_if[1].tag_valid")),
+        "pmem list": str(safe_getattr(dut, "program_memory_controller")),
     }
 
     printed_gpu_header = False
+
+    def print_gpu_header():
+        nonlocal printed_gpu_header
+        if not printed_gpu_header:
+            logger.debug("\n**** GPU TOP ****")
+            printed_gpu_header = True
+
     for key, val in gpu_vals.items():
-        tag = (dut, key)
-        if previous_values.get(tag) != val:
-            if not printed_gpu_header:
-                logger.debug(
-                    f"\n**** GPU TOP****")
-                printed_gpu_header = True
-            logger.debug(f"{key}: {val}")
-            previous_values[tag] = val
+        log_if_changed((dut, key), val, print_gpu_header)
 
-    #
-    # for each HW core, log:
-    #
+    # Handle each hardware core
+    if not hasattr(dut, "cores"):
+        logger.debug("DUT has no cores attribute.")
+        return
+
+    total_threads = safe_int(dut.thread_count.value, 2)
+    threads_per_block = safe_int(dut.THREADS_PER_BLOCK.value, 10)
+
     for hw_core in dut.cores:
-        zeebbbp = safe_int(dut.thread_count.value, 2)
-        if zeebbbp is not None and zeebbbp <= hw_core.i.value * dut.THREADS_PER_BLOCK.value:
-            continue
+        if total_threads is not None and threads_per_block is not None:
+            if total_threads <= hw_core.i.value * threads_per_block:
+                continue
 
-        #
-        # for each logical core, log:
-        #
-        for lc_idx, logical_core in enumerate([hw_core.core_instance.inner_core_instance_1, hw_core.core_instance.inner_core_instance_2]):
-            # Check and log logical core-wide values before thread-specific ones
+        for lc_idx, logical_core in enumerate([hw_core.core_instance.inner_core_instance_1,
+                                               hw_core.core_instance.inner_core_instance_2]):
+            printed_lc_header = False
+
+            def print_lc_header():
+                nonlocal printed_lc_header
+                if not printed_lc_header:
+                    logger.debug(
+                        f"\n+-------- Logical Core {lc_idx} --------+")
+                    printed_lc_header = True
+
             logical_core_values = {
                 "start": str(logical_core.start.value),
-                "logical core done? ": str(logical_core.done.value),
+                "logical core done?": str(logical_core.done.value),
                 "reset": str(logical_core.reset.value),
                 "Instruction (hex)": safe_hex(logical_core.instruction.value),
                 "Instruction": format_instruction(str(logical_core.instruction.value)),
@@ -264,38 +332,32 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
                 "Decoded Immediate": safe_int(logical_core.decoded_immediate.value, 2),
             }
 
-            printed_header = False
             for key, val in logical_core_values.items():
-                tag = (logical_core, key)
-                if previous_values.get(tag) != val:
-                    if not printed_header:
-                        logger.debug(
-                            f"\n+-------- Logical Core {lc_idx}--------+")
-                        printed_header = True
-                    logger.debug(f"{key}: {val}")
-                    previous_values[tag] = val
+                log_if_changed((logical_core, key), val, print_lc_header)
 
-            #
-            # for each thread in a LC, log:
-            #
+            # Handle each thread
             for thread in logical_core.threads:
                 tv = safe_int(thread.i.value, 10)
                 tc = safe_int(logical_core.thread_count.value, 2)
-
-                if tv is None:
-                    continue
-                elif tc is None:
+                if None in (tv, tc):
                     continue
                 elif tv >= tc:
                     continue
 
                 block_idx = logical_core.block_id.value
-                block_dim = int(logical_core.THREADS_PER_BLOCK)
                 thread_idx = thread.register_instance.THREAD_ID.value
-                idx = block_idx * block_dim + thread_idx
+                idx = block_idx * threads_per_block + thread_idx
+
+                printed_thread_header = False
+
+                def print_thread_header():
+                    nonlocal printed_thread_header
+                    if not printed_thread_header:
+                        logger.debug(
+                            f"\n+-------- LC {lc_idx}, Thread {idx} --------+")
+                        printed_thread_header = True
 
                 values_to_check = {
-                    # "PC": int(str(logical_core.current_pc.value), 2),
                     "RS": int(str(thread.register_instance.rs.value), 2),
                     "RT": int(str(thread.register_instance.rt.value), 2),
                     "ALU Out": int(str(thread.alu_instance.alu_out.value), 2),
@@ -304,25 +366,9 @@ def format_cycle(dut, cycle_id: int, thread_id: Optional[int] = None):
                 }
 
                 for key, val in values_to_check.items():
-                    tag = (idx, key)
-                    if previous_values.get(tag) != val:
-                        if not printed_header:
-                            logger.debug(
-                                f"\n+-------- LC {lc_idx}, Thread {idx} --------+")
-                            printed_header = True
-                        logger.debug(f"{key}: {val}")
-                        previous_values[tag] = val
+                    log_if_changed((idx, key), val, print_thread_header)
 
-                #
-                # for all registers in a thread, log:
-                #
                 for i, reg in enumerate(thread.register_instance.registers):
                     tag = (idx, f"reg_{i}")
                     val = str(reg.value)
-                    if previous_values.get(tag) != val:
-                        if not printed_header:
-                            logger.debug(
-                                f"\n+-------- LC {lc_idx}, Thread {idx} --------+")
-                            printed_header = True
-                        logger.debug(f"R{i}: {val}")
-                        previous_values[tag] = val
+                    log_if_changed(tag, val, print_thread_header)
