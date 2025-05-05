@@ -77,6 +77,7 @@ typedef enum logic [7:0] {
     DIRECT_WRITE_WAITING,
     INDIRECT_WRITE_WAITING,
     SETUP_WRITEBACK,
+    CLAIM_LINE,
     ERROR
 } controller_state_t;
 
@@ -93,15 +94,12 @@ function automatic logic [CONSUMER_BUS_BITS-1:0] cache_read_by_offset(
 endfunction
 
 // Write a chunk into a cache line
-function automatic logic [CACHE_LINE_SIZE_BITS-1:0] cache_write_by_offset(
+function automatic cache_write_by_offset(
     input logic [CACHE_LINE_SIZE_BITS-1:0] line,
     input logic [CACHE_OFFSET_BITS-1:0] offset,
     input logic [MEMORY_BUS_BITS-1:0] data_in
 );
-    logic [CACHE_LINE_SIZE_BITS-1:0] temp;
-    temp = line;
-    temp[$unsigned(offset) * MEMORY_BUS_BITS +: MEMORY_BUS_BITS] = data_in;
-    cache_write_by_offset = temp;
+    line[$unsigned(offset) * MEMORY_BUS_BITS +: MEMORY_BUS_BITS] = data_in;
 endfunction
 
 // Generate a valid-bit mask

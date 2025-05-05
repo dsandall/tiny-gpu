@@ -244,49 +244,75 @@ module arbiter_cache #(
           end else if (`IS_WRITE) begin
             // tag invalid, cache invalid
             if (!tag_valid || !cache[`REQUESTED_LINE].valid) begin
-                // wait for main mem direct write
-                if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end 
-                `NEXTSTATE_CONS(WRITE_RELAYING);
+
+
+                if (!cache[`REQUESTED_LINE].dirty) begin
+                    if (tag_valid && !cache[`REQUESTED_LINE].valid) begin
+                            // wait for main mem direct write
+                            if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end 
+                            `NEXTSTATE_CONS(WRITE_RELAYING);
+
+                    end else if (!tag_valid && cache[`REQUESTED_LINE].valid) begin
+                            if (cache_line_mutex[`REQUESTED_LINE]) begin
+                                  // free the consumer
+                                  consumer_write_ready[j] <= 1;
+                                  cache[`REQUESTED_LINE].dirty <= 1'b1;
+                                  // clear validation, except for the new chunk
+                                  cache[`REQUESTED_LINE].valid <= cache_valid_mask_by_offset(`REQUESTED_OFFSET);
+                                  cache[`REQUESTED_LINE].data[$unsigned(`REQUESTED_OFFSET) * MEMORY_BUS_BITS +: MEMORY_BUS_BITS] <= consumer_write_data[j];
+                                  `NEXTSTATE_CONS(WRITE_RELAYING);
+                            end else begin
+                                  // wait for main mem direct write
+                                  if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end 
+                                  `NEXTSTATE_CONS(WRITE_RELAYING);
+                            end
+
+                    end else if  (!tag_valid && !cache[`REQUESTED_LINE].valid) begin
+                            // wait for main mem direct write
+                            if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end 
+                            `NEXTSTATE_CONS(WRITE_RELAYING);
+                    end
+                 end else begin
+                    if (tag_valid && !cache[`REQUESTED_LINE].valid) begin
+                            // wait for main mem direct write
+                            if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end 
+                            `NEXTSTATE_CONS(WRITE_RELAYING);
+                    end else if (!tag_valid && cache[`REQUESTED_LINE].valid) begin
+                        // no can do, buckaroo
+                            // wait for main mem direct write
+                            if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end 
+                            `NEXTSTATE_CONS(WRITE_RELAYING);
+                    end else if  (!tag_valid && !cache[`REQUESTED_LINE].valid) begin
+                            // wait for main mem direct write
+                            if (!main_mem_request[j]) begin main_mem_request[j] <= 1; end 
+                            `NEXTSTATE_CONS(WRITE_RELAYING);
+                    end
+                 end
+
 
             // tag valid, not dirty
-            end else if (!cache[`REQUESTED_LINE].dirty) begin
-                cache[`REQUESTED_LINE].data <= cache_write_by_offset(
-                   cache[`REQUESTED_LINE].data,
-                   `REQUESTED_OFFSET,
-                   consumer_write_data[j]
-                );
+            end else if (tag_valid && cache[`REQUESTED_LINE].valid) begin
 
+              if(cache[`REQUESTED_LINE].dirty && req_chunk_valid) begin
+                  //WARN: shouldnt happen but ok
+              end
+
+              if (!cache[`REQUESTED_LINE].dirty)begin 
                 cache[`REQUESTED_LINE].dirty <= 1'b1;
                 // clear validation, except for the new chunk
                 cache[`REQUESTED_LINE].valid <= cache_valid_mask_by_offset(`REQUESTED_OFFSET);
-                
-                // free the consumer
-                consumer_write_ready[j] <= 1;
-                // same next state regardless 
-                `NEXTSTATE_CONS(WRITE_RELAYING);
 
-            // tag valid, you're already in it 
-            end else if (cache[`REQUESTED_LINE].dirty && req_chunk_valid) begin
-              //WARN: shouldnt happen
-
-            // tag valid, you're not in it
-            end else if (cache[`REQUESTED_LINE].dirty && !req_chunk_valid) begin
-                cache[`REQUESTED_LINE].data <= cache_write_by_offset(
-                   cache[`REQUESTED_LINE].data,
-                   `REQUESTED_OFFSET,
-                   consumer_write_data[j]
-                );
-                 
-                //(valid + dirty means needs writeback)
-                // add to valid bits
+             end else if (cache[`REQUESTED_LINE].dirty) begin
+              // tag valid, assume you're not in it yet
                 cache[`REQUESTED_LINE].valid <= cache[`REQUESTED_LINE].valid |
                 cache_valid_mask_by_offset(`REQUESTED_OFFSET);
-                
-                // free the consumer
-                consumer_write_ready[j] <= 1;
-                // same next state regardless 
-                `NEXTSTATE_CONS(WRITE_RELAYING);
-            end
+             end
+
+             // free the consumer
+             consumer_write_ready[j] <= 1;
+             cache[`REQUESTED_LINE].data[$unsigned(`REQUESTED_OFFSET) * MEMORY_BUS_BITS +: MEMORY_BUS_BITS] <= consumer_write_data[j];
+             `NEXTSTATE_CONS(WRITE_RELAYING);
+             end
           end
         end
 

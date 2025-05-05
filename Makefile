@@ -27,7 +27,7 @@ else ifeq ($(SIM),verilator)
 	VERILOG_SOURCES=$(shell find src -name '*.sv' -o -name '*.svh') \
 	SIM=verilator \
 	WAVES=1 \
-	EXTRA_ARGS="--cc --timing --trace-fst --top-module $(TOPLEVEL) -Wall -I src" \
+	EXTRA_ARGS="--cc --timing --trace-fst --top-module $(TOPLEVEL) -Wall -Isrc" \
 	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim
 else
 	$(error Unknown SIM '$(SIM)')
