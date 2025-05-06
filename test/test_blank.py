@@ -6,7 +6,7 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 async def test_blank(dut):
 
     test_conf = load_json_binary(
-        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_blank.json")
+        "/home/NikoTambo/tiny-gpu/tiny-gpu-assembler/asm_build/test_blank.json")
 
     # run device and dump memory
     data_memory = await setup_wrap(dut, test_conf, "screen")

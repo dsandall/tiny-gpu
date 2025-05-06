@@ -106,10 +106,10 @@ async def setup_wrap(dut, test_config, screen=None):
 
     old_mem = copy.deepcopy(data_memory.memory)
 
-    if screen is not None:
-        # initialize screen is user passes anything in for screen
-        screen = init_window()
-        await update_display(screen, data_memory.memory)
+    # if screen is not None:
+    #     # initialize screen is user passes anything in for screen
+    #     screen = init_window()
+    #     await update_display(screen, data_memory.memory)
 
     # printout prior to sim
     logger.info("------------------------------------------\n")
@@ -135,9 +135,9 @@ async def setup_wrap(dut, test_config, screen=None):
             data_memory.display(num_memory_printout)
             old_mem = copy.deepcopy(data_memory.memory)
 
-            # lets also update the screen... at the same freq as the gpu clock, lol
-            if screen is not None:
-                await update_display(screen, data_memory.memory)
+            # # lets also update the screen... at the same freq as the gpu clock, lol
+            # if screen is not None:
+            #     await update_display(screen, data_memory.memory)
 
         # same for the printer logging function
         await cocotb.triggers.ReadOnly()
