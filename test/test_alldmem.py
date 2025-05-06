@@ -5,7 +5,7 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 @cocotb.test()
 async def test_alldmem_hash(dut):
     test_conf = load_json_binary(
-        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_hash.json"
+        "~/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_hash.json"
     )
 
     # run device and dump memory
@@ -29,22 +29,26 @@ async def test_alldmem_hash(dut):
 @cocotb.test()
 async def test_alldmem_unrolled(dut):
     await test_dmem(
-        dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_unrolled.json")
+        dut,
+        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_unrolled.json",
+    )
 
 
 @cocotb.test()
 async def test_alldmem_64(dut):
     await test_dmem(
-        dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_64.json")
+        dut,
+        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_64.json",
+    )
 
 
 def simple_mul_add_hash(addr: int, stride: int = 8) -> int:
     assert 0 <= addr <= 255
     h = addr
-    h = (h * h) & 0xFF      # Square
+    h = (h * h) & 0xFF  # Square
     h = (h + stride) & 0xFF  # Add stride
-    h = (h * h) & 0xFF      # Square again
-    h = (h + addr) & 0xFF   # Mix in original
+    h = (h * h) & 0xFF  # Square again
+    h = (h + addr) & 0xFF  # Mix in original
     return h
 
 
