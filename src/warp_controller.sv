@@ -9,73 +9,73 @@
 module warp_controller #(
     parameter THREADS_PER_BLOCK = 4,
 ) (
-    input wire clk,
+    input logic clk,
 
-    input wire start_1,
-    input wire start_2,
-    input wire reset_1,
-    input wire reset_2,
-    input wire done,
+    input logic start_1,
+    input logic start_2,
+    input logic reset_1,
+    input logic reset_2,
+    input logic done,
 
-    input wire [$clog2(THREADS_PER_BLOCK):0] thread_count_1,
-    input wire [$clog2(THREADS_PER_BLOCK):0] thread_count_2,
+    input logic [$clog2(THREADS_PER_BLOCK):0] thread_count_1,
+    input logic [$clog2(THREADS_PER_BLOCK):0] thread_count_2,
 
     // inputs from schedulers
-    input reg warp_select,
-    input reg [2:0] core_state,
-    input reg [7:0] current_pc,
+    input logic warp_select,
+    input logic [2:0] core_state,
+    input logic [7:0] current_pc,
 
 
     //inputs from fetcher 1
-    input reg [2:0] fetcher_state_1,
-    input reg [15:0] instruction_1,
+    input logic [2:0] fetcher_state_1,
+    input logic [15:0] instruction_1,
 
     //inputs from fetcher 2
-    input reg [2:0] fetcher_state_2,
-    input reg [15:0] instruction_2,
+    input logic [2:0] fetcher_state_2,
+    input logic [15:0] instruction_2,
 
     //inputs from lsu 1
-    input reg [1:0] lsu_state_1[THREADS_PER_BLOCK-1:0],
-    input reg [7:0] lsu_out_1[THREADS_PER_BLOCK-1:0],
+    input logic [1:0] lsu_state_1[THREADS_PER_BLOCK-1:0],
+    input logic [7:0] lsu_out_1[THREADS_PER_BLOCK-1:0],
 
 
     //inputs from lsu 2
-    input reg [1:0] lsu_state_2[THREADS_PER_BLOCK-1:0],
-    input reg [7:0] lsu_out_2[THREADS_PER_BLOCK-1:0],
+    input logic [1:0] lsu_state_2[THREADS_PER_BLOCK-1:0],
+    input logic [7:0] lsu_out_2[THREADS_PER_BLOCK-1:0],
 
-    //inputs from reg 1
-    input reg [7:0] rs_1,
-    input reg [7:0] rt_1,
+    //inputs from logic 1
+    input logic [7:0] rs_1[THREADS_PER_BLOCK-1:0],
+    input logic [7:0] rt_1[THREADS_PER_BLOCK-1:0],
 
-    //inputs from reg 2
-    input reg [7:0] rs_2,
-    input reg [7:0] rt_2,
+    //inputs from logic 2
+    input logic [7:0] rs_2[THREADS_PER_BLOCK-1:0],
+    input logic [7:0] rt_2[THREADS_PER_BLOCK-1:0],
 
     //inputs from decoder
-    input reg decoded_mem_read_enable,            // Enable reading from memory
-    input reg decoded_mem_write_enable,           // Enable writing to memory
+    input logic decoded_mem_read_enable,            // Enable reading from memory
+    input logic decoded_mem_write_enable,           // Enable writing to memory
 
     //Outputs
-    output reg [7:0] current_pc_1,
-    output reg [7:0] current_pc_2,
-    output reg  [2:0] core_state_1,
-    output reg  [2:0] core_state_2,
-    output reg decoded_mem_read_enable_1,            // Enable reading from memory
-    output reg decoded_mem_write_enable_1,           // Enable writing to memory
-    output reg decoded_mem_read_enable_2,            // Enable reading from memory
-    output reg decoded_mem_write_enable_2,           // Enable writing to memory
-    output reg done_1,
-    output reg done_2,
+    output logic [7:0] current_pc_1,
+    output logic [7:0] current_pc_2,
+    output logic  [2:0] core_state_1,
+    output logic  [2:0] core_state_2,
+    output logic decoded_mem_read_enable_1,            // Enable reading from memory
+    output logic decoded_mem_write_enable_1,           // Enable writing to memory
+    output logic decoded_mem_read_enable_2,            // Enable reading from memory
+    output logic decoded_mem_write_enable_2,           // Enable writing to memory
+    output logic done_1,
+    output logic done_2,
 
-    output wire start,
-    output wire reset,
-    output wire [$clog2(THREADS_PER_BLOCK):0] thread_count,
-    output reg [2:0] fetcher_state,
-    output reg [15:0] instruction,
-    output reg [1:0] lsu_state[THREADS_PER_BLOCK-1:0],
-    output reg [7:0] lsu_out[THREADS_PER_BLOCK-1:0],
-    output reg [7:0] rs,
-    output reg [7:0] rt
+    output logic start,
+    output logic reset,
+    output logic [$clog2(THREADS_PER_BLOCK):0] thread_count,
+    output logic [2:0] fetcher_state,
+    output logic [15:0] instruction,
+    output logic [1:0] lsu_state[THREADS_PER_BLOCK-1:0],
+    output logic [7:0] lsu_out[THREADS_PER_BLOCK-1:0],
+    output logic [7:0] rs[THREADS_PER_BLOCK-1:0],
+    output logic [7:0] rt[THREADS_PER_BLOCK-1:0]
 
     
     

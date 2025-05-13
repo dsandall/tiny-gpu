@@ -157,17 +157,17 @@ module gpu #(
             ) core_instance (
                 .clk(clk),
 
-                .reset(core_reset[i]),
-                .start(core_start[i]),
-                .done(core_done[i]),
-                .block_id(core_block_id[i]),
-                .thread_count(core_thread_count[i]),
-                .program_mem_read_valid(fetcher_read_valid[i]),
-                .program_mem_read_address(fetcher_read_address[i]),
-                .program_mem_read_ready(fetcher_read_ready[i]),
-                .program_mem_read_data(fetcher_read_data[i]),
-                `MEM_BUS_READ(data_mem, per_core_accoutrements[i].core_lsu), //NOTE: this macro expands to connect: data_mem{_read_ready,_read_valid,...} and per_core_accoutrements[i].core_lsu{_read_ready, _read_valid...}
-                `MEM_BUS_WRITE(data_mem, per_core_accoutrements[i].core_lsu),
+                .reset_1(core_reset[i]),
+                .start_1(core_start[i]),
+                .done_1(core_done[i]),
+                .block_id_1(core_block_id[i]),
+                .thread_count_1(core_thread_count[i]),
+                .program_mem_1_read_valid(fetcher_read_valid[i]),
+                .program_mem_1_read_address(fetcher_read_address[i]),
+                .program_mem_1_read_ready(fetcher_read_ready[i]),
+                .program_mem_1_read_data(fetcher_read_data[i]),
+                `MEM_BUS_READ(data_mem_1, per_core_accoutrements[i].core_lsu), //NOTE: this macro expands to connect: data_mem{_read_ready,_read_valid,...} and per_core_accoutrements[i].core_lsu{_read_ready, _read_valid...}
+                `MEM_BUS_WRITE(data_mem_1, per_core_accoutrements[i].core_lsu),
 
                 // the conjoined twin core
                 .reset_2(core_reset[i+1]),

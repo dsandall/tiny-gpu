@@ -35,9 +35,11 @@ module scheduler #(
 
     // Execution State
     output reg [2:0] core_state,
-    output reg done
+    output reg done,
 
     // Warp core select
+    input reg [2:0] core_state_1,
+    input reg [2:0] core_state_2,
     output reg warp_select
 );
     localparam IDLE = 3'b000, // Waiting to start
@@ -70,6 +72,12 @@ module scheduler #(
                     end
                     else begin
                         warp_select <= ~warp_select;
+                        if (warp_select)begin
+                            core_state <= core_state_2;
+                        end
+                        else begin
+                            core_state <= core_state_1;
+                        end
                     end
                 end
                 DECODE: begin
