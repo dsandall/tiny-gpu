@@ -14,6 +14,15 @@ async def test_alldmem_hash(dut):
     ###
     # Verify results
     ###
+    def simple_mul_add_hash(addr: int, stride: int = 8) -> int:
+        assert 0 <= addr <= 255
+        h = addr
+        h = (h * h) & 0xFF      # Square
+        h = (h + stride) & 0xFF  # Add stride
+        h = (h * h) & 0xFF      # Square again
+        h = (h + addr) & 0xFF   # Mix in original
+        return h
+
     errors = []
     for i, byte in enumerate(data_memory.memory):
         expected = simple_mul_add_hash(i, 8)
@@ -36,16 +45,6 @@ async def test_alldmem_unrolled(dut):
 async def test_alldmem_64(dut):
     await test_dmem(
         dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_64.json")
-
-
-def simple_mul_add_hash(addr: int, stride: int = 8) -> int:
-    assert 0 <= addr <= 255
-    h = addr
-    h = (h * h) & 0xFF      # Square
-    h = (h + stride) & 0xFF  # Add stride
-    h = (h * h) & 0xFF      # Square again
-    h = (h + addr) & 0xFF   # Mix in original
-    return h
 
 
 async def test_dmem(dut, json):

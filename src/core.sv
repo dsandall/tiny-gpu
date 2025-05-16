@@ -64,6 +64,21 @@ module core #(
     reg decoded_pc_mux;                     // Select source of next PC
     reg decoded_ret;
 
+    //// Fetcher
+    //fetcher #(
+    //    .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
+    //    .PROGRAM_MEM_DATA_BITS(PROGRAM_MEM_DATA_BITS)
+    //) fetcher_instance (
+    //    .clk(clk),
+    //    .reset(reset),
+    //    .core_state(core_state),
+    //    .current_pc(current_pc),
+    //    `MEM_BUS_READ(mem, program_mem),
+
+    //    .fetcher_state(fetcher_state),
+    //    .instruction(instruction)
+    //);
+
     // Fetcher
     fetcher #(
         .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
@@ -73,12 +88,13 @@ module core #(
         .reset(reset),
         .core_state(core_state),
         .current_pc(current_pc),
-        `MEM_BUS_READ(mem, program_mem),
-
+        .mem_read_valid(program_mem_read_valid[0]),  // Use [0] for single address
+        .mem_read_ready(program_mem_read_ready[0]),  // Use [0] for single address
+        .mem_read_address(program_mem_read_address[0]),  // Use [0] for single address
+        .mem_read_data(program_mem_read_data[0]),        // Use [0] for single data
         .fetcher_state(fetcher_state),
         .instruction(instruction)
     );
-
     // Decoder
     decoder decoder_instance (
         .clk(clk),

@@ -1,5 +1,4 @@
-`ifndef CACHE_UTILS_SVH
-`define CACHE_UTILS_SVH
+`ifdef CACHE_UTILS_SVH
 
 // ------------------------------------
 // Cache Geometry Derived Parameters

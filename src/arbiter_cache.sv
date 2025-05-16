@@ -94,6 +94,7 @@ module arbiter_cache #(
     // space is very tight...)
 
     // do the calculations based on provided bits
+    `define CACHE_UTILS_SVH
     `include "cache_utils.svh"
     
     ////
@@ -127,11 +128,17 @@ module arbiter_cache #(
             `CHANNEL_WRITE_MODULE_RESET(mem);
 
             `ZERO_ARRAY(current_consumer, NUM_CHANNELS)
-            `ZERO_ARRAY(controller_state, NUM_CHANNELS)
+            for (int i = 0; i < NUM_CHANNELS; i++) begin
+                controller_state[i] = controller_state_t'(0);  // Explicit cast
+            end
 
-            `ZERO_ARRAY(main_mem_request, NUM_CONSUMERS)
-            `ZERO_ARRAY(granted, NUM_CONSUMERS)
-            `ZERO_ARRAY(consumer_state, NUM_CONSUMERS)
+            //`ZERO_ARRAY(main_mem_request, NUM_CONSUMERS)
+            //`ZERO_ARRAY(granted, NUM_CONSUMERS)
+            for (int i = 0; i < NUM_CONSUMERS; i++) begin
+                consumer_state[i] <= controller_state_t'(0);  // Explicit cast
+                main_mem_request[i] <= 0;
+                granted[i] <= 0;
+            end
 
             `ZERO_ARRAY(consumer_mutex, NUM_CONSUMERS)
             `ZERO_ARRAY(cache_line_mutex, NUM_CONSUMERS)
@@ -191,7 +198,8 @@ module arbiter_cache #(
                 if ( grant_consumer || grant_cache_line ) begin
                    granted[zeeper] <= 1;
                    last_grant <= zeeper;
-                   if (++num_grants_this_cycle >= NUM_CHANNELS) begin
+                   num_grants_this_cycle <= num_grants_this_cycle + 1;
+                   if (num_grants_this_cycle + 1 >= NUM_CHANNELS) begin
                      break;
                    end
                 end
@@ -340,7 +348,7 @@ module arbiter_cache #(
         
 
     // these could be merged to current_grant , only 1 is ever in use at once
-    logic [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
+    //logic [$clog2(NUM_CONSUMERS)-1:0] current_consumer [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
     logic [$clog2(CACHE_NUM_LINES)-1:0] current_line [NUM_CHANNELS-1:0]; // Which consumer is each channel currently serving
     logic [$clog2(NUM_CHUNKS)-1:0] chunk_i[NUM_CHANNELS-1:0];
 
@@ -348,7 +356,7 @@ module arbiter_cache #(
     for (genvar i = 0; i < NUM_CHANNELS; i = i + 1) begin : channel_if
 
         // setting up some per-channel state registers
-        logic consumer_req_offset [7:0]; //arbitrary size todo:
+        logic consumer_req_offset; //arbitrary size todo:
         int chunks_read = 0;
 
         always @(posedge clk) begin

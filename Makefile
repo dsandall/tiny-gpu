@@ -7,27 +7,29 @@ export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 # - make compile_matadd
 # - make show_matadd
 
+VERILATOR_ARGS = "--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3""
+VERILOG_SOURCES = "$(shell find src -name '*.sv' -o -name '*.svh')" 
 clean: 
 	rm -rf build/*
+	rm -rf sim_build/*
 
-SIM ?= icarus
-#SIM ?= verilator
+#SIM ?= icarus
+SIM ?= verilator
 TOPLEVEL = gpu
 BUILD_DIR = build
 TOP_V = $(BUILD_DIR)/gpu.v
 
 test_%: MODULE = test.test_$*
-test_%: clean $(TOP_V)
+test_%: 
 ifeq ($(SIM),icarus)
 	iverilog -o $(BUILD_DIR)/sim.vvp -s $(TOPLEVEL) -g2012 $(TOP_V)
 	MODULE=$(MODULE) vvp -M $(shell cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus $(BUILD_DIR)/sim.vvp
 else ifeq ($(SIM),verilator)
 	MODULE=$(MODULE) \
 	TOPLEVEL=$(TOPLEVEL) \
-	VERILOG_SOURCES=$(shell find src -name '*.sv' -o -name '*.svh') \
+	VERILOG_SOURCES=$(VERILOG_SOURCES) \
 	SIM=verilator \
-	WAVES=1 \
-	EXTRA_ARGS="--cc --timing --trace-fst --top-module $(TOPLEVEL) -Wall -Isrc" \
+	EXTRA_ARGS=$(VERILATOR_ARGS) \
 	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim
 else
 	$(error Unknown SIM '$(SIM)')
@@ -98,6 +100,7 @@ record_benchmark:
 	cd yosys && yosys -s synth.ys > synth_stat.log
 	make assemble_alldmem
 	make assemble_alldmem_64
+	make assemble_alldmem_hash
 	make assemble_alldmem_unrolled
 	make assemble_load
 	make assemble_load_8_threads
@@ -105,5 +108,5 @@ record_benchmark:
 	make assemble_matmul
 	make assemble_negatives
 	make assemble_reverse
-	make test_all > test_all.log
+	#make test_all > test_all.log
 

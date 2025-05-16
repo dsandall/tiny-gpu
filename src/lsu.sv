@@ -1,5 +1,3 @@
-`default_nettype none
-`timescale 1ns/1ns
 
 // LOAD-STORE UNIT
 // > Handles asynchronous memory load and store operations and waits for response

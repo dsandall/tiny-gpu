@@ -12,5 +12,5 @@ from test.test_negatives import *
 # from test.test_negatives import *
 from test.test_matadd import *
 from test.test_matmul import *
-# from test.test_load import *
+from test.test_load import *
 from test.test_alldmem import *

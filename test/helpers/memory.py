@@ -2,6 +2,7 @@ from typing import List
 from .logger import logger
 import cocotb
 from cocotb.triggers import Timer, RisingEdge
+from .format import safe_int
 
 
 class Memory:
@@ -34,15 +35,18 @@ class Memory:
             await RisingEdge(self.dut.clk)
 
             # Read handling with 2-cycle delay
+            # print(f"skibidi_toilet {self.mem_read_valid.value}")
+            # print(f"skibidi_toilet2 {self.mem_read_address.value}")
             mem_read_valid = [
                 int(str(self.mem_read_valid.value)[i:i+1], 2)
                 for i in range(self.channels)
             ]
-            mem_read_address = [
-                int(str(self.mem_read_address.value)[
-                    i * self.addr_bits:(i + 1) * self.addr_bits], 2)
-                for i in range(self.channels)
-            ]
+
+            mem_read_address = [int(str(addr), 2)
+                                for addr in self.mem_read_address.value]
+
+            # print(f"skibidi_toilet2converted {mem_read_address}")
+
             mem_read_ready = [0] * self.channels
             mem_read_data = [0] * self.channels
 
@@ -67,10 +71,14 @@ class Memory:
                 else:
                     self.read_delay_counters[i] = 0
 
-            self.mem_read_data.value = int(
-                ''.join(format(d, f'0{self.data_bits}b') for d in mem_read_data), 2)
-            self.mem_read_ready.value = int(
-                ''.join(format(r, '01b') for r in mem_read_ready), 2)
+            for i in range(self.channels):
+                self.mem_read_data[i].value = mem_read_data[i]
+                self.mem_read_ready[i].value = mem_read_ready[i]
+
+            # self.mem_read_data.value = int(
+            #    ''.join(format(d, f'0{self.data_bits}b') for d in mem_read_data), 2)
+            # self.mem_read_ready.value = int(
+            #    ''.join(format(r, '01b') for r in mem_read_ready), 2)
 
             # Write handling with 2-cycle delay
             if self.name != "program":
@@ -78,16 +86,13 @@ class Memory:
                     int(str(self.mem_write_valid.value)[i:i+1], 2)
                     for i in range(self.channels)
                 ]
-                mem_write_address = [
-                    int(str(self.mem_write_address.value)[
-                        i * self.addr_bits:(i + 1) * self.addr_bits], 2)
-                    for i in range(self.channels)
-                ]
-                mem_write_data = [
-                    int(str(self.mem_write_data.value)[
-                        i * self.data_bits:(i + 1) * self.data_bits], 2)
-                    for i in range(self.channels)
-                ]
+
+                mem_write_address = [int(str(addr), 2)
+                                     for addr in self.mem_write_address.value]
+
+                mem_write_data = [int(str(data), 2)
+                                  for data in self.mem_write_data.value]
+
                 mem_write_ready = [0] * self.channels
 
                 for i in range(self.channels):

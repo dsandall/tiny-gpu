@@ -60,20 +60,20 @@
     output logic  [DATA_BITS-1:0]      prefix``_write_data   [NUM-1:0]
 
 `define CONSUMER_READ_MODULE_RESET(prefix) \
-    prefix``_read_ready <= 0; \
-    prefix``_read_data <= 0
+    prefix``_read_ready <= '{default: '0}; \
+    prefix``_read_data <= '{default: '0}
 
 `define CONSUMER_WRITE_MODULE_RESET(prefix) \
-    prefix``_write_ready <= 0
+    prefix``_write_ready <= '{default: '0}
 
 `define CHANNEL_READ_MODULE_RESET(prefix) \
-    prefix``_read_valid <= 0; \
-    prefix``_read_address <= 0
+    prefix``_read_valid <= '{default: '0}; \
+    prefix``_read_address <= '{default: '0}
 
 `define CHANNEL_WRITE_MODULE_RESET(prefix) \
-    prefix``_write_valid <= 0; \
-    prefix``_write_address <= 0; \
-    prefix``_write_data <= 0
+    prefix``_write_valid <= '{default: '0}; \
+    prefix``_write_address <= '{default: '0}; \
+    prefix``_write_data <= '{default: '0}
 
 // Assumes that a single memory bus is read and write
 // assumes that both devices use same address bits to communicate

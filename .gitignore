@@ -8,8 +8,7 @@ gds/**/*.gltf
 **.nvim
 .DS_Store
 results.xml
-
+.python-version
 research_papers/
-./sim_build
-./sim_build/*
+sim_build
 tiny-gpu-mlir/
