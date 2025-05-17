@@ -41,7 +41,7 @@ module ducttape2cores #(
     logic  reset;
     logic  start;
     logic  done;
-    
+ 
     logic  [$clog2(THREADS_PER_BLOCK):0] thread_count;
 
     // State
@@ -60,7 +60,7 @@ module ducttape2cores #(
    logic [7:0] current_pc;
    logic [7:0] current_pc_1;
    logic [7:0] current_pc_2;
-   logic  [7:0] next_pc[THREADS_PER_BLOCK-1:0];
+   logic [7:0] next_pc[THREADS_PER_BLOCK-1:0];
    logic [7:0] rs[THREADS_PER_BLOCK-1:0];
    logic [7:0] rt[THREADS_PER_BLOCK-1:0];
    logic [7:0] rs_1[THREADS_PER_BLOCK-1:0];
@@ -73,7 +73,7 @@ module ducttape2cores #(
    logic [7:0] lsu_out_1[THREADS_PER_BLOCK-1:0];
    logic [1:0] lsu_state_2[THREADS_PER_BLOCK-1:0];
    logic [7:0] lsu_out_2[THREADS_PER_BLOCK-1:0];
-    logic  [7:0] alu_out[THREADS_PER_BLOCK-1:0];
+   logic [7:0] alu_out[THREADS_PER_BLOCK-1:0];
     
     // Decoded Instruction Signals
    logic [3:0] decoded_rd_address;
@@ -181,7 +181,10 @@ module ducttape2cores #(
         .reset(reset_1),
         .core_state(core_state_1),
         .current_pc(current_pc_1),
-        `MEM_BUS_READ(mem, program_mem_1),
+        .mem_read_valid(program_mem_1_read_valid[0]),  // Use [0] for single address
+        .mem_read_ready(program_mem_1_read_ready[0]),  // Use [0] for single address
+        .mem_read_address(program_mem_1_read_address[0]),  // Use [0] for single address
+        .mem_read_data(program_mem_1_read_data[0]),        // Use [0] for single data
 
         .fetcher_state(fetcher_state_1),
         .instruction(instruction_1)
@@ -196,7 +199,10 @@ module ducttape2cores #(
         .reset(reset_2),
         .core_state(core_state_2),
         .current_pc(current_pc_2),
-        `MEM_BUS_READ(mem, program_mem_2),
+        .mem_read_valid(program_mem_2_read_valid[0]),  // Use [0] for single address
+        .mem_read_ready(program_mem_2_read_ready[0]),  // Use [0] for single address
+        .mem_read_address(program_mem_2_read_address[0]),  // Use [0] for single address
+        .mem_read_data(program_mem_2_read_data[0]),        // Use [0] for single data
 
         .fetcher_state(fetcher_state_2),
         .instruction(instruction_2)

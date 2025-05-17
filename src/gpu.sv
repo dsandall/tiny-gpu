@@ -209,7 +209,8 @@ module gpu #(
         `MEM_BUS_WRITE(mem, data_mem),
         `MEM_BUS_READ(mem, data_mem)
     );
-    
+
+    /* verilator lint_off PINMISSING */
     arbiter_cache #(
         .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
         .CONSUMER_BUS_BITS(PROGRAM_MEM_DATA_BITS),

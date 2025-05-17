@@ -7,7 +7,7 @@
 // > Each thread in each core has it's own ALU
 // > ADD, SUB, MUL, DIV instructions are all executed here
 module warp_controller #(
-    parameter THREADS_PER_BLOCK = 4,
+    parameter THREADS_PER_BLOCK = 4
 ) (
     input logic clk,
 
