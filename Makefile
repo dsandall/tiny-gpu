@@ -65,9 +65,9 @@ $(BUILD_DIR)/gpu.v:
 # 	MODULE=test.test_$* vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus build/sim.vvp
 # compile_alu or other module
 
-compile_%:
+compile_verilog:
 # compile source/*.sv and write it to build/*.v 
-	sv2v -w build/$*.v src/$*.sv 
+	sv2v src/*.sv -w $(TOP_V) 
 
 # GTKWave Visualization Rule
 show_%: build/gpu.vcd
@@ -108,5 +108,5 @@ record_benchmark:
 	make assemble_matmul
 	make assemble_negatives
 	make assemble_reverse
-	#make test_all > test_all.log
+	make test_all > test_all.log
 
