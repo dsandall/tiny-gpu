@@ -35,7 +35,12 @@ module scheduler #(
 
     // Execution State
     output reg [2:0] core_state,
-    output reg done
+    output reg done,
+
+    // Warp core select
+    input reg [2:0] core_state_1,
+    input reg [2:0] core_state_2,
+    output reg warp_select
 );
     localparam IDLE = 3'b000, // Waiting to start
         FETCH = 3'b001,       // Fetch instructions from program memory
@@ -60,10 +65,19 @@ module scheduler #(
                         core_state <= FETCH;
                     end
                 end
-                FETCH: begin 
+                FETCH: begin //TODO:chage this so on stall switch to other warp
                     // Move on once fetcher_state = FETCHED
                     if (fetcher_state == 3'b010) begin 
                         core_state <= DECODE;
+                    end
+                    else begin
+                        warp_select <= ~warp_select;
+                        if (warp_select)begin
+                            core_state <= core_state_2;
+                        end
+                        else begin
+                            core_state <= core_state_1;
+                        end
                     end
                 end
                 DECODE: begin
@@ -74,13 +88,14 @@ module scheduler #(
                     // Request is synchronous so we move on after one cycle
                     core_state <= WAIT;
                 end
-                WAIT: begin
+                WAIT: begin //TODO:chage this so on stall switch to other warp
                     // Wait for all LSUs to finish their request before continuing
                     reg any_lsu_waiting = 1'b0;
                     for (int i = 0; i < THREADS_PER_BLOCK; i++) begin
                         // Make sure no lsu_state = REQUESTING or WAITING
                         if (lsu_state[i] == 2'b01 || lsu_state[i] == 2'b10) begin
                             any_lsu_waiting = 1'b1;
+                            warp_select <= ~warp_select;
                             break; //i'm commenting this out and expect this to cause errors in future 
                         end
                     end

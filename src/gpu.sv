@@ -160,17 +160,17 @@ module gpu #(
             ) core_instance (
                 .clk(clk),
 
-                .reset(core_reset[core_num]),
-                .start(core_start[core_num]),
-                .done(core_done[core_num]),
-                .block_id(core_block_id[core_num]),
-                .thread_count(core_thread_count[core_num]),
-                .program_mem_read_valid(fetcher_read_valid[core_num]),
-                .program_mem_read_address('{fetcher_read_address[core_num]}),
-                .program_mem_read_ready(fetcher_read_ready[core_num]),
-                .program_mem_read_data('{fetcher_read_data[core_num]}),
-                `MEM_BUS_READ(data_mem, per_core_accoutrements[core_num].core_lsu), //NOTE: this macro expands to connect: data_mem{_read_ready,_read_valid,...} and per_core_accoutrements[i].core_lsu{_read_ready, _read_valid...}
-                `MEM_BUS_WRITE(data_mem, per_core_accoutrements[core_num].core_lsu),
+                .reset_1(core_reset[core_num]),
+                .start_1(core_start[core_num]),
+                .done_1(core_done[core_num]),
+                .block_id_1(core_block_id[core_num]),
+                .thread_count_1(core_thread_count[core_num]),
+                .program_mem_1_read_valid(fetcher_read_valid[core_num]),
+                .program_mem_1_read_address('{fetcher_read_address[core_num]}),
+                .program_mem_1_read_ready(fetcher_read_ready[core_num]),
+                .program_mem_1_read_data('{fetcher_read_data[core_num]}),
+                `MEM_BUS_READ(data_mem_1, per_core_accoutrements[core_num].core_lsu), //NOTE: this macro expands to connect: data_mem{_read_ready,_read_valid,...} and per_core_accoutrements[core_num].core_lsu{_read_ready, _read_valid...}
+                `MEM_BUS_WRITE(data_mem_1, per_core_accoutrements[core_num].core_lsu),
 
                 // the conjoined twin core
                 .reset_2(core_reset[core_num+1]),
@@ -222,15 +222,7 @@ module gpu #(
         .reset(reset),
         // Assumed to be disconnected by module, but hardware is present
         //`MEM_BUS_WRITE(),
-        .consumer_write_valid      (),
-        .consumer_write_address    (), 
-        .consumer_write_ready      (),
-        .consumer_write_data       (),
         //`MEM_BUS_WRITE(),
-        .mem_write_valid      (),
-        .mem_write_address    (),
-        .mem_write_ready      (),
-        .mem_write_data       (),
         `MEM_BUS_READ(consumer, fetcher),
         `MEM_BUS_READ(mem, program_mem)
     );
