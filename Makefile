@@ -96,8 +96,8 @@ ft_%:
 	make assemble_$*
 	make test_$*
 
-record_benchmark: 
-	cd yosys && yosys -s synth.ys > synth_stat.log
+record_benchmark:
+	#cd yosys && yosys -s synth.ys > synth_stat.log
 	make assemble_alldmem
 	make assemble_alldmem_64
 	make assemble_alldmem_hash

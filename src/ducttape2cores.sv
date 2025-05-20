@@ -100,6 +100,7 @@ module ducttape2cores #(
     //Warp Controller Signals
    logic warp_select;
 
+        /* verilator lint_off PINMISSING */
     // Warp Controller
     warp_controller #(
         .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
@@ -158,8 +159,8 @@ module ducttape2cores #(
         .decoded_mem_write_enable_1(decoded_mem_write_enable_1),           // Enable writing to memory
         .decoded_mem_read_enable_2(decoded_mem_read_enable_2),            // Enable reading from memory
         .decoded_mem_write_enable_2(decoded_mem_write_enable_2),           // Enable writing to memory
-        .done_1(done_1),
-        .done_2(done_2),
+        //.done_1(done_1),
+        //.done_2(done_2),
 
         .start(start),
         .reset(reset),
@@ -248,7 +249,10 @@ module ducttape2cores #(
         .core_state_1(core_state_1),
         .core_state_2(core_state_2),
         .warp_select(warp_select),
-        .done(done)
+        .done_1(done_1),
+        .done_2(done_2),
+        .current_pc_1(current_pc_1),
+        .current_pc_2(current_pc_2)
     );
 
     // Dedicated ALU, LSU, registers, & PC unit for each thread this core has capacity for
