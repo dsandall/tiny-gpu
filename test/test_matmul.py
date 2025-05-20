@@ -6,9 +6,9 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 async def test_matmul(dut):
 
     test_conf = load_json_binary(
-        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_matmul.json")
+        "./tiny-gpu-assembler/asm_build/test_matmul.json")
 
-    data_memory = await setup_wrap(dut, test_conf)
+    data_memory = await setup_wrap(dut, test_conf, "screen")
 
     ###
     # Verify results

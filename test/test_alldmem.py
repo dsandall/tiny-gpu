@@ -5,7 +5,7 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 @cocotb.test()
 async def test_alldmem_hash(dut):
     test_conf = load_json_binary(
-        "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_hash.json"
+        "./tiny-gpu-assembler/asm_build/test_alldmem_hash.json"
     )
 
     # run device and dump memory
