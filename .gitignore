@@ -12,3 +12,4 @@ results.xml
 research_papers/
 sim_build
 tiny-gpu-mlir/
+*.surf.ron

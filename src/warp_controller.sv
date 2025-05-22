@@ -82,27 +82,32 @@ module warp_controller #(
 
   // look at the current state of warp controller_select and output the neceisarry data
   always @(negedge clk) begin
-    if (reset_1) begin
-      done_1 <= 0;
-      current_pc_1 <= 0;
-      core_state_1 <= 3'b000;
-      decoded_mem_read_enable_1 <= 0;
-      decoded_mem_write_enable_1 <= 0;
-      done_1 <= 0;
+    if (reset_1 || reset_2) begin
+      if (reset_1) begin
+        done_1 <= 0;
+        current_pc_1 <= 0;
+        core_state_1 <= 3'b000;
+        decoded_mem_read_enable_1 <= 0;
+        decoded_mem_write_enable_1 <= 0;
+        done_1 <= 0;
+      end
+      if (reset_2) begin
+        done_2 <= 0;
+        current_pc_2 <= 0;
+        core_state_2 <= 3'b000;
+        decoded_mem_read_enable_2 <= 0;
+        decoded_mem_write_enable_2 <= 0;
+      end
     end
 
-    if (reset_2) begin
-      done_2 <= 0;
-      current_pc_2 <= 0;
-      core_state_2 <= 3'b000;
-      decoded_mem_read_enable_2 <= 0;
-      decoded_mem_write_enable_2 <= 0;
-
-    end else if (warp_select) begin
+    if (warp_select && !reset_2) begin
       current_pc_2 <= current_pc;
       core_state_2 <= core_state;
-      decoded_mem_read_enable_2 <= decoded_mem_read_enable;
-      decoded_mem_write_enable_2 <= decoded_mem_write_enable;
+      if (core_state == 3'b010) begin
+        decoded_mem_read_enable_2  <= decoded_mem_read_enable;
+        decoded_mem_write_enable_2 <= decoded_mem_write_enable;
+      end
+
       done_2 <= done;
 
       start <= start_2;
@@ -114,11 +119,13 @@ module warp_controller #(
       lsu_out <= lsu_out_2;
       rs <= rs_2;
       rt <= rt_2;
-    end else begin
+    end else if (!warp_select && !reset_1) begin
       current_pc_1 <= current_pc;
       core_state_1 <= core_state;
-      decoded_mem_read_enable_1 <= decoded_mem_read_enable;
-      decoded_mem_write_enable_1 <= decoded_mem_write_enable;
+      if (core_state == 3'b010) begin
+        decoded_mem_read_enable_1  <= decoded_mem_read_enable;
+        decoded_mem_write_enable_1 <= decoded_mem_write_enable;
+      end
       done_1 <= done;
 
       start <= start_1;
@@ -131,6 +138,5 @@ module warp_controller #(
       rs <= rs_1;
       rt <= rt_1;
     end
-
   end
 endmodule
