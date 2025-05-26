@@ -19,6 +19,12 @@ typedef enum logic [2:0] {
   FET_DONE = 3'b010
 } fetcher_state_t;
 
+typedef enum logic [1:0] {
+  LSU_IDLE = 2'b00,
+  LSU_REQUESTING = 2'b01,
+  LSU_WAITING = 2'b10,
+  LSU_DONE = 2'b11
+} LSU_state_t;
 
 `endif
 

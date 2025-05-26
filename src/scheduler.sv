@@ -67,8 +67,8 @@ module scheduler #(
     end else begin
       case (core_state)
         CORE_IDLE: begin
-          done_1 <= 0;
-          done_2 <= 0;
+          //done_1 <= 0;
+          //done_2 <= 0;
           // Here after reset (before kernel is launched, or after previous block has been processed)
           if (start) begin
             // Start by fetching the next instruction for this block based on PC
@@ -146,10 +146,11 @@ module scheduler #(
             core_state <= CORE_FETCH;
         end
         CORE_DONE: begin
-          // return to idle when the dispatcher recognizes DONE
           if (!start) begin
+            // return to idle when the dispatcher recognizes DONE
             core_state <= CORE_IDLE;
           end
+          // switch regardless
           switch_warp();
         end
       endcase

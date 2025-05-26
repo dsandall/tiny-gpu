@@ -1,86 +1,8 @@
-make[1]: Entering directory '/home/thebu/newhome/tiny-gpu'
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
 MODULE=test.test_all \
 TOPLEVEL=gpu \
-VERILOG_SOURCES="src/fetcher.sv src/registers.sv src/pc.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/dispatch.sv src/lsu.sv src/utils.svh src/core.sv src/gpu.sv src/arbiter_cache.sv src/decoder.sv src/warp_controller.sv src/ducttape2cores.sv src/scheduler.sv"  \
+VERILOG_SOURCES="src/pc.sv src/dispatch.sv src/registers.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/gpu.sv src/warp_controller.sv src/decoder.sv src/fetcher.sv src/scheduler.sv src/enums.svh src/lsu.sv src/ducttape2cores.sv"  \
 SIM=verilator \
 EXTRA_ARGS="--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3"" \
 make -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim
-make[2]: Entering directory '/home/thebu/newhome/tiny-gpu'
-rm -f results.xml
-"make" -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim results.xml
-make[3]: Entering directory '/home/thebu/newhome/tiny-gpu'
-rm -f results.xml
-MODULE=test.test_all TESTCASE= TOPLEVEL=gpu TOPLEVEL_LANG=verilog \
-         sim_build/Vtop  --cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS -O3  
-     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:79   in set_program_name_in_venv        Did not detect Python virtual environment. Using system-wide Python interpreter
-     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
-     0.00ns INFO     cocotb                             Running on Verilator version 5.034 2025-02-24
-     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/lib/python3.13/site-packages/cocotb
-     0.00ns INFO     cocotb                             Seeding Python random module with 1747953309
-     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
-pygame 2.6.1 (SDL 2.32.54, Python 3.13.2)
-Hello from the pygame community. https://www.pygame.org/contribute.html
-     0.00ns INFO     cocotb.regression                  Found test test.test_negatives.test_negatives
-     0.00ns INFO     cocotb.regression                  Found test test.test_matadd.test_matadd
-     0.00ns INFO     cocotb.regression                  Found test test.test_matmul.test_matmul
-     0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load_8_threads
-     0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load
-     0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load_20_cycles
-     0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_hash
-     0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_unrolled
-     0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_64
-     0.00ns INFO     cocotb.regression                  running test_negatives (1/9)
-using json initial data
-PROGRAM IS
-36869
-37123
-37376
-16673
-32801
-61440
-DATA IS
-0
-0
-0
-0
-Running test: test_negatives
-threads is 4
-finished at cycle 128
-3625000.00ns INFO     cocotb.regression                  test_negatives passed
-3625000.00ns INFO     cocotb.regression                  running test_matadd (2/9)
-using json initial data
-PROGRAM IS
-20702
-12303
-37120
-37384
-37648
-13328
-29760
-13600
-30032
-13893
-14128
-32886
-61440
-DATA IS
-0
-1
-2
-3
-4
-5
-6
-7
-0
-1
-2
-3
-4
-5
-6
-7
-Running test: test_matadd
-threads is 8
-12750000.00ns ERROR    cocotb.Task 570.Memory.run         Exception raised by this forked coroutine
-- :0: Verilog $finish
+make[2]: Entering directory '/mnt/newhome/tiny-gpu'

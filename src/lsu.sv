@@ -1,3 +1,4 @@
+`include "enums.svh"
 
 // LOAD-STORE UNIT
 // > Handles asynchronous memory load and store operations and waits for response
@@ -9,7 +10,7 @@ module lsu (
     input wire enable, // If current block has less threads then block size, some LSUs will be inactive
 
     // State
-    input reg [2:0] core_state,
+    input corestate_t core_state,
 
     // Memory Control Sgiansl
     input reg decoded_mem_read_enable,
@@ -30,14 +31,13 @@ module lsu (
     input reg mem_write_ready,
 
     // LSU Outputs
-    output reg [1:0] lsu_state,
+    output LSU_state_t lsu_state,
     output reg [7:0] lsu_out
 );
-    localparam IDLE = 2'b00, REQUESTING = 2'b01, WAITING = 2'b10, DONE = 2'b11;
 
     always @(posedge clk) begin
         if (reset) begin
-            lsu_state <= IDLE;
+            lsu_state <= LSU_IDLE;
             lsu_out <= 0;
             mem_read_valid <= 0;
             mem_read_address <= 0;
@@ -48,28 +48,28 @@ module lsu (
             // If memory read enable is triggered (LDR instruction)
             if (decoded_mem_read_enable) begin 
                 case (lsu_state)
-                    IDLE: begin
+                    LSU_IDLE: begin
                         // Only read when core_state = REQUEST
-                        if (core_state == 3'b011) begin 
-                            lsu_state <= REQUESTING;
+                        if (core_state == CORE_REQUEST) begin 
+                            lsu_state <= LSU_REQUESTING;
                         end
                     end
-                    REQUESTING: begin 
+                    LSU_REQUESTING: begin 
                         mem_read_valid <= 1;
                         mem_read_address <= rs;
-                        lsu_state <= WAITING;
+                        lsu_state <= LSU_WAITING;
                     end
-                    WAITING: begin
+                    LSU_WAITING: begin
                         if (mem_read_ready == 1) begin
                             mem_read_valid <= 0;
                             lsu_out <= mem_read_data;
-                            lsu_state <= DONE;
+                            lsu_state <= LSU_DONE;
                         end
                     end
-                    DONE: begin 
+                    LSU_DONE: begin 
                         // Reset when core_state = UPDATE
-                        if (core_state == 3'b110) begin 
-                            lsu_state <= IDLE;
+                        if (core_state == CORE_UPDATE) begin 
+                            lsu_state <= LSU_IDLE;
                         end
                     end
                 endcase
@@ -78,28 +78,28 @@ module lsu (
             // If memory write enable is triggered (STR instruction)
             if (decoded_mem_write_enable) begin 
                 case (lsu_state)
-                    IDLE: begin
+                    LSU_IDLE: begin
                         // Only read when core_state = REQUEST
-                        if (core_state == 3'b011) begin 
-                            lsu_state <= REQUESTING;
+                        if (core_state == CORE_REQUEST) begin 
+                            lsu_state <= LSU_REQUESTING;
                         end
                     end
-                    REQUESTING: begin 
+                    LSU_REQUESTING: begin 
                         mem_write_valid <= 1;
                         mem_write_address <= rs;
                         mem_write_data <= rt;
-                        lsu_state <= WAITING;
+                        lsu_state <= LSU_WAITING;
                     end
-                    WAITING: begin
+                    LSU_WAITING: begin
                         if (mem_write_ready) begin
                             mem_write_valid <= 0;
-                            lsu_state <= DONE;
+                            lsu_state <= LSU_DONE;
                         end
                     end
-                    DONE: begin 
+                    LSU_DONE: begin 
                         // Reset when core_state = UPDATE
-                        if (core_state == 3'b110) begin 
-                            lsu_state <= IDLE;
+                        if (core_state == CORE_UPDATE) begin 
+                            lsu_state <= LSU_IDLE;
                         end
                     end
                 endcase

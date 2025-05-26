@@ -336,7 +336,7 @@ module ducttape2cores #(
                 .rt(rt_1[i])
             );
 
-            // Register File 1
+            // Register File 2
             registers #(
                 .THREADS_PER_BLOCK(THREADS_PER_BLOCK),
                 .THREAD_ID(i),
