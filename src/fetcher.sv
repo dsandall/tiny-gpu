@@ -83,7 +83,7 @@ module fetcher #(
                 FET_DONE: begin
                     // Reset when core_state = DECODE
                     if (core_state == CORE_DECODE) begin 
-                        fetcher_state <= FET_DONE;
+                        fetcher_state <= FET_IDLE;
                     end
                 end
             endcase
