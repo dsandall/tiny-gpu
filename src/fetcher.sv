@@ -1,5 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ns
+`include "enums.svh"
 
 // Unfortunately, you cant use interfaces as module input/outputs... 
 // so this is very limited for actual cleanup and bundling of the code
@@ -31,7 +32,7 @@ module fetcher #(
     input wire reset,
     
     // Execution State
-    input reg [2:0] core_state,
+    input corestate_t core_state,
     input reg [7:0] current_pc,
 
     // Program Memory
@@ -41,14 +42,9 @@ module fetcher #(
     input reg [PROGRAM_MEM_DATA_BITS-1:0] mem_read_data,
 
     // Fetcher Output
-    output reg [2:0] fetcher_state,
+    output fetcher_state_t fetcher_state,
     output reg [PROGRAM_MEM_DATA_BITS-1:0] instruction
 );
-
-
-    localparam IDLE = 3'b000, 
-        FETCHING = 3'b001, 
-        FETCHED = 3'b010;
     
     MemChannelIF #(
         .ADDR_BITS(PROGRAM_MEM_ADDR_BITS),
@@ -62,32 +58,32 @@ module fetcher #(
 
     always @(posedge clk) begin
         if (reset) begin
-            fetcher_state <= IDLE;
+            fetcher_state <= FET_IDLE;
             mem_if.read_valid <= 0;
             mem_if.read_address <= 0;
             instruction <= {PROGRAM_MEM_DATA_BITS{1'b0}};
         end else begin
             case (fetcher_state)
-                IDLE: begin
+                FET_IDLE: begin
                     // Start fetching when core_state = FETCH
-                    if (core_state == 3'b001) begin
-                        fetcher_state <= FETCHING;
+                    if (core_state == CORE_FETCH) begin
+                        fetcher_state <= FET_CHING;
                         mem_if.read_valid <= 1;
                         mem_if.read_address <= current_pc;
                     end
                 end
-                FETCHING: begin
+                FET_CHING: begin
                     // Wait for response from program memory
                     if (mem_if.read_ready) begin
-                        fetcher_state <= FETCHED;
+                        fetcher_state <= FET_DONE;
                         instruction <= mem_if.read_data; // Store the instruction when received
                         mem_if.read_valid <= 0;
                     end
                 end
-                FETCHED: begin
+                FET_DONE: begin
                     // Reset when core_state = DECODE
-                    if (core_state == 3'b010) begin 
-                        fetcher_state <= IDLE;
+                    if (core_state == CORE_DECODE) begin 
+                        fetcher_state <= FET_DONE;
                     end
                 end
             endcase

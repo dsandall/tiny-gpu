@@ -159,8 +159,6 @@ module ducttape2cores #(
         .decoded_mem_write_enable_1(decoded_mem_write_enable_1),           // Enable writing to memory
         .decoded_mem_read_enable_2(decoded_mem_read_enable_2),            // Enable reading from memory
         .decoded_mem_write_enable_2(decoded_mem_write_enable_2),           // Enable writing to memory
-        //.done_1(done_1),
-        //.done_2(done_2),
 
         .start(start),
         .reset(reset),

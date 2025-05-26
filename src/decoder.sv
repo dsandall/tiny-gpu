@@ -1,4 +1,5 @@
 `default_nettype none `timescale 1ns / 1ns
+`include "enums.svh"
 
 // INSTRUCTION DECODER
 // > Decodes an instruction into the control signals necessary to execute it
@@ -7,7 +8,7 @@ module decoder (
     input wire clk,
     input wire reset,
 
-    input reg [ 2:0] core_state,
+    input corestate_t core_state,
     input reg [15:0] instruction,
 
     // Instruction Signals
@@ -58,9 +59,10 @@ module decoder (
       decoded_alu_output_mux <= 0;
       decoded_pc_mux <= 0;
       decoded_ret <= 0;
-    end else begin
-      // Decode when core_state = DECODE
-      if (core_state == 3'b010) begin
+    end else begin      
+      if (core_state == CORE_DONE) begin
+        decoded_ret <= 0;
+      end else if (core_state == CORE_DECODE) begin
         // Get instruction signals from instruction every time
         decoded_rd_address <= instruction[11:8];
         decoded_rs_address <= instruction[7:4];
@@ -127,8 +129,6 @@ module decoder (
             decoded_ret <= 1;
           end
         endcase
-      end else if (core_state == 3'b110) begin
-        decoded_ret <= 0;
       end
     end
   end

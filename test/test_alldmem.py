@@ -3,6 +3,18 @@ from .helpers.testbench_bin import load_json_binary, setup_wrap
 
 
 @cocotb.test()
+async def test_alldmem_basic(dut):
+    await test_dmem(
+        dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem.json")
+
+
+@cocotb.test()
+async def test_alldmem_unrolled(dut):
+    await test_dmem(
+        dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_unrolled.json")
+
+
+@cocotb.test()
 async def test_alldmem_hash(dut):
     test_conf = load_json_binary(
         "./tiny-gpu-assembler/asm_build/test_alldmem_hash.json"
@@ -33,12 +45,6 @@ async def test_alldmem_hash(dut):
         print(f"Mismatch at index {index}: expected {expected}, got {actual}")
 
     assert not errors, f"Found {len(errors)} mismatches in data memory."
-
-
-@cocotb.test()
-async def test_alldmem_unrolled(dut):
-    await test_dmem(
-        dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_unrolled.json")
 
 
 @cocotb.test()
