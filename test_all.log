@@ -1,7 +1,7 @@
 make[1]: Entering directory '/mnt/newhome/tiny-gpu'
 MODULE=test.test_all \
 TOPLEVEL=gpu \
-VERILOG_SOURCES="src/pc.sv src/dispatch.sv src/registers.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/gpu.sv src/warp_controller.sv src/decoder.sv src/fetcher.sv src/scheduler.sv src/enums.svh src/lsu.sv src/ducttape2cores.sv"  \
+VERILOG_SOURCES="src/pc.sv src/dispatch.sv src/registers.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/gpu.sv src/decoder.sv src/fetcher.sv src/scheduler.sv src/enums.svh src/lsu.sv src/ducttape2cores.sv src/warp_controller.sv"  \
 SIM=verilator \
 EXTRA_ARGS="--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3"" \
 make -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim

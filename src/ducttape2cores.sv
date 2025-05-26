@@ -106,14 +106,11 @@ module ducttape2cores #(
         .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
     ) warp_controller_instance (
         .clk(clk),
-        .start_1(start_1),
-        .start_2(start_2),
-        .reset_1(reset_1),
-        .reset_2(reset_2),
+        .start({start_2, start_1}),
+        .reset({reset_2, reset_1}),
         .done(done),
 
-        .thread_count_1(thread_count_1),
-        .thread_count_2(thread_count_2),
+        .thread_count({thread_count_2, thread_count_1}),
 
         // inputs from schedulers
         .warp_select(warp_select),
@@ -122,53 +119,36 @@ module ducttape2cores #(
 
 
         //inputs from fetcher 1
-        .fetcher_state_1(fetcher_state_1),
-        .instruction_1(instruction_1),
-
-        //inputs from fetcher 2
-        .fetcher_state_2(fetcher_state_2),
-        .instruction_2(instruction_2),
+        .fetcher_state({fetcher_state_2, fetcher_state_1}),
+        .instruction({instruction_2, instruction_1}),
 
         //inputs from lsu 1
-        .lsu_state_1(lsu_state_1),
-        .lsu_out_1(lsu_out_1),
-
-
-        //inputs from lsu 2
-        .lsu_state_2(lsu_state_2),
-        .lsu_out_2(lsu_out_2),
+        .lsu_state({lsu_state_2, lsu_state_1}),
+        .lsu_out({lsu_out_2, lsu_out_1}),
 
         //inputs fromlogic 1
-        .rs_1(rs_1),
-        .rt_1(rt_1),
-
-        //inputs fromlogic 2
-        .rs_2(rs_2),
-        .rt_2(rt_2),
+        .rs({rs_2, rs_1}),
+        .rt({rt_2, rt_1}),
 
         //inputs from decoder
         .decoded_mem_read_enable(decoded_mem_read_enable),            // Enable reading from memory
         .decoded_mem_write_enable(decoded_mem_write_enable),           // Enable writing to memory
 
         //Outputs
-        .current_pc_1(current_pc_1),
-        .current_pc_2(current_pc_2),
-        .core_state_1(core_state_1),
-        .core_state_2(core_state_2),
-        .decoded_mem_read_enable_1(decoded_mem_read_enable_1),            // Enable reading from memory
-        .decoded_mem_write_enable_1(decoded_mem_write_enable_1),           // Enable writing to memory
-        .decoded_mem_read_enable_2(decoded_mem_read_enable_2),            // Enable reading from memory
-        .decoded_mem_write_enable_2(decoded_mem_write_enable_2),           // Enable writing to memory
+        .current_pc_out({current_pc_2, current_pc_1}),
+        .core_state_out({core_state_2, core_state_1}),
+        .decoded_mem_read_enable_out({decoded_mem_read_enable_2, decoded_mem_read_enable_1}),            // Enable reading from memory
+        .decoded_mem_write_enable_out({decoded_mem_write_enable_2, decoded_mem_write_enable_1}),           // Enable writing to memory
 
-        .start(start),
-        .reset(reset),
-        .thread_count(thread_count),
-        .fetcher_state(fetcher_state),
-        .instruction(instruction),
-        .lsu_state(lsu_state),
-        .lsu_out(lsu_out),
-        .rs(rs),
-        .rt(rt)
+        .start_out(start),
+        .reset_out(reset),
+        .thread_count_out(thread_count),
+        .fetcher_state_out(fetcher_state),
+        .instruction_out(instruction),
+        .lsu_state_out(lsu_state),
+        .lsu_out_out(lsu_out),
+        .rs_out(rs),
+        .rt_out(rt)
     );
 
     // Fetcher

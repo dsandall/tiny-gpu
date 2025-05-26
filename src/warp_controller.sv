@@ -1,4 +1,6 @@
 `default_nettype none `timescale 1ns / 1ns
+`include "enums.svh"
+
 
 // warp_controller UNIT
 // > stores the warps at there current state
@@ -8,135 +10,110 @@
 module warp_controller #(
     parameter THREADS_PER_BLOCK = 4
 ) (
-    input logic clk,
+    input  logic clk,
 
-    input logic start_1,
-    input logic start_2,
-    input logic reset_1,
-    input logic reset_2,
-    input logic done,
+    input  logic start     [1:0],
+    input  logic reset     [1:0],
+    input  logic done,
 
-    input logic [$clog2(THREADS_PER_BLOCK):0] thread_count_1,
-    input logic [$clog2(THREADS_PER_BLOCK):0] thread_count_2,
+    input  logic [$clog2(THREADS_PER_BLOCK):0] thread_count [1:0],
 
     // inputs from schedulers
-    input logic warp_select,
-    input logic [2:0] core_state,
-    input logic [7:0] current_pc,
+    input  logic warp_select,
+    input  corestate_t core_state,
+    input  logic [7:0] current_pc,
 
+    // inputs from fetchers
+    input  logic [2:0]  fetcher_state  [1:0],
+    input  logic [15:0] instruction    [1:0],
 
-    //inputs from fetcher 1
-    input logic [ 2:0] fetcher_state_1,
-    input logic [15:0] instruction_1,
+    // inputs from lsu
+    input  logic [1:0]  lsu_state      [1:0][THREADS_PER_BLOCK-1:0],
+    input  logic [7:0]  lsu_out        [1:0][THREADS_PER_BLOCK-1:0],
 
-    //inputs from fetcher 2
-    input logic [ 2:0] fetcher_state_2,
-    input logic [15:0] instruction_2,
+    // inputs from logic
+    input  logic [7:0]  rs             [1:0][THREADS_PER_BLOCK-1:0],
+    input  logic [7:0]  rt             [1:0][THREADS_PER_BLOCK-1:0],
 
-    //inputs from lsu 1
-    input logic [1:0] lsu_state_1[THREADS_PER_BLOCK-1:0],
-    input logic [7:0] lsu_out_1  [THREADS_PER_BLOCK-1:0],
+    // inputs from decoder
+    input  logic decoded_mem_read_enable,
+    input  logic decoded_mem_write_enable,
 
+    // Outputs per warp
+    output logic [7:0]  current_pc_out  [1:0],
+    output logic [2:0]  core_state_out  [1:0],
+    output logic        decoded_mem_read_enable_out  [1:0],
+    output logic        decoded_mem_write_enable_out [1:0],
+    output logic        done_out        [1:0],
 
-    //inputs from lsu 2
-    input logic [1:0] lsu_state_2[THREADS_PER_BLOCK-1:0],
-    input logic [7:0] lsu_out_2  [THREADS_PER_BLOCK-1:0],
-
-    //inputs from logic 1
-    input logic [7:0] rs_1[THREADS_PER_BLOCK-1:0],
-    input logic [7:0] rt_1[THREADS_PER_BLOCK-1:0],
-
-    //inputs from logic 2
-    input logic [7:0] rs_2[THREADS_PER_BLOCK-1:0],
-    input logic [7:0] rt_2[THREADS_PER_BLOCK-1:0],
-
-    //inputs from decoder
-    input logic decoded_mem_read_enable,  // Enable reading from memory
-    input logic decoded_mem_write_enable, // Enable writing to memory
-
-    //Outputs
-    output logic [7:0] current_pc_1,
-    output logic [7:0] current_pc_2,
-    output logic [2:0] core_state_1,
-    output logic [2:0] core_state_2,
-    output logic       decoded_mem_read_enable_1,   // Enable reading from memory
-    output logic       decoded_mem_write_enable_1,  // Enable writing to memory
-    output logic       decoded_mem_read_enable_2,   // Enable reading from memory
-    output logic       decoded_mem_write_enable_2,  // Enable writing to memory
-    output logic       done_1,
-    output logic       done_2,
-
-    output logic start,
-    output logic reset,
-    output logic [$clog2(THREADS_PER_BLOCK):0] thread_count,
-    output logic [2:0] fetcher_state,
-    output logic [15:0] instruction,
-    output logic [1:0] lsu_state[THREADS_PER_BLOCK-1:0],
-    output logic [7:0] lsu_out[THREADS_PER_BLOCK-1:0],
-    output logic [7:0] rs[THREADS_PER_BLOCK-1:0],
-    output logic [7:0] rt[THREADS_PER_BLOCK-1:0]
-
-
-
+    // Selected warp outputs
+    output logic        start_out,
+    output logic        reset_out,
+    output logic [$clog2(THREADS_PER_BLOCK):0] thread_count_out,
+    output fetcher_state_t fetcher_state_out,
+    output logic [15:0] instruction_out,
+    output logic [1:0]  lsu_state_out    [THREADS_PER_BLOCK-1:0],
+    output logic [7:0]  lsu_out_out      [THREADS_PER_BLOCK-1:0],
+    output logic [7:0]  rs_out           [THREADS_PER_BLOCK-1:0],
+    output logic [7:0]  rt_out           [THREADS_PER_BLOCK-1:0]
 );
 
-  // look at the current state of warp controller_select and output the neceisarry data
+  // Internal registers for outputs
+  logic [7:0] current_pc_reg  [1:0];
+  logic [2:0] core_state_reg  [1:0];
+  logic       decoded_mem_read_enable_reg  [1:0];
+  logic       decoded_mem_write_enable_reg [1:0];
+  logic       done_reg        [1:0];
+
   always @(negedge clk) begin
-    if (reset_1 || reset_2) begin
-      if (reset_1) begin
-        done_1 <= 0;
-        current_pc_1 <= 0;
-        core_state_1 <= 3'b000;
-        decoded_mem_read_enable_1 <= 0;
-        decoded_mem_write_enable_1 <= 0;
-        done_1 <= 0;
-      end
-      if (reset_2) begin
-        done_2 <= 0;
-        current_pc_2 <= 0;
-        core_state_2 <= 3'b000;
-        decoded_mem_read_enable_2 <= 0;
-        decoded_mem_write_enable_2 <= 0;
+    // Handle resets per warp
+    for (int i = 0; i < 2; i++) begin
+      if (reset[i]) begin
+        done_reg[i] <= 0;
+        current_pc_reg[i] <= 0;
+        core_state_reg[i] <= CORE_IDLE;
+        decoded_mem_read_enable_reg[i] <= 0;
+        decoded_mem_write_enable_reg[i] <= 0;
       end
     end
 
-    if (warp_select && !reset_2) begin
-      current_pc_2 <= current_pc;
-      core_state_2 <= core_state;
-      if (core_state == 3'b010) begin
-        decoded_mem_read_enable_2  <= decoded_mem_read_enable;
-        decoded_mem_write_enable_2 <= decoded_mem_write_enable;
+
+    // Update logic for warp_select index, if not reset
+    if (!reset[warp_select]) begin
+      current_pc_reg[warp_select] <= current_pc;
+      core_state_reg[warp_select] <= core_state;
+
+      if (core_state == CORE_DECODE) begin
+        decoded_mem_read_enable_reg[warp_select]  <= decoded_mem_read_enable;
+        decoded_mem_write_enable_reg[warp_select] <= decoded_mem_write_enable;
       end
 
-      done_2 <= done;
-
-      start <= start_2;
-      reset <= reset_2;
-      thread_count <= thread_count_2;
-      fetcher_state <= fetcher_state_2;
-      instruction <= instruction_2;
-      lsu_state <= lsu_state_2;
-      lsu_out <= lsu_out_2;
-      rs <= rs_2;
-      rt <= rt_2;
-    end else if (!warp_select && !reset_1) begin
-      current_pc_1 <= current_pc;
-      core_state_1 <= core_state;
-      if (core_state == 3'b010) begin
-        decoded_mem_read_enable_1  <= decoded_mem_read_enable;
-        decoded_mem_write_enable_1 <= decoded_mem_write_enable;
-      end
-      done_1 <= done;
-
-      start <= start_1;
-      reset <= reset_1;
-      thread_count <= thread_count_1;
-      fetcher_state <= fetcher_state_1;
-      instruction <= instruction_1;
-      lsu_state <= lsu_state_1;
-      lsu_out <= lsu_out_1;
-      rs <= rs_1;
-      rt <= rt_1;
+      done_reg[warp_select] <= done;
     end
   end
+
+  // Assign outputs from registers
+  assign current_pc_out = current_pc_reg;
+  assign core_state_out = core_state_reg;
+  assign decoded_mem_read_enable_out = decoded_mem_read_enable_reg;
+  assign decoded_mem_write_enable_out = decoded_mem_write_enable_reg;
+  assign done_out = done_reg;
+
+  // Selected warp output signals
+  always_comb begin
+    start_out = start[warp_select];
+    reset_out = reset[warp_select];
+    thread_count_out = thread_count[warp_select];
+    fetcher_state_out = fetcher_state_t'(fetcher_state[warp_select]);
+    instruction_out = instruction[warp_select];
+
+    // Copy arrays elementwise from selected warp
+    for (int i = 0; i < THREADS_PER_BLOCK; i++) begin
+      lsu_state_out[i] = lsu_state[warp_select][i];
+      lsu_out_out[i]   = lsu_out[warp_select][i];
+      rs_out[i]        = rs[warp_select][i];
+      rt_out[i]        = rt[warp_select][i];
+    end
+  end
+
 endmodule
