@@ -229,74 +229,74 @@ module ducttape2cores #(
     );
 
     // Dedicated ALU, LSU, registers, & PC unit for each thread this core has capacity for
-    genvar i;
+    genvar tid;
     generate
-        for (i = 0; i < THREADS_PER_BLOCK; i = i + 1) begin : threads
+        for (tid = 0; tid < THREADS_PER_BLOCK; tid = tid + 1) begin : threads
             // ALU
             alu alu_instance (
                 .clk(clk),
                 .reset(reset),
-                .enable(i < thread_count),
+                .enable(tid< thread_count),
                 .core_state(core_state),
                 .decoded_alu_arithmetic_mux(decoded_alu_arithmetic_mux),
                 .decoded_alu_output_mux(decoded_alu_output_mux),
-                .rs(rs[i]),
-                .rt(rt[i]),
-                .alu_out(alu_out[i])
+                .rs(rs[tid]),
+                .rt(rt[tid]),
+                .alu_out(alu_out[tid])
             );
 
             // LSU
             lsu lsu_instance_1 (
                 .clk(clk),
                 .reset(reset_1),
-                .enable(i < thread_count_1),
+                .enable(tid < thread_count_1),
                 .core_state(core_state_1),
-                .decoded_mem_read_enable(decoded_mem_read_enable_1),
-                .decoded_mem_write_enable(decoded_mem_write_enable_1),
-                .mem_read_valid(data_mem_1_read_valid[i]),
-                .mem_read_address(data_mem_1_read_address[i]),
-                .mem_read_ready(data_mem_1_read_ready[i]),
-                .mem_read_data(data_mem_1_read_data[i]),
-                .mem_write_valid(data_mem_1_write_valid[i]),
-                .mem_write_address(data_mem_1_write_address[i]),
-                .mem_write_data(data_mem_1_write_data[i]),
-                .mem_write_ready(data_mem_1_write_ready[i]),
-                .rs(rs_1[i]),
-                .rt(rt_1[i]),
-                .lsu_state(lsu_state_1[i]),
-                .lsu_out(lsu_out_1[i])
+                .decoded_mem_read_enable(decoded_mem_read_enable),
+                .decoded_mem_write_enable(decoded_mem_write_enable),
+                .mem_read_valid(data_mem_1_read_valid[tid]),
+                .mem_read_address(data_mem_1_read_address[tid]),
+                .mem_read_ready(data_mem_1_read_ready[tid]),
+                .mem_read_data(data_mem_1_read_data[tid]),
+                .mem_write_valid(data_mem_1_write_valid[tid]),
+                .mem_write_address(data_mem_1_write_address[tid]),
+                .mem_write_data(data_mem_1_write_data[tid]),
+                .mem_write_ready(data_mem_1_write_ready[tid]),
+                .rs(rs_1[tid]),
+                .rt(rt_1[tid]),
+                .lsu_state(lsu_state_1[tid]),
+                .lsu_out(lsu_out_1[tid])
             );
 
             lsu lsu_instance_2 (
                 .clk(clk),
                 .reset(reset_2),
-                .enable(i < thread_count_2),
+                .enable(tid < thread_count_2),
                 .core_state(core_state_2),
-                .decoded_mem_read_enable(decoded_mem_read_enable_2),
-                .decoded_mem_write_enable(decoded_mem_write_enable_2),
-                .mem_read_valid(data_mem_2_read_valid[i]),
-                .mem_read_address(data_mem_2_read_address[i]),
-                .mem_read_ready(data_mem_2_read_ready[i]),
-                .mem_read_data(data_mem_2_read_data[i]),
-                .mem_write_valid(data_mem_2_write_valid[i]),
-                .mem_write_address(data_mem_2_write_address[i]),
-                .mem_write_data(data_mem_2_write_data[i]),
-                .mem_write_ready(data_mem_2_write_ready[i]),
-                .rs(rs_2[i]),
-                .rt(rt_2[i]),
-                .lsu_state(lsu_state_2[i]),
-                .lsu_out(lsu_out_2[i])
+                .decoded_mem_read_enable(decoded_mem_read_enable),
+                .decoded_mem_write_enable(decoded_mem_write_enable),
+                .mem_read_valid(data_mem_2_read_valid[tid]),
+                .mem_read_address(data_mem_2_read_address[tid]),
+                .mem_read_ready(data_mem_2_read_ready[tid]),
+                .mem_read_data(data_mem_2_read_data[tid]),
+                .mem_write_valid(data_mem_2_write_valid[tid]),
+                .mem_write_address(data_mem_2_write_address[tid]),
+                .mem_write_data(data_mem_2_write_data[tid]),
+                .mem_write_ready(data_mem_2_write_ready[tid]),
+                .rs(rs_2[tid]),
+                .rt(rt_2[tid]),
+                .lsu_state(lsu_state_2[tid]),
+                .lsu_out(lsu_out_2[tid])
             );
 
             // Register File 1
             registers #(
                 .THREADS_PER_BLOCK(THREADS_PER_BLOCK),
-                .THREAD_ID(i),
+                .THREAD_ID(tid),
                 .DATA_BITS(DATA_MEM_DATA_BITS)
             ) register_instance_1 (
                 .clk(clk),
                 .reset(reset_1),
-                .enable((i < thread_count_1) && ~warp_select),
+                .enable((tid < thread_count_1) && ~warp_select),
                 .block_id(block_id_1),
                 .core_state(core_state_1),
                 .decoded_reg_write_enable(decoded_reg_write_enable),
@@ -305,21 +305,21 @@ module ducttape2cores #(
                 .decoded_rs_address(decoded_rs_address),
                 .decoded_rt_address(decoded_rt_address),
                 .decoded_immediate(decoded_immediate),
-                .alu_out(alu_out[i]),
-                .lsu_out(lsu_out_1[i]),
-                .rs(rs_1[i]),
-                .rt(rt_1[i])
+                .alu_out(alu_out[tid]),
+                .lsu_out(lsu_out_1[tid]),
+                .rs(rs_1[tid]),
+                .rt(rt_1[tid])
             );
 
             // Register File 2
             registers #(
                 .THREADS_PER_BLOCK(THREADS_PER_BLOCK),
-                .THREAD_ID(i),
+                .THREAD_ID(tid),
                 .DATA_BITS(DATA_MEM_DATA_BITS)
             ) register_instance_2 (
                 .clk(clk),
                 .reset(reset_2),
-                .enable((i < thread_count_1) && warp_select),
+                .enable((tid < thread_count_1) && warp_select),
                 .block_id(block_id_2),
                 .core_state(core_state_2),
                 .decoded_reg_write_enable(decoded_reg_write_enable),
@@ -328,10 +328,10 @@ module ducttape2cores #(
                 .decoded_rs_address(decoded_rs_address),
                 .decoded_rt_address(decoded_rt_address),
                 .decoded_immediate(decoded_immediate),
-                .alu_out(alu_out[i]),
-                .lsu_out(lsu_out_2[i]),
-                .rs(rs_2[i]),
-                .rt(rt_2[i])
+                .alu_out(alu_out[tid]),
+                .lsu_out(lsu_out_2[tid]),
+                .rs(rs_2[tid]),
+                .rt(rt_2[tid])
             );
 
             // WARN:
@@ -344,15 +344,15 @@ module ducttape2cores #(
             ) pc_instance (
                 .clk(clk),
                 .reset(reset),
-                .enable(i < thread_count),
+                .enable(tid < thread_count),
                 .core_state(core_state),
                 .decoded_nzp(decoded_nzp),
                 .decoded_immediate(decoded_immediate),
                 .decoded_nzp_write_enable(decoded_nzp_write_enable),
                 .decoded_pc_mux(decoded_pc_mux),
-                .alu_out(alu_out[i]),
+                .alu_out(alu_out[tid]),
                 .current_pc(current_pc),
-                .next_pc(next_pc[i])
+                .next_pc(next_pc[tid])
             );
         end
     endgenerate

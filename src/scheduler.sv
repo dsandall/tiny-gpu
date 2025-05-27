@@ -118,7 +118,6 @@ module scheduler #(
             if (lsu_state_1[i] == LSU_REQUESTING || lsu_state_1[i] == LSU_WAITING) begin
               // WARN: only checking warp 0 lsus for testing
               any_lsu_waiting = 1'b1;
-              switch_warp();
               break;  //i'm commenting this out and expect this to cause errors in future 
             end
           end
@@ -126,6 +125,8 @@ module scheduler #(
           // If no LSU is waiting for a response, move onto the next stage
           if (!any_lsu_waiting) begin
             core_state <= CORE_EXECUTE;
+          end else begin
+            switch_warp();
           end
         end
         CORE_EXECUTE: begin

@@ -35,6 +35,10 @@ module lsu (
     output reg [7:0] lsu_out
 );
 
+    reg read;
+    reg write;
+    reg [7:0] debug_read_addr;
+
     always @(posedge clk) begin
         if (reset) begin
             lsu_state <= LSU_IDLE;
@@ -46,64 +50,51 @@ module lsu (
             mem_write_data <= 0;
         end else if (enable) begin
             // If memory read enable is triggered (LDR instruction)
-            if (decoded_mem_read_enable) begin 
-                case (lsu_state)
-                    LSU_IDLE: begin
-                        // Only read when core_state = REQUEST
-                        if (core_state == CORE_REQUEST) begin 
-                            lsu_state <= LSU_REQUESTING;
-                        end
+            
+            case (lsu_state)
+                LSU_IDLE: begin
+                    if (core_state == CORE_REQUEST && (decoded_mem_read_enable||decoded_mem_write_enable)) begin 
+                       lsu_state <= LSU_REQUESTING;
+                       // save state
+                       read <= decoded_mem_read_enable;
+                       write <= decoded_mem_write_enable;
                     end
-                    LSU_REQUESTING: begin 
-                        mem_read_valid <= 1;
-                        mem_read_address <= rs;
-                        lsu_state <= LSU_WAITING;
+                end
+                LSU_REQUESTING: begin 
+                    if (read) begin
+                       mem_read_valid <= 1;
+                       mem_read_address <= rs;
+                       debug_read_addr <= rs;
+                       lsu_state <= LSU_WAITING;
+                    end else if (write) begin
+                       mem_write_valid <= 1;
+                       mem_write_address <= rs;
+                       mem_write_data <= rt;
+                       lsu_state <= LSU_WAITING;
+                    end else begin
+                      // WARN: do nothing, error
                     end
-                    LSU_WAITING: begin
-                        if (mem_read_ready == 1) begin
-                            mem_read_valid <= 0;
-                            lsu_out <= mem_read_data;
-                            lsu_state <= LSU_DONE;
-                        end
+                end
+                LSU_WAITING: begin
+                    if (read && mem_read_ready) begin
+                       mem_read_valid <= 0;
+                       lsu_out <= mem_read_data;
+                       lsu_state <= LSU_DONE;
+                    end else if (write && mem_write_ready) begin
+                       mem_write_valid <= 0;
+                       lsu_state <= LSU_DONE;
                     end
-                    LSU_DONE: begin 
-                        // Reset when core_state = UPDATE
-                        if (core_state == CORE_UPDATE) begin 
-                            lsu_state <= LSU_IDLE;
-                        end
+                end
+                LSU_DONE: begin 
+                    // Reset when core_state = UPDATE
+                    if (core_state == CORE_UPDATE) begin 
+                       lsu_state <= LSU_IDLE;
+                       read <= 0;
+                       write <= 0;
                     end
-                endcase
-            end
+                end
+            endcase
 
-            // If memory write enable is triggered (STR instruction)
-            if (decoded_mem_write_enable) begin 
-                case (lsu_state)
-                    LSU_IDLE: begin
-                        // Only read when core_state = REQUEST
-                        if (core_state == CORE_REQUEST) begin 
-                            lsu_state <= LSU_REQUESTING;
-                        end
-                    end
-                    LSU_REQUESTING: begin 
-                        mem_write_valid <= 1;
-                        mem_write_address <= rs;
-                        mem_write_data <= rt;
-                        lsu_state <= LSU_WAITING;
-                    end
-                    LSU_WAITING: begin
-                        if (mem_write_ready) begin
-                            mem_write_valid <= 0;
-                            lsu_state <= LSU_DONE;
-                        end
-                    end
-                    LSU_DONE: begin 
-                        // Reset when core_state = UPDATE
-                        if (core_state == CORE_UPDATE) begin 
-                            lsu_state <= LSU_IDLE;
-                        end
-                    end
-                endcase
-            end
         end
     end
 endmodule
