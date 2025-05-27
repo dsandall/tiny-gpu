@@ -49,16 +49,14 @@ module scheduler #(
 );
 
   task automatic switch_warp();
-    // WARN: disabled
-    //
-    //warp_select <= ~warp_select;
-    //if (warp_select) begin
-    //  core_state <= core_state_1;
-    //  current_pc <= current_pc_1;
-    //end else begin
-    //  core_state <= core_state_2;
-    //  current_pc <= current_pc_2;
-    //end
+    warp_select <= ~warp_select;
+    if (warp_select) begin
+      core_state <= core_state_1;
+      current_pc <= current_pc_1;
+    end else begin
+      core_state <= core_state_2;
+      current_pc <= current_pc_2;
+    end
   endtask
 
   always @(posedge clk) begin
@@ -82,7 +80,7 @@ module scheduler #(
         CORE_FETCH: begin  //TODO:chage this so on stall switch to other warp
           // Move on once fetcher_state = FETCHED
 
-          if (fetcher_state == 3'b010) begin
+          if (fetcher_state == FET_DONE) begin
             core_state <= CORE_DECODE;
           end else begin
 
@@ -113,20 +111,23 @@ module scheduler #(
         CORE_WAIT: begin  //TODO:chage this so on stall switch to other warp
           // Wait for all LSUs to finish their request before continuing
           reg any_lsu_waiting = 1'b0;
+
           for (int i = 0; i < THREADS_PER_BLOCK; i++) begin
             // Make sure no lsu_state = REQUESTING or WAITING
-            if (lsu_state_1[i] == LSU_REQUESTING || lsu_state_1[i] == LSU_WAITING) begin
-              // WARN: only checking warp 0 lsus for testing
+            logic warp_1_waiting = (lsu_state_1[i] == LSU_REQUESTING || lsu_state_1[i] == LSU_WAITING);
+            logic warp_2_waiting = (lsu_state_2[i] == LSU_REQUESTING || lsu_state_2[i] == LSU_WAITING);
+
+            if ((warp_select && warp_2_waiting) || (!warp_select && warp_1_waiting)) begin
               any_lsu_waiting = 1'b1;
-              break;  //i'm commenting this out and expect this to cause errors in future 
+              break;
             end
           end
 
           // If no LSU is waiting for a response, move onto the next stage
-          if (!any_lsu_waiting) begin
-            core_state <= CORE_EXECUTE;
-          end else begin
+          if (any_lsu_waiting) begin
             switch_warp();
+          end else begin
+            core_state <= CORE_EXECUTE;
           end
         end
         CORE_EXECUTE: begin

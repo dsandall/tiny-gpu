@@ -40,7 +40,6 @@ module ducttape2cores #(
 
     logic  reset;
     logic  start;
-    logic  done;
  
     logic  [$clog2(THREADS_PER_BLOCK):0] thread_count;
 
@@ -98,33 +97,17 @@ module ducttape2cores #(
     //Warp Controller Signals
    logic warp_select;
 
-        /* verilator lint_off PINMISSING */
     // Warp Controller
     warp_controller #(
         .THREADS_PER_BLOCK(THREADS_PER_BLOCK)
     ) warp_controller_instance (
         .clk(clk),
-        .start({start_2, start_1}),
         .reset({reset_2, reset_1}),
-        .done(done),
-
-        .thread_count({thread_count_2, thread_count_1}),
 
         // inputs from schedulers
         .warp_select(warp_select),
         .core_state(core_state),
         .current_pc(current_pc),
-
-
-        //inputs from fetcher 1
-        .fetcher_state({fetcher_state_2, fetcher_state_1}),
-        .instruction({instruction_2, instruction_1}),
-
-
-
-        //inputs fromlogic 1
-        .rs({rs_2, rs_1}),
-        .rt({rt_2, rt_1}),
 
         //inputs from decoder
         .decoded_mem_read_enable(decoded_mem_read_enable),            // Enable reading from memory
@@ -134,16 +117,24 @@ module ducttape2cores #(
         .current_pc_out({current_pc_2, current_pc_1}),
         .core_state_out({core_state_2, core_state_1}),
         .decoded_mem_read_enable_out({decoded_mem_read_enable_2, decoded_mem_read_enable_1}),            // Enable reading from memory
-        .decoded_mem_write_enable_out({decoded_mem_write_enable_2, decoded_mem_write_enable_1}),           // Enable writing to memory
+        .decoded_mem_write_enable_out({decoded_mem_write_enable_2, decoded_mem_write_enable_1})           // Enable writing to memory
 
-        .start_out(start),
-        .reset_out(reset),
-        .thread_count_out(thread_count),
-        .fetcher_state_out(fetcher_state),
-        .instruction_out(instruction),
-        .rs_out(rs),
-        .rt_out(rt)
     );
+
+    // Selected warp output signals
+    always_comb begin
+      start = warp_select ? start_2 : start_1;
+      reset = warp_select ? reset_2 : reset_1;
+      thread_count = warp_select ? thread_count_2 : thread_count_1;
+      fetcher_state = warp_select ? fetcher_state_2 : fetcher_state_1;
+      instruction = warp_select ? instruction_2 : instruction_1;
+  
+      // Copy arrays elementwise from selected warp
+      for (int tid = 0; tid < THREADS_PER_BLOCK; tid++) begin
+        rs[tid] = warp_select ? rs_2[tid] : rs_1[tid];
+        rt[tid] = warp_select ? rt_2[tid] : rt_1[tid];
+      end
+    end
 
     // Fetcher
     fetcher #(
@@ -245,14 +236,35 @@ module ducttape2cores #(
                 .alu_out(alu_out[tid])
             );
 
+            // WARN:
+            // Program Counter:
+            // Handles Jump/Branch requests
+            // Assumed that all synched threads remain executing the same instruction!
+            pc #(
+                .DATA_MEM_DATA_BITS(DATA_MEM_DATA_BITS),
+                .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS)
+            ) pc_instance (
+                .clk(clk),
+                .reset(reset),
+                .enable(tid < thread_count),
+                .core_state(core_state),
+                .decoded_nzp(decoded_nzp),
+                .decoded_immediate(decoded_immediate),
+                .decoded_nzp_write_enable(decoded_nzp_write_enable),
+                .decoded_pc_mux(decoded_pc_mux),
+                .alu_out(alu_out[tid]),
+                .current_pc(current_pc),
+                .next_pc(next_pc[tid])
+            );
+
             // LSU
             lsu lsu_instance_1 (
                 .clk(clk),
                 .reset(reset_1),
                 .enable(tid < thread_count_1),
                 .core_state(core_state_1),
-                .decoded_mem_read_enable(decoded_mem_read_enable),
-                .decoded_mem_write_enable(decoded_mem_write_enable),
+                .decoded_mem_read_enable(decoded_mem_read_enable && ~warp_select),
+                .decoded_mem_write_enable(decoded_mem_write_enable && ~warp_select),
                 .mem_read_valid(data_mem_1_read_valid[tid]),
                 .mem_read_address(data_mem_1_read_address[tid]),
                 .mem_read_ready(data_mem_1_read_ready[tid]),
@@ -272,8 +284,8 @@ module ducttape2cores #(
                 .reset(reset_2),
                 .enable(tid < thread_count_2),
                 .core_state(core_state_2),
-                .decoded_mem_read_enable(decoded_mem_read_enable),
-                .decoded_mem_write_enable(decoded_mem_write_enable),
+                .decoded_mem_read_enable(decoded_mem_read_enable && warp_select),
+                .decoded_mem_write_enable(decoded_mem_write_enable && warp_select),
                 .mem_read_valid(data_mem_2_read_valid[tid]),
                 .mem_read_address(data_mem_2_read_address[tid]),
                 .mem_read_ready(data_mem_2_read_ready[tid]),
@@ -334,26 +346,6 @@ module ducttape2cores #(
                 .rt(rt_2[tid])
             );
 
-            // WARN:
-            // Program Counter:
-            // Handles Jump/Branch requests
-            // Assumed that all synched threads remain executing the same instruction!
-            pc #(
-                .DATA_MEM_DATA_BITS(DATA_MEM_DATA_BITS),
-                .PROGRAM_MEM_ADDR_BITS(PROGRAM_MEM_ADDR_BITS)
-            ) pc_instance (
-                .clk(clk),
-                .reset(reset),
-                .enable(tid < thread_count),
-                .core_state(core_state),
-                .decoded_nzp(decoded_nzp),
-                .decoded_immediate(decoded_immediate),
-                .decoded_nzp_write_enable(decoded_nzp_write_enable),
-                .decoded_pc_mux(decoded_pc_mux),
-                .alu_out(alu_out[tid]),
-                .current_pc(current_pc),
-                .next_pc(next_pc[tid])
-            );
         end
     endgenerate
 endmodule
