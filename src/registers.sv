@@ -1,5 +1,6 @@
 `default_nettype none
 `timescale 1ns/1ns
+`include "enums.svh"
 
 // REGISTER FILE
 // > Each thread within each core has it's own register file with 13 free registers and 3 read-only registers
@@ -68,18 +69,22 @@ module registers #(
             registers[14] <= THREADS_PER_BLOCK; // %blockDim
             registers[15] <= THREAD_ID;         // %threadIdx
         end else if (enable) begin 
-            // [Bad Solution] Shouldn't need to set this every cycle
-            registers[13] <= block_id; // Update the block_id when a new block is issued from dispatcher
+            
+            if (core_state == CORE_IDLE) begin
+                registers[13] <= block_id; // Update the block_id when a new block is issued from dispatcher
+            end
             
             // Fill rs/rt when core_state = REQUEST
-            if (core_state == 3'b011) begin 
+            if (core_state == CORE_REQUEST) begin 
                 rs <= registers[decoded_rs_address];
                 rt <= registers[decoded_rt_address];
             end
 
             // Store rd when core_state = UPDATE
-            if (core_state == 3'b110) begin 
+            if (core_state == CORE_UPDATE) begin 
                 // Only allow writing to R0 - R12
+                // TODO: no reason we cant just set the special registers upon
+                // block dispatch, then allow rewrites later...
                 if (decoded_reg_write_enable && decoded_rd_address < 13) begin
                     case (decoded_reg_input_mux)
                         ARITHMETIC: begin 

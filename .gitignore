@@ -16,5 +16,5 @@ tiny-gpu-mlir/
 #*.surf.ron
 #
 
-
+test_all.log
 yosys/*.v

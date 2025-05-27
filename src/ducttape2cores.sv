@@ -280,9 +280,9 @@ module ducttape2cores #(
             );
 
             lsu lsu_instance_2 (
-                .clk(clk),
+                .clk(clk), 
                 .reset(reset_2),
-                .enable(tid < thread_count_2),
+                .enable(tid < thread_count_2), // constant
                 .core_state(core_state_2),
                 .decoded_mem_read_enable(decoded_mem_read_enable && warp_select),
                 .decoded_mem_write_enable(decoded_mem_write_enable && warp_select),
