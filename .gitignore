@@ -2,7 +2,8 @@
 build/
 test/logs/*
 !.gitkeep
-**.vcd
+#**.vcd
+dump.vcd
 gds
 gds/**/*.gltf
 **.nvim

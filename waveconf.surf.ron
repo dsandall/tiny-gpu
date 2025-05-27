@@ -21,10 +21,7 @@
         active_scope: Some(WaveScope((
             strs: [
                 "gpu",
-                "cores[0]",
-                "core_instance",
-                "threads[3]",
-                "lsu_instance_1",
+                "data_memory_controller",
             ],
         ))),
         items_tree: (
@@ -254,6 +251,210 @@
                 (
                     item_ref: (305),
                     level: 1,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (471),
+                    level: 1,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (455),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (457),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (460),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (461),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (467),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (468),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (458),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (459),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (465),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (466),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (489),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (481),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (482),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (483),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (484),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (485),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (486),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (487),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (488),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (480),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (472),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (473),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (474),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (475),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (476),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (477),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (478),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (479),
+                    level: 3,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (462),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (463),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (464),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (469),
+                    level: 2,
+                    unfolded: true,
+                    selected: false,
+                ),
+                (
+                    item_ref: (470),
+                    level: 2,
                     unfolded: true,
                     selected: false,
                 ),
@@ -878,12 +1079,235 @@
             ],
         ),
         displayed_items: {
-            (34): Group((
-                name: "top",
+            (230): Placeholder((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "warp_controller_instance",
+                        ],
+                    ),
+                    name: "decoded_mem_write_enable_2",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "decoded_mem_write_enable_2",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (301): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "scheduler_instance",
+                        ],
+                    ),
+                    name: "core_state_1",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…scheduler_instance.core_state_1 [2:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (392): Group((
+                name: "W1-R0",
                 color: None,
                 background_color: None,
                 content: [],
                 is_open: false,
+            )),
+            (468): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "mem_write_valid",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "mem_write_valid [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (178): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_state_1",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Violet"),
+                background_color: None,
+                display_name: "…lsu_state_1.[0] [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (482): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_data",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_data.[1] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (23): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "fetcher_read_ready",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "fetcher_read_ready [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (303): Marker((
+                color: None,
+                background_color: None,
+                name: None,
+                idx: 0,
+            )),
+            (33): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "thread_count",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "thread_count [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (339): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_read_address",
+                        ],
+                    ),
+                    name: "[2]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_read_address.[2] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (351): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_write_data",
+                        ],
+                    ),
+                    name: "[2]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_write_data.[2] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (292): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "instruction",
+                ),
+                color: Some("Gray"),
+                background_color: None,
+                display_name: "…core_instance.instruction [15:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (335): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "decoder_instance",
+                        ],
+                    ),
+                    name: "reset",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…decoder_instance.reset",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
             )),
             (18): Variable((
                 variable_ref: (
@@ -903,154 +1327,39 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (234): Variable((
+            (181): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
                             "cores[0]",
                             "core_instance",
-                            "threads[0]",
-                            "lsu_instance_2",
+                            "lsu_state_1",
                         ],
                     ),
-                    name: "mem_read_ready",
+                    name: "[3]",
                 ),
-                color: None,
+                color: Some("Gray"),
                 background_color: None,
-                display_name: "…threads[0].lsu_instance_2.mem_read_ready",
+                display_name: "…lsu_state_1.[3] [1:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (233): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[1]",
-                            "lsu_instance_2",
-                        ],
-                    ),
-                    name: "mem_read_ready",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[1].lsu_instance_2.mem_read_ready",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (227): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "warp_controller_instance",
-                        ],
-                    ),
-                    name: "decoded_mem_read_enable_1",
-                ),
-                color: Some("Blue"),
-                background_color: None,
-                display_name: "decoded_mem_read_enable_1",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (300): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "scheduler_instance",
-                        ],
-                    ),
-                    name: "core_state",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…scheduler_instance.core_state [2:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Hexadecimal"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (14): Variable((
+            (13): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
                         ],
                     ),
-                    name: "core_reset",
+                    name: "core_done",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "core_reset [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (290): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (28): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "lsu_write_valid",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "lsu_write_valid [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (355): Group((
-                name: "Group",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (105): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "block_id_2",
-                ),
-                color: Some("Blue"),
-                background_color: None,
-                display_name: "block_id_2 [7:0]",
+                display_name: "core_done [1:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -1080,69 +1389,7 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (172): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_out_1",
-                        ],
-                    ),
-                    name: "[2]",
-                ),
-                color: Some("Gray"),
-                background_color: None,
-                display_name: "…lsu_out_1.[2] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (387): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[1]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[7]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[1].register_instance_1.registers.[7] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (21): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "device_control_write_enable",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "device_control_write_enable",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (231): Variable((
+            (365): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -1150,154 +1397,7 @@
                             "cores[0]",
                             "core_instance",
                             "threads[3]",
-                            "lsu_instance_2",
-                        ],
-                    ),
-                    name: "mem_read_ready",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[3].lsu_instance_2.mem_read_ready",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (349): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_write_data",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…data_mem_write_data.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (181): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_state_1",
-                        ],
-                    ),
-                    name: "[3]",
-                ),
-                color: Some("Gray"),
-                background_color: None,
-                display_name: "…lsu_state_1.[3] [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (370): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[2]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[5]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[2].register_instance_1.registers.[5] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (340): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_read_address",
-                        ],
-                    ),
-                    name: "[3]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…data_mem_read_address.[3] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (292): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "instruction",
-                ),
-                color: Some("Gray"),
-                background_color: None,
-                display_name: "…core_instance.instruction [15:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (386): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[2]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[2].register_instance_1.registers.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (358): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[0]",
-                            "register_instance_1",
+                            "register_instance_2",
                             "registers",
                         ],
                     ),
@@ -1305,69 +1405,61 @@
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…threads[0].register_instance_1.registers.[4] [7:0]",
+                display_name: "…threads[3].register_instance_2.registers.[4] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (179): Variable((
+            (234): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
                             "cores[0]",
                             "core_instance",
-                            "lsu_state_1",
+                            "threads[0]",
+                            "lsu_instance_2",
                         ],
                     ),
-                    name: "[1]",
-                ),
-                color: Some("Gray"),
-                background_color: None,
-                display_name: "gpu.cores[0].core_instance.lsu_state_1.[1] [1:0]",
-                display_name_type: Global,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (33): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "thread_count",
+                    name: "mem_read_ready",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "thread_count [7:0]",
+                display_name: "…threads[0].lsu_instance_2.mem_read_ready",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (31): Variable((
+            (474): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
+                            "data_memory_controller",
+                            "consumer_read_address",
                         ],
                     ),
-                    name: "reset",
+                    name: "[2]",
                 ),
-                color: None,
+                color: Some("Blue"),
                 background_color: None,
-                display_name: "gpu.reset",
+                display_name: "…consumer_read_address.[2] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
+            )),
+            (391): Group((
+                name: "W1 -R7",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
             )),
             (344): Variable((
                 variable_ref: (
@@ -1388,231 +1480,59 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (173): Variable((
+            (459): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_out_1",
+                            "data_memory_controller",
                         ],
                     ),
-                    name: "[3]",
+                    name: "consumer_read_valid",
                 ),
-                color: Some("Gray"),
+                color: Some("Blue"),
                 background_color: None,
-                display_name: "…lsu_out_1.[3] [7:0]",
+                display_name: "consumer_read_valid [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (359): Variable((
+            (478): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[0]",
-                            "register_instance_2",
-                            "registers",
+                            "data_memory_controller",
+                            "consumer_read_address",
                         ],
                     ),
-                    name: "[4]",
+                    name: "[6]",
                 ),
-                color: None,
+                color: Some("Blue"),
                 background_color: None,
-                display_name: "…threads[0].register_instance_2.registers.[4] [7:0]",
+                display_name: "…consumer_read_address.[6] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (390): Variable((
+            (488): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[0]",
-                            "register_instance_1",
-                            "registers",
+                            "data_memory_controller",
+                            "consumer_read_data",
                         ],
                     ),
-                    name: "[0]",
+                    name: "[7]",
                 ),
-                color: None,
+                color: Some("Blue"),
                 background_color: None,
-                display_name: "…threads[0].register_instance_1.registers.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (338): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_read_address",
-                        ],
-                    ),
-                    name: "[1]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…data_mem_read_address.[1] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (32): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "start",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "gpu.start",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (184): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_state_2",
-                        ],
-                    ),
-                    name: "[2]",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…lsu_state_2.[2] [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (139): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "done",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…core_instance.done",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (298): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (170): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_out_1",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: Some("Violet"),
-                background_color: None,
-                display_name: "…lsu_out_1.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (182): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_state_2",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: Some("Violet"),
-                background_color: None,
-                display_name: "…lsu_state_2.[0] [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (107): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "core_state",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…core_instance.core_state [2:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: Some("Hexadecimal"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (352): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_write_data",
-                        ],
-                    ),
-                    name: "[3]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…data_mem_write_data.[3] [7:0]",
+                display_name: "…consumer_read_data.[7] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -1639,179 +1559,7 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (345): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_write_address",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…data_mem_write_address.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (185): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_state_2",
-                        ],
-                    ),
-                    name: "[3]",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…lsu_state_2.[3] [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (369): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[1]",
-                            "register_instance_2",
-                            "registers",
-                        ],
-                    ),
-                    name: "[5]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[1].register_instance_2.registers.[5] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (30): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "program_mem_read_valid",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "program_mem_read_valid [0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (229): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "warp_controller_instance",
-                        ],
-                    ),
-                    name: "decoded_mem_write_enable_1",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "decoded_mem_write_enable_1",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (331): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "decoder_instance",
-                        ],
-                    ),
-                    name: "decoded_ret",
-                ),
-                color: Some("Yellow"),
-                background_color: None,
-                display_name: "decoded_ret",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (168): Group((
-                name: "LSU",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (347): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_write_address",
-                        ],
-                    ),
-                    name: "[2]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…data_mem_write_address.[2] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (363): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[2]",
-                            "register_instance_2",
-                            "registers",
-                        ],
-                    ),
-                    name: "[4]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[2].register_instance_2.registers.[4] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (174): Variable((
+            (177): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -1821,55 +1569,44 @@
                             "lsu_out_2",
                         ],
                     ),
-                    name: "[0]",
+                    name: "[3]",
                 ),
-                color: Some("Violet"),
+                color: Some("Red"),
                 background_color: None,
-                display_name: "…lsu_out_2.[0] [7:0]",
+                display_name: "…lsu_out_2.[3] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (296): Group((
-                name: "CURRENT INSTR",
+            (290): Divider((
                 color: None,
                 background_color: None,
-                content: [],
-                is_open: false,
+                name: None,
             )),
-            (295): Group((
-                name: "CURRENT PC ADDR",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (368): Variable((
+            (334): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
                             "cores[0]",
                             "core_instance",
-                            "threads[1]",
-                            "register_instance_1",
-                            "registers",
+                            "decoder_instance",
                         ],
                     ),
-                    name: "[5]",
+                    name: "instruction",
                 ),
-                color: None,
+                color: Some("Red"),
                 background_color: None,
-                display_name: "…threads[1].register_instance_1.registers.[5] [7:0]",
+                display_name: "…decoder_instance.instruction [15:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (35): Variable((
+            (106): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -1880,8 +1617,8 @@
                     ),
                     name: "clk",
                 ),
-                color: None,
-                background_color: None,
+                color: Some("Pink"),
+                background_color: Some("Blue"),
                 display_name: "…core_instance.clk",
                 display_name_type: Unique,
                 manual_name: None,
@@ -1889,190 +1626,37 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (180): Variable((
+            (463): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_state_1",
+                            "data_memory_controller",
                         ],
                     ),
-                    name: "[2]",
+                    name: "last_grant",
                 ),
-                color: Some("Gray"),
+                color: None,
                 background_color: None,
-                display_name: "…lsu_state_1.[2] [1:0]",
+                display_name: "last_grant [4:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (305): Variable((
+            (25): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "scheduler_instance",
                         ],
                     ),
-                    name: "done_2",
-                ),
-                color: Some("Yellow"),
-                background_color: None,
-                display_name: "gpu.cores[0].core_instance.scheduler_instance.done_2",
-                display_name_type: Global,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (156): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "start_1",
-                ),
-                color: Some("Orange"),
-                background_color: None,
-                display_name: "start_1",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (376): Group((
-                name: "Group",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (391): Group((
-                name: "W1 -R7",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (232): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[2]",
-                            "lsu_instance_2",
-                        ],
-                    ),
-                    name: "mem_read_ready",
+                    name: "lsu_read_ready",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…threads[2].lsu_instance_2.mem_read_ready",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (324): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "decoder_instance",
-                        ],
-                    ),
-                    name: "decoded_mem_write_enable",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "decoded_mem_write_enable",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (287): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "scheduler_instance",
-                        ],
-                    ),
-                    name: "current_pc",
-                ),
-                color: Some("Gray"),
-                background_color: None,
-                display_name: "current_pc [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (371): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[2]",
-                            "register_instance_2",
-                            "registers",
-                        ],
-                    ),
-                    name: "[5]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[2].register_instance_2.registers.[5] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (356): Group((
-                name: "Group",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (109): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "core_state_2",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…core_instance.core_state_2 [2:0]",
+                display_name: "lsu_read_ready [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -2102,7 +1686,73 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (228): Variable((
+            (331): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "decoder_instance",
+                        ],
+                    ),
+                    name: "decoded_ret",
+                ),
+                color: Some("Yellow"),
+                background_color: None,
+                display_name: "decoded_ret",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (107): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "core_state",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…core_instance.core_state [2:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Hexadecimal"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (28): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "lsu_write_valid",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "lsu_write_valid [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (489): Group((
+                name: "READ_DAT",
+                color: Some("Blue"),
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (227): Placeholder((
                 variable_ref: (
                     path: (
                         strs: [
@@ -2112,11 +1762,185 @@
                             "warp_controller_instance",
                         ],
                     ),
-                    name: "decoded_mem_read_enable_2",
+                    name: "decoded_mem_read_enable_1",
                 ),
                 color: Some("Blue"),
                 background_color: None,
-                display_name: "decoded_mem_read_enable_2",
+                display_name: "decoded_mem_read_enable_1",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (473): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_address",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_address.[1] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (481): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_data",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "gpu.data_memory_controller.consumer_read_data.[0] [7:0]",
+                display_name_type: Global,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (472): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_address",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "gpu.data_memory_controller.consumer_read_address.[0] [7:0]",
+                display_name_type: Global,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (338): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_read_address",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_read_address.[1] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (319): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "decoder_instance",
+                        ],
+                    ),
+                    name: "core_state",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…decoder_instance.core_state [2:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (32): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "start",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "gpu.start",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (22): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "done",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "gpu.done",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (31): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "reset",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "gpu.reset",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (35): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "clk",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…core_instance.clk",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -2143,89 +1967,7 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (367): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[0]",
-                            "register_instance_2",
-                            "registers",
-                        ],
-                    ),
-                    name: "[5]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[0].register_instance_2.registers.[5] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (20): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "device_control_data",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "device_control_data [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (360): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[1]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[4]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[1].register_instance_1.registers.[4] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (27): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "lsu_write_ready",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "lsu_write_ready [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (106): Variable((
+            (109): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -2234,411 +1976,38 @@
                             "core_instance",
                         ],
                     ),
-                    name: "clk",
-                ),
-                color: Some("Pink"),
-                background_color: Some("Blue"),
-                display_name: "…core_instance.clk",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (389): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[0]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[7]",
+                    name: "core_state_2",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…threads[0].register_instance_1.registers.[7] [7:0]",
+                display_name: "…core_instance.core_state_2 [2:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (306): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "scheduler_instance",
-                        ],
-                    ),
-                    name: "done_1",
-                ),
-                color: Some("Yellow"),
-                background_color: None,
-                display_name: "gpu.cores[0].core_instance.scheduler_instance.done_1",
-                display_name_type: Global,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (377): Group((
-                name: "W1 -R4",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (383): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[3]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[3].register_instance_1.registers.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (23): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "fetcher_read_ready",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "fetcher_read_ready [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (337): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_read_address",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: Some("Blue"),
-                background_color: None,
-                display_name: "…data_mem_read_address.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (29): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "program_mem_read_ready",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "program_mem_read_ready [0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (157): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "start_2",
-                ),
-                color: Some("Orange"),
-                background_color: None,
-                display_name: "start_2",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (388): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[1]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[1].register_instance_1.registers.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (375): Group((
+            (376): Group((
                 name: "Group",
                 color: None,
                 background_color: None,
                 content: [],
                 is_open: false,
             )),
-            (289): Variable((
+            (483): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "scheduler_instance",
-                        ],
-                    ),
-                    name: "current_pc_2",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "current_pc_2 [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (26): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "lsu_read_valid",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "lsu_read_valid [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (155): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "start",
-                ),
-                color: Some("Orange"),
-                background_color: None,
-                display_name: "…core_instance.start",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (19): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "data_mem_write_valid",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "data_mem_write_valid [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (177): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_out_2",
-                        ],
-                    ),
-                    name: "[3]",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…lsu_out_2.[3] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (353): Group((
-                name: "LSU 1",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (16): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "data_mem_read_ready",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "data_mem_read_ready [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (323): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "decoder_instance",
-                        ],
-                    ),
-                    name: "decoded_mem_read_enable",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "decoded_mem_read_enable",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (297): Divider((
-                color: None,
-                background_color: None,
-                name: None,
-            )),
-            (343): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_read_data",
+                            "data_memory_controller",
+                            "consumer_read_data",
                         ],
                     ),
                     name: "[2]",
                 ),
-                color: None,
+                color: Some("Blue"),
                 background_color: None,
-                display_name: "…data_mem_read_data.[2] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (335): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "decoder_instance",
-                        ],
-                    ),
-                    name: "reset",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…decoder_instance.reset",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (336): Group((
-                name: "DECODER",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (303): Marker((
-                color: None,
-                background_color: None,
-                name: None,
-                idx: 0,
-            )),
-            (351): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_write_data",
-                        ],
-                    ),
-                    name: "[2]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…data_mem_write_data.[2] [7:0]",
+                display_name: "…consumer_read_data.[2] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -2666,6 +2035,25 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
+            (345): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_write_address",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…data_mem_write_address.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
             (350): Variable((
                 variable_ref: (
                     path: (
@@ -2685,7 +2073,94 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (334): Variable((
+            (390): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[0]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[0].register_instance_1.registers.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (375): Group((
+                name: "Group",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (20): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "device_control_data",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "device_control_data [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (14): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "core_reset",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "core_reset [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (175): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_out_2",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…lsu_out_2.[1] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (324): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -2695,161 +2170,75 @@
                             "decoder_instance",
                         ],
                     ),
-                    name: "instruction",
+                    name: "decoded_mem_write_enable",
                 ),
-                color: Some("Red"),
+                color: None,
                 background_color: None,
-                display_name: "…decoder_instance.instruction [15:0]",
+                display_name: "decoded_mem_write_enable",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (378): Group((
-                name: "W1 -R5",
+            (21): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "device_control_write_enable",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "device_control_write_enable",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (374): Group((
+                name: "W2 registers",
                 color: None,
                 background_color: None,
                 content: [],
                 is_open: false,
             )),
-            (380): Group((
-                name: "W1 registers",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (346): Variable((
+            (476): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "data_mem_write_address",
+                            "data_memory_controller",
+                            "consumer_read_address",
                         ],
                     ),
-                    name: "[1]",
+                    name: "[4]",
                 ),
-                color: None,
+                color: Some("Blue"),
                 background_color: None,
-                display_name: "…data_mem_write_address.[1] [7:0]",
+                display_name: "…consumer_read_address.[4] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (348): Variable((
+            (470): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "data_mem_write_address",
+                            "data_memory_controller",
                         ],
                     ),
-                    name: "[3]",
+                    name: "reset",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…data_mem_write_address.[3] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (302): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "scheduler_instance",
-                        ],
-                    ),
-                    name: "core_state_2",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…scheduler_instance.core_state_2 [2:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (178): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_state_1",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: Some("Violet"),
-                background_color: None,
-                display_name: "…lsu_state_1.[0] [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (12): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "clk",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "gpu.clk",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (25): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "lsu_read_ready",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "lsu_read_ready [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (154): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "reset_2",
-                ),
-                color: Some("Orange"),
-                background_color: None,
-                display_name: "reset_2",
+                display_name: "…data_memory_controller.reset",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -2879,253 +2268,18 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (301): Variable((
+            (24): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "scheduler_instance",
                         ],
                     ),
-                    name: "core_state_1",
+                    name: "fetcher_read_valid",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…scheduler_instance.core_state_1 [2:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (319): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "decoder_instance",
-                        ],
-                    ),
-                    name: "core_state",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…decoder_instance.core_state [2:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (22): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "done",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "gpu.done",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (365): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[3]",
-                            "register_instance_2",
-                            "registers",
-                        ],
-                    ),
-                    name: "[4]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[3].register_instance_2.registers.[4] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (17): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "data_mem_read_valid",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "data_mem_read_valid [3:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (339): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_read_address",
-                        ],
-                    ),
-                    name: "[2]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…data_mem_read_address.[2] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (341): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_read_data",
-                        ],
-                    ),
-                    name: "[0]",
-                ),
-                color: Some("Blue"),
-                background_color: None,
-                display_name: "…data_mem_read_data.[0] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (176): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_out_2",
-                        ],
-                    ),
-                    name: "[2]",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…lsu_out_2.[2] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (187): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "data_mem_read_ready",
-                ),
-                color: Some("Violet"),
-                background_color: None,
-                display_name: "gpu.data_mem_read_ready [3:0]",
-                display_name_type: Global,
-                manual_name: None,
-                format: Some("Binary (with groups)"),
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (392): Group((
-                name: "W1-R0",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (354): Group((
-                name: "LSU 2",
-                color: None,
-                background_color: None,
-                content: [],
-                is_open: false,
-            )),
-            (361): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[1]",
-                            "register_instance_2",
-                            "registers",
-                        ],
-                    ),
-                    name: "[4]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…threads[1].register_instance_2.registers.[4] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (15): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "core_start",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "core_start [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (108): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                        ],
-                    ),
-                    name: "core_state_1",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…core_instance.core_state_1 [2:0]",
+                display_name: "fetcher_read_valid [1:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -3152,7 +2306,222 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (385): Variable((
+            (162): Group((
+                name: "hwcore0",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (182): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_state_2",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Violet"),
+                background_color: None,
+                display_name: "…lsu_state_2.[0] [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (168): Group((
+                name: "LSU",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (185): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_state_2",
+                        ],
+                    ),
+                    name: "[3]",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…lsu_state_2.[3] [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (475): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_address",
+                        ],
+                    ),
+                    name: "[3]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_address.[3] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (389): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[0]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[7]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[0].register_instance_1.registers.[7] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (173): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_out_1",
+                        ],
+                    ),
+                    name: "[3]",
+                ),
+                color: Some("Gray"),
+                background_color: None,
+                display_name: "…lsu_out_1.[3] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (139): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "done",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…core_instance.done",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (296): Group((
+                name: "CURRENT INSTR",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (16): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "data_mem_read_ready",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "data_mem_read_ready [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (455): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "cache_line_mutex",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "cache_line_mutex [15:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (297): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (353): Group((
+                name: "LSU 1",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (342): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_read_data",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_read_data.[1] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (370): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -3164,112 +2533,143 @@
                             "registers",
                         ],
                     ),
-                    name: "[7]",
+                    name: "[5]",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…threads[2].register_instance_1.registers.[7] [7:0]",
+                display_name: "…threads[2].register_instance_1.registers.[5] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (153): Variable((
+            (462): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
+                            "data_memory_controller",
                         ],
                     ),
-                    name: "reset_1",
+                    name: "granted",
                 ),
-                color: Some("Orange"),
+                color: None,
                 background_color: None,
-                display_name: "reset_1",
+                display_name: "granted [23:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (374): Group((
-                name: "W2 registers",
+            (377): Group((
+                name: "W1 -R4",
                 color: None,
                 background_color: None,
                 content: [],
                 is_open: false,
             )),
-            (183): Variable((
+            (347): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "lsu_state_2",
+                            "data_mem_write_address",
                         ],
                     ),
-                    name: "[1]",
-                ),
-                color: Some("Red"),
-                background_color: None,
-                display_name: "…lsu_state_2.[1] [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (384): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "cores[0]",
-                            "core_instance",
-                            "threads[3]",
-                            "register_instance_1",
-                            "registers",
-                        ],
-                    ),
-                    name: "[7]",
+                    name: "[2]",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "…threads[3].register_instance_1.registers.[7] [7:0]",
+                display_name: "…data_mem_write_address.[2] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (373): Variable((
+            (12): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "clk",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "gpu.clk",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (352): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_write_data",
+                        ],
+                    ),
+                    name: "[3]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_write_data.[3] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (17): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "data_mem_read_valid",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "data_mem_read_valid [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (154): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
                             "cores[0]",
                             "core_instance",
-                            "threads[3]",
-                            "register_instance_2",
-                            "registers",
                         ],
                     ),
-                    name: "[5]",
+                    name: "reset_2",
                 ),
-                color: None,
+                color: Some("Orange"),
                 background_color: None,
-                display_name: "…threads[3].register_instance_2.registers.[5] [7:0]",
+                display_name: "reset_2",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (288): Variable((
+            (298): Divider((
+                color: None,
+                background_color: None,
+                name: None,
+            )),
+            (302): Variable((
                 variable_ref: (
                     path: (
                         strs: [
@@ -3279,29 +2679,52 @@
                             "scheduler_instance",
                         ],
                     ),
-                    name: "current_pc_1",
+                    name: "core_state_2",
                 ),
                 color: None,
                 background_color: None,
-                display_name: "current_pc_1 [7:0]",
+                display_name: "…scheduler_instance.core_state_2 [2:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (13): Variable((
+            (172): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_out_1",
                         ],
                     ),
-                    name: "core_done",
+                    name: "[2]",
                 ),
-                color: None,
+                color: Some("Gray"),
                 background_color: None,
-                display_name: "core_done [1:0]",
+                display_name: "…lsu_out_1.[2] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (477): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_address",
+                        ],
+                    ),
+                    name: "[5]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_address.[5] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -3331,7 +2754,363 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
-            (230): Variable((
+            (367): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[0]",
+                            "register_instance_2",
+                            "registers",
+                        ],
+                    ),
+                    name: "[5]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[0].register_instance_2.registers.[5] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (231): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[3]",
+                            "lsu_instance_2",
+                        ],
+                    ),
+                    name: "mem_read_ready",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[3].lsu_instance_2.mem_read_ready",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (356): Group((
+                name: "Group",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (469): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "num_grants_this_cycle",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "num_grants_this_cycle [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (388): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[1]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[1].register_instance_1.registers.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (380): Group((
+                name: "W1 registers",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (343): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_read_data",
+                        ],
+                    ),
+                    name: "[2]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_read_data.[2] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (105): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "block_id_2",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "block_id_2 [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (153): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "reset_1",
+                ),
+                color: Some("Orange"),
+                background_color: None,
+                display_name: "reset_1",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (232): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[2]",
+                            "lsu_instance_2",
+                        ],
+                    ),
+                    name: "mem_read_ready",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[2].lsu_instance_2.mem_read_ready",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (466): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "mem_read_valid",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "mem_read_valid [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (484): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_data",
+                        ],
+                    ),
+                    name: "[3]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_data.[3] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (386): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[2]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[2].register_instance_1.registers.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (187): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "data_mem_read_ready",
+                ),
+                color: Some("Violet"),
+                background_color: None,
+                display_name: "gpu.data_mem_read_ready [3:0]",
+                display_name_type: Global,
+                manual_name: None,
+                format: Some("Binary (with groups)"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (480): Group((
+                name: "READ_ADDR",
+                color: Some("Blue"),
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (108): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "core_state_1",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…core_instance.core_state_1 [2:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (184): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_state_2",
+                        ],
+                    ),
+                    name: "[2]",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…lsu_state_2.[2] [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (479): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_address",
+                        ],
+                    ),
+                    name: "[7]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_address.[7] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (354): Group((
+                name: "LSU 2",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (340): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_read_address",
+                        ],
+                    ),
+                    name: "[3]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_read_address.[3] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (229): Placeholder((
                 variable_ref: (
                     path: (
                         strs: [
@@ -3341,11 +3120,286 @@
                             "warp_controller_instance",
                         ],
                     ),
-                    name: "decoded_mem_write_enable_2",
+                    name: "decoded_mem_write_enable_1",
                 ),
                 color: Some("Red"),
                 background_color: None,
-                display_name: "decoded_mem_write_enable_2",
+                display_name: "decoded_mem_write_enable_1",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (337): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_read_address",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…data_mem_read_address.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (360): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[1]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[4]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[1].register_instance_1.registers.[4] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (30): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "program_mem_read_valid",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "program_mem_read_valid [0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (486): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_data",
+                        ],
+                    ),
+                    name: "[5]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_data.[5] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (157): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "start_2",
+                ),
+                color: Some("Orange"),
+                background_color: None,
+                display_name: "start_2",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (180): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_state_1",
+                        ],
+                    ),
+                    name: "[2]",
+                ),
+                color: Some("Gray"),
+                background_color: None,
+                display_name: "…lsu_state_1.[2] [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (176): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_out_2",
+                        ],
+                    ),
+                    name: "[2]",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…lsu_out_2.[2] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (170): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_out_1",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Violet"),
+                background_color: None,
+                display_name: "…lsu_out_1.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (289): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "scheduler_instance",
+                        ],
+                    ),
+                    name: "current_pc_2",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "current_pc_2 [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (336): Group((
+                name: "DECODER",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (323): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "decoder_instance",
+                        ],
+                    ),
+                    name: "decoded_mem_read_enable",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "decoded_mem_read_enable",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (183): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_state_2",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "…lsu_state_2.[1] [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (467): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "mem_write_ready",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "mem_write_ready [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (385): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[2]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[7]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[2].register_instance_1.registers.[7] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -3372,65 +3426,232 @@
                 field_formats: [],
                 height_scaling_factor: Some(2.0),
             )),
-            (24): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                        ],
-                    ),
-                    name: "fetcher_read_valid",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "fetcher_read_valid [1:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (342): Variable((
-                variable_ref: (
-                    path: (
-                        strs: [
-                            "gpu",
-                            "data_mem_read_data",
-                        ],
-                    ),
-                    name: "[1]",
-                ),
-                color: None,
-                background_color: None,
-                display_name: "…data_mem_read_data.[1] [7:0]",
-                display_name_type: Unique,
-                manual_name: None,
-                format: None,
-                field_formats: [],
-                height_scaling_factor: None,
-            )),
-            (162): Group((
-                name: "hwcore0",
+            (34): Group((
+                name: "top",
                 color: None,
                 background_color: None,
                 content: [],
                 is_open: false,
             )),
-            (175): Variable((
+            (27): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "lsu_write_ready",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "lsu_write_ready [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (465): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "mem_read_ready",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…data_memory_controller.mem_read_ready [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (288): Variable((
                 variable_ref: (
                     path: (
                         strs: [
                             "gpu",
                             "cores[0]",
                             "core_instance",
-                            "lsu_out_2",
+                            "scheduler_instance",
                         ],
                     ),
-                    name: "[1]",
+                    name: "current_pc_1",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "current_pc_1 [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (384): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[3]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[7]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[3].register_instance_1.registers.[7] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (387): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[1]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[7]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[1].register_instance_1.registers.[7] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (19): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "data_mem_write_valid",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "data_mem_write_valid [3:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (363): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[2]",
+                            "register_instance_2",
+                            "registers",
+                        ],
+                    ),
+                    name: "[4]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[2].register_instance_2.registers.[4] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (348): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_write_address",
+                        ],
+                    ),
+                    name: "[3]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_write_address.[3] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (233): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[1]",
+                            "lsu_instance_2",
+                        ],
+                    ),
+                    name: "mem_read_ready",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[1].lsu_instance_2.mem_read_ready",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (349): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_write_data",
+                        ],
+                    ),
+                    name: "[0]",
                 ),
                 color: Some("Red"),
                 background_color: None,
-                display_name: "…lsu_out_2.[1] [7:0]",
+                display_name: "…data_mem_write_data.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (487): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_data",
+                        ],
+                    ),
+                    name: "[6]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_data.[6] [7:0]",
                 display_name_type: Unique,
                 manual_name: None,
                 format: None,
@@ -3457,12 +3678,618 @@
                 field_formats: [],
                 height_scaling_factor: None,
             )),
+            (457): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "consumer_mutex",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "consumer_mutex [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (369): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[1]",
+                            "register_instance_2",
+                            "registers",
+                        ],
+                    ),
+                    name: "[5]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[1].register_instance_2.registers.[5] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (361): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[1]",
+                            "register_instance_2",
+                            "registers",
+                        ],
+                    ),
+                    name: "[4]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[1].register_instance_2.registers.[4] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (383): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[3]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[3].register_instance_1.registers.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (287): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "scheduler_instance",
+                        ],
+                    ),
+                    name: "current_pc",
+                ),
+                color: Some("Gray"),
+                background_color: None,
+                display_name: "current_pc [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (378): Group((
+                name: "W1 -R5",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (355): Group((
+                name: "Group",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (368): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[1]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[5]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[1].register_instance_1.registers.[5] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (174): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_out_2",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Violet"),
+                background_color: None,
+                display_name: "…lsu_out_2.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (358): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[0]",
+                            "register_instance_1",
+                            "registers",
+                        ],
+                    ),
+                    name: "[4]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[0].register_instance_1.registers.[4] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (295): Group((
+                name: "CURRENT PC ADDR",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (485): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                            "consumer_read_data",
+                        ],
+                    ),
+                    name: "[4]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…consumer_read_data.[4] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (458): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "consumer_read_ready",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "consumer_read_ready [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (373): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[3]",
+                            "register_instance_2",
+                            "registers",
+                        ],
+                    ),
+                    name: "[5]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[3].register_instance_2.registers.[5] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (26): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "lsu_read_valid",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "lsu_read_valid [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (228): Placeholder((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "warp_controller_instance",
+                        ],
+                    ),
+                    name: "decoded_mem_read_enable_2",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "decoded_mem_read_enable_2",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (15): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "core_start",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "core_start [1:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (371): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[2]",
+                            "register_instance_2",
+                            "registers",
+                        ],
+                    ),
+                    name: "[5]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[2].register_instance_2.registers.[5] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (460): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "consumer_write_ready",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "consumer_write_ready [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (464): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "main_mem_request",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "main_mem_request [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (471): Group((
+                name: "DATA CACHE",
+                color: None,
+                background_color: None,
+                content: [],
+                is_open: false,
+            )),
+            (461): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_memory_controller",
+                        ],
+                    ),
+                    name: "consumer_write_valid",
+                ),
+                color: Some("Red"),
+                background_color: None,
+                display_name: "consumer_write_valid [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (29): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                        ],
+                    ),
+                    name: "program_mem_read_ready",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "program_mem_read_ready [0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (341): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_read_data",
+                        ],
+                    ),
+                    name: "[0]",
+                ),
+                color: Some("Blue"),
+                background_color: None,
+                display_name: "…data_mem_read_data.[0] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (155): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "start",
+                ),
+                color: Some("Orange"),
+                background_color: None,
+                display_name: "…core_instance.start",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (300): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "scheduler_instance",
+                        ],
+                    ),
+                    name: "core_state",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…scheduler_instance.core_state [2:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: Some("Hexadecimal"),
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (359): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "threads[0]",
+                            "register_instance_2",
+                            "registers",
+                        ],
+                    ),
+                    name: "[4]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…threads[0].register_instance_2.registers.[4] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (156): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                        ],
+                    ),
+                    name: "start_1",
+                ),
+                color: Some("Orange"),
+                background_color: None,
+                display_name: "start_1",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (179): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "lsu_state_1",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: Some("Gray"),
+                background_color: None,
+                display_name: "gpu.cores[0].core_instance.lsu_state_1.[1] [1:0]",
+                display_name_type: Global,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (305): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "scheduler_instance",
+                        ],
+                    ),
+                    name: "done_2",
+                ),
+                color: Some("Yellow"),
+                background_color: None,
+                display_name: "gpu.cores[0].core_instance.scheduler_instance.done_2",
+                display_name_type: Global,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (306): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "cores[0]",
+                            "core_instance",
+                            "scheduler_instance",
+                        ],
+                    ),
+                    name: "done_1",
+                ),
+                color: Some("Yellow"),
+                background_color: None,
+                display_name: "gpu.cores[0].core_instance.scheduler_instance.done_1",
+                display_name_type: Global,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
+            (346): Variable((
+                variable_ref: (
+                    path: (
+                        strs: [
+                            "gpu",
+                            "data_mem_write_address",
+                        ],
+                    ),
+                    name: "[1]",
+                ),
+                color: None,
+                background_color: None,
+                display_name: "…data_mem_write_address.[1] [7:0]",
+                display_name_type: Unique,
+                manual_name: None,
+                format: None,
+                field_formats: [],
+                height_scaling_factor: None,
+            )),
         },
-        display_item_ref_counter: 393,
+        display_item_ref_counter: 489,
         viewports: [
             (
-                curr_left: (-0.2),
-                curr_right: (1.2),
+                curr_left: (0.4394645524049624),
+                curr_right: (0.6708827826186027),
                 target_left: (-0.2),
                 target_right: (1.2),
                 move_start_left: (-0.2),
@@ -3472,8 +4299,7 @@
             ),
         ],
         cursor: Some((1, [
-            735065408,
-            2,
+            3650000000,
         ])),
         markers: {
             0: (1, [
@@ -3481,7 +4307,7 @@
                 1,
             ]),
         },
-        focused_item: Some((8)),
+        focused_item: Some((12)),
         focused_transaction: (None, None),
         default_variable_name_type: Unique,
         scroll_offset: 0.0,
@@ -3490,7 +4316,10 @@
     )),
     drag_started: false,
     drag_source_idx: None,
-    drag_target_idx: None,
+    drag_target_idx: Some((
+        before: (47),
+        level: 2,
+    )),
     previous_waves: None,
     count: None,
     blacklisted_translators: [],
@@ -3517,6 +4346,6 @@
         group_by_direction: false,
     ),
     rename_target: None,
-    sidepanel_width: Some(250.90625),
+    sidepanel_width: Some(300.0),
     ui_zoom_factor: None,
 )

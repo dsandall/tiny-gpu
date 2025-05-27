@@ -48,14 +48,14 @@ module scheduler #(
 );
 
   task automatic switch_warp();
-    warp_select <= ~warp_select;
-    if (warp_select) begin
-      core_state <= core_state_1;
-      current_pc <= current_pc_1;
-    end else begin
-      core_state <= core_state_2;
-      current_pc <= current_pc_2;
-    end
+    //warp_select <= ~warp_select;
+    //if (warp_select) begin
+    //  core_state <= core_state_1;
+    //  current_pc <= current_pc_1;
+    //end else begin
+    //  core_state <= core_state_2;
+    //  current_pc <= current_pc_2;
+    //end
   endtask
 
   always @(posedge clk) begin
@@ -64,6 +64,7 @@ module scheduler #(
       core_state <= CORE_IDLE;
       done_1 <= 0;
       done_2 <= 0;
+      warp_select <= 0;
     end else begin
       case (core_state)
         CORE_IDLE: begin
