@@ -1,0 +1,449 @@
+MODULE=test.test_all \
+TOPLEVEL=gpu \
+VERILOG_SOURCES="src/pc.sv src/dispatch.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/enums.svh src/warp_controller.sv src/core.sv src/decoder.sv src/ducttape2cores.sv src/fetcher.sv src/gpu.sv src/lsu.sv src/registers.sv src/scheduler.sv"  \
+SIM=verilator \
+EXTRA_ARGS="--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3"" \
+make -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+rm -f results.xml
+"make" -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim results.xml
+make[2]: Entering directory '/mnt/newhome/tiny-gpu'
+/usr/bin/verilator -cc --exe -Mdir sim_build -DCOCOTB_SIM=1 --top-module gpu --timescale 1ns/1ps --vpi --public-flat-rw --prefix Vtop -o Vtop -LDFLAGS "-Wl,-rpath,/usr/lib/python3.13/site-packages/cocotb/libs -L/usr/lib/python3.13/site-packages/cocotb/libs -lcocotbvpi_verilator" --cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS -O3 src/pc.sv src/dispatch.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/enums.svh src/warp_controller.sv src/core.sv src/decoder.sv src/ducttape2cores.sv src/fetcher.sv src/gpu.sv src/lsu.sv src/registers.sv src/scheduler.sv /usr/lib/python3.13/site-packages/cocotb/share/lib/verilator/verilator.cpp
+make[3]: Entering directory '/mnt/newhome/tiny-gpu/sim_build'
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -Os  -c -o verilator.o /usr/lib/python3.13/site-packages/cocotb/share/lib/verilator/verilator.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -c -o verilated.o /usr/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -c -o verilated_dpi.o /usr/share/verilator/include/verilated_dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -c -o verilated_vpi.o /usr/share/verilator/include/verilated_vpi.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -c -o verilated_vcd_c.o /usr/share/verilator/include/verilated_vcd_c.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -c -o verilated_threads.o /usr/share/verilator/include/verilated_threads.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -x c++-header Vtop__pch.h -o Vtop__pch.h.fast.gch
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.fast -c -o Vtop.o Vtop.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.fast -c -o Vtop___024root__DepSet_h84412442__0.o Vtop___024root__DepSet_h84412442__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.fast -c -o Vtop___024root__DepSet_heccd7ead__0.o Vtop___024root__DepSet_heccd7ead__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.fast -c -o Vtop___024root__DepSet_heccd7ead__1.o Vtop___024root__DepSet_heccd7ead__1.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.fast -c -o Vtop_MemChannelIF__A8_D10__DepSet_h0a6afb43__0.o Vtop_MemChannelIF__A8_D10__DepSet_h0a6afb43__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.fast -c -o Vtop__Dpi.o Vtop__Dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.fast -c -o Vtop__Trace__0.o Vtop__Trace__0.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -x c++-header Vtop__pch.h -o Vtop__pch.h.slow.gch
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop___024root__Slow.o Vtop___024root__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop___024root__DepSet_h84412442__0__Slow.o Vtop___024root__DepSet_h84412442__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop___024root__DepSet_heccd7ead__0__Slow.o Vtop___024root__DepSet_heccd7ead__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop___024unit__Slow.o Vtop___024unit__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop___024unit__DepSet_hff17caec__0__Slow.o Vtop___024unit__DepSet_hff17caec__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop_MemChannelIF__A8_D10__Slow.o Vtop_MemChannelIF__A8_D10__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop_MemChannelIF__A8_D10__DepSet_h0a6afb43__0__Slow.o Vtop_MemChannelIF__A8_D10__DepSet_h0a6afb43__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop__Syms.o Vtop__Syms.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop__Trace__0__Slow.o Vtop__Trace__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable    -O3   -include Vtop__pch.h.slow -c -o Vtop__TraceDecls__0__Slow.o Vtop__TraceDecls__0__Slow.cpp
+echo "" > Vtop__ALL.verilator_deplist.tmp
+g++    verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_vcd_c.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/lib/python3.13/site-packages/cocotb/libs -L/usr/lib/python3.13/site-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic   -o Vtop
+rm Vtop__ALL.verilator_deplist.tmp
+make[3]: Leaving directory '/mnt/newhome/tiny-gpu/sim_build'
+- V e r i l a t i o n   R e p o r t: Verilator 5.034 2025-02-24 rev v5.034
+- Verilator: Built from 0.916 MB sources in 17 modules, into 3.330 MB in 17 C++ files needing 0.002 MB
+- Verilator: Walltime 35.324 s (elab=0.027, cvt=0.242, bld=34.995); cpu 0.321 s on 1 threads; alloced 26.289 MB
+make -C sim_build  -f Vtop.mk
+make[3]: Entering directory '/mnt/newhome/tiny-gpu/sim_build'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/mnt/newhome/tiny-gpu/sim_build'
+rm -f results.xml
+MODULE=test.test_all TESTCASE= TOPLEVEL=gpu TOPLEVEL_LANG=verilog \
+         sim_build/Vtop  --cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS -O3  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:79   in set_program_name_in_venv        Did not detect Python virtual environment. Using system-wide Python interpreter
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.034 2025-02-24
+     0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/lib/python3.13/site-packages/cocotb
+     0.00ns INFO     cocotb                             Seeding Python random module with 1748323610
+pygame 2.6.1 (SDL 2.32.56, Python 3.13.3)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+     0.00ns INFO     cocotb.regression                  Found test test.test_negatives.test_negatives
+     0.00ns INFO     cocotb.regression                  Found test test.test_matadd.test_matadd
+     0.00ns INFO     cocotb.regression                  Found test test.test_matmul.test_matmul
+     0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load_8_threads
+     0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load
+     0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load_20_cycles
+     0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_basic
+     0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_unrolled
+     0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_hash
+     0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_64
+     0.00ns INFO     cocotb.regression                  running test_negatives (1/10)
+using json initial data
+PROGRAM IS
+36869
+37123
+37376
+16673
+32801
+61440
+DATA IS
+0
+0
+0
+0
+Running test: test_negatives
+threads is 4
+finished at cycle 121
+3450000.00ns INFO     cocotb.regression                  test_negatives passed
+3450000.00ns INFO     cocotb.regression                  running test_matadd (2/10)
+using json initial data
+PROGRAM IS
+20702
+12303
+37120
+37384
+37648
+13328
+29760
+13600
+30032
+13893
+14128
+32886
+61440
+DATA IS
+1
+2
+3
+4
+5
+6
+7
+8
+11
+12
+13
+14
+15
+16
+17
+18
+Running test: test_matadd
+threads is 8
+finished at cycle 280
+10900000.00ns INFO     cocotb.regression                  test_matadd passed
+10900000.00ns INFO     cocotb.regression                  running test_matmul (3/10)
+using json initial data
+PROGRAM IS
+20702
+12303
+37121
+37378
+37632
+37892
+38152
+26114
+22370
+18183
+38912
+39168
+23138
+15017
+15011
+31392
+23442
+15287
+15284
+31664
+23723
+14476
+14737
+8338
+6156
+14672
+32920
+61440
+DATA IS
+1
+2
+3
+4
+1
+2
+3
+4
+Running test: test_matmul
+threads is 4
+finished at cycle 606
+26500000.00ns INFO     cocotb.regression                  test_matmul passed
+26500000.00ns INFO     cocotb.regression                  running test_load_8_threads (4/10)
+using json initial data
+PROGRAM IS
+37128
+37380
+37632
+37890
+20702
+12303
+13872
+38656
+30816
+22660
+13921
+32872
+0
+0
+39937
+14204
+8306
+6152
+61440
+DATA IS
+1
+2
+3
+4
+5
+6
+7
+Running test: test_load_8_threads
+threads is 8
+finished at cycle 751
+45725000.00ns INFO     cocotb.regression                  test_load_8_threads failed
+                                                          Traceback (most recent call last):
+                                                            File "/mnt/newhome/tiny-gpu/test/test_load.py", line 10, in test_load_8_threads
+                                                              await lode(dut, test_conf)
+                                                            File "/mnt/newhome/tiny-gpu/test/test_load.py", line 49, in lode
+                                                              assert result == 2 * \
+                                                                  expected, f"Result mismatch at index {
+                                                                      i}: expected {expected}, got {result}"
+                                                          AssertionError: Result mismatch at index 0: expected 1, got 5
+                                                          assert 5 == (2 * 1)
+45725000.00ns INFO     cocotb.regression                  running test_load (5/10)
+using json initial data
+PROGRAM IS
+37124
+37380
+37632
+37890
+20702
+12303
+13872
+38656
+30816
+22660
+13921
+32872
+0
+0
+39937
+14204
+8306
+6152
+61440
+DATA IS
+1
+2
+3
+4
+Running test: test_load
+threads is 4
+finished at cycle 744
+64775000.01ns INFO     cocotb.regression                  test_load passed
+64775000.01ns INFO     cocotb.regression                  running test_load_20_cycles (6/10)
+using json initial data
+PROGRAM IS
+37124
+37380
+37632
+37890
+20702
+12303
+13872
+38656
+30816
+22660
+13921
+32872
+0
+0
+39937
+14204
+8306
+6152
+61440
+DATA IS
+1
+2
+3
+4
+Running test: test_load
+threads is 4
+finished at cycle 1052
+91525000.01ns INFO     cocotb.regression                  test_load_20_cycles passed
+91525000.01ns INFO     cocotb.regression                  running test_alldmem_basic (7/10)
+using 0 initial data
+PROGRAM IS
+20702
+12303
+39167
+37121
+20481
+38152
+37889
+38664
+38404
+37376
+39424
+32768
+12293
+15012
+8358
+6155
+12836
+8231
+6154
+61440
+DATA IS
+0
+Running test: test_alldmem
+threads is 8
+finished at cycle 2662
+158525000.01ns INFO     cocotb.regression                  test_alldmem_basic passed
+158525000.01ns INFO     cocotb.regression                  running test_alldmem_unrolled (8/10)
+using 0 initial data
+PROGRAM IS
+37136
+20702
+12303
+20481
+37376
+37121
+12833
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+37168
+12289
+37124
+8225
+6149
+61440
+DATA IS
+0
+Running test: test_alldmem_unrolled
+threads is 4
+finished at cycle 3351
+242750000.01ns INFO     cocotb.regression                  test_alldmem_unrolled passed
+242750000.01ns INFO     cocotb.regression                  running test_alldmem_hash (9/10)
+using 0 initial data
+PROGRAM IS
+20702
+12303
+39167
+37121
+20481
+38152
+37889
+38664
+38404
+37376
+39424
+37120
+13057
+21299
+37128
+13105
+21299
+13104
+32771
+12293
+15012
+8358
+6155
+12836
+8231
+6154
+61440
+DATA IS
+0
+Running test: test_alldmem_hash
+threads is 8
+finished at cycle 4708
+360900000.01ns INFO     cocotb.regression                  test_alldmem_hash passed
+360900000.01ns INFO     cocotb.regression                  running test_alldmem_64 (10/10)
+using 0 initial data
+PROGRAM IS
+20702
+12303
+39167
+37124
+20481
+37376
+39424
+37121
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+37121
+15009
+37121
+8353
+6151
+37121
+12833
+37184
+12289
+37121
+8225
+6150
+61440
+DATA IS
+0
+Running test: test_alldmem_64
+threads is 64
+finished at cycle 2994
+436200000.01ns INFO     cocotb.regression                  test_alldmem_64 passed
+436200000.01ns INFO     cocotb.regression                  *************************************************************************************************
+                                                           ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                           *************************************************************************************************
+                                                           ** test.test_negatives.test_negatives        PASS     3450000.00           1.00    3455429.92  **
+                                                           ** test.test_matadd.test_matadd              PASS     7450000.00           4.62    1613022.63  **
+                                                           ** test.test_matmul.test_matmul              PASS    15600000.00          17.76     878579.18  **
+                                                           ** test.test_load.test_load_8_threads        FAIL    19225000.00          27.27     705105.34  **
+                                                           ** test.test_load.test_load                  PASS    19050000.00          25.57     745013.25  **
+                                                           ** test.test_load.test_load_20_cycles        PASS    26750000.00          49.75     537642.88  **
+                                                           ** test.test_alldmem.test_alldmem_basic      PASS    67000000.00         313.76     213535.98  **
+                                                           ** test.test_alldmem.test_alldmem_unrolled   PASS    84225000.00         510.48     164992.16  **
+                                                           ** test.test_alldmem.test_alldmem_hash       PASS   118150000.00         993.38     118937.52  **
+                                                           ** test.test_alldmem.test_alldmem_64         PASS    75300000.00         395.62     190335.59  **
+                                                           *************************************************************************************************
+                                                           ** TESTS=10 PASS=9 FAIL=1 SKIP=0                    436200000.01        2340.26     186389.42  **
+                                                           *************************************************************************************************
+                                                           
+- :0: Verilog $finish
+make[2]: Leaving directory '/mnt/newhome/tiny-gpu'
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
