@@ -308,9 +308,9 @@ module ducttape2cores #(
             ) register_instance_1 (
                 .clk(clk),
                 .reset(reset_1),
-                .enable((tid < thread_count_1) && ~warp_select),
+                .enable((tid < thread_count_1) && ~warp_select && (core_state == CORE_UPDATE || core_state == CORE_IDLE || core_state == CORE_REQUEST)),
                 .block_id(block_id_1),
-                .core_state(core_state_1),
+                .core_state(core_state),
                 .decoded_reg_write_enable(decoded_reg_write_enable),
                 .decoded_reg_input_mux(decoded_reg_input_mux),
                 .decoded_rd_address(decoded_rd_address),
@@ -331,9 +331,9 @@ module ducttape2cores #(
             ) register_instance_2 (
                 .clk(clk),
                 .reset(reset_2),
-                .enable((tid < thread_count_1) && warp_select),
+                .enable((tid < thread_count_1) && warp_select && (core_state == CORE_UPDATE || core_state == CORE_IDLE || core_state == CORE_REQUEST)),
                 .block_id(block_id_2),
-                .core_state(core_state_2),
+                .core_state(core_state),
                 .decoded_reg_write_enable(decoded_reg_write_enable),
                 .decoded_reg_input_mux(decoded_reg_input_mux),
                 .decoded_rd_address(decoded_rd_address),

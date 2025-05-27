@@ -1,5 +1,4 @@
-`default_nettype none
-`timescale 1ns/1ns
+`default_nettype none `timescale 1ns / 1ns
 `include "enums.svh"
 
 // REGISTER FILE
@@ -38,70 +37,85 @@ module registers #(
     output reg [7:0] rs,
     output reg [7:0] rt
 );
-    localparam ARITHMETIC = 2'b00,
-        MEMORY = 2'b01,
-        CONSTANT = 2'b10;
+  localparam ARITHMETIC = 2'b00, MEMORY = 2'b01, CONSTANT = 2'b10;
 
-    // 16 registers per thread (13 free registers and 3 read-only registers)
-    reg [7:0] registers[15:0];
+  // 16 registers per thread (13 free registers and 3 read-only registers)
+  reg [7:0] registers[15:0];
 
-    always @(posedge clk) begin
-        if (reset) begin
-            // Empty rs, rt
-            rs <= 0;
-            rt <= 0;
-            // Initialize all free registers
-            registers[0] <= 8'b0;
-            registers[1] <= 8'b0;
-            registers[2] <= 8'b0;
-            registers[3] <= 8'b0;
-            registers[4] <= 8'b0;
-            registers[5] <= 8'b0;
-            registers[6] <= 8'b0;
-            registers[7] <= 8'b0;
-            registers[8] <= 8'b0;
-            registers[9] <= 8'b0;
-            registers[10] <= 8'b0;
-            registers[11] <= 8'b0;
-            registers[12] <= 8'b0;
-            // Initialize read-only registers
-            registers[13] <= 8'b0;              // %blockIdx
-            registers[14] <= THREADS_PER_BLOCK; // %blockDim
-            registers[15] <= THREAD_ID;         // %threadIdx
-        end else if (enable) begin 
-            
-            if (core_state == CORE_IDLE) begin
-                registers[13] <= block_id; // Update the block_id when a new block is issued from dispatcher
-            end
-            
-            // Fill rs/rt when core_state = REQUEST
-            if (core_state == CORE_REQUEST) begin 
-                rs <= registers[decoded_rs_address];
-                rt <= registers[decoded_rt_address];
-            end
 
-            // Store rd when core_state = UPDATE
-            if (core_state == CORE_UPDATE) begin 
-                // Only allow writing to R0 - R12
-                // TODO: no reason we cant just set the special registers upon
-                // block dispatch, then allow rewrites later...
-                if (decoded_reg_write_enable && decoded_rd_address < 13) begin
-                    case (decoded_reg_input_mux)
-                        ARITHMETIC: begin 
-                            // ADD, SUB, MUL, DIV
-                            registers[decoded_rd_address] <= alu_out;
-                        end
-                        MEMORY: begin 
-                            // LDR
-                            registers[decoded_rd_address] <= lsu_out;
-                        end
-                        CONSTANT: begin 
-                            // CONST
-                            registers[decoded_rd_address] <= decoded_immediate;
-                        end
-                    endcase
-                end
+  reg [3:0] rd_address;
+  reg [3:0] rs_address;
+  reg [3:0] rt_address;
+  reg reg_write_enable;
+  reg [1:0] reg_input_mux;
+  reg [DATA_BITS-1:0] immediate;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      // Empty rs, rt
+      rs            <= 0;
+      rt            <= 0;
+      // Initialize all free registers
+      registers[0]  <= 8'b0;
+      registers[1]  <= 8'b0;
+      registers[2]  <= 8'b0;
+      registers[3]  <= 8'b0;
+      registers[4]  <= 8'b0;
+      registers[5]  <= 8'b0;
+      registers[6]  <= 8'b0;
+      registers[7]  <= 8'b0;
+      registers[8]  <= 8'b0;
+      registers[9]  <= 8'b0;
+      registers[10] <= 8'b0;
+      registers[11] <= 8'b0;
+      registers[12] <= 8'b0;
+      // Initialize read-only registers
+      registers[13] <= 8'b0;  // %blockIdx
+      registers[14] <= THREADS_PER_BLOCK;  // %blockDim
+      registers[15] <= THREAD_ID;  // %threadIdx
+    end else if (enable) begin
+
+      if (core_state == CORE_IDLE) begin
+        registers[13] <= block_id; // Update the block_id when a new block is issued from dispatcher
+      end
+
+      // Fill rs/rt when core_state = REQUEST
+      if (core_state == CORE_REQUEST) begin
+        rd_address <= decoded_rd_address;
+        //rs_address <= decoded_rs_address;
+        //rt_address <= decoded_rt_address;
+        reg_write_enable <= decoded_reg_write_enable;
+        reg_input_mux <= decoded_reg_input_mux;
+        immediate <= decoded_immediate;
+        rs <= registers[decoded_rs_address];
+        rt <= registers[decoded_rt_address];
+      end
+      // Store rd when core_state = UPDATE
+      if (core_state == CORE_UPDATE) begin
+        // Only allow writing to R0 - R12
+        // TODO: no reason we cant just set the special registers upon
+        // block dispatch, then allow rewrites later...
+        if (reg_write_enable && rd_address < 13) begin
+          case (reg_input_mux)
+            ARITHMETIC: begin
+              // ADD, SUB, MUL, DIV
+              registers[rd_address] <= alu_out;
             end
+            MEMORY: begin
+              // LDR
+              registers[rd_address] <= lsu_out;
+            end
+            CONSTANT: begin
+              // CONST
+              registers[rd_address] <= immediate;
+            end
+          endcase
         end
+      end
     end
+  end
 endmodule
+
+
+
+
