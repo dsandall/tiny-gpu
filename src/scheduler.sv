@@ -28,7 +28,8 @@ module scheduler #(
 
     // Memory Access State
     input reg [2:0] fetcher_state,
-    input reg [1:0] lsu_state[THREADS_PER_BLOCK-1:0],
+    input reg [1:0] lsu_state_1[THREADS_PER_BLOCK-1:0],
+    input reg [1:0] lsu_state_2[THREADS_PER_BLOCK-1:0],
 
     // Current & Next PC
     output reg [7:0] current_pc,
@@ -48,6 +49,8 @@ module scheduler #(
 );
 
   task automatic switch_warp();
+    // WARN: disabled
+    //
     //warp_select <= ~warp_select;
     //if (warp_select) begin
     //  core_state <= core_state_1;
@@ -68,8 +71,6 @@ module scheduler #(
     end else begin
       case (core_state)
         CORE_IDLE: begin
-          //done_1 <= 0;
-          //done_2 <= 0;
           // Here after reset (before kernel is launched, or after previous block has been processed)
           if (start) begin
             // Start by fetching the next instruction for this block based on PC
@@ -80,8 +81,7 @@ module scheduler #(
         end
         CORE_FETCH: begin  //TODO:chage this so on stall switch to other warp
           // Move on once fetcher_state = FETCHED
-          done_1 <= 0;
-          done_2 <= 0;
+
           if (fetcher_state == 3'b010) begin
             core_state <= CORE_DECODE;
           end else begin
@@ -93,33 +93,30 @@ module scheduler #(
         CORE_DECODE: begin
           // Decode is synchronous so we move on after one cycle
           core_state <= CORE_REQUEST;
-          done_1 <= 0;
-          done_2 <= 0;
+
         end
         CORE_REQUEST: begin
           // Request is synchronous so we move on after one cycle
           if (decoded_ret) begin
             // If we reach a RET instruction, this block is done executing
+            core_state <= CORE_DONE;
             if (warp_select) begin
               done_2 <= 1;
             end else begin
               done_1 <= 1;
             end
-            core_state <= CORE_DONE;
           end else begin
+            // otherwise proceed
             core_state <= CORE_WAIT;
-            done_1 <= 0;
-            done_2 <= 0;
           end
         end
         CORE_WAIT: begin  //TODO:chage this so on stall switch to other warp
           // Wait for all LSUs to finish their request before continuing
           reg any_lsu_waiting = 1'b0;
-          done_1 <= 0;
-          done_2 <= 0;
           for (int i = 0; i < THREADS_PER_BLOCK; i++) begin
             // Make sure no lsu_state = REQUESTING or WAITING
-            if (lsu_state[i] == 2'b01 || lsu_state[i] == 2'b10) begin
+            if (lsu_state_1[i] == LSU_REQUESTING || lsu_state_1[i] == LSU_WAITING) begin
+              // WARN: only checking warp 0 lsus for testing
               any_lsu_waiting = 1'b1;
               switch_warp();
               break;  //i'm commenting this out and expect this to cause errors in future 
@@ -132,24 +129,25 @@ module scheduler #(
           end
         end
         CORE_EXECUTE: begin
-          done_1 <= 0;
-          done_2 <= 0;
           // Execute is synchronous so we move on after one cycle
           core_state <= CORE_UPDATE;
         end
         CORE_UPDATE: begin
-            // TODO: Branch divergence. For now assume all next_pc converge
-            current_pc <= next_pc[THREADS_PER_BLOCK-1];
+          // Update is synchronous so we move on after one cycle
+          core_state <= CORE_FETCH;
 
-            done_1 <= 0;
-            done_2 <= 0;
-            // Update is synchronous so we move on after one cycle
-            core_state <= CORE_FETCH;
+          // TODO: Branch divergence. For now assume all next_pc converge
+          current_pc <= next_pc[THREADS_PER_BLOCK-1];
         end
         CORE_DONE: begin
           if (!start) begin
             // return to idle when the dispatcher recognizes DONE
             core_state <= CORE_IDLE;
+            if (warp_select) begin
+              done_2 <= 0;
+            end else begin
+              done_1 <= 0;
+            end
           end
           // switch regardless
           switch_warp();

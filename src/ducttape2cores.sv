@@ -67,8 +67,6 @@ module ducttape2cores #(
    logic [7:0] rt_1[THREADS_PER_BLOCK-1:0];
    logic [7:0] rs_2[THREADS_PER_BLOCK-1:0];
    logic [7:0] rt_2[THREADS_PER_BLOCK-1:0];
-   logic [1:0] lsu_state[THREADS_PER_BLOCK-1:0];
-   logic [7:0] lsu_out[THREADS_PER_BLOCK-1:0];
    logic [1:0] lsu_state_1[THREADS_PER_BLOCK-1:0];
    logic [7:0] lsu_out_1[THREADS_PER_BLOCK-1:0];
    logic [1:0] lsu_state_2[THREADS_PER_BLOCK-1:0];
@@ -122,9 +120,7 @@ module ducttape2cores #(
         .fetcher_state({fetcher_state_2, fetcher_state_1}),
         .instruction({instruction_2, instruction_1}),
 
-        //inputs from lsu 1
-        .lsu_state({lsu_state_2, lsu_state_1}),
-        .lsu_out({lsu_out_2, lsu_out_1}),
+
 
         //inputs fromlogic 1
         .rs({rs_2, rs_1}),
@@ -145,8 +141,6 @@ module ducttape2cores #(
         .thread_count_out(thread_count),
         .fetcher_state_out(fetcher_state),
         .instruction_out(instruction),
-        .lsu_state_out(lsu_state),
-        .lsu_out_out(lsu_out),
         .rs_out(rs),
         .rt_out(rt)
     );
@@ -221,7 +215,8 @@ module ducttape2cores #(
         .decoded_mem_read_enable(decoded_mem_read_enable),
         .decoded_mem_write_enable(decoded_mem_write_enable),
         .decoded_ret(decoded_ret),
-        .lsu_state(lsu_state),
+        .lsu_state_1(lsu_state_1),
+        .lsu_state_2(lsu_state_2),
         .current_pc(current_pc),
         .next_pc(next_pc),
         .core_state_1(core_state_1),

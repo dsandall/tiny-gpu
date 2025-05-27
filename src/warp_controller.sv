@@ -27,10 +27,6 @@ module warp_controller #(
     input  logic [2:0]  fetcher_state  [1:0],
     input  logic [15:0] instruction    [1:0],
 
-    // inputs from lsu
-    input  logic [1:0]  lsu_state      [1:0][THREADS_PER_BLOCK-1:0],
-    input  logic [7:0]  lsu_out        [1:0][THREADS_PER_BLOCK-1:0],
-
     // inputs from logic
     input  logic [7:0]  rs             [1:0][THREADS_PER_BLOCK-1:0],
     input  logic [7:0]  rt             [1:0][THREADS_PER_BLOCK-1:0],
@@ -52,8 +48,6 @@ module warp_controller #(
     output logic [$clog2(THREADS_PER_BLOCK):0] thread_count_out,
     output fetcher_state_t fetcher_state_out,
     output logic [15:0] instruction_out,
-    output logic [1:0]  lsu_state_out    [THREADS_PER_BLOCK-1:0],
-    output logic [7:0]  lsu_out_out      [THREADS_PER_BLOCK-1:0],
     output logic [7:0]  rs_out           [THREADS_PER_BLOCK-1:0],
     output logic [7:0]  rt_out           [THREADS_PER_BLOCK-1:0]
 );
@@ -109,8 +103,6 @@ module warp_controller #(
 
     // Copy arrays elementwise from selected warp
     for (int i = 0; i < THREADS_PER_BLOCK; i++) begin
-      lsu_state_out[i] = lsu_state[warp_select][i];
-      lsu_out_out[i]   = lsu_out[warp_select][i];
       rs_out[i]        = rs[warp_select][i];
       rt_out[i]        = rt[warp_select][i];
     end
