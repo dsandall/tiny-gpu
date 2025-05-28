@@ -1,13 +1,14 @@
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
 MODULE=test.test_all \
 TOPLEVEL=gpu \
-VERILOG_SOURCES="src/pc.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/dispatch.sv src/utils.svh src/arbiter_cache.sv src/gpu.sv src/decoder.sv src/enums.svh src/fetcher.sv src/lsu.sv src/scheduler.sv src/warp_controller.sv src/ducttape2cores.sv src/registers.sv"  \
+VERILOG_SOURCES="src/pc.sv src/dispatch.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/enums.svh src/warp_controller.sv src/decoder.sv src/ducttape2cores.sv src/fetcher.sv src/gpu.sv src/lsu.sv src/registers.sv src/scheduler.sv"  \
 SIM=verilator \
 EXTRA_ARGS="--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3"" \
 make -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim
-make[1]: Entering directory '/home/thebu/newhome/tiny-gpu'
+make[2]: Entering directory '/mnt/newhome/tiny-gpu'
 rm -f results.xml
 "make" -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim results.xml
-make[2]: Entering directory '/home/thebu/newhome/tiny-gpu'
+make[3]: Entering directory '/mnt/newhome/tiny-gpu'
 rm -f results.xml
 MODULE=test.test_all TESTCASE= TOPLEVEL=gpu TOPLEVEL_LANG=verilog \
          sim_build/Vtop  --cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS -O3  
@@ -15,20 +16,21 @@ MODULE=test.test_all TESTCASE= TOPLEVEL=gpu TOPLEVEL_LANG=verilog \
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
      0.00ns INFO     cocotb                             Running on Verilator version 5.034 2025-02-24
      0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/lib/python3.13/site-packages/cocotb
-     0.00ns INFO     cocotb                             Seeding Python random module with 1748387196
-     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
-pygame 2.6.1 (SDL 2.32.54, Python 3.13.2)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1748414290
+pygame 2.6.1 (SDL 2.32.56, Python 3.13.3)
 Hello from the pygame community. https://www.pygame.org/contribute.html
      0.00ns INFO     cocotb.regression                  Found test test.test_negatives.test_negatives
-     0.00ns INFO     cocotb.regression                  Found test test.test_matadd.test_matadd
-     0.00ns INFO     cocotb.regression                  Found test test.test_matmul.test_matmul
+     0.00ns INFO     cocotb.regression                  Found test test.test_matadd.test_matadd_8_threads
+     0.00ns INFO     cocotb.regression                  Found test test.test_matadd.test_matadd_32_threads
+     0.00ns INFO     cocotb.regression                  Found test test.test_matmul.test_matmul_2x2
+     0.00ns INFO     cocotb.regression                  Found test test.test_matmul.test_matmul_4x4
      0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load
      0.00ns INFO     cocotb.regression                  Found test test.test_load.test_load_20_cycles
      0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_basic
      0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_unrolled
      0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_hash
      0.00ns INFO     cocotb.regression                  Found test test.test_alldmem.test_alldmem_64
-     0.00ns INFO     cocotb.regression                  running test_negatives (1/9)
+     0.00ns INFO     cocotb.regression                  running test_negatives (1/11)
 using json initial data
 PROGRAM IS
 36869
@@ -46,7 +48,7 @@ Running test: test_negatives
 threads is 4
 finished at cycle 124
 3525000.00ns INFO     cocotb.regression                  test_negatives passed
-3525000.00ns INFO     cocotb.regression                  running test_matadd (2/9)
+3525000.00ns INFO     cocotb.regression                  running test_matadd_8_threads (2/11)
 using json initial data
 PROGRAM IS
 20702
@@ -79,11 +81,106 @@ DATA IS
 56
 57
 58
-Running test: test_matadd
+Running test: test_matadd_8_threads
 threads is 8
 finished at cycle 319
-11950000.00ns INFO     cocotb.regression                  test_matadd passed
-11950000.00ns INFO     cocotb.regression                  running test_matmul (3/9)
+11950000.00ns INFO     cocotb.regression                  test_matadd_8_threads passed
+11950000.00ns INFO     cocotb.regression                  running test_matadd_32_threads (3/11)
+using json initial data
+PROGRAM IS
+20702
+12303
+37120
+37408
+37696
+13328
+29760
+13600
+30032
+13893
+14128
+32886
+61440
+DATA IS
+1
+2
+3
+4
+5
+6
+7
+8
+11
+12
+13
+14
+15
+16
+17
+18
+21
+22
+23
+24
+25
+26
+27
+28
+31
+32
+33
+34
+35
+36
+37
+38
+41
+42
+43
+44
+45
+46
+47
+48
+51
+52
+53
+54
+55
+56
+57
+58
+61
+62
+63
+64
+65
+66
+67
+68
+71
+72
+73
+74
+75
+76
+77
+78
+Running test: test_matadd_32_threads
+threads is 32
+finished at cycle 757
+31325000.00ns INFO     cocotb.regression                  test_matadd_32_threads failed
+                                                          Traceback (most recent call last):
+                                                            File "/mnt/newhome/tiny-gpu/test/test_matadd.py", line 22, in test_matadd_32_threads
+                                                              verify_matadd(test_conf, data_memory)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+                                                            File "/mnt/newhome/tiny-gpu/test/test_matadd.py", line 40, in verify_matadd
+                                                              assert result == expected, (
+                                                                  f"Result mismatch at index {i}: expected {expected}, got {result}"
+                                                              )
+                                                          AssertionError: Result mismatch at index 8: expected 62, got 0
+                                                          assert 0 == 62
+31325000.00ns INFO     cocotb.regression                  running test_matmul_2x2 (4/11)
 using json initial data
 PROGRAM IS
 20702
@@ -123,23 +220,130 @@ DATA IS
 2
 3
 4
-Running test: test_matmul
+Running test: test_matmul_2x2
 threads is 4
 finished at cycle 648
-28600000.00ns INFO     cocotb.regression                  test_matmul passed
-28600000.00ns INFO     cocotb.regression                  running test_load (4/9)
+[1, 2, 3, 4, 1, 2, 3, 4]
+printing
+[1, 2, 3, 4]
+[1, 2, 3, 4]
+0 0
+0 1
+1 0
+1 1
+printing2
+[7, 10, 15, 22]
+47975000.00ns INFO     cocotb.regression                  test_matmul_2x2 passed
+47975000.00ns INFO     cocotb.regression                  running test_matmul_4x4 (5/11)
 using json initial data
 PROGRAM IS
-37124
-37380
-37632
-37890
 20702
 12303
-13872
+37121
+37380
+37632
+37904
+38176
+26114
+22370
+18183
+38912
+39168
+23138
+15017
+15011
+31392
+23442
+15287
+15284
+31664
+23723
+14476
+14737
+8338
+6156
+14672
+32920
+61440
+DATA IS
+1
+2
+3
+4
+5
+6
+2
+3
+1
+2
+1
+4
+5
+6
+1
+3
+1
+2
+3
+4
+1
+6
+7
+2
+1
+2
+3
+4
+5
+6
+7
+3
+Running test: test_matmul_4x4
+threads is 16
+finished at cycle 1173
+[1, 2, 3, 4, 5, 6, 2, 3, 1, 2, 1, 4, 5, 6, 1, 3, 1, 2, 3, 4, 1, 6, 7, 2, 1, 2, 3, 4, 5, 6, 7, 3]
+printing
+[1, 2, 3, 4, 5, 6, 2, 3, 1, 2, 1, 4, 5, 6, 1, 3]
+[1, 2, 3, 4, 1, 6, 7, 2, 1, 2, 3, 4, 5, 6, 7, 3]
+0 0
+0 1
+0 2
+0 3
+1 0
+1 1
+1 2
+1 3
+2 0
+2 1
+2 2
+2 3
+3 0
+3 1
+3 2
+3 3
+printing2
+[26, 44, 54, 32, 28, 68, 84, 49, 24, 40, 48, 24, 27, 66, 81, 45]
+77750000.00ns INFO     cocotb.regression                  test_matmul_4x4 failed
+                                                          Traceback (most recent call last):
+                                                            File "/mnt/newhome/tiny-gpu/test/test_matmul.py", line 24, in test_matmul_4x4
+                                                              verify_matmul(4, test_conf, data_memory)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                            File "/mnt/newhome/tiny-gpu/test/test_matmul.py", line 57, in verify_matmul
+                                                              assert result == expected, (
+                                                                  f"Result mismatch at index {i}: expected {expected}, got {result}"
+                                                              )
+                                                          AssertionError: Result mismatch at index 8: expected 24, got 0
+                                                          assert 0 == 24
+77750000.00ns INFO     cocotb.regression                  running test_load (6/11)
+using json initial data
+PROGRAM IS
+22238
+13935
+37380
 38656
 30816
-22660
+14472
+37124
 13921
 32872
 0
@@ -147,7 +351,7 @@ PROGRAM IS
 39937
 14204
 8306
-6152
+6148
 61440
 DATA IS
 1
@@ -156,21 +360,18 @@ DATA IS
 4
 Running test: test_load
 threads is 4
-finished at cycle 794
-48900000.00ns INFO     cocotb.regression                  test_load passed
-48900000.00ns INFO     cocotb.regression                  running test_load_20_cycles (5/9)
+finished at cycle 774
+97550000.01ns INFO     cocotb.regression                  test_load passed
+97550000.01ns INFO     cocotb.regression                  running test_load_20_cycles (7/11)
 using json initial data
 PROGRAM IS
-37124
+22238
+13935
 37380
-37632
-37890
-20702
-12303
-13872
 38656
 30816
-22660
+14472
+37124
 13921
 32872
 0
@@ -178,7 +379,7 @@ PROGRAM IS
 39937
 14204
 8306
-6152
+6148
 61440
 DATA IS
 1
@@ -187,6 +388,176 @@ DATA IS
 4
 Running test: test_load
 threads is 4
-finished at cycle 1122
-77400000.00ns INFO     cocotb.regression                  test_load_20_cycles passed
-77400000.00ns INFO     cocotb.regression                  running test_alldmem_basic (6/9)
+finished at cycle 1108
+125700000.01ns INFO     cocotb.regression                  test_load_20_cycles passed
+125700000.01ns INFO     cocotb.regression                  running test_alldmem_basic (8/11)
+using 0 initial data
+PROGRAM IS
+20702
+12303
+39167
+37121
+20481
+38152
+37889
+38664
+38404
+37376
+39424
+32768
+12293
+15012
+8358
+6155
+12836
+8231
+6154
+61440
+DATA IS
+0
+Running test: test_alldmem
+threads is 8
+finished at cycle 3541
+214675000.01ns INFO     cocotb.regression                  test_alldmem_basic passed
+214675000.01ns INFO     cocotb.regression                  running test_alldmem_unrolled (9/11)
+using 0 initial data
+PROGRAM IS
+37128
+20702
+12303
+20481
+37376
+37121
+12833
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+37176
+12289
+37124
+8225
+6149
+61440
+DATA IS
+0
+Running test: test_alldmem_unrolled
+threads is 8
+finished at cycle 2123
+268200000.01ns INFO     cocotb.regression                  test_alldmem_unrolled passed
+268200000.01ns INFO     cocotb.regression                  running test_alldmem_hash (10/11)
+using 0 initial data
+PROGRAM IS
+20702
+12303
+39167
+37121
+20481
+38152
+37889
+38664
+38404
+37376
+39424
+37120
+13057
+21299
+37128
+13105
+21299
+13104
+32771
+12293
+15012
+8358
+6155
+12836
+8231
+6154
+61440
+DATA IS
+0
+Running test: test_alldmem_hash
+threads is 8
+finished at cycle 6663
+435225000.01ns INFO     cocotb.regression                  test_alldmem_hash passed
+435225000.01ns INFO     cocotb.regression                  running test_alldmem_64 (11/11)
+using 0 initial data
+PROGRAM IS
+20702
+12303
+39167
+37124
+20481
+37376
+39424
+37121
+32768
+12289
+32768
+12289
+32768
+12289
+32768
+12289
+37121
+15009
+37121
+8353
+6151
+37121
+12833
+37184
+12289
+37121
+8225
+6150
+61440
+DATA IS
+0
+Running test: test_alldmem_64
+threads is 64
+finished at cycle 1564
+474775000.01ns INFO     cocotb.regression                  test_alldmem_64 failed
+                                                           Traceback (most recent call last):
+                                                             File "/mnt/newhome/tiny-gpu/test/test_alldmem.py", line 52, in test_alldmem_64
+                                                               await test_dmem(
+                                                                   dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem_64.json")
+                                                             File "/mnt/newhome/tiny-gpu/test/test_alldmem.py", line 69, in test_dmem
+                                                               assert i == byte, f"Result mismatch: expected {i}, got {byte}"
+                                                           AssertionError: Result mismatch: expected 32, got 0
+                                                           assert 32 == 0
+474775000.01ns INFO     cocotb.regression                  *************************************************************************************************
+                                                           ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                           *************************************************************************************************
+                                                           ** test.test_negatives.test_negatives        PASS     3525000.00           0.71    4985482.38  **
+                                                           ** test.test_matadd.test_matadd_8_threads    PASS     8425000.00           5.01    1682623.16  **
+                                                           ** test.test_matadd.test_matadd_32_threads   FAIL    19375000.00          25.58     757362.93  **
+                                                           ** test.test_matmul.test_matmul_2x2          PASS    16650000.00          19.07     872923.80  **
+                                                           ** test.test_matmul.test_matmul_4x4          FAIL    29775000.00          62.04     479931.28  **
+                                                           ** test.test_load.test_load                  PASS    19800000.00          26.69     741911.56  **
+                                                           ** test.test_load.test_load_20_cycles        PASS    28150000.00          54.45     517003.64  **
+                                                           ** test.test_alldmem.test_alldmem_basic      PASS    88975000.00         570.32     156008.17  **
+                                                           ** test.test_alldmem.test_alldmem_unrolled   PASS    53525000.00         201.08     266187.34  **
+                                                           ** test.test_alldmem.test_alldmem_hash       PASS   167025000.00        2024.17      82515.43  **
+                                                           ** test.test_alldmem.test_alldmem_64         FAIL    39550000.00         108.14     365743.33  **
+                                                           *************************************************************************************************
+                                                           ** TESTS=11 PASS=8 FAIL=3 SKIP=0                    474775000.01        3098.17     153243.64  **
+                                                           *************************************************************************************************
+                                                           
+- :0: Verilog $finish
+make[3]: Leaving directory '/mnt/newhome/tiny-gpu'
+make[2]: Leaving directory '/mnt/newhome/tiny-gpu'
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
