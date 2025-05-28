@@ -125,13 +125,14 @@ async def setup_wrap(dut, test_config, screen=None):
     cycles = 0
     extra_cycles = 10
 
+    cocotb.start_soon(data_memory.run())
+    cocotb.start_soon(program_memory.run())
+
     while dut.done.value != 1 or extra_cycles > 0:
         if dut.done.value == 1:
             extra_cycles -= 1
 
         # while running the DUT, piggyback the clock and use for dmem and pmem
-        dmem = cocotb.start(data_memory.run())
-        pmem = cocotb.start(program_memory.run())
 
         # track changes to data memory
         if (data_memory.memory != old_mem):
@@ -151,8 +152,6 @@ async def setup_wrap(dut, test_config, screen=None):
             logger.info(f"GPU PROGRAM COMPLETE - Done signal asserted\n")
         # await the GPUs clock
         await RisingEdge(dut.clk)
-        await dmem
-        await pmem
 
         cycles += 1
 
