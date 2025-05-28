@@ -67,7 +67,7 @@ enable_logging = False
 
 async def setup_wrap(dut, test_config, screen=None):
 
-    num_memory_printout = 64
+    num_memory_printout = 256
 
     hw = test_config["hardware"]
     mem_delay = test_config["memory_delay"]

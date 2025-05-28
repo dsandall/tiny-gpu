@@ -3,10 +3,10 @@ from cocotb.triggers import Timer
 import psutil
 import os
 
-# @cocotb.start_soon
-
 
 async def monitor_resources():
+    # add to your test:
+    #     cocotb.start_soon(monitor_resources())  # Start monitoring
     process = psutil.Process(os.getpid())
     while True:
         mem = process.memory_info().rss / (1024 * 1024)  # RSS in MB

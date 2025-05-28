@@ -39,19 +39,18 @@ module warp_controller #(
         core_state_out[i] <= CORE_IDLE;
         decoded_mem_read_enable_out[i] <= 0;
         decoded_mem_write_enable_out[i] <= 0;
+      end else begin
+
+        // Update logic for warp_select index, if not reset
+        current_pc_out[warp_select] <= current_pc;
+        core_state_out[warp_select] <= core_state;
+
+        if (core_state == CORE_DECODE) begin
+          decoded_mem_read_enable_out[warp_select]  <= decoded_mem_read_enable;
+          decoded_mem_write_enable_out[warp_select] <= decoded_mem_write_enable;
+        end
       end
     end
 
-    // Update logic for warp_select index, if not reset
-    if (!reset[warp_select]) begin
-      current_pc_out[warp_select] <= current_pc;
-      core_state_out[warp_select] <= core_state;
-
-      if (core_state == CORE_DECODE) begin
-        decoded_mem_read_enable_out[warp_select]  <= decoded_mem_read_enable;
-        decoded_mem_write_enable_out[warp_select] <= decoded_mem_write_enable;
-      end
-
-    end
   end
 endmodule

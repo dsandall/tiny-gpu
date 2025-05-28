@@ -1,6 +1,5 @@
 import cocotb
 from .helpers.testbench_bin import load_json_binary, setup_wrap
-from .helpers.sim_perf_monitor import monitor_resources
 
 
 @cocotb.test
@@ -23,7 +22,6 @@ async def test_alldmem_64(dut):
 
 @cocotb.test
 async def test_alldmem_hash(dut):
-    cocotb.start_soon(monitor_resources())  # Start monitoring
     test_conf = load_json_binary(
         "./tiny-gpu-assembler/asm_build/test_alldmem_hash.json"
     )
@@ -56,7 +54,6 @@ async def test_alldmem_hash(dut):
 
 
 async def test_dmem(dut, json):
-    cocotb.start_soon(monitor_resources())  # Start monitoring
 
     test_conf = load_json_binary(json)
 

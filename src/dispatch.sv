@@ -63,7 +63,7 @@ module dispatch #(
             end
 
             for (int i = 0; i < NUM_LOGICAL_CORES; i++) begin
-                if (core_reset[i]) begin 
+                if (core_reset[i] && !core_done[i]) begin 
                     core_reset[i] <= 0;
 
                     // If this core was just reset, check if there are more blocks to be dispatched
