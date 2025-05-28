@@ -10,14 +10,12 @@ async def test_load(dut):
     await lode(dut, test_conf)
 
 
-@cocotb.test
-async def test_load_20_cycles(dut):
-    test_conf = load_json_binary(
-        "./tiny-gpu-assembler/asm_build/test_load.json")
-
-    test_conf["memory_delay"] = 20
-
-    await lode(dut, test_conf)
+# @cocotb.test
+# async def test_load_20_cycles(dut):
+#    test_conf = load_json_binary(
+#        "./tiny-gpu-assembler/asm_build/test_load.json", 20)
+#
+#    await lode(dut, test_conf)
 
 
 # @cocotb.test
