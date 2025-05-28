@@ -62,9 +62,12 @@ def load_json_binary(config_path):
     return test_config
 
 
+enable_logging = False
+
+
 async def setup_wrap(dut, test_config, screen=None):
 
-    num_memory_printout = 24
+    num_memory_printout = 64
 
     hw = test_config["hardware"]
     mem_delay = test_config["memory_delay"]
@@ -141,7 +144,8 @@ async def setup_wrap(dut, test_config, screen=None):
 
         # same for the printer logging function
         await cocotb.triggers.ReadOnly()
-        format_cycle(dut, cycles)  # print the stuff
+        if (enable_logging):
+            format_cycle(dut, cycles)  # print the stuff
 
         if (dut.done.value == 1):
             logger.info(f"GPU PROGRAM COMPLETE - Done signal asserted\n")

@@ -7,9 +7,9 @@ from .format import format_cycle
 from .logger import logger
 
 
-async def logAndWaitRisingEdge(dut):
-    format_cycle(dut, 69)  # WARN: constant set cycle
-    await RisingEdge(dut.clk)
+# async def logAndWaitRisingEdge(dut):
+#    format_cycle(dut, 69)  # WARN: constant set cycle
+#    await RisingEdge(dut.clk)
 
 
 async def setup(
@@ -33,15 +33,15 @@ async def setup(
     # Reset
     dut.reset.value = 1
     dut.start.value = 0
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
     dut.reset.value = 0
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
 
     # Load Program Memory
     program_memory.load(program)
@@ -52,15 +52,15 @@ async def setup(
     # Device Control Register
     dut.device_control_data.value = threads
     dut.device_control_write_enable.value = 1
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
     dut.device_control_write_enable.value = 0
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
-    await logAndWaitRisingEdge(dut)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
+    await RisingEdge(dut.clk)
 
     # Start
     dut.start.value = 1

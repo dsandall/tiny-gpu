@@ -2,7 +2,7 @@ import cocotb
 from .helpers.testbench_bin import load_json_binary, setup_wrap
 
 
-@cocotb.test()
+@cocotb.test
 async def test_negatives(dut):
 
     test_conf = load_json_binary(

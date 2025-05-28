@@ -2,7 +2,6 @@ from typing import List
 from .logger import logger
 import cocotb
 from cocotb.triggers import Timer, RisingEdge
-from .format import safe_int
 
 
 class Memory:

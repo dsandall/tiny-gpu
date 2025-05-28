@@ -91,22 +91,25 @@ assemble_%:
 	cargo build && \
 	./target/debug/tiny-gpu-assembler asm_src/test_$*.asm -o asm_build/test_$*.json
 
-#fulltest
-ft_%:
-	make assemble_$*
-	make test_$*
-
-record_benchmark:
-	#cd yosys && yosys -s synth.ys > synth_stat.log
+compile_all_binaries:
 	make assemble_alldmem
 	make assemble_alldmem_64
 	make assemble_alldmem_hash
 	make assemble_alldmem_unrolled
 	make assemble_load
 	make assemble_load_8_threads
-	make assemble_matadd
-	make assemble_matmul
+	make assemble_matadd_8_threads
+	make assemble_matadd_32_threads
+	make assemble_matmul_2x2
+	make assemble_matmul_4x4
 	make assemble_negatives
 	make assemble_reverse
+
+#fulltest
+ft_%: compile_all_binaries
+	make test_$*
+
+record_benchmark: compile_all_binaries
+	#cd yosys && yosys -s synth.ys > synth_stat.log
 	make test_all > test_all.log
 
