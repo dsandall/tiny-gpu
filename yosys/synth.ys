@@ -2,16 +2,40 @@
 read_verilog ../build/gpu.v
 
 # Isolate the target module
-hierarchy -top gpu
+hierarchy -top ducttape2cores
 
 # Perform synthesis
 synth
+opt
 
-techmap -map libertyfile
+#abc -dff
+#
+## write the synthesized netlist for further analysis
+#write_json synth_out.json
+#write_verilog synth_out.v
+#
+## Show detailed statistics
+#stat 
 
-# write the synthesized netlist for further analysis
-write_json synth_out.json
-write_verilog synth_out.v
 
-# Show detailed statistics
-stat 
+# Map the design to the Nangate45 library
+dfflibmap -liberty ../../OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+# Perform logic synthesis
+abc -liberty ../../OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+
+# Get the stats (area, timing, and other metrics)
+stat
+
+# Optionally, perform a basic timing analysis
+# Assuming you have an SDC file for constraints (optional)
+# read_sdc constraints.sdc
+# sta
+
+# To estimate power, you'd need VCD file from simulations (optional)
+#read_vcd ../build/gpu.vcd
+#power
+
+# Optionally, export the design for further analysis in other tools
+write_blif design.blif
+write_verilog synthesized.v

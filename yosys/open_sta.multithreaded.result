@@ -1,0 +1,85 @@
+OpenSTA 2.6.2 65c2943191 Copyright (c) 2025, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Startpoint: threads[0].pc_instance/_238_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: threads[0].pc_instance/_238_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ threads[0].pc_instance/_238_/CK (DFF_X1)
+   0.08    0.08 v threads[0].pc_instance/_238_/Q (DFF_X1)
+   0.01    0.09 ^ threads[0].pc_instance/_188_/ZN (INV_X1)
+   0.01    0.10 v threads[0].pc_instance/_196_/ZN (AOI211_X1)
+   0.00    0.10 v threads[0].pc_instance/_238_/D (DFF_X1)
+           0.10   data arrival time
+
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+           0.00 ^ threads[0].pc_instance/_238_/CK (DFF_X1)
+   0.00    0.00   library hold time
+           0.00   data required time
+---------------------------------------------------------
+           0.00   data required time
+          -0.10   data arrival time
+---------------------------------------------------------
+           0.10   slack (MET)
+
+
+Startpoint: decoder_instance/_301_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: threads[3].register_instance_1/_2609_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ decoder_instance/_301_/CK (DFF_X1)
+   3.21    3.21 ^ decoder_instance/_301_/Q (DFF_X1)
+   1.25    4.46 v threads[3].register_instance_1/_1860_/ZN (INV_X1)
+   0.26    4.73 ^ threads[3].register_instance_1/_2353_/ZN (OAI21_X1)
+   0.02    4.74 v threads[3].register_instance_1/_2354_/ZN (AOI21_X1)
+   0.07    4.82 ^ threads[3].register_instance_1/_2355_/ZN (AOI211_X1)
+   0.03    4.84 v threads[3].register_instance_1/_2356_/ZN (OAI21_X1)
+   0.03    4.87 ^ threads[3].register_instance_1/_2368_/ZN (NAND2_X1)
+   0.01    4.89 v threads[3].register_instance_1/_2370_/ZN (AOI21_X1)
+   0.00    4.89 v threads[3].register_instance_1/_2609_/D (DFF_X1)
+           4.89   data arrival time
+
+   5.00    5.00   clock clk (rise edge)
+   0.00    5.00   clock network delay (ideal)
+   0.00    5.00   clock reconvergence pessimism
+           5.00 ^ threads[3].register_instance_1/_2609_/CK (DFF_X1)
+  -0.06    4.94   library setup time
+           4.94   data required time
+---------------------------------------------------------
+           4.94   data required time
+          -4.89   data arrival time
+---------------------------------------------------------
+           0.06   slack (MET)
+
+
+Annotated 0 pin activities.
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             2.77e-03   5.87e-04   1.35e-04   3.49e-03  32.1%
+Combinational          5.27e-03   1.84e-03   2.41e-04   7.36e-03  67.7%
+Clock                  9.86e-06   5.98e-06   3.73e-07   1.62e-05   0.1%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  8.05e-03   2.44e-03   3.76e-04   1.09e-02 100.0%
+                          74.1%      22.4%       3.5%

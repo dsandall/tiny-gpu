@@ -67,7 +67,7 @@ $(BUILD_DIR)/gpu.v:
 
 compile_verilog:
 # compile source/*.sv and write it to build/*.v 
-	sv2v src/*.sv -w $(TOP_V) 
+	sv2v src/*.sv src/*.svh -w $(TOP_V) 
 
 # GTKWave Visualization Rule
 show_%: build/gpu.vcd
@@ -112,8 +112,11 @@ ft_%: compile_all_binaries
 record_benchmark: compile_all_binaries measure_hardware_yosys
 	make test_all > ./test/results/test_all.log
 
+# must have proper verilog build, and proper vcd prior to sta and power
 measure_hardware_yosys: compile_verilog
-	cd yosys && yosys -s synth.ys > synth_stat.log
+	cd yosys && yosys -s synth.ys > synth_stat.multithreaded.log
+	cd yosys && sta -exit open_sta.tcl > open_sta.multithreaded.result 
+	
 
 generate_plots:
 	cd test && python ./parse_test_logs.py ./results/test_all_*.log

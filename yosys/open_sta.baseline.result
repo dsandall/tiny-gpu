@@ -1,0 +1,118 @@
+OpenSTA 2.6.2 65c2943191 Copyright (c) 2025, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Startpoint: inner_core_instance_1/scheduler_instance/_255_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: inner_core_instance_1/scheduler_instance/_255_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ inner_core_instance_1/scheduler_instance/_255_/CK (DFF_X1)
+   0.08    0.08 v inner_core_instance_1/scheduler_instance/_255_/Q (DFF_X1)
+   0.01    0.09 ^ inner_core_instance_1/scheduler_instance/_198_/ZN (INV_X1)
+   0.01    0.10 v inner_core_instance_1/scheduler_instance/_234_/ZN (AOI21_X1)
+   0.00    0.10 v inner_core_instance_1/scheduler_instance/_255_/D (DFF_X1)
+           0.10   data arrival time
+
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+           0.00 ^ inner_core_instance_1/scheduler_instance/_255_/CK (DFF_X1)
+   0.00    0.00   library hold time
+           0.00   data required time
+---------------------------------------------------------
+           0.00   data required time
+          -0.10   data arrival time
+---------------------------------------------------------
+           0.10   slack (MET)
+
+
+Startpoint: inner_core_instance_1/threads[0].register_instance/_2453_
+            (rising edge-triggered flip-flop clocked by clk)
+Endpoint: inner_core_instance_1/threads[0].alu_instance/_1681_
+          (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ inner_core_instance_1/threads[0].register_instance/_2453_/CK (DFF_X1)
+   0.11    0.11 v inner_core_instance_1/threads[0].register_instance/_2453_/Q (DFF_X1)
+   0.14    0.25 v inner_core_instance_1/threads[0].alu_instance/_1238_/ZN (OR4_X1)
+   0.07    0.32 ^ inner_core_instance_1/threads[0].alu_instance/_1239_/ZN (NOR3_X1)
+   0.04    0.36 v inner_core_instance_1/threads[0].alu_instance/_1247_/ZN (OAI221_X1)
+   0.06    0.42 ^ inner_core_instance_1/threads[0].alu_instance/_1248_/ZN (OAI21_X1)
+   0.05    0.47 ^ inner_core_instance_1/threads[0].alu_instance/_1252_/ZN (XNOR2_X1)
+   0.03    0.50 v inner_core_instance_1/threads[0].alu_instance/_1257_/ZN (AOI21_X1)
+   0.06    0.56 ^ inner_core_instance_1/threads[0].alu_instance/_1265_/ZN (OAI21_X1)
+   0.07    0.63 v inner_core_instance_1/threads[0].alu_instance/_1270_/Z (MUX2_X1)
+   0.04    0.66 v inner_core_instance_1/threads[0].alu_instance/_1272_/ZN (AND2_X1)
+   0.06    0.72 ^ inner_core_instance_1/threads[0].alu_instance/_1288_/ZN (OAI221_X1)
+   0.03    0.75 v inner_core_instance_1/threads[0].alu_instance/_1290_/ZN (NAND2_X1)
+   0.04    0.79 v inner_core_instance_1/threads[0].alu_instance/_1293_/ZN (AND2_X1)
+   0.05    0.84 v inner_core_instance_1/threads[0].alu_instance/_1294_/ZN (OR2_X1)
+   0.04    0.89 v inner_core_instance_1/threads[0].alu_instance/_1295_/ZN (XNOR2_X1)
+   0.07    0.96 ^ inner_core_instance_1/threads[0].alu_instance/_1313_/ZN (OAI33_X1)
+   0.02    0.98 v inner_core_instance_1/threads[0].alu_instance/_1314_/ZN (AOI21_X1)
+   0.08    1.06 v inner_core_instance_1/threads[0].alu_instance/_1331_/ZN (OR3_X1)
+   0.06    1.12 ^ inner_core_instance_1/threads[0].alu_instance/_1332_/ZN (AOI22_X1)
+   0.03    1.15 v inner_core_instance_1/threads[0].alu_instance/_1335_/ZN (XNOR2_X1)
+   0.05    1.20 ^ inner_core_instance_1/threads[0].alu_instance/_1336_/ZN (OAI21_X1)
+   0.02    1.23 v inner_core_instance_1/threads[0].alu_instance/_1337_/ZN (AOI21_X1)
+   0.06    1.29 ^ inner_core_instance_1/threads[0].alu_instance/_1338_/ZN (OAI21_X1)
+   0.02    1.31 v inner_core_instance_1/threads[0].alu_instance/_1345_/ZN (AOI211_X1)
+   0.21    1.52 ^ inner_core_instance_1/threads[0].alu_instance/_1347_/ZN (NOR4_X1)
+   0.04    1.56 v inner_core_instance_1/threads[0].alu_instance/_1369_/ZN (AOI21_X1)
+   0.07    1.63 ^ inner_core_instance_1/threads[0].alu_instance/_1371_/ZN (NOR3_X1)
+   0.02    1.65 v inner_core_instance_1/threads[0].alu_instance/_1377_/ZN (AOI211_X1)
+   0.10    1.76 ^ inner_core_instance_1/threads[0].alu_instance/_1379_/ZN (OAI33_X1)
+   0.03    1.78 v inner_core_instance_1/threads[0].alu_instance/_1380_/ZN (AOI21_X1)
+   0.04    1.83 ^ inner_core_instance_1/threads[0].alu_instance/_1382_/ZN (OAI21_X1)
+   0.04    1.87 v inner_core_instance_1/threads[0].alu_instance/_1385_/ZN (OAI21_X1)
+   0.07    1.94 ^ inner_core_instance_1/threads[0].alu_instance/_1386_/ZN (NOR2_X1)
+   0.07    2.01 v inner_core_instance_1/threads[0].alu_instance/_1393_/Z (MUX2_X1)
+   0.04    2.05 v inner_core_instance_1/threads[0].alu_instance/_1419_/ZN (XNOR2_X1)
+   0.09    2.14 v inner_core_instance_1/threads[0].alu_instance/_1420_/ZN (OR3_X1)
+   0.06    2.20 ^ inner_core_instance_1/threads[0].alu_instance/_1421_/ZN (AOI211_X1)
+   0.03    2.23 v inner_core_instance_1/threads[0].alu_instance/_1428_/ZN (OAI221_X1)
+   0.03    2.26 ^ inner_core_instance_1/threads[0].alu_instance/_1432_/ZN (AOI21_X1)
+   0.02    2.28 v inner_core_instance_1/threads[0].alu_instance/_1433_/ZN (OAI21_X1)
+   0.03    2.31 v inner_core_instance_1/threads[0].alu_instance/_1434_/ZN (AND2_X1)
+   0.00    2.31 v inner_core_instance_1/threads[0].alu_instance/_1681_/D (DFF_X1)
+           2.31   data arrival time
+
+   5.00    5.00   clock clk (rise edge)
+   0.00    5.00   clock network delay (ideal)
+   0.00    5.00   clock reconvergence pessimism
+           5.00 ^ inner_core_instance_1/threads[0].alu_instance/_1681_/CK (DFF_X1)
+  -0.04    4.96   library setup time
+           4.96   data required time
+---------------------------------------------------------
+           4.96   data required time
+          -2.31   data arrival time
+---------------------------------------------------------
+           2.65   slack (MET)
+
+
+Annotated 16 pin activities.
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             2.64e-03   7.38e-04   1.31e-04   3.51e-03  22.6%
+Combinational          7.29e-03   4.45e-03   2.89e-04   1.20e-02  77.4%
+Clock                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  9.93e-03   5.19e-03   4.19e-04   1.55e-02 100.0%
+                          63.9%      33.4%       2.7%
