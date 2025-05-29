@@ -1,7 +1,7 @@
 import cocotb.triggers
 from cocotb.triggers import RisingEdge
 
-from test.screen.screen import init_window, update_display
+from .screen import init_window, update_display
 from .setup import setup
 from .memory import Memory
 from .format import format_cycle

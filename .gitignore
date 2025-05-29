@@ -14,7 +14,9 @@ research_papers/
 sim_build
 tiny-gpu-mlir/
 #*.surf.ron
-#
 
 test_all.log
 yosys/*.v
+yosys/*.json
+
+test/results/plots/*.png

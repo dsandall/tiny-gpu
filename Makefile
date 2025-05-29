@@ -113,3 +113,7 @@ record_benchmark: compile_all_binaries
 	#cd yosys && yosys -s synth.ys > synth_stat.log
 	make test_all > test_all.log
 
+
+generate_plots:
+	cd test && python ./parse_test_logs.py ./results/test_all_*.log
+
