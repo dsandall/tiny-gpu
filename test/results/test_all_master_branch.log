@@ -560,7 +560,6 @@ finished at cycle 4742
                                                            ** test.test_matmul.test_matmul_2x2          PASS    15625000.00           0.26   59117815.27  **
                                                            ** test.test_matmul.test_matmul_4x4          PASS    41850000.00           0.50   84258387.31  **
                                                            ** test.test_load.test_load                  PASS    18650000.00           0.23   82798029.54  **
-                                                           ** test.test_load.test_load_20_cycles        PASS    41250000.00           0.42   98241873.18  **
                                                            ** test.test_alldmem.test_alldmem_basic      PASS    67850000.00           2.04   33309150.97  **
                                                            ** test.test_alldmem.test_alldmem_unrolled   PASS    45225000.00           1.76   25739409.02  **
                                                            ** test.test_alldmem.test_alldmem_64         PASS    77950000.00           2.04   38297904.86  **

@@ -1,13 +1,87 @@
+make assemble_alldmem
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_alldmem.asm -o asm_build/test_alldmem.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_alldmem_64
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_alldmem_64.asm -o asm_build/test_alldmem_64.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_alldmem_hash
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_alldmem_hash.asm -o asm_build/test_alldmem_hash.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_alldmem_unrolled
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_alldmem_unrolled.asm -o asm_build/test_alldmem_unrolled.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_load
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_load.asm -o asm_build/test_load.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_load_8_threads
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_load_8_threads.asm -o asm_build/test_load_8_threads.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_matadd_8_threads
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_matadd_8_threads.asm -o asm_build/test_matadd_8_threads.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_matadd_32_threads
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_matadd_32_threads.asm -o asm_build/test_matadd_32_threads.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_matmul_2x2
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_matmul_2x2.asm -o asm_build/test_matmul_2x2.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_matmul_4x4
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_matmul_4x4.asm -o asm_build/test_matmul_4x4.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_negatives
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_negatives.asm -o asm_build/test_negatives.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make assemble_reverse
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+cd ./tiny-gpu-assembler && \
+cargo build && \
+./target/debug/tiny-gpu-assembler asm_src/test_reverse.asm -o asm_build/test_reverse.json
+make[1]: Leaving directory '/mnt/newhome/tiny-gpu'
+make test_all
+make[1]: Entering directory '/mnt/newhome/tiny-gpu'
 MODULE=test.test_all \
 TOPLEVEL=gpu \
-VERILOG_SOURCES="src/pc.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/enums.svh src/warp_controller.sv src/decoder.sv src/dispatch.sv src/ducttape2cores.sv src/fetcher.sv src/gpu.sv src/lsu.sv src/registers.sv src/scheduler.sv"  \
+VERILOG_SOURCES="src/pc.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/enums.svh src/warp_controller.sv src/decoder.sv src/dispatch.sv src/fetcher.sv src/gpu.sv src/lsu.sv src/registers.sv src/ducttape2cores.sv src/scheduler.sv"  \
 SIM=verilator \
 EXTRA_ARGS="--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3"" \
 make -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim
-make[1]: Entering directory '/mnt/newhome/tiny-gpu'
+make[2]: Entering directory '/mnt/newhome/tiny-gpu'
 rm -f results.xml
 "make" -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim results.xml
-make[2]: Entering directory '/mnt/newhome/tiny-gpu'
+make[3]: Entering directory '/mnt/newhome/tiny-gpu'
 rm -f results.xml
 MODULE=test.test_all TESTCASE= TOPLEVEL=gpu TOPLEVEL_LANG=verilog \
          sim_build/Vtop  --cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS -O3  
@@ -15,7 +89,7 @@ MODULE=test.test_all TESTCASE= TOPLEVEL=gpu TOPLEVEL_LANG=verilog \
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
      0.00ns INFO     cocotb                             Running on Verilator version 5.034 2025-02-24
      0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/lib/python3.13/site-packages/cocotb
-     0.00ns INFO     cocotb                             Seeding Python random module with 1748435575
+     0.00ns INFO     cocotb                             Seeding Python random module with 1748482661
 pygame 2.6.1 (SDL 2.32.56, Python 3.13.3)
 Hello from the pygame community. https://www.pygame.org/contribute.html
      0.00ns INFO     cocotb.regression                  Found test test.test_negatives.test_negatives
@@ -44,9 +118,9 @@ DATA IS
 0
 Running test: test_negatives
 threads is 4
-finished at cycle 164
-4525000.00ns INFO     cocotb.regression                  test_negatives passed
-4525000.00ns INFO     cocotb.regression                  running test_matadd_8_threads (2/10)
+finished at cycle 128
+3625000.00ns INFO     cocotb.regression                  test_negatives passed
+3625000.00ns INFO     cocotb.regression                  running test_matadd_8_threads (2/10)
 using json initial data
 PROGRAM IS
 20702
@@ -81,9 +155,9 @@ DATA IS
 58
 Running test: test_matadd_8_threads
 threads is 8
-finished at cycle 429
-15700000.00ns INFO     cocotb.regression                  test_matadd_8_threads passed
-15700000.00ns INFO     cocotb.regression                  running test_matadd_32_threads (3/10)
+finished at cycle 341
+12600000.00ns INFO     cocotb.regression                  test_matadd_8_threads passed
+12600000.00ns INFO     cocotb.regression                  running test_matadd_32_threads (3/10)
 using json initial data
 PROGRAM IS
 0
@@ -167,9 +241,9 @@ DATA IS
 64
 Running test: test_matadd_32_threads
 threads is 32
-finished at cycle 1472
-52950000.00ns INFO     cocotb.regression                  test_matadd_32_threads passed
-52950000.00ns INFO     cocotb.regression                  running test_matmul_2x2 (4/10)
+finished at cycle 1196
+42950000.00ns INFO     cocotb.regression                  test_matadd_32_threads passed
+42950000.00ns INFO     cocotb.regression                  running test_matmul_2x2 (4/10)
 using json initial data
 PROGRAM IS
 20702
@@ -211,7 +285,7 @@ DATA IS
 4
 Running test: test_matmul_2x2
 threads is 4
-finished at cycle 808
+finished at cycle 642
 [1, 2, 3, 4, 1, 2, 3, 4]
 printing
 [1, 2, 3, 4]
@@ -222,8 +296,8 @@ printing
 1 1
 printing2
 [7, 10, 15, 22]
-73600000.00ns INFO     cocotb.regression                  test_matmul_2x2 passed
-73600000.00ns INFO     cocotb.regression                  running test_matmul_4x4 (5/10)
+59450000.00ns INFO     cocotb.regression                  test_matmul_2x2 passed
+59450000.00ns INFO     cocotb.regression                  running test_matmul_4x4 (5/10)
 using json initial data
 PROGRAM IS
 0
@@ -290,7 +364,7 @@ DATA IS
 3
 Running test: test_matmul_4x4
 threads is 16
-finished at cycle 2462
+finished at cycle 2254
 [1, 2, 3, 4, 5, 6, 2, 3, 1, 2, 1, 4, 5, 6, 1, 3, 1, 2, 3, 4, 1, 6, 7, 2, 1, 2, 3, 4, 5, 6, 7, 3]
 printing
 [1, 2, 3, 4, 5, 6, 2, 3, 1, 2, 1, 4, 5, 6, 1, 3]
@@ -313,8 +387,8 @@ printing
 3 3
 printing2
 [26, 44, 54, 32, 28, 68, 84, 49, 24, 40, 48, 24, 27, 66, 81, 45]
-135600000.00ns INFO     cocotb.regression                  test_matmul_4x4 passed
-135600000.00ns INFO     cocotb.regression                  running test_load (6/10)
+116250000.00ns INFO     cocotb.regression                  test_matmul_4x4 passed
+116250000.00ns INFO     cocotb.regression                  running test_load (6/10)
 using json initial data
 PROGRAM IS
 22238
@@ -340,15 +414,15 @@ DATA IS
 4
 Running test: test_load
 threads is 4
-finished at cycle 966
-160200000.01ns INFO     cocotb.regression                  test_load passed
-160200000.01ns INFO     cocotb.regression                  running test_alldmem_basic (7/10)
+finished at cycle 765
+135825000.01ns INFO     cocotb.regression                  test_load passed
+135825000.01ns INFO     cocotb.regression                  running test_alldmem_basic (7/10)
 using 0 initial data
 PROGRAM IS
-20702
-12303
 39167
 37121
+20702
+12303
 20481
 38152
 37889
@@ -369,24 +443,16 @@ DATA IS
 0
 Running test: test_alldmem
 threads is 8
-finished at cycle 3667
-252325000.01ns INFO     cocotb.regression                  test_alldmem_basic failed
-                                                           Traceback (most recent call last):
-                                                             File "/mnt/newhome/tiny-gpu/test/test_alldmem.py", line 7, in test_alldmem_basic
-                                                               await test_dmem(
-                                                                   dut, "/home/thebu/newhome/tiny-gpu/tiny-gpu-assembler/asm_build/test_alldmem.json")
-                                                             File "/mnt/newhome/tiny-gpu/test/test_alldmem.py", line 70, in test_dmem
-                                                               assert i == byte, f"Result mismatch: expected {i}, got {byte}"
-                                                           AssertionError: Result mismatch: expected 64, got 0
-                                                           assert 64 == 0
-252325000.01ns INFO     cocotb.regression                  running test_alldmem_unrolled (8/10)
+finished at cycle 3776
+230675000.01ns INFO     cocotb.regression                  test_alldmem_basic passed
+230675000.01ns INFO     cocotb.regression                  running test_alldmem_unrolled (8/10)
 using 0 initial data
 PROGRAM IS
+37376
 37128
 20702
 12303
 20481
-37376
 37121
 12833
 32768
@@ -415,16 +481,15 @@ DATA IS
 0
 Running test: test_alldmem_unrolled
 threads is 8
-finished at cycle 2741
-321300000.01ns INFO     cocotb.regression                  test_alldmem_unrolled passed
-321300000.01ns INFO     cocotb.regression                  running test_alldmem_64 (9/10)
+finished at cycle 2383
+290700000.01ns INFO     cocotb.regression                  test_alldmem_unrolled passed
+290700000.01ns INFO     cocotb.regression                  running test_alldmem_64 (9/10)
 using 0 initial data
 PROGRAM IS
-0
-20702
-12303
 39167
 37124
+20702
+12303
 20481
 37376
 39424
@@ -441,28 +506,28 @@ PROGRAM IS
 15009
 37121
 8353
-6152
+6151
 37121
 12833
 37184
 12289
 37121
 8225
-6151
+6150
 61440
 DATA IS
 0
 Running test: test_alldmem_64
 threads is 64
-finished at cycle 4895
-444125000.01ns INFO     cocotb.regression                  test_alldmem_64 passed
-444125000.01ns INFO     cocotb.regression                  running test_alldmem_hash (10/10)
+finished at cycle 4276
+398050000.01ns INFO     cocotb.regression                  test_alldmem_64 passed
+398050000.01ns INFO     cocotb.regression                  running test_alldmem_hash (10/10)
 using 0 initial data
 PROGRAM IS
-20702
-12303
 39167
 37121
+20702
+12303
 20481
 38152
 37889
@@ -490,25 +555,26 @@ DATA IS
 0
 Running test: test_alldmem_hash
 threads is 8
-finished at cycle 12585
-759200000.01ns INFO     cocotb.regression                  test_alldmem_hash passed
-759200000.01ns INFO     cocotb.regression                  *************************************************************************************************
+finished at cycle 6931
+571775000.01ns INFO     cocotb.regression                  test_alldmem_hash passed
+571775000.01ns INFO     cocotb.regression                  *************************************************************************************************
                                                            ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                            *************************************************************************************************
-                                                           ** test.test_negatives.test_negatives        PASS     4525000.00           0.05   85348606.19  **
-                                                           ** test.test_matadd.test_matadd_8_threads    PASS    11175000.00           0.46   24274817.64  **
-                                                           ** test.test_matadd.test_matadd_32_threads   PASS    37250000.00           0.58   64404729.84  **
-                                                           ** test.test_matmul.test_matmul_2x2          PASS    20650000.00           0.27   76226649.12  **
-                                                           ** test.test_matmul.test_matmul_4x4          PASS    62000000.00           0.64   96675140.82  **
-                                                           ** test.test_load.test_load                  PASS    24600000.00           0.27   90293307.81  **
-                                                           ** test.test_alldmem.test_alldmem_basic      FAIL    92125000.00           1.65   55933743.46  **
-                                                           ** test.test_alldmem.test_alldmem_unrolled   PASS    68975000.00           1.96   35244487.31  **
-                                                           ** test.test_alldmem.test_alldmem_64         PASS   122825000.00           2.42   50793718.86  **
-                                                           ** test.test_alldmem.test_alldmem_hash       PASS   315075000.00           3.97   79454086.54  **
+                                                           ** test.test_negatives.test_negatives        PASS     3625000.00           0.04   83447319.77  **
+                                                           ** test.test_matadd.test_matadd_8_threads    PASS     8975000.00           0.42   21342184.40  **
+                                                           ** test.test_matadd.test_matadd_32_threads   PASS    30350000.00           0.54   56470611.95  **
+                                                           ** test.test_matmul.test_matmul_2x2          PASS    16500000.00           0.23   71565975.62  **
+                                                           ** test.test_matmul.test_matmul_4x4          PASS    56800000.00           0.62   91254215.25  **
+                                                           ** test.test_load.test_load                  PASS    19575000.00           0.23   85918991.37  **
+                                                           ** test.test_alldmem.test_alldmem_basic      PASS    94850000.00           2.10   45252050.26  **
+                                                           ** test.test_alldmem.test_alldmem_unrolled   PASS    60025000.00           1.81   33079206.83  **
+                                                           ** test.test_alldmem.test_alldmem_64         PASS   107350000.00           2.20   48903053.82  **
+                                                           ** test.test_alldmem.test_alldmem_hash       PASS   173725000.00           2.75   63141130.26  **
                                                            *************************************************************************************************
-                                                           ** TESTS=10 PASS=9 FAIL=1 SKIP=0                    759200000.01          13.17   57630721.25  **
+                                                           ** TESTS=10 PASS=10 FAIL=0 SKIP=0                   571775000.01          11.88   48139501.20  **
                                                            *************************************************************************************************
                                                            
 - :0: Verilog $finish
+make[3]: Leaving directory '/mnt/newhome/tiny-gpu'
 make[2]: Leaving directory '/mnt/newhome/tiny-gpu'
 make[1]: Leaving directory '/mnt/newhome/tiny-gpu'

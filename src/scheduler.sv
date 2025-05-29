@@ -15,11 +15,12 @@
 // > Technically, different instructions can branch to different PCs, requiring "branch divergence." In
 //   this minimal implementation, we assume no branch divergence (naive approach for simplicity)
 module scheduler #(
-    parameter THREADS_PER_BLOCK = 4
+    parameter THREADS_PER_BLOCK = 4,
+    parameter NUM_WARPS_PER_CORE = 2 // dont change this, not parameterized
 ) (
     input wire clk,
     input wire reset,
-    input wire start,
+    input wire start[NUM_WARPS_PER_CORE-1:0],
 
     // Control Signals
     input reg decoded_mem_read_enable,
@@ -37,8 +38,7 @@ module scheduler #(
 
     // Execution State
     output corestate_t core_state,
-    output reg done_1,
-    output reg done_2,
+    output reg done[NUM_WARPS_PER_CORE-1:0],
 
     // Warp core select
     input corestate_t core_state_1,
@@ -49,13 +49,17 @@ module scheduler #(
 );
 
   task automatic switch_warp();
-    warp_select <= ~warp_select;
-    if (warp_select) begin
-      core_state <= core_state_1;
-      current_pc <= current_pc_1;
-    end else begin
-      core_state <= core_state_2;
-      current_pc <= current_pc_2;
+    // if other one is ready...
+    if (start[~warp_select]) begin
+      // switch to it
+      warp_select <= ~warp_select;
+      if (warp_select) begin
+        core_state <= core_state_1;
+        current_pc <= current_pc_1;
+      end else begin
+        core_state <= core_state_2;
+        current_pc <= current_pc_2;
+      end
     end
   endtask
 
@@ -63,14 +67,15 @@ module scheduler #(
     if (reset) begin
       current_pc <= 0;
       core_state <= CORE_IDLE;
-      done_1 <= 0;
-      done_2 <= 0;
       warp_select <= 0;
+      for (int i = 0; i < NUM_WARPS_PER_CORE; i++) begin
+        done[i] <= 0;
+      end
     end else begin
       case (core_state)
         CORE_IDLE: begin
           // Here after reset (before kernel is launched, or after previous block has been processed)
-          if (start) begin
+          if (start[warp_select]) begin
             // Start by fetching the next instruction for this block based on PC
             core_state <= CORE_FETCH;
           end else begin
@@ -98,11 +103,7 @@ module scheduler #(
           if (decoded_ret) begin
             // If we reach a RET instruction, this block is done executing
             core_state <= CORE_DONE;
-            if (warp_select) begin
-              done_2 <= 1;
-            end else begin
-              done_1 <= 1;
-            end
+            done[warp_select] <= 1;
           end else begin
             // otherwise proceed
             core_state <= CORE_WAIT;
@@ -142,14 +143,10 @@ module scheduler #(
           current_pc <= next_pc[THREADS_PER_BLOCK-1];
         end
         CORE_DONE: begin
-          if (!start) begin
+          if (!start[warp_select]) begin
             // return to idle when the dispatcher recognizes DONE
             core_state <= CORE_IDLE;
-            if (warp_select) begin
-              done_2 <= 0;
-            end else begin
-              done_1 <= 0;
-            end
+            done[warp_select] <= 1;
           end
           // switch regardless
           switch_warp();

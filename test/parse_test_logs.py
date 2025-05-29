@@ -63,27 +63,37 @@ def parse_files(file_list):
     return pd.DataFrame(records)
 
 
-def plot_sim_times(df, output_dir="../test/results/plots"):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    import os
+def _highlight_failures(ax, df):
+    for patch, (_, row) in zip(ax.patches, df.iterrows()):
+        if row["status"] == "FAIL":
+            patch.set_color("red")
 
+
+def _setup_plot(title):
+    plt.figure(figsize=(16, 8))
+    ax = plt.gca()
+    ax.set_title(title)
+    ax.set_ylabel("Simulation Time")
+    ax.set_xlabel("Test Name")
+    plt.xticks(rotation=45, ha="right")
+    return ax
+
+
+def _finalize_plot(ax, output_path):
+    ax.legend(title="HW Config", bbox_to_anchor=(1.05, 1), loc="upper left")
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+
+
+def plot_sim_times(df, output_dir="../test/results/plots"):
     os.makedirs(output_dir, exist_ok=True)
     delays = sorted(df["delay"].unique())
 
-    for i, delay in enumerate(delays):
-        if i == 0:
-            continue  # no previous delay to compare with
-
-        prev_delay = delays[i - 1]
-
+    for delay in delays:
         df_curr = df[df["delay"] == delay]
-        df_prev = df[df["delay"] == prev_delay]
+        ax = _setup_plot(f"Simulation Time by Test (Delay {delay})")
 
-        plt.figure(figsize=(16, 8))
-        ax = plt.gca()
-
-        # Plot current delay (main data) first — this will be behind
         sns.barplot(
             data=df_curr,
             x="name",
@@ -93,13 +103,39 @@ def plot_sim_times(df, output_dir="../test/results/plots"):
             dodge=True,
             ax=ax
         )
+        _highlight_failures(ax, df_curr)
 
-        # Highlight FAILs in red
-        for patch, (_, row) in zip(ax.patches, df_curr.iterrows()):
-            if row["status"] == "FAIL":
-                patch.set_color("red")
+        out_path = os.path.join(output_dir, f"sim_times_delay{delay}.png")
+        _finalize_plot(ax, out_path)
 
-        # Plot previous delay (overlay) with transparent colors — drawn *after* to appear on top
+
+def plot_sim_times_overlay(df, output_dir="../test/results/plots"):
+    os.makedirs(output_dir, exist_ok=True)
+    delays = sorted(df["delay"].unique())
+
+    for i in range(1, len(delays)):
+        delay = delays[i]
+        prev_delay = delays[i - 1]
+
+        df_curr = df[df["delay"] == delay]
+        df_prev = df[df["delay"] == prev_delay]
+
+        ax = _setup_plot(f"Simulation Time by Test (Delay {
+                         delay}, Overlay: {prev_delay})")
+
+        # Current data — plotted first (in the back)
+        sns.barplot(
+            data=df_curr,
+            x="name",
+            y="sim_time",
+            hue="hw_config",
+            ci=None,
+            dodge=True,
+            ax=ax
+        )
+        _highlight_failures(ax, df_curr)
+
+        # Overlay previous delay — plotted second (on top)
         sns.barplot(
             data=df_prev,
             x="name",
@@ -109,22 +145,12 @@ def plot_sim_times(df, output_dir="../test/results/plots"):
             palette="light:#999999",
             dodge=True,
             ax=ax,
-            alpha=0.3  # semi-transparent
+            alpha=0.3
         )
-
-        ax.set_title(f"Simulation Time by Test (Delay {
-                     delay}, Overlay: {prev_delay})")
-        ax.set_ylabel("Simulation Time")
-        ax.set_xlabel("Test Name")
-        plt.xticks(rotation=45, ha="right")
-        ax.legend(title="HW Config", bbox_to_anchor=(
-            1.05, 1), loc="upper left")
-        plt.tight_layout()
 
         out_path = os.path.join(output_dir, f"sim_times_overlay_delay{
                                 delay}_vs_{prev_delay}.png")
-        plt.savefig(out_path)
-        plt.close()
+        _finalize_plot(ax, out_path)
 
 
 if __name__ == "__main__":
@@ -141,3 +167,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     plot_sim_times(df)
+    plot_sim_times_overlay(df)

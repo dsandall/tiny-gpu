@@ -109,10 +109,11 @@ compile_all_binaries:
 ft_%: compile_all_binaries
 	make test_$*
 
-record_benchmark: compile_all_binaries
-	#cd yosys && yosys -s synth.ys > synth_stat.log
-	make test_all > test_all.log
+record_benchmark: compile_all_binaries measure_hardware_yosys
+	make test_all > ./test/results/test_all.log
 
+measure_hardware_yosys: compile_verilog
+	cd yosys && yosys -s synth.ys > synth_stat.log
 
 generate_plots:
 	cd test && python ./parse_test_logs.py ./results/test_all_*.log

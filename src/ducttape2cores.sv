@@ -123,7 +123,6 @@ module ducttape2cores #(
 
     // Selected warp output signals
     always_comb begin
-      start = warp_select ? start_2 : start_1;
       reset = warp_select ? reset_2 : reset_1;
       thread_count = warp_select ? thread_count_2 : thread_count_1;
       fetcher_state = warp_select ? fetcher_state_2 : fetcher_state_1;
@@ -200,7 +199,7 @@ module ducttape2cores #(
     ) scheduler_instance (
         .clk(clk),
         .reset(reset),
-        .start(start),
+        .start({start_2, start_1}),
         .fetcher_state(fetcher_state),
         .core_state(core_state),
         .decoded_mem_read_enable(decoded_mem_read_enable),
@@ -213,8 +212,7 @@ module ducttape2cores #(
         .core_state_1(core_state_1),
         .core_state_2(core_state_2),
         .warp_select(warp_select),
-        .done_1(done_1),
-        .done_2(done_2),
+        .done({done_2, done_1}),
         .current_pc_1(current_pc_1),
         .current_pc_2(current_pc_2)
     );
