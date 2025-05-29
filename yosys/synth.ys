@@ -7,6 +7,8 @@ hierarchy -top gpu
 # Perform synthesis
 synth
 
+techmap -map libertyfile
+
 # write the synthesized netlist for further analysis
 write_json synth_out.json
 write_verilog synth_out.v

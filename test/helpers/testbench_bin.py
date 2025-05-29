@@ -21,7 +21,7 @@ default_hw_config = {
 }
 
 
-def load_json_binary(config_path, override_memory_delay=1):
+def load_json_binary(config_path, override_memory_delay=50):
     # TODO: replace all accesses with graceful handling (.get() and None)
     with open(config_path, "r") as f:
         test_config = json.load(f).copy()

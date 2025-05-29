@@ -1,6 +1,6 @@
 MODULE=test.test_all \
 TOPLEVEL=gpu \
-VERILOG_SOURCES="src/pc.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/enums.svh src/warp_controller.sv src/core.sv src/decoder.sv src/dispatch.sv src/ducttape2cores.sv src/fetcher.sv src/lsu.sv src/registers.sv src/scheduler.sv src/gpu.sv"  \
+VERILOG_SOURCES="src/pc.sv src/alu.sv src/cache_utils.svh src/dcr.sv src/arbiter_cache.sv src/utils.svh src/enums.svh src/warp_controller.sv src/core.sv src/decoder.sv src/dispatch.sv src/fetcher.sv src/lsu.sv src/registers.sv src/scheduler.sv src/gpu.sv"  \
 SIM=verilator \
 EXTRA_ARGS="--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3"" \
 make -f /usr/lib/python3.13/site-packages/cocotb/share/makefiles/Makefile.sim
@@ -15,7 +15,7 @@ MODULE=test.test_all TESTCASE= TOPLEVEL=gpu TOPLEVEL_LANG=verilog \
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:101  in gpi_print_registered_impl       VPI registered
      0.00ns INFO     cocotb                             Running on Verilator version 5.034 2025-02-24
      0.00ns INFO     cocotb                             Running tests with cocotb v1.9.2 from /usr/lib/python3.13/site-packages/cocotb
-     0.00ns INFO     cocotb                             Seeding Python random module with 1748435916
+     0.00ns INFO     cocotb                             Seeding Python random module with 1748496163
 pygame 2.6.1 (SDL 2.32.56, Python 3.13.3)
 Hello from the pygame community. https://www.pygame.org/contribute.html
      0.00ns INFO     cocotb.regression                  Found test test.test_negatives.test_negatives
@@ -345,10 +345,10 @@ finished at cycle 916
 201000000.01ns INFO     cocotb.regression                  running test_alldmem_basic (7/10)
 using 0 initial data
 PROGRAM IS
-20702
-12303
 39167
 37121
+20702
+12303
 20481
 38152
 37889
@@ -374,11 +374,11 @@ finished at cycle 6284
 358550000.01ns INFO     cocotb.regression                  running test_alldmem_unrolled (8/10)
 using 0 initial data
 PROGRAM IS
+37376
 37128
 20702
 12303
 20481
-37376
 37121
 12833
 32768
@@ -412,11 +412,10 @@ finished at cycle 4484
 471100000.01ns INFO     cocotb.regression                  running test_alldmem_64 (9/10)
 using 0 initial data
 PROGRAM IS
-0
-20702
-12303
 39167
 37124
+20702
+12303
 20481
 37376
 39424
@@ -433,28 +432,28 @@ PROGRAM IS
 15009
 37121
 8353
-6152
+6151
 37121
 12833
 37184
 12289
 37121
 8225
-6151
+6150
 61440
 DATA IS
 0
 Running test: test_alldmem_64
 threads is 64
-finished at cycle 7082
-648600000.01ns INFO     cocotb.regression                  test_alldmem_64 passed
-648600000.01ns INFO     cocotb.regression                  running test_alldmem_hash (10/10)
+finished at cycle 6938
+645000000.01ns INFO     cocotb.regression                  test_alldmem_64 passed
+645000000.01ns INFO     cocotb.regression                  running test_alldmem_hash (10/10)
 using 0 initial data
 PROGRAM IS
-20702
-12303
 39167
 37121
+20702
+12303
 20481
 38152
 37889
@@ -483,22 +482,22 @@ DATA IS
 Running test: test_alldmem_hash
 threads is 8
 finished at cycle 10388
-908750000.01ns INFO     cocotb.regression                  test_alldmem_hash passed
-908750000.01ns INFO     cocotb.regression                  *************************************************************************************************
+905150000.01ns INFO     cocotb.regression                  test_alldmem_hash passed
+905150000.01ns INFO     cocotb.regression                  *************************************************************************************************
                                                            ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                            *************************************************************************************************
-                                                           ** test.test_negatives.test_negatives        PASS     4450000.00           0.05   90553679.73  **
-                                                           ** test.test_matadd.test_matadd_8_threads    PASS    15900000.00           0.51   31165136.25  **
-                                                           ** test.test_matadd.test_matadd_32_threads   PASS    53700000.00           0.67   80488678.37  **
-                                                           ** test.test_matmul.test_matmul_2x2          PASS    19600000.00           0.26   76226838.40  **
-                                                           ** test.test_matmul.test_matmul_4x4          PASS    84000000.00           0.80   105436906.77  **
-                                                           ** test.test_load.test_load                  PASS    23350000.00           0.25   94736606.37  **
-                                                           ** test.test_alldmem.test_alldmem_basic      PASS   157550000.00           2.69   58536802.29  **
-                                                           ** test.test_alldmem.test_alldmem_unrolled   PASS   112550000.00           2.34   48084633.22  **
-                                                           ** test.test_alldmem.test_alldmem_64         PASS   177500000.00           2.79   63558269.20  **
-                                                           ** test.test_alldmem.test_alldmem_hash       PASS   260150000.00           3.41   76336584.04  **
+                                                           ** test.test_negatives.test_negatives        PASS     4450000.00           0.05   95471369.84  **
+                                                           ** test.test_matadd.test_matadd_8_threads    PASS    15900000.00           0.54   29374037.26  **
+                                                           ** test.test_matadd.test_matadd_32_threads   PASS    53700000.00           0.66   81469898.25  **
+                                                           ** test.test_matmul.test_matmul_2x2          PASS    19600000.00           0.24   80856279.70  **
+                                                           ** test.test_matmul.test_matmul_4x4          PASS    84000000.00           0.83   101260588.82  **
+                                                           ** test.test_load.test_load                  PASS    23350000.00           0.25   92672373.54  **
+                                                           ** test.test_alldmem.test_alldmem_basic      PASS   157550000.00           2.56   61570999.12  **
+                                                           ** test.test_alldmem.test_alldmem_unrolled   PASS   112550000.00           2.16   52217055.32  **
+                                                           ** test.test_alldmem.test_alldmem_64         PASS   173900000.00           2.61   66614785.32  **
+                                                           ** test.test_alldmem.test_alldmem_hash       PASS   260150000.00           3.35   77596329.99  **
                                                            *************************************************************************************************
-                                                           ** TESTS=10 PASS=10 FAIL=0 SKIP=0                   908750000.01          14.73   61674602.55  **
+                                                           ** TESTS=10 PASS=10 FAIL=0 SKIP=0                   905150000.01          14.14   64000461.12  **
                                                            *************************************************************************************************
                                                            
 - :0: Verilog $finish
