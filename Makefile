@@ -8,7 +8,8 @@ export LIBPYTHON_LOC=$(shell cocotb-config --libpython)
 # - make show_matadd
 
 VERILATOR_ARGS = "--cc --exe --build --trace -Isrc -Wno-WIDTHEXPAND -Wno-ASCRANGE -Wno-WIDTHTRUNC -Wno-CASEINCOMPLETE -Wno-UNSIGNED  -Wno-MULTIDRIVEN --compiler gcc -O3 -CFLAGS "-O3""
-VERILOG_SOURCES = "$(shell find src -name '*.sv' -o -name '*.svh')" 
+VERILOG_SOURCES = "$(shell find src -name '*.sv')"
+VERILOG_HEADER = "$(shell find src -name '*.svh')"
 clean: 
 	rm -rf build/*
 	rm -rf sim_build/*
@@ -25,9 +26,11 @@ ifeq ($(SIM),icarus)
 	iverilog -o $(BUILD_DIR)/sim.vvp -s $(TOPLEVEL) -g2012 $(TOP_V)
 	MODULE=$(MODULE) vvp -M $(shell cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus $(BUILD_DIR)/sim.vvp
 else ifeq ($(SIM),verilator)
+	
 	MODULE=$(MODULE) \
 	TOPLEVEL=$(TOPLEVEL) \
 	VERILOG_SOURCES=$(VERILOG_SOURCES) \
+	VERILOG_HEADER=$(VERILOG_HEADER) \
 	SIM=verilator \
 	EXTRA_ARGS=$(VERILATOR_ARGS) \
 	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim
